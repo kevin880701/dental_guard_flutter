@@ -9,6 +9,8 @@ class AppTexts {
   static const classField = '班級：';
   static const studentNumberField = '學號';
   static const plsEnterStudentNumber = '請輸入學號';
+  static const keepLoginState = '保持登入狀態';
+  static const registerMember = '註冊會員';
 
   static const home = 'Home';
   static const notify = 'Notify';

@@ -26,6 +26,7 @@ class LoginPage extends HookConsumerWidget {
     final passwordController = useTextEditingController();
     final isPasswordVisible = useState(false);
     final lastBackPressed = useState<DateTime?>(null);
+    final _isKeepLogin = useState<bool>(false);
     final ValueNotifier<int?> selectedIndex = ValueNotifier<int?>(null);
     void _login() {
       final email = emailController.text.trim();
@@ -45,7 +46,8 @@ class LoginPage extends HookConsumerWidget {
 
     Future<bool> _onWillPop() async {
       final now = DateTime.now();
-      if (lastBackPressed.value == null || now.difference(lastBackPressed.value!) > Duration(seconds: 2)) {
+      if (lastBackPressed.value == null ||
+          now.difference(lastBackPressed.value!) > Duration(seconds: 2)) {
         lastBackPressed.value = now;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -66,9 +68,8 @@ class LoginPage extends HookConsumerWidget {
         child: Padding(
           padding: EdgeInsets.all(24.sp),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              h2Text(AppTexts.login),
               gapH24,
               DropdownWidget(
                 items: ['選項 1', '選項 2', '選項 3'],
@@ -81,6 +82,28 @@ class LoginPage extends HookConsumerWidget {
               InputWidget(
                 hintText: AppTexts.plsEnterStudentNumber,
               ),
+              Row(
+                children: [
+                  Checkbox(
+                    side:
+                        BorderSide(color: AppColors.primaryBlack, width: 2.sp),
+                    checkColor: Colors.white,
+                    activeColor: AppColors.primaryBlack,
+                    value: _isKeepLogin.value,
+                    onChanged: (bool? value) {
+                      _isKeepLogin.value = value ?? false;
+                    },
+                  ),
+                  customText(
+                    AppTexts.keepLoginState,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16.sp,
+                    onTap: () {
+                      _isKeepLogin.value = !_isKeepLogin.value;
+                    },
+                  ),
+                ],
+              ),
               gapH24,
               SizedBox(
                   width: double.infinity,
@@ -92,25 +115,13 @@ class LoginPage extends HookConsumerWidget {
                         _login();
                       })),
               gapH32,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  circleAssetsImage(
-                      filename: AppImages.googleIcon,
-                      width: 24.sp,
-                      bgColor: AppColors.white,
-                      onTap: () {
-                        showToast(context: context, text: 'Google 登入');
-                      }),
-                  gapW16,
-                  circleAssetsImage(
-                      filename: AppImages.appleIcon,
-                      width: 24.sp,
-                      bgColor: AppColors.white,
-                      onTap: () {
-                        showToast(context: context, text: 'Apple 登入');
-                      }),
-                ],
+              customText(
+                AppTexts.registerMember,
+                fontWeight: FontWeight.w400,
+                fontSize: 16.sp,
+                color: AppColors.blue,
+                onTap: () {
+                },
               ),
             ],
           ),
