@@ -1,3 +1,6 @@
+import 'package:dental_guard_flutter/widgets/common/ButtonWidgets.dart';
+import 'package:dental_guard_flutter/widgets/customerWidget/DropdownWidget.dart';
+import 'package:dental_guard_flutter/widgets/customerWidget/InputWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:dental_guard_flutter/extensions/PageExtensions.dart';
@@ -23,7 +26,7 @@ class LoginPage extends HookConsumerWidget {
     final passwordController = useTextEditingController();
     final isPasswordVisible = useState(false);
     final lastBackPressed = useState<DateTime?>(null);
-
+    final ValueNotifier<int?> selectedIndex = ValueNotifier<int?>(null);
     void _login() {
       final email = emailController.text.trim();
       final password = passwordController.text.trim();
@@ -42,8 +45,7 @@ class LoginPage extends HookConsumerWidget {
 
     Future<bool> _onWillPop() async {
       final now = DateTime.now();
-      if (lastBackPressed.value == null ||
-          now.difference(lastBackPressed.value!) > Duration(seconds: 2)) {
+      if (lastBackPressed.value == null || now.difference(lastBackPressed.value!) > Duration(seconds: 2)) {
         lastBackPressed.value = now;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -57,6 +59,7 @@ class LoginPage extends HookConsumerWidget {
     }
 
     return BasePage(
+      backgroundColor: AppColors.bgColor,
       appBar: blackLightAppBar(),
       onWillPop: _onWillPop,
       child: SafeArea(
@@ -67,39 +70,27 @@ class LoginPage extends HookConsumerWidget {
             children: [
               h2Text(AppTexts.login),
               gapH24,
-              TextField(
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
-                ),
+              DropdownWidget(
+                items: ['選項 1', '選項 2', '選項 3'],
+                selectedIndex: selectedIndex, // 傳入 ValueNotifier 來追蹤索引
+                onChanged: (index) {
+                  print('選擇了索引: $index');
+                },
               ),
               gapH16,
-              TextField(
-                controller: passwordController,
-                obscureText: !isPasswordVisible.value,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: Icon(isPasswordVisible.value
-                        ? Icons.visibility
-                        : Icons.visibility_off),
-                    onPressed: () {
-                      isPasswordVisible.value = !isPasswordVisible.value;
-                    },
-                  ),
-                ),
+              InputWidget(
+                hintText: AppTexts.plsEnterStudentNumber,
               ),
               gapH24,
               SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _login,
-                  child: Text(AppTexts.login),
-                ),
-              ),
+                  width: double.infinity,
+                  child: roundedButton(
+                      text: AppTexts.login,
+                      bgColor: AppColors.primaryBlack,
+                      fontColor: AppColors.white,
+                      onTap: () {
+                        _login();
+                      })),
               gapH32,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
