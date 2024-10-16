@@ -229,7 +229,7 @@ Widget netImage(
         alignment: alignment,
         errorBuilder: (context, error, stackTrace) {
           return Image.asset(
-            'assets/images/$defaultImage',
+            defaultImage,
             width: width,
             height: height,
             fit: fit,
@@ -314,7 +314,7 @@ Widget circleNetImage(
           alignment: alignment,
           errorBuilder: (context, error, stackTrace) {
             return Image.asset(
-              'assets/images/$defaultImage',
+              defaultImage,
               width: width,
               height: height,
               fit: fit,
