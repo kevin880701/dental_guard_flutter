@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:dental_guard_flutter/resources/AppResources.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ///
 /// 根據指定的檔名從 assets 載入圖片，並可選擇設置寬度、高度、適應方式及點擊事件處理。
@@ -62,7 +61,7 @@ Widget assetImage(
           ? ColorFiltered(
         colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
         child: Image.asset(
-          'assets/images/$filename',
+          filename,
           width: width,
           height: height,
           fit: fit,
@@ -70,7 +69,7 @@ Widget assetImage(
         ),
       )
           : Image.asset( // 如果沒有傳入顏色，直接顯示圖片
-        'assets/images/$filename',
+        filename,
         width: width,
         height: height,
         fit: fit,
@@ -139,7 +138,7 @@ Widget circleAssetsImage({
         ? ColorFiltered(
       colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
       child: Image.asset(
-        'assets/images/$filename',
+        filename,
         width: width,
         height: height,
         fit: fit,
@@ -147,7 +146,7 @@ Widget circleAssetsImage({
       ),
     )
         : Image.asset(
-      'assets/images/$filename',
+      filename,
       width: width,
       height: height,
       fit: fit,
