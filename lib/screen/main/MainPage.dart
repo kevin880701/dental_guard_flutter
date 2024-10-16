@@ -6,12 +6,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dental_guard_flutter/resources/AppResources.dart';
 import 'package:dental_guard_flutter/screen/DialogPage.dart';
-import 'package:dental_guard_flutter/screen/SettingPage.dart';
+import 'package:dental_guard_flutter/screen/main/setting/SettingPage.dart';
 import 'package:dental_guard_flutter/screen/NotifyPage.dart';
 import 'package:dental_guard_flutter/widgets/common/AppBarWidgets.dart';
 import 'package:dental_guard_flutter/widgets/common/ImageWidgets.dart';
 import 'package:dental_guard_flutter/widgets/common/KeepAliveWrapper.dart';
-import 'package:dental_guard_flutter/widgets/common/TextWidgets.dart';
 
 @RoutePage()
 class MainPage extends HookConsumerWidget {

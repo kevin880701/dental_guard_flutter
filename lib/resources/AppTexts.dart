@@ -12,6 +12,9 @@ class AppTexts {
   static const keepLoginState = '保持登入狀態';
   static const registerMember = '註冊會員';
 
+  static const plsEnterYourAccount = '請輸入你的帳號';
+  static const checkDuplicates = '檢查是否重複';
+
   static const home = 'Home';
   static const notify = 'Notify';
   static const account = 'Account';
