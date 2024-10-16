@@ -139,7 +139,7 @@ Widget circleAssetsImage({
         ? ColorFiltered(
       colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
       child: Image.asset(
-        'assets/images/$filename',
+        filename,
         width: width,
         height: height,
         fit: fit,
@@ -147,7 +147,7 @@ Widget circleAssetsImage({
       ),
     )
         : Image.asset(
-      'assets/images/$filename',
+      filename,
       width: width,
       height: height,
       fit: fit,
