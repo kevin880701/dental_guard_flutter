@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dental_guard_flutter/widgets/common/TextWidgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -24,7 +25,7 @@ class LaunchPage extends HookConsumerWidget {
 
     useEffect(() {
       SchedulerBinding.instance.addPostFrameCallback((_) {
-        ref.read(versionInfoProvider.notifier).loadVersionInfo().then((_){
+        ref.read(versionInfoProvider.notifier).loadVersionInfo().then((_) {
           Timer(const Duration(seconds: 2), () async {
             AutoRouter.of(context).replace(const LoginRoute());
           });
@@ -35,19 +36,29 @@ class LaunchPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: blackLightAppBar(),
-      body: Stack(
-        children: [
-          // Container(
-          //   height: double.infinity,
-          //   width: double.infinity,
-          //   alignment: Alignment.center,
-          //   child: assetImage(AppImages.launchBg,width: double.infinity, height: double.infinity, fit: BoxFit.fill),
-          // ),
-          Align(
-            alignment: Alignment.center,
-            child: assetImage(AppImages.appIcon, width: screenWidth * 0.6, height: screenWidth * 0.6 * 0.26),
-          ),
-        ],
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        child: Stack(
+          children: [
+            // Container(
+            //   height: double.infinity,
+            //   width: double.infinity,
+            //   alignment: Alignment.center,
+            //   child: assetImage(AppImages.launchBg,width: double.infinity, height: double.infinity, fit: BoxFit.fill),
+            // ),
+            Align(
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  assetImage(AppImages.appIcon, width: screenWidth * 0.4, height: screenWidth * 0.4,),
+                  customText(AppTexts.appName)
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

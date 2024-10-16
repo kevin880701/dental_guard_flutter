@@ -1,6 +1,6 @@
 
 class AppTexts {
-  static const appTitle = 'My Flutter App';
+  static const appName = '口腔衛教';
   static const login = 'Login';
   static const home = 'Home';
   static const notify = 'Notify';
