@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
           ),
           routerDelegate: _appRouter.delegate(),
           routeInformationParser: _appRouter.defaultRouteParser(),
-          builder: EasyLoading.init(),
         );
       },
     );
