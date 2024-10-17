@@ -60,8 +60,45 @@ flutter:
 
   uses-material-design: true
   assets:
+    - assets/fonts/
     - assets/images/
     - assets/other/
+
+  fonts:
+    - family: PingFangTC
+      fonts:
+        - asset: assets/fonts/PingFangTC/PingFangTcThin.otf
+          weight: 100
+        - asset: assets/fonts/PingFangTC/PingFangTcUltralight.otf
+          weight: 200
+        - asset: assets/fonts/PingFangTC/PingFangTcLight.otf
+          weight: 300
+        - asset: assets/fonts/PingFangTC/PingFangTcRegular.otf
+          weight: 400
+        - asset: assets/fonts/PingFangTC/PingFangTcMedium.otf
+          weight: 500
+        - asset: assets/fonts/PingFangTC/PingFangTcSemibold.otf
+          weight: 600
+    - family: NotoSansTC
+      fonts:
+        - asset: assets/fonts/NotoSansTC/NotoSansTcThin.ttf
+          weight: 100
+        - asset: assets/fonts/NotoSansTC/NotoSansTcExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/NotoSansTC/NotoSansTcLight.ttf
+          weight: 300
+        - asset: assets/fonts/NotoSansTC/NotoSansTcRegular.ttf
+          weight: 400
+        - asset: assets/fonts/NotoSansTC/NotoSansTcMedium.ttf
+          weight: 500
+        - asset: assets/fonts/NotoSansTC/NotoSansTcSemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/NotoSansTC/NotoSansTcBold.ttf
+          weight: 700
+        - asset: assets/fonts/NotoSansTC/NotoSansTcExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/NotoSansTC/NotoSansTcBlack.ttf
+          weight: 900
 
 flutter_icons:
   android: true
