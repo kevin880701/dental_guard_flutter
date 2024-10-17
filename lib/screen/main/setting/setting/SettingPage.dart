@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ import 'package:dental_guard_flutter/widgets/common/TextWidgets.dart';
 import 'package:dental_guard_flutter/screen/base/BasePage.dart';
 import 'package:dental_guard_flutter/utils/ToastHelper.dart';
 
+@RoutePage()
 class SettingPage extends HookConsumerWidget {
   const SettingPage({super.key});
 
