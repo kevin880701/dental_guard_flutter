@@ -46,8 +46,7 @@ class LoginPage extends HookConsumerWidget {
 
     Future<bool> _onWillPop() async {
       final now = DateTime.now();
-      if (lastBackPressed.value == null ||
-          now.difference(lastBackPressed.value!) > Duration(seconds: 2)) {
+      if (lastBackPressed.value == null || now.difference(lastBackPressed.value!) > Duration(seconds: 2)) {
         lastBackPressed.value = now;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -85,8 +84,7 @@ class LoginPage extends HookConsumerWidget {
               Row(
                 children: [
                   Checkbox(
-                    side:
-                        BorderSide(color: AppColors.primaryBlack, width: 2.sp),
+                    side: BorderSide(color: AppColors.primaryBlack, width: 2.sp),
                     checkColor: Colors.white,
                     activeColor: AppColors.primaryBlack,
                     value: _isKeepLogin.value,
@@ -121,6 +119,7 @@ class LoginPage extends HookConsumerWidget {
                 fontSize: 16.sp,
                 color: AppColors.blue,
                 onTap: () {
+                  AutoRouter.of(context).push(const SetAccountRoute());
                 },
               ),
             ],
