@@ -70,16 +70,14 @@ class LoginPage extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               gapH24,
-              DropdownWidget(
-                items: ['選項 1', '選項 2', '選項 3'],
-                selectedIndex: selectedIndex, // 傳入 ValueNotifier 來追蹤索引
-                onChanged: (index) {
-                  print('選擇了索引: $index');
-                },
+              InputWidget(
+                fieldName: AppTexts.accountField,
+                hintText: AppTexts.account,
               ),
               gapH16,
               InputWidget(
-                hintText: AppTexts.plsEnterStudentNumber,
+                fieldName: AppTexts.passwordField,
+                hintText: AppTexts.password,
               ),
               Row(
                 children: [
