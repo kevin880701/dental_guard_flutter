@@ -14,11 +14,17 @@ class AppTexts {
   static const registerMember = '註冊會員';
   static const account = '帳號';
   static const accountField = '帳號：';
+  static const password = '密碼';
+  static const passwordField = '密碼：';
 
   //設定帳號
   static const setAccount = '設定帳號';
   static const plsEnterYourAccount = '請輸入你的帳號';
   static const checkDuplicates = '檢查是否重複';
+
+  //設定帳號
+  static const setPassword = '設定密碼';
+  static const plsEnterYourPassword = '請輸入你的密碼';
 
   static const home = 'Home';
   static const notify = 'Notify';
