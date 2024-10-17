@@ -10,13 +10,7 @@ import 'package:dental_guard_flutter/provider/PageProvider.dart';
 import 'package:dental_guard_flutter/resources/AppResources.dart';
 import 'package:dental_guard_flutter/screen/base/BasePage.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:dental_guard_flutter/route/AppRouter.gr.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dental_guard_flutter/widgets/common/AppBarWidgets.dart';
-import 'package:dental_guard_flutter/widgets/common/ImageWidgets.dart';
-import 'package:dental_guard_flutter/widgets/common/TextWidgets.dart';
-import 'package:dental_guard_flutter/utils/ToastHelper.dart';
 
 class Student {
   final String name;

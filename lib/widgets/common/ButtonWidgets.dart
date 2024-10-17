@@ -56,7 +56,7 @@ Widget roundedButton({
           width: 1.sp,
         ),
       ),
-      padding: EdgeInsets.symmetric(vertical: verticalPadding ?? 12.sp, horizontal: 24.sp),
+      padding: EdgeInsets.symmetric(vertical: verticalPadding ?? 4.sp, horizontal: 8.sp),
       child: Center(
         child: Text(
           text,

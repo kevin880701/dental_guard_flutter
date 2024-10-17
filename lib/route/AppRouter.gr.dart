@@ -304,10 +304,17 @@ class SettingRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.StudentInfoPage]
-class StudentInfoRoute extends _i15.PageRouteInfo<void> {
-  const StudentInfoRoute({List<_i15.PageRouteInfo>? children})
-      : super(
+class StudentInfoRoute extends _i15.PageRouteInfo<StudentInfoRouteArgs> {
+  StudentInfoRoute({
+    _i16.Key? key,
+    required _i13.Student student,
+    List<_i15.PageRouteInfo>? children,
+  }) : super(
           StudentInfoRoute.name,
+          args: StudentInfoRouteArgs(
+            key: key,
+            student: student,
+          ),
           initialChildren: children,
         );
 
@@ -316,9 +323,29 @@ class StudentInfoRoute extends _i15.PageRouteInfo<void> {
   static _i15.PageInfo page = _i15.PageInfo(
     name,
     builder: (data) {
-      return const _i12.StudentInfoPage();
+      final args = data.argsAs<StudentInfoRouteArgs>();
+      return _i12.StudentInfoPage(
+        key: args.key,
+        student: args.student,
+      );
     },
   );
+}
+
+class StudentInfoRouteArgs {
+  const StudentInfoRouteArgs({
+    this.key,
+    required this.student,
+  });
+
+  final _i16.Key? key;
+
+  final _i13.Student student;
+
+  @override
+  String toString() {
+    return 'StudentInfoRouteArgs{key: $key, student: $student}';
+  }
 }
 
 /// generated route for

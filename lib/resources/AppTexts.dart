@@ -26,6 +26,11 @@ class AppTexts {
   static const setPassword = '設定密碼';
   static const plsEnterYourPassword = '請輸入你的密碼';
 
+  // 學生資訊
+  static const studentInfo = '學生資訊';
+  static const toothBrushingRecord = '刷牙記錄';
+  static const addRecordPlus = '新增記錄+';
+
   static const home = 'Home';
   static const notify = 'Notify';
   static const finish = 'Finish';
@@ -35,9 +40,7 @@ class AppTexts {
 
   static const importData = '匯入資料';
   static const addStudentInfo = '新增學生資訊';
-  static const toothBrushingRecord = '刷牙記錄';
   static const edit = '編輯';
-  static const addRecord = '新增記錄';
   static const personalInfo = '個人資訊';
   static const sure = '確定';
   static const editStudentInfo = '編輯學生資訊';
