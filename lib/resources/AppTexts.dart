@@ -31,6 +31,15 @@ class AppTexts {
   static const toothBrushingRecord = '刷牙記錄';
   static const addRecordPlus = '新增記錄+';
 
+  // 圖片偵測
+  static const imageDetection = '圖片偵測';
+  static const originalImage = '原始圖片';
+  static const detectionResults = '偵測結果';
+  static const selectImage = '選擇圖片...';
+  static const imageStorage = '圖片儲存';
+  static const clearImage = '清除圖片';
+  static const notDetectedYet = '尚未偵測';
+
   static const home = 'Home';
   static const notify = 'Notify';
   static const finish = 'Finish';
@@ -44,10 +53,4 @@ class AppTexts {
   static const personalInfo = '個人資訊';
   static const sure = '確定';
   static const editStudentInfo = '編輯學生資訊';
-  static const imageDetection = '圖片偵測';
-  static const originalImage = '原始圖片';
-  static const detectionResults = '偵測結果';
-  static const selectImage = '選擇圖片...';
-  static const imageStorage = '圖片儲存';
-  static const clearImage = '清除圖片';
 }

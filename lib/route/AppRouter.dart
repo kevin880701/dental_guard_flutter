@@ -64,15 +64,6 @@ class AppRouter extends RootStackRouter {
       reverseDurationInMilliseconds: rinterval,
     ),
 
-    // Detect Image Pages
-    CustomRoute(
-      path: '/detectImage',
-      page: DetectImageRoute.page,
-      transitionsBuilder: TransitionsBuilders.slideLeft,
-      durationInMilliseconds: rinterval,
-      reverseDurationInMilliseconds: rinterval,
-    ),
-
     // Edit User Information Pages
     CustomRoute(
       path: '/editUserInformation',
@@ -86,15 +77,6 @@ class AppRouter extends RootStackRouter {
     CustomRoute(
       path: '/imageDetect',
       page: ImageDetectRoute.page,
-      transitionsBuilder: TransitionsBuilders.slideLeft,
-      durationInMilliseconds: rinterval,
-      reverseDurationInMilliseconds: rinterval,
-    ),
-
-    // Original Image Pages
-    CustomRoute(
-      path: '/originalImage',
-      page: OriginalImageRoute.page,
       transitionsBuilder: TransitionsBuilders.slideLeft,
       durationInMilliseconds: rinterval,
       reverseDurationInMilliseconds: rinterval,

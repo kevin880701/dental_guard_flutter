@@ -48,6 +48,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   permission_handler: ^11.3.1
   dropdown_button2: ^2.3.9
+  fw_tab_bar: ^0.0.3
 
 dev_dependencies:
   flutter_test:
