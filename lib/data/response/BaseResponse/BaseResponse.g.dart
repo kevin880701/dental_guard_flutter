@@ -11,7 +11,7 @@ BaseResponse<T> _$BaseResponseFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) =>
     BaseResponse<T>(
-      code: (json['code'] as num).toInt(),
+      returnCode: (json['returnCode'] as num).toInt(),
       message: json['message'] as String,
       data: fromJsonT(json['data']),
     );
@@ -21,7 +21,7 @@ Map<String, dynamic> _$BaseResponseToJson<T>(
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
-      'code': instance.code,
+      'returnCode': instance.returnCode,
       'message': instance.message,
       'data': toJsonT(instance.data),
     };
