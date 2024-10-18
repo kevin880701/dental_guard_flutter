@@ -1,69 +1,33 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'AddStudentResponse.freezed.dart';
 part 'AddStudentResponse.g.dart';
 
-@JsonSerializable()
-class AddStudentResponse {
-  @JsonKey(name: 'id')
-  final int id;
+@freezed
+class AddStudentResponse with _$AddStudentResponse {
+  const factory AddStudentResponse({
+    @JsonKey(name: 'id') required int id,
+    @JsonKey(name: 'user') required User user,
+    @JsonKey(name: 'student_id') required String studentId,
+    @JsonKey(name: 'school') required int school,
+    @JsonKey(name: 'classroom') required int classroom,
+    @JsonKey(name: 'birth') required String birth,
+    @JsonKey(name: 'gender') required String gender,
+  }) = _AddStudentResponse;
 
-  @JsonKey(name: 'user')
-  final User user;
-
-  @JsonKey(name: 'student_id')
-  final String studentId;
-
-  @JsonKey(name: 'school')
-  final int school;
-
-  @JsonKey(name: 'classroom')
-  final int classroom;
-
-  @JsonKey(name: 'birth')
-  final String birth;
-
-  @JsonKey(name: 'gender')
-  final String gender;
-
-  AddStudentResponse({
-    required this.id,
-    required this.user,
-    required this.studentId,
-    required this.school,
-    required this.classroom,
-    required this.birth,
-    required this.gender,
-  });
-
-  factory AddStudentResponse.fromJson(Map<String, dynamic> json) => _$AddStudentResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$AddStudentResponseToJson(this);
+  factory AddStudentResponse.fromJson(Map<String, dynamic> json) =>
+      _$AddStudentResponseFromJson(json);
 }
 
-@JsonSerializable()
-class User {
-  @JsonKey(name: 'id')
-  final int id;
-
-  @JsonKey(name: 'username')
-  final String username;
-
-  @JsonKey(name: 'full_name')
-  final String fullName;
-
-  @JsonKey(name: 'email')
-  final String email;
-
-  @JsonKey(name: 'line_id')
-  final String lineId;
-
-  User({
-    required this.id,
-    required this.username,
-    required this.fullName,
-    required this.email,
-    required this.lineId,
-  });
+@freezed
+class User with _$User {
+  const factory User({
+    @JsonKey(name: 'id') required int id,
+    @JsonKey(name: 'username') required String username,
+    @JsonKey(name: 'full_name') String? fullName,
+    @JsonKey(name: 'email') required String email,
+    @JsonKey(name: 'line_id') String? lineId,
+  }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

@@ -6,8 +6,9 @@ part of 'AddStudentResponse.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AddStudentResponse _$AddStudentResponseFromJson(Map<String, dynamic> json) =>
-    AddStudentResponse(
+_$AddStudentResponseImpl _$$AddStudentResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AddStudentResponseImpl(
       id: (json['id'] as num).toInt(),
       user: User.fromJson(json['user'] as Map<String, dynamic>),
       studentId: json['student_id'] as String,
@@ -17,7 +18,8 @@ AddStudentResponse _$AddStudentResponseFromJson(Map<String, dynamic> json) =>
       gender: json['gender'] as String,
     );
 
-Map<String, dynamic> _$AddStudentResponseToJson(AddStudentResponse instance) =>
+Map<String, dynamic> _$$AddStudentResponseImplToJson(
+        _$AddStudentResponseImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'user': instance.user,
@@ -28,15 +30,16 @@ Map<String, dynamic> _$AddStudentResponseToJson(AddStudentResponse instance) =>
       'gender': instance.gender,
     };
 
-User _$UserFromJson(Map<String, dynamic> json) => User(
+_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       id: (json['id'] as num).toInt(),
       username: json['username'] as String,
-      fullName: json['full_name'] as String,
+      fullName: json['full_name'] as String?,
       email: json['email'] as String,
-      lineId: json['line_id'] as String,
+      lineId: json['line_id'] as String?,
     );
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'username': instance.username,
       'full_name': instance.fullName,

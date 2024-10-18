@@ -6,9 +6,9 @@ part of 'TeethRecordsResponse.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TeethRecordsResponse _$TeethRecordsResponseFromJson(
+_$TeethRecordsResponseImpl _$$TeethRecordsResponseImplFromJson(
         Map<String, dynamic> json) =>
-    TeethRecordsResponse(
+    _$TeethRecordsResponseImpl(
       id: (json['id'] as num).toInt(),
       student: (json['student'] as num).toInt(),
       dateTime: json['date_time'] as String,
@@ -16,8 +16,8 @@ TeethRecordsResponse _$TeethRecordsResponseFromJson(
       dentalPlaqueCount: (json['dental_plaque_count'] as num).toInt(),
     );
 
-Map<String, dynamic> _$TeethRecordsResponseToJson(
-        TeethRecordsResponse instance) =>
+Map<String, dynamic> _$$TeethRecordsResponseImplToJson(
+        _$TeethRecordsResponseImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'student': instance.student,

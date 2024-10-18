@@ -1,28 +1,29 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'AddStudentRequestBody.freezed.dart';
-part 'AddStudentRequestBody.g.dart';
+part 'StudentListResponse.freezed.dart';
+part 'StudentListResponse.g.dart';
 
 @freezed
-class AddStudentRequestBody with _$AddStudentRequestBody {
-  const factory AddStudentRequestBody({
+class StudentListResponse with _$StudentListResponse {
+  const factory StudentListResponse({
+    @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'user') required User user,
     @JsonKey(name: 'student_id') required String studentId,
     @JsonKey(name: 'school') required int school,
     @JsonKey(name: 'classroom') required int classroom,
     @JsonKey(name: 'birth') required String birth,
     @JsonKey(name: 'gender') required String gender,
-  }) = _AddStudentRequestBody;
+  }) = _StudentListResponse;
 
-  factory AddStudentRequestBody.fromJson(Map<String, dynamic> json) =>
-      _$AddStudentRequestBodyFromJson(json);
+  factory StudentListResponse.fromJson(Map<String, dynamic> json) =>
+      _$StudentListResponseFromJson(json);
 }
 
 @freezed
 class User with _$User {
   const factory User({
+    @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'username') required String username,
-    @JsonKey(name: 'password') required String password,
     @JsonKey(name: 'full_name') String? fullName,
     @JsonKey(name: 'email') required String email,
     @JsonKey(name: 'line_id') String? lineId,

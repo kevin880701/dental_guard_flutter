@@ -1,20 +1,15 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'AnalyzeTeethResponse.freezed.dart';
 part 'AnalyzeTeethResponse.g.dart';
 
-@JsonSerializable()
-class AnalyzeTeethResponse {
-  @JsonKey(name: 'teethRangePath')
-  final String teethRangePath;
+@freezed
+class AnalyzeTeethResponse with _$AnalyzeTeethResponse {
+  const factory AnalyzeTeethResponse({
+    @JsonKey(name: 'teethRangePath') required String teethRangePath,
+    @JsonKey(name: 'teethRangeDetectPath') required String teethRangeDetectPath,
+  }) = _AnalyzeTeethResponse;
 
-  @JsonKey(name: 'teethRangeDetectPath')
-  final String teethRangeDetectPath;
-
-  AnalyzeTeethResponse({
-    required this.teethRangePath,
-    required this.teethRangeDetectPath,
-  });
-
-  factory AnalyzeTeethResponse.fromJson(Map<String, dynamic> json) => _$AnalyzeTeethResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$AnalyzeTeethResponseToJson(this);
+  factory AnalyzeTeethResponse.fromJson(Map<String, dynamic> json) =>
+      _$AnalyzeTeethResponseFromJson(json);
 }

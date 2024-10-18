@@ -1,4 +1,5 @@
 import 'package:dental_guard_flutter/data/request/login/LoginRequestBody.dart';
+import 'package:dental_guard_flutter/data/response/BaseResponse/BaseResponse.dart';
 import 'package:dental_guard_flutter/data/response/login/LoginResponse.dart';
 import 'package:dental_guard_flutter/net/ApiEndPoint.dart';
 import 'package:dental_guard_flutter/net/NetworkInterface.dart';
@@ -16,7 +17,17 @@ class ApiManager {
       url: ApiEndPoint.accountsLogin,
       body: body,
     );
-    final loginResponse = LoginResponse.fromJson(response.data as Map<String, dynamic>);
-    return loginResponse;
+
+    final baseResponse = BaseResponse<LoginResponse>.fromJson(
+      response.data,
+          (data) => LoginResponse.fromJson(data as Map<String, dynamic>),
+    );
+
+    if (baseResponse.returnCode == 0) {
+      return baseResponse.data;
+    } else {
+      print('登入失敗: ${baseResponse.message}');
+      return null;
+    }
   }
 }
