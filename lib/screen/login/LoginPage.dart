@@ -1,3 +1,4 @@
+import 'package:dental_guard_flutter/provider/UserProvider.dart';
 import 'package:dental_guard_flutter/widgets/common/ButtonWidgets.dart';
 import 'package:dental_guard_flutter/widgets/customerWidget/DropdownWidget.dart';
 import 'package:dental_guard_flutter/widgets/customerWidget/InputWidget.dart';
@@ -12,9 +13,7 @@ import 'package:dental_guard_flutter/route/AppRouter.gr.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dental_guard_flutter/widgets/common/AppBarWidgets.dart';
-import 'package:dental_guard_flutter/widgets/common/ImageWidgets.dart';
 import 'package:dental_guard_flutter/widgets/common/TextWidgets.dart';
-import 'package:dental_guard_flutter/utils/ToastHelper.dart';
 
 @RoutePage()
 class LoginPage extends HookConsumerWidget {
@@ -22,16 +21,17 @@ class LoginPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    
+    final userNotifier = ref.read(userProvider.notifier);
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final isPasswordVisible = useState(false);
     final lastBackPressed = useState<DateTime?>(null);
     final _isKeepLogin = useState<bool>(false);
     final ValueNotifier<int?> selectedIndex = ValueNotifier<int?>(null);
+    
     void _login() {
-      final email = emailController.text.trim();
-      final password = passwordController.text.trim();
-
+      userNotifier.login(username: 'test_teacher', password: 'oktescher_test');
       ref.showLoading(cancellable: true);
 
       Future.delayed(Duration(seconds: 2), () {

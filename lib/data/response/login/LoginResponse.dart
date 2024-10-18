@@ -25,16 +25,16 @@ class User {
   final int id;
 
   @JsonKey(name: 'username')
-  final String username;
+  final String? username;
 
   @JsonKey(name: 'full_name')
-  final String fullName;
+  final String? fullName;
 
   @JsonKey(name: 'email')
   final String email;
 
   @JsonKey(name: 'line_id')
-  final String lineId;
+  final String? lineId;
 
   User({
     required this.id,

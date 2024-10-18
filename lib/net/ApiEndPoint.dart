@@ -1,14 +1,15 @@
 class ApiEndPoint {
   // 開發環境
-  static const String domain = serverUrl + apiEndpoint;
+  static const String domain = serverUrl;
 
   // 正式環境
-  // static const String serverUrl = "https://prod.com";
-  // 開發環境
-  static const String serverUrl = "http://stage:8180";
-  static const String apiEndpoint = "/v1/";
+  static const String serverUrl = "https://dental-service.jieniguicare.org/";
 
-  // User
-  static const String user = "user";
-  static const String userLogin = "user/login";
+  static const String accountsLogin = "accounts/login/";
+  static const String accountsStudents = "accounts/students/";
+  static const String apiAnalysis = "api/analysis/";
+  static const String apiTeethCleaningRecords = "api/teeth-cleaning-records/";
+
+
+
 }
