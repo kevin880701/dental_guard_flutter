@@ -13,6 +13,7 @@ class MainTitleBar extends HookWidget {
   final VoidCallback? onTextTap;
   final bool isInformation;
   final String title;
+  final VoidCallback? onAddTap;
 
   const MainTitleBar({
     super.key,
@@ -20,6 +21,7 @@ class MainTitleBar extends HookWidget {
     this.onBackTap,
     this.onTextTap,
     this.isInformation = false,
+    this.onAddTap,
     required this.title,
   });
 
@@ -62,6 +64,16 @@ class MainTitleBar extends HookWidget {
                     AutoRouter.of(context).popForced();
                   },
                   child: assetImage(AppImages.informationIcon, width: 24, height: 24, color: AppColors.white)),
+            )
+          ],
+          if (onAddTap != null) ...[
+            Align(
+              alignment: Alignment.centerRight,
+              child: GestureDetector(
+                  onTap: () {
+                    AutoRouter.of(context).popForced();
+                  },
+                  child: assetImage(AppImages.addIcon, width: 24, height: 24, color: AppColors.white)),
             )
           ],
         ],

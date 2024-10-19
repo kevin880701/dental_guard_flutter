@@ -7,6 +7,7 @@ class AppImages {
   static const googleIcon = '${assetsImages}ic_google.png';
   static const cancelIcon = '${assetsImages}ic_cancel.png';
   static const informationIcon = '${assetsImages}ic_information.png';
+  static const addIcon = '${assetsImages}ic_add.png';
   static const homeActiveIcon = '${assetsImages}ic_home_active.png';
   static const homeInactiveIcon = '${assetsImages}ic_home_inactive.png';
   static const notifyActiveIcon = '${assetsImages}ic_notify_active.png';

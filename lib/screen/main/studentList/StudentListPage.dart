@@ -22,7 +22,7 @@ class StudentListPage extends HookConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            MainTitleBar(title: '學生列表'),
+            MainTitleBar(title: '學生列表', onAddTap: (){},),
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.all(8.0),
