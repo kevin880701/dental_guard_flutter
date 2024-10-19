@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dental_guard_flutter/data/response/studentList/StudentListResponse.dart';
 import 'package:dental_guard_flutter/route/AppRouter.gr.dart';
 import 'package:dental_guard_flutter/screen/main/studentList/StudentListPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class StudentItem extends HookWidget {
-  final Student student;
+  final StudentListResponse student;
 
   const StudentItem({Key? key, required this.student}) : super(key: key);
 
@@ -36,11 +37,11 @@ class StudentItem extends HookWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    student.name,
+                    student.user.username,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                   Text(
-                    student.id,
+                    student.user.id.toString(),
                     style: TextStyle(fontSize: 14, color: Colors.grey),
                   ),
                 ],

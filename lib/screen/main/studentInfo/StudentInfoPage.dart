@@ -1,3 +1,4 @@
+import 'package:dental_guard_flutter/data/response/studentList/StudentListResponse.dart';
 import 'package:dental_guard_flutter/route/AppRouter.gr.dart';
 import 'package:dental_guard_flutter/screen/main/studentList/StudentListPage.dart';
 import 'package:dental_guard_flutter/widgets/common/ButtonWidgets.dart';
@@ -18,7 +19,7 @@ import 'package:dental_guard_flutter/widgets/common/AppBarWidgets.dart';
 class StudentInfoPage extends HookConsumerWidget {
   const StudentInfoPage({super.key, required this.student});
 
-  final Student student;
+  final StudentListResponse student;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

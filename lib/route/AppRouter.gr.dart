@@ -9,6 +9,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i13;
+import 'package:dental_guard_flutter/data/response/studentList/StudentListResponse.dart'
+    as _i15;
 import 'package:dental_guard_flutter/screen/LaunchPage.dart' as _i3;
 import 'package:dental_guard_flutter/screen/login/LoginPage.dart' as _i4;
 import 'package:dental_guard_flutter/screen/login/SetAccountPage.dart' as _i6;
@@ -265,7 +267,7 @@ class SettingRoute extends _i13.PageRouteInfo<void> {
 class StudentInfoRoute extends _i13.PageRouteInfo<StudentInfoRouteArgs> {
   StudentInfoRoute({
     _i14.Key? key,
-    required _i11.Student student,
+    required _i15.StudentListResponse student,
     List<_i13.PageRouteInfo>? children,
   }) : super(
           StudentInfoRoute.name,
@@ -298,7 +300,7 @@ class StudentInfoRouteArgs {
 
   final _i14.Key? key;
 
-  final _i11.Student student;
+  final _i15.StudentListResponse student;
 
   @override
   String toString() {
