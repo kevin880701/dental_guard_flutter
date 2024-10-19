@@ -11,6 +11,7 @@ import 'package:dental_guard_flutter/data/response/studentList/StudentListRespon
 import 'package:dental_guard_flutter/data/response/teethRecords/TeethRecordsResponse.dart';
 import 'package:dental_guard_flutter/net/ApiEndPoint.dart';
 import 'package:dental_guard_flutter/net/NetworkInterface.dart';
+import 'package:dental_guard_flutter/provider/PageProvider.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http_parser/http_parser.dart';
@@ -90,8 +91,9 @@ class ApiManager {
       gender: gender,
     );
     final response = await _networkInterface.post(
-      url: ApiEndPoint.accountsLogin,
+      url: ApiEndPoint.accountsStudents,
       body: body,
+      userToken: token,
     );
 
     final baseResponse = BaseResponse<AddStudentResponse>.fromJson(
@@ -99,9 +101,11 @@ class ApiManager {
       (data) => AddStudentResponse.fromJson(data as Map<String, dynamic>),
     );
 
-    if (baseResponse.returnCode == 0) {
+    if (baseResponse.returnCode == 0){
+      ref.read(pageProvider.notifier).showSuccess(baseResponse.message);
       return baseResponse.data;
     } else {
+      ref.read(pageProvider.notifier).showError(baseResponse.message)
       return null;
     }
   }

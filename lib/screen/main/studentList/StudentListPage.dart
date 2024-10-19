@@ -1,4 +1,5 @@
 import 'package:dental_guard_flutter/data/fakerData/StudentListFakerData.dart';
+import 'package:dental_guard_flutter/route/AppRouter.gr.dart';
 import 'package:dental_guard_flutter/widgets/item/StudentItem.dart';
 import 'package:dental_guard_flutter/widgets/main/MainTitleBar.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,9 @@ class StudentListPage extends HookConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            MainTitleBar(title: '學生列表', onAddTap: (){},),
+            MainTitleBar(title: '學生列表', onAddTap: (){
+              AutoRouter.of(context).push(AddStudentRoute(classRoomId: 3));
+            },),
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.all(8.0),

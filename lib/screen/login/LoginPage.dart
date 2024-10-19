@@ -31,17 +31,19 @@ class LoginPage extends HookConsumerWidget {
     final ValueNotifier<int?> selectedIndex = ValueNotifier<int?>(null);
     
     void _login() {
-      userNotifier.login(username: 'test_teacher', password: 'oktescher_test');
+      userNotifier.login(username: 'test_teacher', password: 'oktescher_test').then((_){
+        AutoRouter.of(context).push(const MainRoute());
+      });
       ref.showLoading(cancellable: true);
 
-      Future.delayed(Duration(seconds: 2), () {
-        final isCancelled = ref.read(pageProvider).isCancelled;
-
-        if (!isCancelled) {
-          ref.hideLoading();
-          AutoRouter.of(context).push(const MainRoute());
-        }
-      });
+      // Future.delayed(Duration(seconds: 2), () {
+      //   final isCancelled = ref.read(pageProvider).isCancelled;
+      //
+      //   if (!isCancelled) {
+      //     ref.hideLoading();
+      //     AutoRouter.of(context).push(const MainRoute());
+      //   }
+      // });
     }
 
     Future<bool> _onWillPop() async {

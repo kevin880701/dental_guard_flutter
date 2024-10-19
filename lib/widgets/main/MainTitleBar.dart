@@ -71,7 +71,7 @@ class MainTitleBar extends HookWidget {
               alignment: Alignment.centerRight,
               child: GestureDetector(
                   onTap: () {
-                    AutoRouter.of(context).popForced();
+                    onAddTap!();
                   },
                   child: assetImage(AppImages.addIcon, width: 24, height: 24, color: AppColors.white)),
             )

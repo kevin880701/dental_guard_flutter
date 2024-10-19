@@ -40,6 +40,9 @@ class AppTexts {
   static const clearImage = '清除圖片';
   static const notDetectedYet = '尚未偵測';
 
+  // 圖片偵測
+  static const addStudent = '新增學生';
+
   static const home = 'Home';
   static const notify = 'Notify';
   static const finish = 'Finish';

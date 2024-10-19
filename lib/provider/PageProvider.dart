@@ -5,12 +5,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class PageState {
   final bool isLoading;
   final String? errorMessage;
+  final String? successMessage;
   final bool isCancellable;
   final bool isCancelled;
 
   PageState({
     this.isLoading = false,
     this.errorMessage,
+    this.successMessage,
     this.isCancellable = false,
     this.isCancelled = false,
   });
@@ -18,12 +20,14 @@ class PageState {
   PageState copyWith({
     bool? isLoading,
     String? errorMessage,
+    String? successMessage,
     bool? isCancellable,
     bool? isCancelled,
   }) {
     return PageState(
       isLoading: isLoading ?? this.isLoading,
       errorMessage: errorMessage,
+      successMessage: successMessage,
       isCancellable: isCancellable ?? this.isCancellable,
       isCancelled: isCancelled ?? this.isCancelled,
     );
@@ -48,10 +52,22 @@ class PageNotifier extends StateNotifier<PageState> {
   void showError(String message) {
     state = state.copyWith(errorMessage: message);
   }
+
   void showToastIfError(BuildContext context) {
     if (state.errorMessage != null) {
       showErrorToast(context: context, text: state.errorMessage!);
       state = state.copyWith(errorMessage: null);
+    }
+  }
+
+  void showSuccess(String message) {
+    state = state.copyWith(successMessage: message);
+  }
+
+  void showToastIfSuccess(BuildContext context) {
+    if (state.successMessage != null) {
+      showErrorToast(context: context, text: state.successMessage!);
+      state = state.copyWith(successMessage: null);
     }
   }
 

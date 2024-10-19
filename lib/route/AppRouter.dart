@@ -117,5 +117,12 @@ class AppRouter extends RootStackRouter {
       durationInMilliseconds: rinterval,
       reverseDurationInMilliseconds: rinterval,
     ),
+    CustomRoute(
+      path: '/addStudent',
+      page: AddStudentRoute.page,
+      transitionsBuilder: TransitionsBuilders.slideLeft,
+      durationInMilliseconds: rinterval,
+      reverseDurationInMilliseconds: rinterval,
+    ),
   ];
 }

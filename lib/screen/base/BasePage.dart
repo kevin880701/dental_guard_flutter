@@ -40,6 +40,13 @@ class BasePage extends HookConsumerWidget {
     }, [pageState.errorMessage]);
 
     useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        ref.read(pageProvider.notifier).showToastIfSuccess(context);
+      });
+      return null;
+    }, [pageState.successMessage]);
+
+    useEffect(() {
       SchedulerBinding.instance.addPostFrameCallback((_) {
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
           statusBarColor: statusBarColor,
