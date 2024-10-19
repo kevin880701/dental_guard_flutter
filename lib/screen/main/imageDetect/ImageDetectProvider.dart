@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:dental_guard_flutter/data/response/analyzeTeeth/AnalyzeTeethResponse.dart';
+import 'package:dental_guard_flutter/net/ApiManager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ImageDetectState {
@@ -27,9 +29,12 @@ final imageDetectProvider = StateNotifierProvider.autoDispose<ImageDetectNotifie
 });
 
 class ImageDetectNotifier extends StateNotifier<ImageDetectState> {
-  ImageDetectNotifier(this.ref) : super(ImageDetectState()) {}
+  ImageDetectNotifier(this.ref) : super(ImageDetectState()) {
+    apiManager = ApiManager(ref);
+  }
 
   final Ref ref;
+  late final ApiManager apiManager;
   late String token = "";
 
   Future<void> updateImage({File? originalImage, File? detectResult}) async {
@@ -44,5 +49,12 @@ class ImageDetectNotifier extends StateNotifier<ImageDetectState> {
       originalImage: null,
       detectResult: null,
     );
+  }
+
+  Future<AnalyzeTeethResponse?> analyzeTeeth({
+    required File originalImage,
+  }) async {
+    final response = apiManager.analyzeTeeth(token, originalImage: originalImage);
+
   }
 }

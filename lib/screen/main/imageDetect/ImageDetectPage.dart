@@ -83,17 +83,28 @@ class ImageDetectPage extends HookConsumerWidget {
                 children: [
                   roundedButton(
                     text: AppTexts.clearImage,
-                    bgColor: AppColors.red,
+                    bgColor: (imageDetectState.originalImage != null ||
+                            imageDetectState.detectResult != null)
+                        ? AppColors.red
+                        : AppColors.disableGrey,
                     fontColor: AppColors.white,
-                    onTap: (){
-                      imageDetectNotifier.clearImage();
-                    }
+                    onTap: (imageDetectState.originalImage != null ||
+                            imageDetectState.detectResult != null)
+                        ? () {
+                            imageDetectNotifier.clearImage();
+                          }
+                        : null,
                   ),
                   roundedButton(
-                    text: AppTexts.imageDetection,
-                    bgColor: AppColors.primaryBlack,
-                    fontColor: AppColors.white,
-                  ),
+                      text: AppTexts.imageDetection,
+                      bgColor: (imageDetectState.originalImage != null)
+                          ? AppColors.primaryBlack
+                          : AppColors.disableGrey,
+                      fontColor: AppColors.white,
+                      onTap: () {
+                        imageDetectNotifier.analyzeTeeth(
+                            originalImage: imageDetectState.originalImage!);
+                      }),
                   roundedButton(
                     text: AppTexts.imageStorage,
                     bgColor: AppColors.blue,
