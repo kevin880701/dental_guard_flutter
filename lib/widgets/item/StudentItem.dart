@@ -37,11 +37,11 @@ class StudentItem extends HookWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    student.user.username,
+                    student.user.fullName ?? "",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                   Text(
-                    student.user.id.toString(),
+                    student.studentId,
                     style: TextStyle(fontSize: 14, color: Colors.grey),
                   ),
                 ],

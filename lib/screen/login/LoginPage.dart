@@ -31,11 +31,11 @@ class LoginPage extends HookConsumerWidget {
     final ValueNotifier<int?> selectedIndex = ValueNotifier<int?>(null);
     
     void _login() {
-      userNotifier.login(username: 'test_teacher', password: 'oktescher_test').then((_){
-        AutoRouter.of(context).push(const MainRoute());
-      });
       ref.showLoading(cancellable: true);
-
+      userNotifier.login(username: 'teacher_test01', password: 'teachertest_111').then((_){
+        AutoRouter.of(context).push(const MainRoute());
+        ref.hideLoading();
+      });
       // Future.delayed(Duration(seconds: 2), () {
       //   final isCancelled = ref.read(pageProvider).isCancelled;
       //

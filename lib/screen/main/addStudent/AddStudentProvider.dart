@@ -16,9 +16,7 @@ final addStudentProvider =
 
 class AddStudentNotifier extends StateNotifier<AddStudentState> {
   AddStudentNotifier(this.ref) : super(AddStudentState()) {
-    print("@@@!:${ref.read(userProvider).loginResponse?.tokens.access}");
     token = ref.read(userProvider).loginResponse?.tokens.access ?? "";
-    print("@@@!#:${token}");
     apiManager = ApiManager(ref);
   }
 
@@ -39,7 +37,7 @@ class AddStudentNotifier extends StateNotifier<AddStudentState> {
     required String gender,
   }) async {
     final response = apiManager.postAddStudent(
-      'Bearer $token',
+      token,
       username: username,
       fullName: fullName,
       password: password,

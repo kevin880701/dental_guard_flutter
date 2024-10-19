@@ -33,8 +33,15 @@ class UserNotifier extends StateNotifier<UserState> {
   Future<LoginResponse?> login({required String username, required String password}) async {
     try {
       LoginResponse? loginResponse = await apiManager.login(username: username, password: password);
-      state = state.copyWith(loginResponse: loginResponse);
-      return loginResponse;
+      final updatedLoginResponse = loginResponse?.copyWith(
+        tokens: loginResponse.tokens.copyWith(
+          access: loginResponse.tokens.access.startsWith('Bearer ')
+              ? loginResponse.tokens.access
+              : 'Bearer ${loginResponse.tokens.access}',
+        ),
+      );
+      state = state.copyWith(loginResponse: updatedLoginResponse);
+      return updatedLoginResponse;
     } catch (e, stackTrace) {
       AppLog.e("login Error：$e");
     }

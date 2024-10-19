@@ -7,6 +7,9 @@ class ApiEndPoint {
 
   static const String accountsLogin = "accounts/login/";
   static const String accountsStudents = "accounts/students/";
+  static String classroomsStudents(int classroomsId) {
+    return "accounts/classrooms/$classroomsId/students/";
+  }
   static const String apiAnalysis = "api/analysis/";
   static const String apiTeethCleaningRecords = "api/teeth-cleaning-records/";
 

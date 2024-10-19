@@ -43,9 +43,11 @@ class ApiManager {
     }
   }
 
-  Future<List<StudentListResponse>> getStudentList(token) async {
-    final response = await _networkInterface.post(
-      url: ApiEndPoint.accountsStudents,
+  Future<List<StudentListResponse>> getStudentList(token,{required int classroomsId}) async {
+    final response = await _networkInterface.get(
+      userToken: token,
+      url: ApiEndPoint.classroomsStudents(classroomsId
+      ),
     );
 
     BaseResponse<List<StudentListResponse>> baseResponse =
@@ -105,7 +107,7 @@ class ApiManager {
       ref.read(pageProvider.notifier).showSuccess(baseResponse.message);
       return baseResponse.data;
     } else {
-      ref.read(pageProvider.notifier).showError(baseResponse.message)
+      ref.read(pageProvider.notifier).showError(baseResponse.message);
       return null;
     }
   }
@@ -131,7 +133,6 @@ class ApiManager {
       return null;
     }
   }
-
 
   Future<AnalyzeTeethResponse?> analyzeTeeth(
       String token, {
