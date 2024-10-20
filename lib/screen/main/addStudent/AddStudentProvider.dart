@@ -2,11 +2,26 @@ import 'dart:io';
 
 import 'package:dental_guard_flutter/data/response/addStudent/AddStudentResponse.dart';
 import 'package:dental_guard_flutter/data/response/analyzeTeeth/AnalyzeTeethResponse.dart';
+import 'package:dental_guard_flutter/data/response/classroomList/ClassroomListResponse.dart';
 import 'package:dental_guard_flutter/net/ApiManager.dart';
 import 'package:dental_guard_flutter/provider/UserProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddStudentState {}
+class AddStudentState {
+  final List<ClassroomListResponse> classroomList;
+
+  AddStudentState({
+    this.classroomList = const [],
+  });
+
+  AddStudentState copyWith({
+    List<ClassroomListResponse>? classroomList,
+  }) {
+    return AddStudentState(
+      classroomList: List.unmodifiable(classroomList ?? this.classroomList),
+    );
+  }
+}
 
 final addStudentProvider =
     StateNotifierProvider.autoDispose<AddStudentNotifier, AddStudentState>(
@@ -23,6 +38,17 @@ class AddStudentNotifier extends StateNotifier<AddStudentState> {
   final Ref ref;
   late final ApiManager apiManager;
   late String token = "";
+
+
+  Future<List<ClassroomListResponse>> getClassroomList() async {
+
+    final response = await apiManager.getClassroomList(token);
+
+    state = state.copyWith(
+      classroomList: response,
+    );
+    return response;
+  }
 
   Future<AddStudentResponse?> addStudent({
     required String username,

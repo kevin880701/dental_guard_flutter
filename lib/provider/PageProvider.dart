@@ -66,7 +66,7 @@ class PageNotifier extends StateNotifier<PageState> {
 
   void showToastIfSuccess(BuildContext context) {
     if (state.successMessage != null) {
-      showErrorToast(context: context, text: state.successMessage!);
+      showSuccessToast(context: context, text: state.successMessage!);
       state = state.copyWith(successMessage: null);
     }
   }

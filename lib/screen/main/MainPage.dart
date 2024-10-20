@@ -36,7 +36,6 @@ class MainPage extends HookConsumerWidget {
               controller: _tabController,
               children: <Widget>[
                 KeepAliveWrapper(child: StudentListPage()),
-                KeepAliveWrapper(child: NotifyPage()),
                 KeepAliveWrapper(child: SettingPage()),
               ],
             )),
@@ -59,14 +58,6 @@ class MainPage extends HookConsumerWidget {
                   ),
                   Tab(
                     icon: _tabSelectedIndex.value == 1
-                        ? assetImage(AppImages.notifyActiveIcon,
-                            width: 24.sp, height: 24.sp, color: AppColors.black)
-                        : assetImage(AppImages.notifyInactiveIcon,
-                            width: 24.sp, height: 24.sp, color: AppColors.grey),
-                    text: AppTexts.notify,
-                  ),
-                  Tab(
-                    icon: _tabSelectedIndex.value == 2
                         ? assetImage(AppImages.personalActiveIcon,
                             width: 24.sp, height: 24.sp, color: AppColors.black)
                         : assetImage(AppImages.personalInactiveIcon,

@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:dental_guard_flutter/data/request/addStudent/AddStudentRequestBody.dart'
     as addStudent;
+import 'package:dental_guard_flutter/data/request/createTeethRecord/CreateTeethRecordRequestBody.dart';
 import 'package:dental_guard_flutter/data/request/login/LoginRequestBody.dart';
 import 'package:dental_guard_flutter/data/response/BaseResponse/BaseResponse.dart';
 import 'package:dental_guard_flutter/data/response/addStudent/AddStudentResponse.dart';
 import 'package:dental_guard_flutter/data/response/analyzeTeeth/AnalyzeTeethResponse.dart';
+import 'package:dental_guard_flutter/data/response/classroomList/ClassroomListResponse.dart';
+import 'package:dental_guard_flutter/data/response/createTeethRecord/CreateTeethRecordResponse.dart';
 import 'package:dental_guard_flutter/data/response/login/LoginResponse.dart';
 import 'package:dental_guard_flutter/data/response/studentList/StudentListResponse.dart';
 import 'package:dental_guard_flutter/data/response/teethRecords/TeethRecordsResponse.dart';
@@ -36,9 +39,11 @@ class ApiManager {
     );
 
     if (baseResponse.returnCode == 0) {
+      ref.read(pageProvider.notifier).hideLoading();
+      ref.read(pageProvider.notifier).showSuccess(baseResponse.message);
       return baseResponse.data;
     } else {
-      print('登入失敗: ${baseResponse.message}');
+      ref.read(pageProvider.notifier).showError(baseResponse.message);
       return null;
     }
   }
@@ -112,26 +117,49 @@ class ApiManager {
     }
   }
 
-  Future<List<TeethRecordsResponse>?> getTeethRecords(String token) async {
-    try {
+  Future<List<TeethRecordsResponse>> getTeethRecords(String token, {required int studentId}) async {
       // 發送 GET 請求
       final response = await _networkInterface.get(
-        url: ApiEndPoint.apiTeethCleaningRecords,
+        userToken: token,
+        url: ApiEndPoint.recordsStudents(studentId),
       );
 
-      // 確保 response 是 Map<String, dynamic> 格式的數據
-      final jsonResponse = response.data as List<dynamic>;
+      BaseResponse<List<TeethRecordsResponse>> baseResponse =
+      BaseResponse<List<TeethRecordsResponse>>.fromJson(
+        response.data,
+            (data) => (data as List<dynamic>)
+            .map((e) => TeethRecordsResponse.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
 
-      // 將每個元素轉換為 TeethRecordsResponse
-      final records = jsonResponse
-          .map((record) =>
-              TeethRecordsResponse.fromJson(record as Map<String, dynamic>))
-          .toList();
+      if (baseResponse.returnCode == 0) {
+        return baseResponse.data;
+      } else {
+        return [];
+      }
+  }
 
-      return records;
-    } catch (e) {
-      return null;
-    }
+  Future<List<ClassroomListResponse>> getClassroomList(String token) async {
+      // 發送 GET 請求
+      final response = await _networkInterface.get(
+        userToken: token,
+        url: ApiEndPoint.accountsClassrooms,
+      );
+
+      BaseResponse<List<ClassroomListResponse>> baseResponse =
+      BaseResponse<List<ClassroomListResponse>>.fromJson(
+        response.data,
+            (data) => (data as List<dynamic>)
+            .map((e) => ClassroomListResponse.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
+
+      if (baseResponse.returnCode == 0) {
+        return baseResponse.data;
+      } else {
+        ref.read(pageProvider.notifier).showError(baseResponse.message);
+        return [];
+      }
   }
 
   Future<AnalyzeTeethResponse?> analyzeTeeth(
@@ -139,11 +167,15 @@ class ApiManager {
         required File originalImage,
       }) async {
     try {
+      ref.read(pageProvider.notifier).showLoading();
+      print("#####################");
+      print("originalImage:${originalImage.path}");
+      print("#####################");
       // 構建 FormData，並添加圖片文件
       FormData formData = FormData.fromMap({
         'image': await MultipartFile.fromFile(
           originalImage.path,
-          filename: originalImage.path.split('/').last,
+          filename: 'originalImage',
           contentType: MediaType('image', 'jpeg'), // 假設是JPEG圖片
         ),
       });
@@ -157,13 +189,43 @@ class ApiManager {
 
       final jsonResponse = response.data as Map<String, dynamic>;
       if (jsonResponse['returnCode'] == 0) {
+        ref.read(pageProvider.notifier).hideLoading();
+        ref.read(pageProvider.notifier).showSuccess(jsonResponse['message']);
         return AnalyzeTeethResponse.fromJson(jsonResponse['data']);
       } else {
         print('Error: ${jsonResponse['message']}');
+        ref.read(pageProvider.notifier).showError(jsonResponse['message']);
+        ref.read(pageProvider.notifier).hideLoading();
         return null;
       }
     } catch (e) {
       print('Exception: $e');
+      ref.read(pageProvider.notifier).hideLoading();
+      return null;
+    }
+  }
+
+  Future<CreateTeethRecordResponse?> createTeethRecords(
+      String token, {
+        required int studentId,
+        required String imagesPath,
+        required String dentalPlaqueCount,
+      }) async {
+    final body = CreateTeethRecordRequestBody(student: studentId, imagesPath: imagesPath, dentalPlaqueCount: dentalPlaqueCount);
+    final response = await _networkInterface.post(
+      userToken: token,
+      url: ApiEndPoint.apiRecordsCreate,
+      body: body,
+    );
+
+    final baseResponse = BaseResponse<CreateTeethRecordResponse>.fromJson(
+      response.data,
+          (data) => CreateTeethRecordResponse.fromJson(data as Map<String, dynamic>),
+    );
+
+    if (baseResponse.returnCode == 0) {
+      return baseResponse.data;
+    } else {
       return null;
     }
   }

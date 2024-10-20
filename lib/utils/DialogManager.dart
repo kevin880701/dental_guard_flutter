@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dental_guard_flutter/widgets/dialog/window/ChooseImageDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -62,6 +63,21 @@ Future<void> showBottomEditDialog(
       isSymbols: isSymbols,
       wordLimit: wordLimit,
     ),
+  );
+}
+
+Future<void> showChooseImageDialog(
+  BuildContext context, {
+     required VoidCallback onChooseImageTap,
+     required VoidCallback onCapturePhotoTap,
+  bool barrierDismissible = true,
+}) async {
+  await showDialogBox(
+    alignment: Alignment.bottomCenter,
+    barrierDismissible: barrierDismissible,
+    context,
+    child: ChooseImageDialog(onChooseImageTap: onChooseImageTap,
+        onCapturePhotoTap: onCapturePhotoTap),
   );
 }
 

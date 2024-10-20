@@ -1,60 +1,86 @@
 import 'dart:io';
 
 import 'package:dental_guard_flutter/data/response/analyzeTeeth/AnalyzeTeethResponse.dart';
+import 'package:dental_guard_flutter/data/response/classroomList/ClassroomListResponse.dart';
+import 'package:dental_guard_flutter/data/response/createTeethRecord/CreateTeethRecordResponse.dart';
 import 'package:dental_guard_flutter/net/ApiManager.dart';
+import 'package:dental_guard_flutter/provider/UserProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ImageDetectState {
   final File? originalImage;
-  final File? detectResult;
+  final AnalyzeTeethResponse? analyzeTeethResponse;
 
   ImageDetectState({
     this.originalImage,
-    this.detectResult,
+    this.analyzeTeethResponse,
   });
 
   ImageDetectState copyWith({
     File? originalImage,
-    File? detectResult,
+    AnalyzeTeethResponse? analyzeTeethResponse,
   }) {
     return ImageDetectState(
       originalImage: originalImage,
-      detectResult: detectResult,
+      analyzeTeethResponse: analyzeTeethResponse,
     );
   }
 }
 
-final imageDetectProvider = StateNotifierProvider.autoDispose<ImageDetectNotifier, ImageDetectState>((ref) {
+final imageDetectProvider =
+    StateNotifierProvider.autoDispose<ImageDetectNotifier, ImageDetectState>(
+        (ref) {
   return ImageDetectNotifier(ref);
 });
 
 class ImageDetectNotifier extends StateNotifier<ImageDetectState> {
   ImageDetectNotifier(this.ref) : super(ImageDetectState()) {
     apiManager = ApiManager(ref);
+    token = ref.read(userProvider).loginResponse?.tokens.access ?? "";
   }
 
   final Ref ref;
   late final ApiManager apiManager;
   late String token = "";
 
-  Future<void> updateImage({File? originalImage, File? detectResult}) async {
+  Future<void> updateImage(
+      {File? originalImage, AnalyzeTeethResponse? analyzeTeethResponse}) async {
     state = state.copyWith(
       originalImage: originalImage ?? state.originalImage,
-      detectResult: detectResult ?? state.detectResult,
+      analyzeTeethResponse: analyzeTeethResponse ?? state.analyzeTeethResponse,
     );
   }
 
   Future<void> clearImage() async {
     state = state.copyWith(
       originalImage: null,
-      detectResult: null,
+      analyzeTeethResponse: null,
     );
   }
 
   Future<AnalyzeTeethResponse?> analyzeTeeth({
     required File originalImage,
   }) async {
-    final response = apiManager.analyzeTeeth(token, originalImage: originalImage);
+    AnalyzeTeethResponse? response =
+        await apiManager.analyzeTeeth(token, originalImage: originalImage);
 
+    state = state.copyWith(
+      originalImage: state.originalImage,
+      analyzeTeethResponse: response,
+    );
+    return response;
+  }
+
+  Future<CreateTeethRecordResponse?> createTeethRecords({
+    required int studentId,
+    required String imagesPath,
+    required String dentalPlaqueCount,
+  }) async {
+    CreateTeethRecordResponse? response = await apiManager.createTeethRecords(token,
+        studentId: studentId,
+        imagesPath: imagesPath,
+        dentalPlaqueCount: dentalPlaqueCount);
+
+    return response;
   }
 }

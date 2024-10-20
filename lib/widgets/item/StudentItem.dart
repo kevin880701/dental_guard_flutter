@@ -1,20 +1,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dental_guard_flutter/data/response/studentList/StudentListResponse.dart';
 import 'package:dental_guard_flutter/route/AppRouter.gr.dart';
-import 'package:dental_guard_flutter/screen/main/studentList/StudentListPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class StudentItem extends HookWidget {
   final StudentListResponse student;
+  final VoidCallback? onTap;
 
-  const StudentItem({Key? key, required this.student}) : super(key: key);
+  const StudentItem({Key? key, required this.student, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        AutoRouter.of(context).push(StudentInfoRoute(student: student));
+        if(onTap!= null){
+          onTap!();
+        }
       },
       child: Container(
         padding: EdgeInsets.all(8.0),
@@ -47,8 +49,9 @@ class StudentItem extends HookWidget {
                 ],
               ),
             ),
-            // Arrow Icon
-            Icon(Icons.chevron_right, color: Colors.grey),
+            if(onTap != null)...[
+              Icon(Icons.chevron_right, color: Colors.grey),
+            ]
           ],
         ),
       ),

@@ -10,6 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i14;
 import 'package:dental_guard_flutter/data/response/studentList/StudentListResponse.dart'
+    as _i17;
+import 'package:dental_guard_flutter/data/response/teethRecords/TeethRecordsResponse.dart'
     as _i16;
 import 'package:dental_guard_flutter/screen/LaunchPage.dart' as _i4;
 import 'package:dental_guard_flutter/screen/login/LoginPage.dart' as _i5;
@@ -35,17 +37,10 @@ import 'package:flutter/material.dart' as _i15;
 
 /// generated route for
 /// [_i1.AddStudentPage]
-class AddStudentRoute extends _i14.PageRouteInfo<AddStudentRouteArgs> {
-  AddStudentRoute({
-    _i15.Key? key,
-    required int classRoomId,
-    List<_i14.PageRouteInfo>? children,
-  }) : super(
+class AddStudentRoute extends _i14.PageRouteInfo<void> {
+  const AddStudentRoute({List<_i14.PageRouteInfo>? children})
+      : super(
           AddStudentRoute.name,
-          args: AddStudentRouteArgs(
-            key: key,
-            classRoomId: classRoomId,
-          ),
           initialChildren: children,
         );
 
@@ -54,29 +49,9 @@ class AddStudentRoute extends _i14.PageRouteInfo<AddStudentRouteArgs> {
   static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<AddStudentRouteArgs>();
-      return _i1.AddStudentPage(
-        key: args.key,
-        classRoomId: args.classRoomId,
-      );
+      return const _i1.AddStudentPage();
     },
   );
-}
-
-class AddStudentRouteArgs {
-  const AddStudentRouteArgs({
-    this.key,
-    required this.classRoomId,
-  });
-
-  final _i15.Key? key;
-
-  final int classRoomId;
-
-  @override
-  String toString() {
-    return 'AddStudentRouteArgs{key: $key, classRoomId: $classRoomId}';
-  }
 }
 
 /// generated route for
@@ -100,10 +75,19 @@ class EditUserInformationRoute extends _i14.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.ImageDetectPage]
-class ImageDetectRoute extends _i14.PageRouteInfo<void> {
-  const ImageDetectRoute({List<_i14.PageRouteInfo>? children})
-      : super(
+class ImageDetectRoute extends _i14.PageRouteInfo<ImageDetectRouteArgs> {
+  ImageDetectRoute({
+    _i15.Key? key,
+    required int studentId,
+    _i16.TeethRecordsResponse? teethRecord,
+    List<_i14.PageRouteInfo>? children,
+  }) : super(
           ImageDetectRoute.name,
+          args: ImageDetectRouteArgs(
+            key: key,
+            studentId: studentId,
+            teethRecord: teethRecord,
+          ),
           initialChildren: children,
         );
 
@@ -112,9 +96,33 @@ class ImageDetectRoute extends _i14.PageRouteInfo<void> {
   static _i14.PageInfo page = _i14.PageInfo(
     name,
     builder: (data) {
-      return const _i3.ImageDetectPage();
+      final args = data.argsAs<ImageDetectRouteArgs>();
+      return _i3.ImageDetectPage(
+        key: args.key,
+        studentId: args.studentId,
+        teethRecord: args.teethRecord,
+      );
     },
   );
+}
+
+class ImageDetectRouteArgs {
+  const ImageDetectRouteArgs({
+    this.key,
+    required this.studentId,
+    this.teethRecord,
+  });
+
+  final _i15.Key? key;
+
+  final int studentId;
+
+  final _i16.TeethRecordsResponse? teethRecord;
+
+  @override
+  String toString() {
+    return 'ImageDetectRouteArgs{key: $key, studentId: $studentId, teethRecord: $teethRecord}';
+  }
 }
 
 /// generated route for
@@ -315,7 +323,7 @@ class SettingRoute extends _i14.PageRouteInfo<void> {
 class StudentInfoRoute extends _i14.PageRouteInfo<StudentInfoRouteArgs> {
   StudentInfoRoute({
     _i15.Key? key,
-    required _i16.StudentListResponse student,
+    required _i17.StudentListResponse student,
     List<_i14.PageRouteInfo>? children,
   }) : super(
           StudentInfoRoute.name,
@@ -348,7 +356,7 @@ class StudentInfoRouteArgs {
 
   final _i15.Key? key;
 
-  final _i16.StudentListResponse student;
+  final _i17.StudentListResponse student;
 
   @override
   String toString() {

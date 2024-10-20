@@ -12,6 +12,13 @@ class ApiEndPoint {
   }
   static const String apiAnalysis = "api/analysis/";
   static const String apiTeethCleaningRecords = "api/teeth-cleaning-records/";
+  static String recordsStudents(int studentId) {
+    return "api/records/students/$studentId/";
+  }
+  static const String accountsClassrooms = "accounts/classrooms/";
+  static const String apiRecordsCreate = "api/records/create/";
+
+
 
 
 

@@ -1,27 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'TeethRecordsResponse.dart';
+part of 'CreateTeethRecordRequestBody.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TeethRecordsResponseImpl _$$TeethRecordsResponseImplFromJson(
+_$CreateTeethRecordRequestBodyImpl _$$CreateTeethRecordRequestBodyImplFromJson(
         Map<String, dynamic> json) =>
-    _$TeethRecordsResponseImpl(
-      id: (json['id'] as num).toInt(),
+    _$CreateTeethRecordRequestBodyImpl(
       student: (json['student'] as num).toInt(),
-      dateTime: json['date_time'] as String,
       imagesPath: json['images_path'] as String,
       dentalPlaqueCount: json['dental_plaque_count'] as String,
     );
 
-Map<String, dynamic> _$$TeethRecordsResponseImplToJson(
-        _$TeethRecordsResponseImpl instance) =>
+Map<String, dynamic> _$$CreateTeethRecordRequestBodyImplToJson(
+        _$CreateTeethRecordRequestBodyImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'student': instance.student,
-      'date_time': instance.dateTime,
       'images_path': instance.imagesPath,
       'dental_plaque_count': instance.dentalPlaqueCount,
     };

@@ -14,6 +14,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dental_guard_flutter/widgets/common/AppBarWidgets.dart';
 import 'package:dental_guard_flutter/widgets/common/TextWidgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
 class LoginPage extends HookConsumerWidget {
@@ -23,17 +24,24 @@ class LoginPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     
     final userNotifier = ref.read(userProvider.notifier);
-    final emailController = useTextEditingController();
+    final accountController = useTextEditingController();
     final passwordController = useTextEditingController();
-    final isPasswordVisible = useState(false);
     final lastBackPressed = useState<DateTime?>(null);
     final _isKeepLogin = useState<bool>(false);
-    final ValueNotifier<int?> selectedIndex = ValueNotifier<int?>(null);
+    final _isClickable = useState(false);
     
-    void _login() {
+    void _login() async {
       ref.showLoading(cancellable: true);
-      userNotifier.login(username: 'teacher_test01', password: 'teachertest_111').then((_){
-        AutoRouter.of(context).push(const MainRoute());
+      userNotifier.login(username: accountController.text, password: passwordController.text).then((response) async {
+        if(response != null){
+          if(_isKeepLogin.value){
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.setBool('keepLogin', true);
+            await prefs.setString('account', accountController.text);
+            await prefs.setString('password', passwordController.text);
+          }
+          AutoRouter.of(context).push(const MainRoute());
+        }
         ref.hideLoading();
       });
       // Future.delayed(Duration(seconds: 2), () {
@@ -45,6 +53,47 @@ class LoginPage extends HookConsumerWidget {
       //   }
       // });
     }
+
+    useEffect(() {
+
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+
+        final prefs = await SharedPreferences.getInstance();
+        final keepLogin = prefs.getBool('keepLogin') ?? false;
+
+        if (keepLogin) {
+          _isKeepLogin.value = true;
+          final savedAccount = prefs.getString('account');
+          final savedPassword = prefs.getString('password');
+
+          if (savedAccount != null) {
+            accountController.text = savedAccount;
+          }
+          if (savedPassword != null) {
+            passwordController.text = savedPassword;
+          }
+        }
+      });
+
+      return () {
+      };
+    }, []);
+
+    useEffect(() {
+      void updateIsClickable() {
+        _isClickable.value = accountController.text.isNotEmpty && passwordController.text.isNotEmpty;
+      }
+
+      accountController.addListener(updateIsClickable);
+      passwordController.addListener(updateIsClickable);
+
+      updateIsClickable();
+
+      return () {
+        accountController.removeListener(updateIsClickable);
+        passwordController.removeListener(updateIsClickable);
+      };
+    }, [accountController.text, passwordController.text]);
 
     Future<bool> _onWillPop() async {
       final now = DateTime.now();
@@ -75,11 +124,13 @@ class LoginPage extends HookConsumerWidget {
               InputWidget(
                 fieldName: AppTexts.accountField,
                 hintText: AppTexts.account,
+                controller: accountController,
               ),
               gapH16,
               InputWidget(
                 fieldName: AppTexts.passwordField,
                 hintText: AppTexts.password,
+                controller: passwordController,
               ),
               Row(
                 children: [
@@ -107,21 +158,21 @@ class LoginPage extends HookConsumerWidget {
                   width: double.infinity,
                   child: roundedButton(
                       text: AppTexts.login,
-                      bgColor: AppColors.primaryBlack,
+                      bgColor: (_isClickable.value)?AppColors.primaryBlack:AppColors.disableGrey,
                       fontColor: AppColors.white,
-                      onTap: () {
+                      onTap: (_isClickable.value)?() {
                         _login();
-                      })),
-              gapH32,
-              customText(
-                AppTexts.registerMember,
-                fontWeight: FontWeight.w400,
-                fontSize: 16.sp,
-                color: AppColors.blue,
-                onTap: () {
-                  AutoRouter.of(context).push(const SetAccountRoute());
-                },
-              ),
+                      }:null)),
+              // gapH32,
+              // customText(
+              //   AppTexts.registerMember,
+              //   fontWeight: FontWeight.w400,
+              //   fontSize: 16.sp,
+              //   color: AppColors.blue,
+              //   onTap: () {
+              //     AutoRouter.of(context).push(const SetAccountRoute());
+              //   },
+              // ),
             ],
           ),
         ),

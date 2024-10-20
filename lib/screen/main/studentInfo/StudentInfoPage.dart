@@ -1,5 +1,6 @@
 import 'package:dental_guard_flutter/data/response/studentList/StudentListResponse.dart';
 import 'package:dental_guard_flutter/route/AppRouter.gr.dart';
+import 'package:dental_guard_flutter/screen/main/studentInfo/StudentInfoProvider.dart';
 import 'package:dental_guard_flutter/screen/main/studentList/StudentListPage.dart';
 import 'package:dental_guard_flutter/widgets/common/ButtonWidgets.dart';
 import 'package:dental_guard_flutter/widgets/common/ImageWidgets.dart';
@@ -9,6 +10,7 @@ import 'package:dental_guard_flutter/widgets/item/BrushingRecordItem.dart';
 import 'package:dental_guard_flutter/widgets/item/StudentItem.dart';
 import 'package:dental_guard_flutter/widgets/main/MainTitleBar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:dental_guard_flutter/resources/AppResources.dart';
 import 'package:dental_guard_flutter/screen/base/BasePage.dart';
@@ -23,6 +25,19 @@ class StudentInfoPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    final studentInfoState = ref.watch(studentInfoProvider);
+    final studentInfoNotifier = ref.read(studentInfoProvider.notifier);
+
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await studentInfoNotifier.getTeethRecords(studentId: student.id).then((response){
+        });
+      });
+      return null;
+    }, []);
+
+
     return BasePage(
       backgroundColor: AppColors.bgColor,
       appBar: blackLightAppBar(),
@@ -52,7 +67,7 @@ class StudentInfoPage extends HookConsumerWidget {
                       fontColor: AppColors.white,
                       bgColor: AppColors.primaryBlack,
                       onTap: () {
-                        AutoRouter.of(context).push(ImageDetectRoute());
+                        AutoRouter.of(context).push(ImageDetectRoute(studentId: student.id));
                       },
                     )
                   ],
@@ -60,11 +75,10 @@ class StudentInfoPage extends HookConsumerWidget {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: brushingRecords.length, // 記錄的總數
+                  itemCount: studentInfoState.teethRecords.length, // 記錄的總數
                   itemBuilder: (context, index) {
-                    final record = brushingRecords[index];
                     return BrushingRecordItem(
-                      brushingRecord: record,
+                      teethRecordsResponse: studentInfoState.teethRecords[index],
                     );
                   },
                 ),

@@ -6,6 +6,8 @@ part 'AnalyzeTeethResponse.g.dart';
 @freezed
 class AnalyzeTeethResponse with _$AnalyzeTeethResponse {
   const factory AnalyzeTeethResponse({
+    @JsonKey(name: 'API status') required int apiStatus,
+    @JsonKey(name: 'percentage_plaque_total') required String percentagePlaqueTotal,
     @JsonKey(name: 'teethRangePath') required String teethRangePath,
     @JsonKey(name: 'teethRangeDetectPath') required String teethRangeDetectPath,
   }) = _AnalyzeTeethResponse;

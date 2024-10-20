@@ -48,7 +48,9 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   permission_handler: ^11.3.1
   dropdown_button2: ^2.3.9
-  fw_tab_bar: ^0.0.3
+#  fw_tab_bar: ^0.0.3
+  get: ^4.6.5
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:
@@ -64,7 +66,7 @@ flutter:
   assets:
     - assets/fonts/
     - assets/images/
-    - assets/other/
+    - assets/others/
 
   fonts:
     - family: PingFangTC
