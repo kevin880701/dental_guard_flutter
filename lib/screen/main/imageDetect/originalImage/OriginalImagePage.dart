@@ -100,11 +100,15 @@ class OriginalImagePage extends HookConsumerWidget {
                   ref.read(pageProvider.notifier).showLoading();
                   capturePhoto(context: context).then((file) async {
                     if (file != null) {
-                      compressImage(file).then((compressedFile){
-                        imageDetectNotifier.updateImage(
-                            originalImage: compressedFile);
-                        ref.read(pageProvider.notifier).hideLoading();
-                      });
+                      // compressImage(file).then((compressedFile){
+                      //   imageDetectNotifier.updateImage(
+                      //       originalImage: compressedFile);
+                      //   ref.read(pageProvider.notifier).hideLoading();
+                      // });
+
+                      imageDetectNotifier.updateImage(
+                          originalImage: file);
+                      ref.read(pageProvider.notifier).hideLoading();
                     }
                   });
                 });
