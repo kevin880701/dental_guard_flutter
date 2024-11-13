@@ -1,5 +1,6 @@
 
 import 'package:dental_guard_flutter/screen/main/addStudent/AddStudentProvider.dart';
+import 'package:dental_guard_flutter/utils/utils.dart';
 import 'package:dental_guard_flutter/widgets/common/ButtonWidgets.dart';
 import 'package:dental_guard_flutter/widgets/customerWidget/DropdownWidget.dart';
 import 'package:dental_guard_flutter/widgets/customerWidget/InputWidget.dart';
@@ -26,7 +27,7 @@ class AddStudentPage extends HookConsumerWidget {
 
     final ValueNotifier<int?> _selectedIndex = ValueNotifier<int?>(null);
     final ValueNotifier<int> _selectedGenderIndex = ValueNotifier<int>(0);
-    final usernameController = useTextEditingController();
+    final fullnameController = useTextEditingController();
     final studentIdController = useTextEditingController();
     final classNames = useState<List<String>>([]);
     final genderList = useState<List<String>>(['男', '女']);
@@ -60,7 +61,7 @@ class AddStudentPage extends HookConsumerWidget {
                   InputWidget(
                     fieldName: '名稱',
                     hintText: AppTexts.account,
-                    controller: usernameController,
+                    controller: fullnameController,
                   ),
                   gapH16,
                   InputWidget(
@@ -104,8 +105,8 @@ class AddStudentPage extends HookConsumerWidget {
                       onTap: _isClickable.value
                           ? () {
                               addStudentNotifier.addStudent(
-                                  username: usernameController.text,
-                                  fullName: "fullName",
+                                  username: generateRandomString(),
+                                  fullName: fullnameController.text,
                                   password: "password",
                                   email: "test@mail.com",
                                   lineId: "lineId",
