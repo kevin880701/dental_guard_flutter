@@ -4,12 +4,17 @@ import 'package:dental_guard_flutter/data/response/analyzeTeeth/AnalyzeTeethResp
 import 'package:dental_guard_flutter/data/response/teethRecords/TeethRecordsResponse.dart';
 import 'package:dental_guard_flutter/extensions/PageExtensions.dart';
 import 'package:dental_guard_flutter/provider/PageProvider.dart';
+import 'package:dental_guard_flutter/route/AppRouter.gr.dart';
 import 'package:dental_guard_flutter/screen/main/imageDetect/ImageDetectProvider.dart';
 import 'package:dental_guard_flutter/screen/main/imageDetect/detectImage/DetectResultsPage.dart';
+import 'package:dental_guard_flutter/utils/DialogManager.dart';
 import 'package:dental_guard_flutter/utils/FileManager.dart';
 import 'package:dental_guard_flutter/widgets/common/ButtonWidgets.dart';
+import 'package:dental_guard_flutter/widgets/common/ImageWidgets.dart';
+import 'package:dental_guard_flutter/widgets/common/TextWidgets.dart';
 import 'package:dental_guard_flutter/widgets/customerWidget/RoundTabBarWidget.dart';
 import 'package:dental_guard_flutter/widgets/main/MainTitleBar.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
@@ -76,54 +81,70 @@ class ImageDetectPage extends HookConsumerWidget {
               title: AppTexts.imageDetection,
               isBack: true,
             ),
-            Container(
-              child: TabBarWidget(
-                key: tabBarKey.value,
-                firstTab: AppTexts.originalImage,
-                secondTab: AppTexts.detectionResults,
-                onTabChanged: (int index) {
-                  print('index:$index');
-                  selectedIndex.value = index - 1;
+            Expanded(child: Container(
+              height: double.infinity,
+              width: double.infinity,
+              margin: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: AppColors.borderGrey,
+                  width: 2,
+                ),
+              ),
+              child: (imageDetectState.originalImage != null || imageDetectState.analyzeTeethResponse?.teethRangePath != null)
+                  ? ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: (imageDetectState.analyzeTeethResponse?.teethRangePath == null)
+                    ? Image.file(
+                  File(imageDetectState.originalImage!.path),
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return _buildImageErrorWidget();
+                  },
+                )
+                    : netImage(
+                    'https://dental-service.jieniguicare.org/api/analysis/${imageDetectState.analyzeTeethResponse?.teethRangePath!}'),
+              )
+                  : GestureDetector(
+                onTap: () async {
+                  showChooseImageDialog(context, onChooseImageTap: () async {
+                    await pickMedia(
+                      context: context,
+                      sizeLimitMB: 50,
+                      fileLimit: 1,
+                      fileType: FileType.image,
+                    ).then((selectedFiles) {
+                      if (selectedFiles.isNotEmpty) {
+                        imageDetectNotifier.updateImage(
+                            originalImage: selectedFiles[0]);
+                      }
+                    });
+                  }, onCapturePhotoTap: () async {
+                    ref.read(pageProvider.notifier).showLoading();
+                    capturePhoto(context: context).then((file) async {
+                      if (file != null) {
+                        imageDetectNotifier.updateImage(
+                            originalImage: file);
+                        ref.read(pageProvider.notifier).hideLoading();
+                      }
+                    });
+                  });
                 },
-                selectedTabDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(50.sp)),
-                  border: Border.all(color: AppColors.borderGrey),
-                  color: AppColors.white,
-                ),
-                backgroundBoxDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(50.sp)),
-                  color: AppColors.primaryBlack,
-                ),
-                selectedTabTextStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.white,
-                  fontSize: 16.sp,
-                ),
-                unselectedTabTextStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primaryBlack,
-                  fontSize: 16.sp,
+                child: Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  child: customText(
+                    AppTexts.selectImage,
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(32),
-                child: IndexedStack(
-                  index: selectedIndex.value,
-                  children: [
-                    OriginalImagePage(
-                      originalUrl:
-                          imageDetectState.analyzeTeethResponse?.teethRangePath,
-                    ),
-                    DetectResultsPage(),
-                  ],
-                ),
-              ),
-            ),
+            )),
             if (teethRecord == null) ...[
-              Padding(
-                padding: const EdgeInsets.all(32),
+              Container(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -205,3 +226,24 @@ String extractDateTime(String input) {
   }
   return ''; // 如果没有匹配到，则返回空字符串
 }
+
+// 圖片錯誤時Widget
+Widget _buildImageErrorWidget() {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Image.asset(
+        'ic_broken_image.png',
+        width: 36,
+        height: 36,
+        color: Colors.grey,
+      ),
+      Text(
+        '圖片載入失敗',
+        style: TextStyle(fontSize: 8),
+        textAlign: TextAlign.center,
+      ),
+    ],
+  );
+}
+
