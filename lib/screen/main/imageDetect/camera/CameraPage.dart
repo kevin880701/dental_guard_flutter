@@ -19,6 +19,7 @@ class CameraPage extends HookConsumerWidget {
 
     final showSizeSliders = useState(false);
     final showOffsetSliders = useState(false);
+    final countdown = useState<int?>(null);
 
     useEffect(() {
       cameraNotifier.initializeCamera();
@@ -55,20 +56,28 @@ class CameraPage extends HookConsumerWidget {
                                 showOffsetSliders.value = false; // 互斥開關
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: showSizeSliders.value ? Colors.grey[700] : Colors.grey[300],
-                                foregroundColor: showSizeSliders.value ? Colors.white : AppColors.primaryBlack, // 設定文字顏色為白色
+                                backgroundColor: showSizeSliders.value
+                                    ? Colors.grey[700]
+                                    : Colors.grey[300],
+                                foregroundColor: showSizeSliders.value
+                                    ? Colors.white
+                                    : AppColors.primaryBlack, // 設定文字顏色為白色
                               ),
                               child: Text("調整尺寸"),
                             ),
-
                             ElevatedButton(
                               onPressed: () {
-                                showOffsetSliders.value = !showOffsetSliders.value;
+                                showOffsetSliders.value =
+                                    !showOffsetSliders.value;
                                 showSizeSliders.value = false; // 互斥開關
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: showOffsetSliders.value ? Colors.grey[700] : Colors.grey[300],
-                                foregroundColor: showOffsetSliders.value ? Colors.white : AppColors.primaryBlack, // 設定文字顏色為白色
+                                backgroundColor: showOffsetSliders.value
+                                    ? Colors.grey[700]
+                                    : Colors.grey[300],
+                                foregroundColor: showOffsetSliders.value
+                                    ? Colors.white
+                                    : AppColors.primaryBlack, // 設定文字顏色為白色
                               ),
                               child: Text("調整位置"),
                             ),
@@ -144,17 +153,54 @@ class CameraPage extends HookConsumerWidget {
                       if (!showSizeSliders.value && !showOffsetSliders.value)
                         Padding(
                           padding: const EdgeInsets.all(20.0),
-                          child: FloatingActionButton(
-                            onPressed: () async {
-                              final path = await cameraNotifier.takePicture();
-                              if (path != null) {
-                                imageDetectNotifier.updateImage(
-                                    originalImage: File(path)).then((_){
-                                  AutoRouter.of(context).popForced();
-                                });
-                              }
-                            },
-                            child: Icon(Icons.camera_alt),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(width: 24,),
+                              FloatingActionButton(
+                                onPressed: () async {
+                                  final path =
+                                      await cameraNotifier.takePicture();
+                                  if (path != null) {
+                                    imageDetectNotifier
+                                        .updateImage(originalImage: File(path))
+                                        .then((_) {
+                                      AutoRouter.of(context).popForced();
+                                    });
+                                  }
+                                },
+                                child: Icon(Icons.camera_alt),
+                              ),
+                              FloatingActionButton(
+                                onPressed: () async {
+                                  countdown.value = 3; // 開始倒數 3 秒
+
+                                  for (int i = 2; i >= 0; i--) {
+                                    await Future.delayed(Duration(seconds: 1));
+                                    countdown.value = i;
+                                  }
+
+                                  // 倒數結束，執行拍照
+                                  final path =
+                                      await cameraNotifier.takePicture();
+                                  if (path != null) {
+                                    imageDetectNotifier
+                                        .updateImage(originalImage: File(path))
+                                        .then((_) {
+                                      AutoRouter.of(context).popForced();
+                                    });
+                                  }
+
+                                  countdown.value = null; // 重置倒數狀態
+                                },
+                                child: countdown.value == null
+                                    ? Icon(Icons.timer) // 顯示計時按鈕
+                                    : Text(countdown.value.toString(),
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold)),
+                              ),
+                            ],
                           ),
                         ),
 
