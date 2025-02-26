@@ -39,16 +39,9 @@ class ImageDetectPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final imageDetectNotifier = ref.read(imageDetectProvider.notifier);
     final imageDetectState = ref.watch(imageDetectProvider);
-    final selectedIndex = useState<int>(0);
-    final tabBarKey = useState(ValueKey<int>(0));
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        final tabBarWidgetController = Get.find<TabBarWidgetController>();
-
-        // 重置 tabBarWidgetController 的 tabIndex 為 1
-        tabBarWidgetController.onChangeTab(index: 1);
-        tabBarKey.value = ValueKey<int>(tabBarKey.value.value + 1);
         // 判断 teethRecord 是否不为 null
         if (teethRecord != null) {
           // 将 TeethRecordsResponse 转换为 AnalyzeTeethResponse
@@ -81,7 +74,8 @@ class ImageDetectPage extends HookConsumerWidget {
               title: AppTexts.imageDetection,
               isBack: true,
             ),
-            Expanded(child: Container(
+            Expanded(
+                child: Container(
               height: double.infinity,
               width: double.infinity,
               margin: EdgeInsets.all(16),
@@ -93,54 +87,76 @@ class ImageDetectPage extends HookConsumerWidget {
                   width: 2,
                 ),
               ),
-              child: (imageDetectState.originalImage != null || imageDetectState.analyzeTeethResponse?.teethRangePath != null)
+              child: (imageDetectState.originalImage != null ||
+                      imageDetectState.analyzeTeethResponse?.teethRangePath !=
+                          null)
                   ? ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: (imageDetectState.analyzeTeethResponse?.teethRangePath == null)
-                    ? Image.file(
-                  File(imageDetectState.originalImage!.path),
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return _buildImageErrorWidget();
-                  },
-                )
-                    : netImage(
-                    'https://dental-service.jieniguicare.org/api/analysis/${imageDetectState.analyzeTeethResponse?.teethRangePath!}'),
-              )
+                      borderRadius: BorderRadius.circular(16),
+                      child: (imageDetectState
+                                  .analyzeTeethResponse?.teethRangePath ==
+                              null)
+                          ? Image.file(
+                              File(imageDetectState.originalImage!.path),
+                              fit: BoxFit.contain,
+                              errorBuilder: (context, error, stackTrace) {
+                                return _buildImageErrorWidget();
+                              },
+                            )
+                          : Column(
+                              children: [
+                                Expanded(
+                                    flex: 1,
+                                    child: netImage(
+                                        'https://dental-service.jieniguicare.org/api/analysis/${imageDetectState.analyzeTeethResponse?.teethRangePath}')),
+                                Container(
+                                  padding: EdgeInsets.symmetric(vertical: 12),
+                                  alignment: Alignment.center,
+                                  width: double.infinity,
+                                  color: getPlaqueColor(imageDetectState
+                                      .analyzeTeethResponse
+                                      ?.percentagePlaqueTotal),
+                                  child: customText(
+                                    getPlaqueMessage(imageDetectState
+                                        .analyzeTeethResponse
+                                        ?.percentagePlaqueTotal),color: AppColors.white,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: netImage(
+                                      'https://dental-service.jieniguicare.org/api/analysis/${imageDetectState.analyzeTeethResponse?.teethRangeDetectPath}'),
+                                ),
+                              ],
+                            ),
+                    )
                   : GestureDetector(
-                onTap: () async {
-                  showChooseImageDialog(context, onChooseImageTap: () async {
-                    await pickMedia(
-                      context: context,
-                      sizeLimitMB: 50,
-                      fileLimit: 1,
-                      fileType: FileType.image,
-                    ).then((selectedFiles) {
-                      if (selectedFiles.isNotEmpty) {
-                        imageDetectNotifier.updateImage(
-                            originalImage: selectedFiles[0]);
-                      }
-                    });
-                  }, onCapturePhotoTap: () async {
-                    ref.read(pageProvider.notifier).showLoading();
-                    capturePhoto(context: context).then((file) async {
-                      if (file != null) {
-                        imageDetectNotifier.updateImage(
-                            originalImage: file);
-                        ref.read(pageProvider.notifier).hideLoading();
-                      }
-                    });
-                  });
-                },
-                child: Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: customText(
-                    AppTexts.selectImage,
-                  ),
-                ),
-              ),
+                      onTap: () async {
+                        showChooseImageDialog(context,
+                            onChooseImageTap: () async {
+                          await pickMedia(
+                            context: context,
+                            sizeLimitMB: 50,
+                            fileLimit: 1,
+                            fileType: FileType.image,
+                          ).then((selectedFiles) {
+                            if (selectedFiles.isNotEmpty) {
+                              imageDetectNotifier.updateImage(
+                                  originalImage: selectedFiles[0]);
+                            }
+                          });
+                        }, onCapturePhotoTap: () async {
+                          AutoRouter.of(context).push(CameraRoute());
+                        });
+                      },
+                      child: Container(
+                        height: double.infinity,
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: customText(
+                          AppTexts.selectImage,
+                        ),
+                      ),
+                    ),
             )),
             if (teethRecord == null) ...[
               Container(
@@ -169,11 +185,14 @@ class ImageDetectPage extends HookConsumerWidget {
                             : AppColors.disableGrey,
                         fontColor: AppColors.white,
                         onTap: () async {
-                          imageDetectNotifier.analyzeTeeth(
-                              originalImage: imageDetectState.originalImage!).then((response){
-                                if(response == null){
-                                  ref.showError('牙菌斑偵測失敗');
-                                }
+                          imageDetectNotifier
+                              .analyzeTeeth(
+                                  originalImage:
+                                      imageDetectState.originalImage!)
+                              .then((response) {
+                            if (response == null) {
+                              ref.showError('牙菌斑偵測失敗');
+                            }
                           });
                         }),
                     roundedButton(
@@ -247,3 +266,30 @@ Widget _buildImageErrorWidget() {
   );
 }
 
+Color getPlaqueColor(String? percentagePlaqueTotal) {
+  if (percentagePlaqueTotal == null) {
+    return Colors.yellow;
+  }
+
+  double? value = double.tryParse(percentagePlaqueTotal);
+  if (value == null) {
+    return Colors.yellow;
+  }
+
+  return value < 60 ? Colors.green : Colors.red;
+}
+
+String getPlaqueMessage(String? percentagePlaqueTotal) {
+  if (percentagePlaqueTotal == null) {
+    return "請重新拍攝一次";
+  }
+
+  double? value = double.tryParse(percentagePlaqueTotal);
+  if (value == null) {
+    return "請重新拍攝一次";
+  }
+
+  return value < 60
+      ? "牙菌斑含量為${percentagePlaqueTotal}%，做得很好！"
+      : "牙菌斑含量為${percentagePlaqueTotal}%，再加強一下！";
+}
