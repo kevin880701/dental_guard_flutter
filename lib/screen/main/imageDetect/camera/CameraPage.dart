@@ -148,11 +148,10 @@ class CameraPage extends HookConsumerWidget {
                             onPressed: () async {
                               final path = await cameraNotifier.takePicture();
                               if (path != null) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('已儲存圖片: $path')),
-                                );
                                 imageDetectNotifier.updateImage(
-                                    originalImage: File(path));
+                                    originalImage: File(path)).then((_){
+                                  AutoRouter.of(context).popForced();
+                                });
                               }
                             },
                             child: Icon(Icons.camera_alt),
