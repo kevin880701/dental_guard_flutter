@@ -4,16 +4,20 @@ import 'package:dental_guard_flutter/provider/UserProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class StudentInfoState {
+  final int studentId;
   final List<TeethRecordsResponse> teethRecords;
 
   StudentInfoState({
-    this.teethRecords = const [],
+  this.studentId = 0,
+  this.teethRecords = const [],
   });
 
   StudentInfoState copyWith({
+    int? studentId,
     List<TeethRecordsResponse>? teethRecords,
   }) {
     return StudentInfoState(
+      studentId: studentId ?? this.studentId,
       teethRecords: List.unmodifiable(teethRecords ?? this.teethRecords),
     );
   }
@@ -33,9 +37,15 @@ class StudentInfoNotifier extends StateNotifier<StudentInfoState> {
   late final ApiManager apiManager;
   late String token = "";
 
-  Future<List<TeethRecordsResponse>> getTeethRecords({required int studentId}) async {
+  Future<void> updateStudentId(int studentId) async {
+    state = state.copyWith(
+      studentId: studentId,
+    );
+  }
 
-    final response = await apiManager.getTeethRecords(token, studentId: studentId);
+  Future<List<TeethRecordsResponse>> getTeethRecords() async {
+
+    final response = await apiManager.getTeethRecords(token, studentId: state.studentId);
 
     state = state.copyWith(
       teethRecords: response,

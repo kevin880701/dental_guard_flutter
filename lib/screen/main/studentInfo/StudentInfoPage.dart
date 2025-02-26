@@ -31,7 +31,8 @@ class StudentInfoPage extends HookConsumerWidget {
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        await studentInfoNotifier.getTeethRecords(studentId: student.id).then((response){
+        await studentInfoNotifier.updateStudentId(student.id);
+        await studentInfoNotifier.getTeethRecords().then((response){
         });
       });
       return null;
