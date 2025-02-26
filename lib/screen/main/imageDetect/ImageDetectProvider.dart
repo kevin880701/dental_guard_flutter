@@ -4,6 +4,7 @@ import 'package:dental_guard_flutter/data/response/analyzeTeeth/AnalyzeTeethResp
 import 'package:dental_guard_flutter/data/response/classroomList/ClassroomListResponse.dart';
 import 'package:dental_guard_flutter/data/response/createTeethRecord/CreateTeethRecordResponse.dart';
 import 'package:dental_guard_flutter/net/ApiManager.dart';
+import 'package:dental_guard_flutter/provider/UpdateStateProvider.dart';
 import 'package:dental_guard_flutter/provider/UserProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -81,6 +82,7 @@ class ImageDetectNotifier extends StateNotifier<ImageDetectState> {
         imagesPath: imagesPath,
         dentalPlaqueCount: dentalPlaqueCount);
 
+    ref.read(updateProvider.notifier).recordUpdated();
     return response;
   }
 }
