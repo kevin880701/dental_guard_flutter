@@ -20,10 +20,10 @@ class CameraState {
     this.availableCameras = const [],
     this.currentCameraIndex = 0,
     this.isInitialized = false,
-    this.cropWidthRatio = 0.4,
-    this.cropHeightRatio = 0.4,
-    this.offsetX = 0.3,
-    this.offsetY = 0.3,
+    this.cropWidthRatio = 0.7,
+    this.cropHeightRatio = 0.3,
+    this.offsetX = 0.15,
+    this.offsetY = 0.5,
   });
 
   CameraState copyWith({
