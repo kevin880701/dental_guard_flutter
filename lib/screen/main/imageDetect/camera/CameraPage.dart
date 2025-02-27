@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
 import 'package:dental_guard_flutter/resources/AppResources.dart';
@@ -19,6 +20,7 @@ class CameraPage extends HookConsumerWidget {
     final showSizeSliders = useState(false);
     final showOffsetSliders = useState(false);
     final countdown = useState<int?>(null);
+    final player = AudioPlayer();
 
     useEffect(() {
       cameraNotifier.initializeCamera();
@@ -196,6 +198,7 @@ class CameraPage extends HookConsumerWidget {
                         countdown.value = 3; // 開始倒數 3 秒
 
                         for (int i = 2; i >= 0; i--) {
+                          await player.play(AssetSource('sounds/countdown_timer.mp3'));
                           await Future.delayed(Duration(seconds: 1));
                           countdown.value = i;
                         }

@@ -55,6 +55,7 @@ dependencies:
   path_provider: ^2.1.2
   path: ^1.9.0
   image: ^4.0.17
+  audioplayers: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,7 @@ flutter:
   assets:
     - assets/fonts/
     - assets/images/
+    - assets/sounds/
     - assets/others/
 
   fonts:
