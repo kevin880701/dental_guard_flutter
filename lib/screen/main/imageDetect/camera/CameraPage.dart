@@ -86,6 +86,29 @@ class CameraPage extends HookConsumerWidget {
                 return Stack(
                   children: [
                     CameraPreview(cameraState.cameraController!),
+                    Positioned(
+                      top: 50, // 距離頂部 50px
+                      right: 20, // 距離右側 20px
+                      child: AnimatedOpacity(
+                        opacity: countdown.value != null ? 1.0 : 0.0,
+                        duration: Duration(milliseconds: 300),
+                        child: Container(
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            countdown.value?.toString() ?? '',
+                            style: TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
 
                     // 📦 裁切區域框線
                     Positioned(
