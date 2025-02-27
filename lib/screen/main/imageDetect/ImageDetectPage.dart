@@ -103,11 +103,12 @@ class ImageDetectPage extends HookConsumerWidget {
                               },
                             )
                           : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Expanded(
-                                    flex: 1,
-                                    child: netImage(
-                                        'https://dental-service.jieniguicare.org/api/analysis/${imageDetectState.analyzeTeethResponse?.teethRangePath}')),
+                                netImage(
+                                    'https://dental-service.jieniguicare.org/api/analysis/${imageDetectState.analyzeTeethResponse?.teethRangePath}'),
+                                netImage(
+                                    'https://dental-service.jieniguicare.org/api/analysis/${imageDetectState.analyzeTeethResponse?.teethRangeDetectPath}'),
                                 Container(
                                   padding: EdgeInsets.symmetric(vertical: 12),
                                   alignment: Alignment.center,
@@ -120,11 +121,6 @@ class ImageDetectPage extends HookConsumerWidget {
                                         .analyzeTeethResponse
                                         ?.percentagePlaqueTotal),color: AppColors.white,
                                   ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: netImage(
-                                      'https://dental-service.jieniguicare.org/api/analysis/${imageDetectState.analyzeTeethResponse?.teethRangeDetectPath}'),
                                 ),
                               ],
                             ),
