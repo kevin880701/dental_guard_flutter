@@ -42,15 +42,13 @@ class ImageDetectPage extends HookConsumerWidget {
 
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        // 判断 teethRecord 是否不为 null
         if (teethRecord != null) {
-          // 将 TeethRecordsResponse 转换为 AnalyzeTeethResponse
           final analyzeTeethResponse = AnalyzeTeethResponse(
             apiStatus: 1, // 假设 API status 为 1（可以根据需要调整）
             percentagePlaqueTotal: teethRecord!.dentalPlaqueCount,
-            teethRangePath: 'teeth_range/${teethRecord!.imagesPath}',
-            teethRangeDetectPath:
-                'teeth_range_detect/${teethRecord!.imagesPath}', // 如果有对应的路径信息，可以在这里填入
+            teethRangePath: teethRecord!.dentalPlaqueCount == -1 ? null : 'teeth_range/${teethRecord!.imagesPath}',
+            teethRangeDetectPath: teethRecord!.dentalPlaqueCount == -1 ? null : 'teeth_range_detect/${teethRecord!.imagesPath}',
+            teethOriginalImagePath: 'original_image/${teethRecord!.imagesPath}',
           );
 
           // 更新 imageDetectState
@@ -105,10 +103,15 @@ class ImageDetectPage extends HookConsumerWidget {
                           : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                netImage(
-                                    'https://dental-service.jieniguicare.org/api/analysis/${imageDetectState.analyzeTeethResponse?.teethRangePath}'),
-                                netImage(
-                                    'https://dental-service.jieniguicare.org/api/analysis/${imageDetectState.analyzeTeethResponse?.teethRangeDetectPath}'),
+                                if((imageDetectState.analyzeTeethResponse != null) && imageDetectState.analyzeTeethResponse!.percentagePlaqueTotal != '-1.00')...[
+                                  netImage(
+                                      'https://dental-service.jieniguicare.org/api/analysis/${imageDetectState.analyzeTeethResponse?.teethRangePath}'),
+                                  netImage(
+                                      'https://dental-service.jieniguicare.org/api/analysis/${imageDetectState.analyzeTeethResponse?.teethRangeDetectPath}')
+                                ]else...[
+                                  netImage(
+                                      'https://dental-service.jieniguicare.org/api/analysis/${imageDetectState.analyzeTeethResponse?.teethOriginalImagePath}')
+                                ],
                                 Container(
                                   padding: EdgeInsets.symmetric(vertical: 12),
                                   alignment: Alignment.center,
@@ -201,6 +204,11 @@ class ImageDetectPage extends HookConsumerWidget {
                         onTap: (imageDetectState.originalImage != null) &&
                                 (imageDetectState.analyzeTeethResponse != null)
                             ? () {
+                          print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                          print("${extractDateTime(
+                              imageDetectState.analyzeTeethResponse?.teethOriginalImagePath)}");
+                          print("${imageDetectState.analyzeTeethResponse?.teethOriginalImagePath}");
+                          print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                                 imageDetectNotifier
                                     .createTeethRecords(
                                         studentId: studentId,
@@ -208,7 +216,7 @@ class ImageDetectPage extends HookConsumerWidget {
                                             imageDetectState.analyzeTeethResponse?.teethOriginalImagePath),
                                         dentalPlaqueCount: imageDetectState
                                             .analyzeTeethResponse
-                                            ?.percentagePlaqueTotal ?? '')
+                                            ?.percentagePlaqueTotal ?? '-1')
                                     .then((response) {
                                   if (response != null) {
                                     ref
@@ -231,13 +239,13 @@ class ImageDetectPage extends HookConsumerWidget {
 }
 
 String extractDateTime(String? input) {
-  if (input == null) return ''; // 若輸入為 null，直接返回空字元串
+  if (input == null) return ''; // 若輸入為 null，直接返回空字串
 
-  // 使用正則表達式匹配日期時間部分
-  final pattern = RegExp(r'teeth_range_detect/([^/]+)/');
+  // 使用正則表達式匹配 "teeth_range_detect" 或 "original_image" 之後的日期時間部分
+  final pattern = RegExp(r'(teeth_range_detect|original_image)/([^/]+)/');
   final match = pattern.firstMatch(input);
 
-  return match != null ? match.group(1)! : ''; // 返回匹配到的日期時間部分或空字元串
+  return match != null ? match.group(2)! : ''; // 返回匹配到的日期時間部分或空字串
 }
 
 // 圖片錯誤時Widget
@@ -270,7 +278,11 @@ Color getPlaqueColor(String? percentagePlaqueTotal) {
     return Colors.yellow;
   }
 
-  return value < 60 ? Colors.green : Colors.red;
+  return value < 0
+      ? Colors.red
+      : value < 60
+      ? Colors.green
+      : Colors.red;
 }
 
 String getPlaqueMessage(String? percentagePlaqueTotal) {
@@ -283,7 +295,9 @@ String getPlaqueMessage(String? percentagePlaqueTotal) {
     return "請重新拍攝一次";
   }
 
-  return value < 60
+  return value < 0
+      ? "偵測失敗"
+      : value < 60
       ? "牙菌斑含量為${percentagePlaqueTotal}%，做得很好！"
       : "牙菌斑含量為${percentagePlaqueTotal}%，再加強一下！";
 }
