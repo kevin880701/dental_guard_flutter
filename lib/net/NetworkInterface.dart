@@ -4,96 +4,55 @@ import 'package:dental_guard_flutter/utils/AppLog.dart';
 import 'package:dio/dio.dart';
 import 'ApiEndPoint.dart';
 
+enum HttpMethod { GET, POST, PUT, DELETE }
+
 class NetworkInterface {
   final Dio _dio = Dio(BaseOptions(baseUrl: ApiEndPoint.domain));
 
-  Future<Response> get(
-      {required String url,
-        dynamic body,
-        String? userToken,
-        Map<String, dynamic>? query,
-        String contentType = 'application/json'}) async {
+  Future<Response> request({
+    required String url,
+    required HttpMethod method,
+    dynamic body,
+    String? userToken,
+    Map<String, dynamic>? query,
+    String contentType = 'application/json',
+  }) async {
     try {
       Options options = Options(headers: {
         HttpHeaders.authorizationHeader: userToken ?? '',
         'Content-Type': contentType,
       });
 
-      _logRequest("GET", url: url, options: options, body: body, query: query);
-      Response response = await _dio.get(url, data: body, queryParameters: query, options: options);
-      _logResponse("GET", url, response);
+      _logRequest(method, url: url, options: options, body: body, query: query);
 
+      late Response response;
+      switch (method) {
+        case HttpMethod.GET:
+          response = await _dio.get(url, queryParameters: query, data: body, options: options);
+          break;
+        case HttpMethod.POST:
+          response = await _dio.post(url, data: body, queryParameters: query, options: options);
+          break;
+        case HttpMethod.PUT:
+          response = await _dio.put(url, data: body, queryParameters: query, options: options);
+          break;
+        case HttpMethod.DELETE:
+          response = await _dio.delete(url, data: body, queryParameters: query, options: options);
+          break;
+      }
+
+      _logResponse(method, url, response);
       return response;
-    } catch (e) {
-      _handleDioError(e, "GET", url);
-      throw Exception('Failed to get data');
+    } on DioException catch (e) {
+      return _handleDioError(e, method, url);
     }
   }
 
-  Future<Response> post(
-      {required String url,
-        dynamic body,
-        String? userToken,
-        Map<String, dynamic>? query,
-        String contentType = 'application/json'}) async {
-    try {
-      Options options =
-      Options(headers: {HttpHeaders.authorizationHeader: userToken ?? '', 'Content-Type': contentType});
-      _logRequest("POST", url: url, options: options, body: body, query: query);
-      Response response = await _dio.post(url, data: body, queryParameters: query, options: options);
-      _logResponse("POST", url, response);
-
-      return response;
-    } catch (e) {
-      _handleDioError(e, "POST", url);
-      throw Exception('Failed to post data');
-    }
-  }
-
-  Future<Response> delete({required String url, dynamic body, String? userToken, Map<String, dynamic>? query}) async {
-    try {
-      Options options = Options(headers: {
-        HttpHeaders.authorizationHeader: userToken ?? '',
-      });
-
-      _logRequest("DELETE", url: url, options: options, body: body, query: query);
-      Response response = await _dio.delete(url, data: body, queryParameters: query, options: options);
-      _logResponse("DELETE", url, response);
-
-      return response;
-    } catch (e) {
-      _handleDioError(e, "DELETE", url);
-      throw Exception('Failed to delete data');
-    }
-  }
-
-  Future<Response> put(
-      {required String url,
-        dynamic body,
-        String? userToken,
-        Map<String, dynamic>? query,
-        String contentType = 'application/json'}) async {
-    try {
-      Options options =
-      Options(headers: {HttpHeaders.authorizationHeader: userToken ?? '', 'Content-Type': contentType});
-
-      _logRequest("PUT", url: url, options: options, body: body, query: query);
-      Response response = await _dio.put(url, queryParameters: query, data: body, options: options);
-      _logResponse("PUT", url, response);
-
-      return response;
-    } catch (e) {
-      _handleDioError(e, "PUT", url);
-      throw Exception('Failed to put data');
-    }
-  }
-
-  void _logRequest(String method, {required String url, Options? options, dynamic body, Map<String, dynamic>? query}) {
-    AppLog.v("--> START $method ${ApiEndPoint.domain + url}");
+  void _logRequest(HttpMethod method, {required String url, Options? options, dynamic body, Map<String, dynamic>? query}) {
+    AppLog.v("--> START ${method.name} ${ApiEndPoint.domain + url}");
     AppLog.v("Headers: ${jsonEncode(options?.headers)}");
     if (body != null) {
       if (body is FormData) {
-        // 印出 FormData 的字段和文件內容
         AppLog.v("FormData Fields:");
         for (var field in body.fields) {
           AppLog.v("Field: ${field.key} = ${field.value}");
@@ -109,29 +68,24 @@ class NetworkInterface {
       AppLog.v("No Body");
     }
     AppLog.v(query != null ? "Query: ${jsonEncode(query)}" : "No Query");
-    AppLog.v("--> END $method ${ApiEndPoint.domain + url}");
+    AppLog.v("--> END ${method.name} ${ApiEndPoint.domain + url}");
   }
 
-  void _logResponse(String method, String url, Response response) {
-    AppLog.v("<-- START $method ${response.realUri}");
+  void _logResponse(HttpMethod method, String url, Response response) {
+    AppLog.v("<-- START ${method.name} ${response.realUri}");
     AppLog.v("Status: ${response.statusCode}");
     AppLog.v("Response: ${jsonEncode(response.data)}");
-    AppLog.v("<-- END $method ${ApiEndPoint.domain + url}");
+    AppLog.v("<-- END ${method.name} ${ApiEndPoint.domain + url}");
   }
 
-  void _handleDioError(dynamic e, String method, String url) {
-    if (e is DioException && e.response != null) {
-      final response = e.response!;
-      if (response.statusCode == 500) {
-        try {
-          // final errorResponse = InternalServerErrorResponse.fromJson(response.data);
-          AppLog.e("[$method] Request to $url failed with Internal Server Error: Status=500, Message=${response.data}");
-        } catch (parseError) {
-          AppLog.e("[$method] Request to $url failed. Failed to parse InternalServerErrorResponse: ${parseError.toString()}");
-        }
-      }
+  Response _handleDioError(DioException e, HttpMethod method, String url) {
+    if (e.response != null) {
+      AppLog.e("[${method.name}] Request to $url failed with status: ${e.response?.statusCode}");
+      AppLog.e("Response: ${jsonEncode(e.response?.data)}");
+      return e.response!;
     } else {
-      AppLog.e("[$method] Request to $url failed: ${e.toString()}");
+      AppLog.e("[${method.name}] Request to $url failed: ${e.toString()}");
+      throw Exception('Network error');
     }
   }
 }
