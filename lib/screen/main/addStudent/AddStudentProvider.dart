@@ -4,6 +4,7 @@ import 'package:dental_guard_flutter/data/response/addStudent/AddStudentResponse
 import 'package:dental_guard_flutter/data/response/analyzeTeeth/AnalyzeTeethResponse.dart';
 import 'package:dental_guard_flutter/data/response/classroomList/ClassroomListResponse.dart';
 import 'package:dental_guard_flutter/net/ApiManager.dart';
+import 'package:dental_guard_flutter/provider/UpdateStateProvider.dart';
 import 'package:dental_guard_flutter/provider/UserProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -62,7 +63,7 @@ class AddStudentNotifier extends StateNotifier<AddStudentState> {
     required String birth,
     required String gender,
   }) async {
-    final response = apiManager.postAddStudent(
+    final response = await apiManager.postAddStudent(
       token,
       username: username,
       fullName: fullName,
@@ -75,6 +76,7 @@ class AddStudentNotifier extends StateNotifier<AddStudentState> {
       birth: birth,
       gender: gender,
     );
+    ref.read(updateProvider.notifier).studentRecordUpdated();
 
     return response;
   }

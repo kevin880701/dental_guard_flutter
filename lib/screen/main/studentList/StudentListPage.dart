@@ -36,7 +36,8 @@ class StudentListPage extends HookConsumerWidget {
     useEffect(() {
       Future.microtask(() async {
         if(currentClassroomId.value != null){
-          await studentListNotifier.getStudentList(classroomsId: studentListState.classroomList[currentClassroomId.value!].id);
+          await studentListNotifier.updateClassroomsId(studentListState.classroomList[currentClassroomId.value!].id);
+          await studentListNotifier.getStudentList();
         }
       });
       return null;
