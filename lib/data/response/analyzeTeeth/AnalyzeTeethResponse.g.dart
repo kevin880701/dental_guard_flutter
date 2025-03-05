@@ -9,10 +9,11 @@ part of 'AnalyzeTeethResponse.dart';
 _$AnalyzeTeethResponseImpl _$$AnalyzeTeethResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$AnalyzeTeethResponseImpl(
-      apiStatus: (json['API status'] as num).toInt(),
-      percentagePlaqueTotal: json['percentage_plaque_total'] as String,
-      teethRangePath: json['teethRangePath'] as String,
-      teethRangeDetectPath: json['teethRangeDetectPath'] as String,
+      apiStatus: (json['API status'] as num?)?.toInt(),
+      percentagePlaqueTotal: json['percentage_plaque_total'] as String?,
+      teethRangePath: json['teethRangePath'] as String?,
+      teethRangeDetectPath: json['teethRangeDetectPath'] as String?,
+      teethOriginalImagePath: json['originalImagePath'] as String?,
     );
 
 Map<String, dynamic> _$$AnalyzeTeethResponseImplToJson(
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$AnalyzeTeethResponseImplToJson(
       'percentage_plaque_total': instance.percentagePlaqueTotal,
       'teethRangePath': instance.teethRangePath,
       'teethRangeDetectPath': instance.teethRangeDetectPath,
+      'originalImagePath': instance.teethOriginalImagePath,
     };

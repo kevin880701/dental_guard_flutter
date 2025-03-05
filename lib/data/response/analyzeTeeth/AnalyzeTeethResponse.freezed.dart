@@ -21,13 +21,15 @@ AnalyzeTeethResponse _$AnalyzeTeethResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AnalyzeTeethResponse {
   @JsonKey(name: 'API status')
-  int get apiStatus => throw _privateConstructorUsedError;
+  int? get apiStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'percentage_plaque_total')
-  String get percentagePlaqueTotal => throw _privateConstructorUsedError;
+  String? get percentagePlaqueTotal => throw _privateConstructorUsedError;
   @JsonKey(name: 'teethRangePath')
-  String get teethRangePath => throw _privateConstructorUsedError;
+  String? get teethRangePath => throw _privateConstructorUsedError;
   @JsonKey(name: 'teethRangeDetectPath')
-  String get teethRangeDetectPath => throw _privateConstructorUsedError;
+  String? get teethRangeDetectPath => throw _privateConstructorUsedError;
+  @JsonKey(name: 'originalImagePath')
+  String? get teethOriginalImagePath => throw _privateConstructorUsedError;
 
   /// Serializes this AnalyzeTeethResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,10 +48,11 @@ abstract class $AnalyzeTeethResponseCopyWith<$Res> {
       _$AnalyzeTeethResponseCopyWithImpl<$Res, AnalyzeTeethResponse>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'API status') int apiStatus,
-      @JsonKey(name: 'percentage_plaque_total') String percentagePlaqueTotal,
-      @JsonKey(name: 'teethRangePath') String teethRangePath,
-      @JsonKey(name: 'teethRangeDetectPath') String teethRangeDetectPath});
+      {@JsonKey(name: 'API status') int? apiStatus,
+      @JsonKey(name: 'percentage_plaque_total') String? percentagePlaqueTotal,
+      @JsonKey(name: 'teethRangePath') String? teethRangePath,
+      @JsonKey(name: 'teethRangeDetectPath') String? teethRangeDetectPath,
+      @JsonKey(name: 'originalImagePath') String? teethOriginalImagePath});
 }
 
 /// @nodoc
@@ -68,28 +71,33 @@ class _$AnalyzeTeethResponseCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? apiStatus = null,
-    Object? percentagePlaqueTotal = null,
-    Object? teethRangePath = null,
-    Object? teethRangeDetectPath = null,
+    Object? apiStatus = freezed,
+    Object? percentagePlaqueTotal = freezed,
+    Object? teethRangePath = freezed,
+    Object? teethRangeDetectPath = freezed,
+    Object? teethOriginalImagePath = freezed,
   }) {
     return _then(_value.copyWith(
-      apiStatus: null == apiStatus
+      apiStatus: freezed == apiStatus
           ? _value.apiStatus
           : apiStatus // ignore: cast_nullable_to_non_nullable
-              as int,
-      percentagePlaqueTotal: null == percentagePlaqueTotal
+              as int?,
+      percentagePlaqueTotal: freezed == percentagePlaqueTotal
           ? _value.percentagePlaqueTotal
           : percentagePlaqueTotal // ignore: cast_nullable_to_non_nullable
-              as String,
-      teethRangePath: null == teethRangePath
+              as String?,
+      teethRangePath: freezed == teethRangePath
           ? _value.teethRangePath
           : teethRangePath // ignore: cast_nullable_to_non_nullable
-              as String,
-      teethRangeDetectPath: null == teethRangeDetectPath
+              as String?,
+      teethRangeDetectPath: freezed == teethRangeDetectPath
           ? _value.teethRangeDetectPath
           : teethRangeDetectPath // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      teethOriginalImagePath: freezed == teethOriginalImagePath
+          ? _value.teethOriginalImagePath
+          : teethOriginalImagePath // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -103,10 +111,11 @@ abstract class _$$AnalyzeTeethResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'API status') int apiStatus,
-      @JsonKey(name: 'percentage_plaque_total') String percentagePlaqueTotal,
-      @JsonKey(name: 'teethRangePath') String teethRangePath,
-      @JsonKey(name: 'teethRangeDetectPath') String teethRangeDetectPath});
+      {@JsonKey(name: 'API status') int? apiStatus,
+      @JsonKey(name: 'percentage_plaque_total') String? percentagePlaqueTotal,
+      @JsonKey(name: 'teethRangePath') String? teethRangePath,
+      @JsonKey(name: 'teethRangeDetectPath') String? teethRangeDetectPath,
+      @JsonKey(name: 'originalImagePath') String? teethOriginalImagePath});
 }
 
 /// @nodoc
@@ -122,28 +131,33 @@ class __$$AnalyzeTeethResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? apiStatus = null,
-    Object? percentagePlaqueTotal = null,
-    Object? teethRangePath = null,
-    Object? teethRangeDetectPath = null,
+    Object? apiStatus = freezed,
+    Object? percentagePlaqueTotal = freezed,
+    Object? teethRangePath = freezed,
+    Object? teethRangeDetectPath = freezed,
+    Object? teethOriginalImagePath = freezed,
   }) {
     return _then(_$AnalyzeTeethResponseImpl(
-      apiStatus: null == apiStatus
+      apiStatus: freezed == apiStatus
           ? _value.apiStatus
           : apiStatus // ignore: cast_nullable_to_non_nullable
-              as int,
-      percentagePlaqueTotal: null == percentagePlaqueTotal
+              as int?,
+      percentagePlaqueTotal: freezed == percentagePlaqueTotal
           ? _value.percentagePlaqueTotal
           : percentagePlaqueTotal // ignore: cast_nullable_to_non_nullable
-              as String,
-      teethRangePath: null == teethRangePath
+              as String?,
+      teethRangePath: freezed == teethRangePath
           ? _value.teethRangePath
           : teethRangePath // ignore: cast_nullable_to_non_nullable
-              as String,
-      teethRangeDetectPath: null == teethRangeDetectPath
+              as String?,
+      teethRangeDetectPath: freezed == teethRangeDetectPath
           ? _value.teethRangeDetectPath
           : teethRangeDetectPath // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      teethOriginalImagePath: freezed == teethOriginalImagePath
+          ? _value.teethOriginalImagePath
+          : teethOriginalImagePath // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -152,32 +166,34 @@ class __$$AnalyzeTeethResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AnalyzeTeethResponseImpl implements _AnalyzeTeethResponse {
   const _$AnalyzeTeethResponseImpl(
-      {@JsonKey(name: 'API status') required this.apiStatus,
-      @JsonKey(name: 'percentage_plaque_total')
-      required this.percentagePlaqueTotal,
-      @JsonKey(name: 'teethRangePath') required this.teethRangePath,
-      @JsonKey(name: 'teethRangeDetectPath')
-      required this.teethRangeDetectPath});
+      {@JsonKey(name: 'API status') this.apiStatus,
+      @JsonKey(name: 'percentage_plaque_total') this.percentagePlaqueTotal,
+      @JsonKey(name: 'teethRangePath') this.teethRangePath,
+      @JsonKey(name: 'teethRangeDetectPath') this.teethRangeDetectPath,
+      @JsonKey(name: 'originalImagePath') this.teethOriginalImagePath});
 
   factory _$AnalyzeTeethResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$AnalyzeTeethResponseImplFromJson(json);
 
   @override
   @JsonKey(name: 'API status')
-  final int apiStatus;
+  final int? apiStatus;
   @override
   @JsonKey(name: 'percentage_plaque_total')
-  final String percentagePlaqueTotal;
+  final String? percentagePlaqueTotal;
   @override
   @JsonKey(name: 'teethRangePath')
-  final String teethRangePath;
+  final String? teethRangePath;
   @override
   @JsonKey(name: 'teethRangeDetectPath')
-  final String teethRangeDetectPath;
+  final String? teethRangeDetectPath;
+  @override
+  @JsonKey(name: 'originalImagePath')
+  final String? teethOriginalImagePath;
 
   @override
   String toString() {
-    return 'AnalyzeTeethResponse(apiStatus: $apiStatus, percentagePlaqueTotal: $percentagePlaqueTotal, teethRangePath: $teethRangePath, teethRangeDetectPath: $teethRangeDetectPath)';
+    return 'AnalyzeTeethResponse(apiStatus: $apiStatus, percentagePlaqueTotal: $percentagePlaqueTotal, teethRangePath: $teethRangePath, teethRangeDetectPath: $teethRangeDetectPath, teethOriginalImagePath: $teethOriginalImagePath)';
   }
 
   @override
@@ -192,13 +208,15 @@ class _$AnalyzeTeethResponseImpl implements _AnalyzeTeethResponse {
             (identical(other.teethRangePath, teethRangePath) ||
                 other.teethRangePath == teethRangePath) &&
             (identical(other.teethRangeDetectPath, teethRangeDetectPath) ||
-                other.teethRangeDetectPath == teethRangeDetectPath));
+                other.teethRangeDetectPath == teethRangeDetectPath) &&
+            (identical(other.teethOriginalImagePath, teethOriginalImagePath) ||
+                other.teethOriginalImagePath == teethOriginalImagePath));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, apiStatus, percentagePlaqueTotal,
-      teethRangePath, teethRangeDetectPath);
+      teethRangePath, teethRangeDetectPath, teethOriginalImagePath);
 
   /// Create a copy of AnalyzeTeethResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -220,28 +238,32 @@ class _$AnalyzeTeethResponseImpl implements _AnalyzeTeethResponse {
 
 abstract class _AnalyzeTeethResponse implements AnalyzeTeethResponse {
   const factory _AnalyzeTeethResponse(
-      {@JsonKey(name: 'API status') required final int apiStatus,
+      {@JsonKey(name: 'API status') final int? apiStatus,
       @JsonKey(name: 'percentage_plaque_total')
-      required final String percentagePlaqueTotal,
-      @JsonKey(name: 'teethRangePath') required final String teethRangePath,
-      @JsonKey(name: 'teethRangeDetectPath')
-      required final String teethRangeDetectPath}) = _$AnalyzeTeethResponseImpl;
+      final String? percentagePlaqueTotal,
+      @JsonKey(name: 'teethRangePath') final String? teethRangePath,
+      @JsonKey(name: 'teethRangeDetectPath') final String? teethRangeDetectPath,
+      @JsonKey(name: 'originalImagePath')
+      final String? teethOriginalImagePath}) = _$AnalyzeTeethResponseImpl;
 
   factory _AnalyzeTeethResponse.fromJson(Map<String, dynamic> json) =
       _$AnalyzeTeethResponseImpl.fromJson;
 
   @override
   @JsonKey(name: 'API status')
-  int get apiStatus;
+  int? get apiStatus;
   @override
   @JsonKey(name: 'percentage_plaque_total')
-  String get percentagePlaqueTotal;
+  String? get percentagePlaqueTotal;
   @override
   @JsonKey(name: 'teethRangePath')
-  String get teethRangePath;
+  String? get teethRangePath;
   @override
   @JsonKey(name: 'teethRangeDetectPath')
-  String get teethRangeDetectPath;
+  String? get teethRangeDetectPath;
+  @override
+  @JsonKey(name: 'originalImagePath')
+  String? get teethOriginalImagePath;
 
   /// Create a copy of AnalyzeTeethResponse
   /// with the given fields replaced by the non-null parameter values.

@@ -205,12 +205,10 @@ class ImageDetectPage extends HookConsumerWidget {
                                     .createTeethRecords(
                                         studentId: studentId,
                                         imagesPath: extractDateTime(
-                                            imageDetectState
-                                                .analyzeTeethResponse!
-                                                .teethRangeDetectPath),
+                                            imageDetectState.analyzeTeethResponse?.teethOriginalImagePath),
                                         dentalPlaqueCount: imageDetectState
-                                            .analyzeTeethResponse!
-                                            .percentagePlaqueTotal)
+                                            .analyzeTeethResponse
+                                            ?.percentagePlaqueTotal ?? '')
                                     .then((response) {
                                   if (response != null) {
                                     ref
@@ -232,14 +230,14 @@ class ImageDetectPage extends HookConsumerWidget {
   }
 }
 
-String extractDateTime(String input) {
-  // 使用正则表达式匹配日期时间部分
+String extractDateTime(String? input) {
+  if (input == null) return ''; // 若輸入為 null，直接返回空字元串
+
+  // 使用正則表達式匹配日期時間部分
   final pattern = RegExp(r'teeth_range_detect/([^/]+)/');
   final match = pattern.firstMatch(input);
-  if (match != null) {
-    return match.group(1)!; // 返回匹配到的日期时间部分
-  }
-  return ''; // 如果没有匹配到，则返回空字符串
+
+  return match != null ? match.group(1)! : ''; // 返回匹配到的日期時間部分或空字元串
 }
 
 // 圖片錯誤時Widget

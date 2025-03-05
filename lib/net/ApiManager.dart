@@ -14,6 +14,7 @@ import 'package:dental_guard_flutter/data/response/teethRecords/TeethRecordsResp
 import 'package:dental_guard_flutter/net/ApiEndPoint.dart';
 import 'package:dental_guard_flutter/net/NetworkInterface.dart';
 import 'package:dental_guard_flutter/provider/PageProvider.dart';
+import 'package:dental_guard_flutter/utils/AppLog.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http_parser/http_parser.dart';
@@ -174,17 +175,16 @@ class ApiManager {
         contentType: 'multipart/form-data',
       );
 
-      final jsonResponse = response.data as Map<String, dynamic>;
-      if (jsonResponse['returnCode'] == 0) {
-        ref.read(pageProvider.notifier).hideLoading();
-        ref.read(pageProvider.notifier).showSuccess(jsonResponse['message']);
-        return AnalyzeTeethResponse.fromJson(jsonResponse['data']);
-      } else {
-        ref.read(pageProvider.notifier).showError(jsonResponse['message']);
-        ref.read(pageProvider.notifier).hideLoading();
-        return null;
-      }
+      final analyzeTeethResponse = BaseResponse<AnalyzeTeethResponse>.fromJson(
+        response.data,
+            (data) => AnalyzeTeethResponse.fromJson(data as Map<String, dynamic>),
+      );
+
+      ref.read(pageProvider.notifier).hideLoading();
+      ref.read(pageProvider.notifier).showSuccess(analyzeTeethResponse.message);
+      return analyzeTeethResponse.data;
     } catch (e) {
+      AppLog.e('$e');
       ref.read(pageProvider.notifier).hideLoading();
       return null;
     }
