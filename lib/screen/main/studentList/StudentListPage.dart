@@ -67,7 +67,11 @@ class StudentListPage extends HookConsumerWidget {
                 SystemNavigator.pop();
               }
             }, onAddTap: (){
-              AutoRouter.of(context).push(AddStudentRoute());
+              if(currentClassroomId.value != null){
+                AutoRouter.of(context).push(AddStudentRoute());
+              }else{
+                AutoRouter.of(context).push(AddClassRoute());
+              }
             },),
             (currentClassroomId.value != null)?
             Expanded(

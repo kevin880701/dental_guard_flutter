@@ -18,6 +18,7 @@ class ApiEndPoint {
   static const String accountsClassrooms = "accounts/classrooms/";
   static const String apiRecordsCreate = "api/records/create/";
 
+  static const String accountsTeachers = "accounts/teachers/";
 
 
 

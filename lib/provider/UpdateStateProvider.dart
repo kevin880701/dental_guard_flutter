@@ -14,19 +14,23 @@ final updateProvider = StateNotifierProvider<UpdateNotifier, UpdateState>((ref) 
 class UpdateState {
   final DateTime? recordUpdated;
   final DateTime? studentRecordUpdated;
+  final DateTime? classUpdated;
 
   UpdateState({
     this.recordUpdated,
     this.studentRecordUpdated,
+    this.classUpdated,
   });
 
   UpdateState copyWith({
     DateTime? recordUpdated,
     DateTime? studentRecordUpdated,
+    DateTime? classUpdated,
   }) {
     return UpdateState(
       recordUpdated: recordUpdated ?? this.recordUpdated,
       studentRecordUpdated: studentRecordUpdated ?? this.studentRecordUpdated,
+      classUpdated: classUpdated ?? this.classUpdated,
     );
   }
 }
@@ -45,6 +49,12 @@ class UpdateNotifier extends StateNotifier<UpdateState> {
   DateTime studentRecordUpdated() {
     state = state.copyWith(studentRecordUpdated: DateTime.now());
     ref.read(studentListProvider.notifier).getStudentList();
+    return DateTime.now();
+  }
+
+  DateTime classUpdated() {
+    state = state.copyWith(classUpdated: DateTime.now());
+    ref.read(studentListProvider.notifier).getClassroomList();
     return DateTime.now();
   }
 }

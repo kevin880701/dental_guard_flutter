@@ -1,15 +1,18 @@
 import 'dart:io';
+import 'package:dental_guard_flutter/data/request/addClass/AddClassRequestBody.dart';
 import 'package:dental_guard_flutter/data/request/addStudent/AddStudentRequestBody.dart'
 as addStudent;
 import 'package:dental_guard_flutter/data/request/createTeethRecord/CreateTeethRecordRequestBody.dart';
 import 'package:dental_guard_flutter/data/request/login/LoginRequestBody.dart';
 import 'package:dental_guard_flutter/data/response/BaseResponse/BaseResponse.dart';
+import 'package:dental_guard_flutter/data/response/addClass/AddClassResponse.dart';
 import 'package:dental_guard_flutter/data/response/addStudent/AddStudentResponse.dart';
 import 'package:dental_guard_flutter/data/response/analyzeTeeth/AnalyzeTeethResponse.dart';
 import 'package:dental_guard_flutter/data/response/classroomList/ClassroomListResponse.dart';
 import 'package:dental_guard_flutter/data/response/createTeethRecord/CreateTeethRecordResponse.dart';
 import 'package:dental_guard_flutter/data/response/login/LoginResponse.dart';
 import 'package:dental_guard_flutter/data/response/studentList/StudentListResponse.dart';
+import 'package:dental_guard_flutter/data/response/teacherInfo/TeacherInfoResponse.dart';
 import 'package:dental_guard_flutter/data/response/teethRecords/TeethRecordsResponse.dart';
 import 'package:dental_guard_flutter/net/ApiEndPoint.dart';
 import 'package:dental_guard_flutter/net/NetworkInterface.dart';
@@ -132,6 +135,33 @@ class ApiManager {
     return baseResponse.returnCode == 0 ? baseResponse.data : [];
   }
 
+
+
+  Future<bool> postAddClass(
+      String token, {
+        required AddClassRequestBody addClassRequestBody
+      }) async {
+    final response = await _networkInterface.request(
+      url: ApiEndPoint.accountsClassrooms,
+      method: HttpMethod.POST,
+      body: addClassRequestBody,
+      userToken: token,
+    );
+
+    final baseResponse = BaseResponse<AddClassResponse>.fromJson(
+      response.data,
+          (data) => AddClassResponse.fromJson(data as Map<String, dynamic>),
+    );
+
+    if (baseResponse.returnCode == 0) {
+      ref.read(pageProvider.notifier).showSuccess(baseResponse.message);
+      return true;
+    } else {
+      ref.read(pageProvider.notifier).showError(baseResponse.message);
+      return false;
+    }
+  }
+
   Future<List<ClassroomListResponse>> getClassroomList(String token) async {
     final response = await _networkInterface.request(
       method: HttpMethod.GET,
@@ -152,6 +182,30 @@ class ApiManager {
     } else {
       ref.read(pageProvider.notifier).showError(baseResponse.message);
       return [];
+    }
+  }
+
+  Future<TeacherInfoResponse?> getTeacherInfo(String token) async {
+    final response = await _networkInterface.request(
+      method: HttpMethod.GET,
+      userToken: token,
+      url: ApiEndPoint.accountsTeachers,
+    );
+
+    BaseResponse<List<TeacherInfoResponse>> baseResponse =
+    BaseResponse<List<TeacherInfoResponse>>.fromJson(
+      response.data,
+          (data) => (data as List<dynamic>)
+          .map((e) => TeacherInfoResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+    if (baseResponse.returnCode == 0) {
+      final list = baseResponse.data;
+      return (list.isNotEmpty) ? list.first : null;
+    } else {
+      ref.read(pageProvider.notifier).showError(baseResponse.message);
+      return null;
     }
   }
 

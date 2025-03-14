@@ -64,6 +64,14 @@ class AppRouter extends RootStackRouter {
       reverseDurationInMilliseconds: rinterval,
     ),
 
+    CustomRoute(
+      path: '/addClass',
+      page: AddClassRoute.page,
+      transitionsBuilder: TransitionsBuilders.slideLeft,
+      durationInMilliseconds: rinterval,
+      reverseDurationInMilliseconds: rinterval,
+    ),
+
     // Edit User Information Pages
     CustomRoute(
       path: '/editUserInformation',

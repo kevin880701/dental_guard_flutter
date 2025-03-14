@@ -56,4 +56,7 @@ class AppTexts {
   static const personalInfo = '個人資訊';
   static const sure = '確定';
   static const editStudentInfo = '編輯學生資訊';
+
+  // 新增班級
+  static const addClass = '新增班級';
 }
