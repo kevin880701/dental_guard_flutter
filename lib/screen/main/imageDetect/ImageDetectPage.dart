@@ -280,7 +280,7 @@ Color getPlaqueColor(String? percentagePlaqueTotal) {
 
   return value < 0
       ? Colors.red
-      : value < 60
+      : value < 30
       ? Colors.green
       : Colors.red;
 }
@@ -297,7 +297,7 @@ String getPlaqueMessage(String? percentagePlaqueTotal) {
 
   return value < 0
       ? "偵測失敗"
-      : value < 60
+      : value < 30
       ? "牙菌斑含量為${percentagePlaqueTotal}%，做得很好！"
       : "牙菌斑含量為${percentagePlaqueTotal}%，再加強一下！";
 }
