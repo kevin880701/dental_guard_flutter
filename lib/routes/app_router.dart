@@ -28,7 +28,7 @@ class AppRouter extends RootStackRouter {
     // Login
     CustomRoute(
       page: LoginRoute.page,
-      path: '/login',
+      path: '/groups_manage',
       duration: _duration,
       transitionsBuilder: TransitionsBuilders.slideLeft,
     ),

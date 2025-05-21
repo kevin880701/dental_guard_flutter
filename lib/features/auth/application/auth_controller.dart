@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../core/providers/auth_session_provider.dart';
 import '../../../core/providers/page_provider.dart';
 import '../../../core/utils/app_log.dart';
-import '../domain/entities/LoginPageType.dart';
 import 'auth_provider.dart';
 
 part 'auth_controller.freezed.dart';
@@ -12,7 +11,6 @@ part 'auth_controller.freezed.dart';
 @freezed
 class AuthState with _$AuthState {
   const factory AuthState({
-    @Default(LoginPageType.login) LoginPageType pageType,
     String? registerEmail,
   }) = _AuthState;
 }

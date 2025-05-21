@@ -3,7 +3,7 @@ import 'token_manager.dart';
 
 class AuthInterceptor extends Interceptor {
   static final List<String> noAuthPaths = [
-    '/login',
+    '/groups_manage',
     '/set_user_profile',
     '/send-verification-code',
     '/enter-verification-code',

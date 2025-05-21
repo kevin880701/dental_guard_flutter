@@ -13,12 +13,6 @@ import '../models/response/user_info/user_info_data.dart';
 abstract class AuthRepository {
   Future<LoginData> login(LoginRequest loginRequest);
   Future<UserInfoData> getUserInfo();
-  Future<bool> setUserProfile(SetUserProfileRequest setUserProfileRequest);
-  Future<RefreshTokenData> refreshToken(RefreshTokenRequest refreshTokenRequest);
-  Future<bool> sendVerificationCode(SendVerificationCodeRequest request);
-  Future<bool> enterVerificationCode(EnterVerificationCodeRequest request);
-  Future<LoginData> registerPassword(SetPasswordRequest request);
-  Future<bool> resetPassword(SetPasswordRequest request);
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -34,35 +28,5 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<UserInfoData> getUserInfo() async {
     return await remoteDataSource.getUserInfo();
-  }
-
-  @override
-  Future<bool> setUserProfile(SetUserProfileRequest setUserProfileRequest) async {
-    return await remoteDataSource.setUserProfile(setUserProfileRequest);
-  }
-
-  @override
-  Future<RefreshTokenData> refreshToken(RefreshTokenRequest refreshTokenRequest) async {
-    return await remoteDataSource.refreshToken(refreshTokenRequest);
-  }
-
-  @override
-  Future<bool> sendVerificationCode(SendVerificationCodeRequest request) async {
-    return (await remoteDataSource.sendVerificationCode(request)).isNotEmpty;
-  }
-
-  @override
-  Future<bool> enterVerificationCode(EnterVerificationCodeRequest request) async {
-    return await remoteDataSource.enterVerificationCode(request);
-  }
-
-  @override
-  Future<LoginData> registerPassword(SetPasswordRequest request) async {
-    return await remoteDataSource.registerPassword(request);
-  }
-
-  @override
-  Future<bool> resetPassword(SetPasswordRequest request) async {
-    return await remoteDataSource.resetPassword(request);
   }
 }

@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AuthState {
-  LoginPageType get pageType => throw _privateConstructorUsedError;
   String? get registerEmail => throw _privateConstructorUsedError;
 
   /// Create a copy of AuthState
@@ -31,7 +30,7 @@ abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
-  $Res call({LoginPageType pageType, String? registerEmail});
+  $Res call({String? registerEmail});
 }
 
 /// @nodoc
@@ -49,14 +48,9 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pageType = null,
     Object? registerEmail = freezed,
   }) {
     return _then(_value.copyWith(
-      pageType: null == pageType
-          ? _value.pageType
-          : pageType // ignore: cast_nullable_to_non_nullable
-              as LoginPageType,
       registerEmail: freezed == registerEmail
           ? _value.registerEmail
           : registerEmail // ignore: cast_nullable_to_non_nullable
@@ -73,7 +67,7 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       __$$AuthStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({LoginPageType pageType, String? registerEmail});
+  $Res call({String? registerEmail});
 }
 
 /// @nodoc
@@ -89,14 +83,9 @@ class __$$AuthStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pageType = null,
     Object? registerEmail = freezed,
   }) {
     return _then(_$AuthStateImpl(
-      pageType: null == pageType
-          ? _value.pageType
-          : pageType // ignore: cast_nullable_to_non_nullable
-              as LoginPageType,
       registerEmail: freezed == registerEmail
           ? _value.registerEmail
           : registerEmail // ignore: cast_nullable_to_non_nullable
@@ -108,18 +97,14 @@ class __$$AuthStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AuthStateImpl implements _AuthState {
-  const _$AuthStateImpl(
-      {this.pageType = LoginPageType.login, this.registerEmail});
+  const _$AuthStateImpl({this.registerEmail});
 
-  @override
-  @JsonKey()
-  final LoginPageType pageType;
   @override
   final String? registerEmail;
 
   @override
   String toString() {
-    return 'AuthState(pageType: $pageType, registerEmail: $registerEmail)';
+    return 'AuthState(registerEmail: $registerEmail)';
   }
 
   @override
@@ -127,14 +112,12 @@ class _$AuthStateImpl implements _AuthState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthStateImpl &&
-            (identical(other.pageType, pageType) ||
-                other.pageType == pageType) &&
             (identical(other.registerEmail, registerEmail) ||
                 other.registerEmail == registerEmail));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, pageType, registerEmail);
+  int get hashCode => Object.hash(runtimeType, registerEmail);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -146,12 +129,8 @@ class _$AuthStateImpl implements _AuthState {
 }
 
 abstract class _AuthState implements AuthState {
-  const factory _AuthState(
-      {final LoginPageType pageType,
-      final String? registerEmail}) = _$AuthStateImpl;
+  const factory _AuthState({final String? registerEmail}) = _$AuthStateImpl;
 
-  @override
-  LoginPageType get pageType;
   @override
   String? get registerEmail;
 

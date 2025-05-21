@@ -2,15 +2,41 @@ class ApiEndPoint {
   static const String domain = 'https://letgo.jieniguicare.org';
   // static const String domain = 'http://192.168.54.194';
 
-  // auth
+
+  // Auth
   static const String login = '/user/login';
   static const String userInfo = '/user/info';
-  static const String userProfile = '/user/profile';
-  static const String sendVerificationCode = '/user/send-verification-code';
-  static const String enterVerificationCode = '/user/enter-verification-code';
-  static const String verifyCode = '/user/verify-code';
-  static const String refreshToken = '/user/refresh-token';
-  static const String registerPassword = '/user/register-password';
-  static const String resetPassword = '/user/reset-password';
+  static const String deleteUser = '/user/delete';
+  static const String updateUserProfile = '/user/profile';
+
+  /// /user/{id}
+  static String getUserById(String id) => '/user/$id';
+
+  // Organization
+  static const String getManagedGroups = '/organization/managed-groups';
+  static const String createGroup = '/organization/group';
+  static const String addGroupMember = '/organization/group/member';
+  static const String removeGroupMember = '/organization/group/member';
+
+  /// /organization/group/{groupId}/members
+  static String getGroupUsers(String groupId) => '/organization/group/$groupId/members';
+
+  /// /organization/group/{groupId}
+  static String getGroupById(String groupId) => '/organization/group/$groupId';
+
+  // Teeth Record
+  static const String createBrushingRecord = '/teeth-record/brushing-record';
+
+  /// /teeth-record/brushing-record/{id}
+  static String deleteBrushingRecord(String id) => '/teeth-record/brushing-record/$id';
+
+  // Analyze
+  /// /analyze/result/{id}
+  static String getAnalyzeResultById(String id) => '/analyze/result/$id';
+
+  static const String analyzeTeethImage = '/analyze/teeth';
+
+  /// /analyze/image/teeth/{filepath}
+  static String getAnalyzeImage(String filepath) => '/analyze/image/teeth/$filepath';
 
 }
