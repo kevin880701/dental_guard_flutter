@@ -30,6 +30,14 @@ class ApiEndPoint {
   /// /teeth-record/brushing-record/{id}
   static String deleteBrushingRecord(String id) => '/teeth-record/brushing-record/$id';
 
+  /// /teeth-record/brushing-record/user/{id}
+  static String getUserBrushingRecords(String userId) =>
+      '/teeth-record/brushing-record/user/$userId';
+
+  /// /teeth-record/brushing-record/brushing-record/{id}
+  static String getBrushingRecordById(String recordId) =>
+      '/teeth-record/brushing-record/$recordId';
+
   // Analyze
   /// /analyze/result/{id}
   static String getAnalyzeResultById(String id) => '/analyze/result/$id';
