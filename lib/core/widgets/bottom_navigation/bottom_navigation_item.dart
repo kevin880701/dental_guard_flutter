@@ -59,7 +59,7 @@ class BottomNavigationItem extends StatelessWidget {
         children: [
           if (iconSet != null) ...[
             AppIcon(
-              iconName: isSelected ? iconSet!.selectedIcon : iconSet!.unselectedIcon,
+              icon: isSelected ? iconSet!.selectedIcon : iconSet!.unselectedIcon,
               color: isSelected ? iconSet!.selectedIconColor : iconSet!.unselectedIconColor,
               padding: 4.0,
             )

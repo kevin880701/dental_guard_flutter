@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$OrganizationState {
   GroupsManageData? get groupsManageData => throw _privateConstructorUsedError;
-  List<UserInfoData>? get groupUsers => throw _privateConstructorUsedError;
+  List<GroupData>? get allParentGroups => throw _privateConstructorUsedError;
 
   /// Create a copy of OrganizationState
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +33,7 @@ abstract class $OrganizationStateCopyWith<$Res> {
       _$OrganizationStateCopyWithImpl<$Res, OrganizationState>;
   @useResult
   $Res call(
-      {GroupsManageData? groupsManageData, List<UserInfoData>? groupUsers});
+      {GroupsManageData? groupsManageData, List<GroupData>? allParentGroups});
 
   $GroupsManageDataCopyWith<$Res>? get groupsManageData;
 }
@@ -54,17 +54,17 @@ class _$OrganizationStateCopyWithImpl<$Res, $Val extends OrganizationState>
   @override
   $Res call({
     Object? groupsManageData = freezed,
-    Object? groupUsers = freezed,
+    Object? allParentGroups = freezed,
   }) {
     return _then(_value.copyWith(
       groupsManageData: freezed == groupsManageData
           ? _value.groupsManageData
           : groupsManageData // ignore: cast_nullable_to_non_nullable
               as GroupsManageData?,
-      groupUsers: freezed == groupUsers
-          ? _value.groupUsers
-          : groupUsers // ignore: cast_nullable_to_non_nullable
-              as List<UserInfoData>?,
+      allParentGroups: freezed == allParentGroups
+          ? _value.allParentGroups
+          : allParentGroups // ignore: cast_nullable_to_non_nullable
+              as List<GroupData>?,
     ) as $Val);
   }
 
@@ -92,7 +92,7 @@ abstract class _$$OrganizationStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {GroupsManageData? groupsManageData, List<UserInfoData>? groupUsers});
+      {GroupsManageData? groupsManageData, List<GroupData>? allParentGroups});
 
   @override
   $GroupsManageDataCopyWith<$Res>? get groupsManageData;
@@ -112,17 +112,17 @@ class __$$OrganizationStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? groupsManageData = freezed,
-    Object? groupUsers = freezed,
+    Object? allParentGroups = freezed,
   }) {
     return _then(_$OrganizationStateImpl(
       groupsManageData: freezed == groupsManageData
           ? _value.groupsManageData
           : groupsManageData // ignore: cast_nullable_to_non_nullable
               as GroupsManageData?,
-      groupUsers: freezed == groupUsers
-          ? _value._groupUsers
-          : groupUsers // ignore: cast_nullable_to_non_nullable
-              as List<UserInfoData>?,
+      allParentGroups: freezed == allParentGroups
+          ? _value._allParentGroups
+          : allParentGroups // ignore: cast_nullable_to_non_nullable
+              as List<GroupData>?,
     ));
   }
 }
@@ -131,24 +131,24 @@ class __$$OrganizationStateImplCopyWithImpl<$Res>
 
 class _$OrganizationStateImpl implements _OrganizationState {
   const _$OrganizationStateImpl(
-      {this.groupsManageData, final List<UserInfoData>? groupUsers})
-      : _groupUsers = groupUsers;
+      {this.groupsManageData, final List<GroupData>? allParentGroups})
+      : _allParentGroups = allParentGroups;
 
   @override
   final GroupsManageData? groupsManageData;
-  final List<UserInfoData>? _groupUsers;
+  final List<GroupData>? _allParentGroups;
   @override
-  List<UserInfoData>? get groupUsers {
-    final value = _groupUsers;
+  List<GroupData>? get allParentGroups {
+    final value = _allParentGroups;
     if (value == null) return null;
-    if (_groupUsers is EqualUnmodifiableListView) return _groupUsers;
+    if (_allParentGroups is EqualUnmodifiableListView) return _allParentGroups;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'OrganizationState(groupsManageData: $groupsManageData, groupUsers: $groupUsers)';
+    return 'OrganizationState(groupsManageData: $groupsManageData, allParentGroups: $allParentGroups)';
   }
 
   @override
@@ -159,12 +159,12 @@ class _$OrganizationStateImpl implements _OrganizationState {
             (identical(other.groupsManageData, groupsManageData) ||
                 other.groupsManageData == groupsManageData) &&
             const DeepCollectionEquality()
-                .equals(other._groupUsers, _groupUsers));
+                .equals(other._allParentGroups, _allParentGroups));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, groupsManageData,
-      const DeepCollectionEquality().hash(_groupUsers));
+      const DeepCollectionEquality().hash(_allParentGroups));
 
   /// Create a copy of OrganizationState
   /// with the given fields replaced by the non-null parameter values.
@@ -179,12 +179,12 @@ class _$OrganizationStateImpl implements _OrganizationState {
 abstract class _OrganizationState implements OrganizationState {
   const factory _OrganizationState(
       {final GroupsManageData? groupsManageData,
-      final List<UserInfoData>? groupUsers}) = _$OrganizationStateImpl;
+      final List<GroupData>? allParentGroups}) = _$OrganizationStateImpl;
 
   @override
   GroupsManageData? get groupsManageData;
   @override
-  List<UserInfoData>? get groupUsers;
+  List<GroupData>? get allParentGroups;
 
   /// Create a copy of OrganizationState
   /// with the given fields replaced by the non-null parameter values.

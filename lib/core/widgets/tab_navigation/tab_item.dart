@@ -34,7 +34,7 @@ class TabItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           AppIcon(
-            iconName: isSelected ? selectedIcon : unselectedIcon,
+            icon: isSelected ? selectedIcon : unselectedIcon,
             color: isSelected ? selectedIconColor : unselectedIconColor,
             padding: 4.0,
           ),

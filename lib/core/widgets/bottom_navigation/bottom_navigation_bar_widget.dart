@@ -20,7 +20,7 @@ import 'bottom_navigation_label_set.dart';
 ///   iconSets: [
 ///     BottomNavigationIconSet(
 ///       icon: Icons.home_outlined,
-///       selectedIcon: Icons.home,
+///       selectedIcon: Icons.group,
 ///     ),
 ///     BottomNavigationIconSet(
 ///       icon: Icons.search_outlined,

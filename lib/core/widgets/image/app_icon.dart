@@ -28,7 +28,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 /// 若資源不存在或錯誤，會顯示預設 `Icons.image_not_supported`。
 class AppIcon extends StatelessWidget {
   /// 圖示路徑（支援 SVG 或 Image 格式）。
-  final String iconName;
+  final String icon;
 
   /// 圖示大小（寬與高），預設為 24。
   final double size;
@@ -59,7 +59,7 @@ class AppIcon extends StatelessWidget {
 
   const AppIcon({
     super.key,
-    required this.iconName,
+    required this.icon,
     this.size = 24.0,
     this.color,
     this.backgroundColor = Colors.transparent,
@@ -74,11 +74,11 @@ class AppIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 判斷是否為 SVG 格式
-    final isSvg = iconName.toLowerCase().endsWith('.svg');
+    final isSvg = icon.toLowerCase().endsWith('.svg');
 
     final iconWidget = isSvg
         ? SvgPicture.asset(
-      iconName,
+      icon,
       width: size,
       height: size,
       colorFilter: color != null
@@ -92,7 +92,7 @@ class AppIcon extends StatelessWidget {
       ),
     )
         : Image.asset(
-      iconName,
+      icon,
       width: size,
       height: size,
       color: color,

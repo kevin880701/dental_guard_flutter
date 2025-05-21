@@ -15,7 +15,7 @@ part 'organization_controller.freezed.dart';
 class OrganizationState with _$OrganizationState {
   const factory OrganizationState({
     GroupsManageData? groupsManageData,
-    List<UserInfoData>? groupUsers,
+    List<GroupData>? allParentGroups,
   }) = _OrganizationState;
 }
 
@@ -34,11 +34,17 @@ class OrganizationController extends StateNotifier<OrganizationState> {
     try {
       final getManagedGroupsUseCase = ref.read(getManagedGroupsUseCaseProvider);
       final data = await getManagedGroupsUseCase();
-      state = state.copyWith(groupsManageData: data);
+
+      final flattenedGroups = flattenHierarchy(data.hierarchy);
+      state = state.copyWith(
+        groupsManageData: data,
+        allParentGroups: flattenedGroups,
+      );
     } catch (e, st) {
       AppLog.e('載入群組失敗: $e\n$st');
     }
   }
+
 
   /// 建立群組
   Future<bool> createGroup(CreateGroupRequest request) async {
@@ -78,7 +84,6 @@ class OrganizationController extends StateNotifier<OrganizationState> {
     try {
       final useCase = ref.read(getGroupUsersUseCaseProvider);
       final users = await useCase(groupId);
-      state = state.copyWith(groupUsers: users);
       return users;
     } catch (e, st) {
       AppLog.e('載入群組成員失敗: $e\n$st');
@@ -102,4 +107,20 @@ class OrganizationController extends StateNotifier<OrganizationState> {
   void clear() {
     state = const OrganizationState();
   }
+}
+
+List<GroupData> flattenHierarchy(List<GroupHierarchyNode> nodes) {
+  final result = <GroupData>[];
+
+  void walk(List<GroupHierarchyNode> list) {
+    for (final node in list) {
+      result.add(node.group);
+      if (node.children.isNotEmpty) {
+        walk(node.children);
+      }
+    }
+  }
+
+  walk(nodes);
+  return result;
 }
