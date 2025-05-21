@@ -1,0 +1,9 @@
+enum InputType {
+  ALL,
+  EMAIL,
+  PHONENUMBER,
+  NUMBER,
+  ALPHANUMERIC,
+  USERNAME,
+  PASSWORD
+}

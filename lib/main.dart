@@ -1,10 +1,11 @@
+import 'package:dental_guard_flutter/routes/app_router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:dental_guard_flutter/resources/AppColors.dart';
-import 'package:dental_guard_flutter/route/AppRouter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'core/constants/app_colors.dart';
+import 'core/network/network_interface.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -16,6 +17,8 @@ final counterProvider = StateProvider<int>((ref) {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await NetworkInterface.createInstance();
 
   runApp(
     ProviderScope(

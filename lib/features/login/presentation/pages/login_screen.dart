@@ -1,0 +1,188 @@
+
+import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:dental_guard_flutter/core/constants/app_resources.dart';
+import 'package:dental_guard_flutter/core/providers/page_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../core/base/base_page.dart';
+import '../../../../core/widgets/button/app_button.dart';
+import '../../../../core/widgets/input/input_type.dart';
+import '../../../../core/widgets/text/app_text.dart';
+import '../../../../routes/app_router.dart';
+import '../../../auth/application/auth_controller.dart';
+import '../widgets/login_input.dart';
+
+@RoutePage()
+class LoginScreen extends HookConsumerWidget {
+  const LoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final authControllerNotifier = ref.read(authControllerProvider.notifier);
+    final accountController = useTextEditingController();
+    final passwordController = useTextEditingController();
+    final lastBackPressed = useState<DateTime?>(null);
+    final _isKeepLogin = useState<bool>(false);
+    final _isClickable = useState(false);
+    final isFormValid = useState(false);
+
+    void validateForm() {
+      final account = accountController.text;
+      final password = passwordController.text;
+
+      final isValid =
+          account.isNotEmpty &&
+              password.isNotEmpty;
+
+      isFormValid.value = isValid;
+    }
+
+    void _login() async {
+      ref.read(pageNotifierProvider.notifier).showLoading();
+      authControllerNotifier.login(account: accountController.text, password: passwordController.text).then((response) async {
+        if(response != null){
+          if(_isKeepLogin.value){
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.setBool('keepLogin', true);
+            await prefs.setString('account', accountController.text);
+            await prefs.setString('password', passwordController.text);
+          }
+          context.pushRoute(MainRoute());
+        }
+        ref.read(pageNotifierProvider.notifier).hideLoading();
+      });
+    }
+
+    useEffect(() {
+
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+
+        final prefs = await SharedPreferences.getInstance();
+        final keepLogin = prefs.getBool('keepLogin') ?? false;
+
+        if (keepLogin) {
+          _isKeepLogin.value = true;
+          final savedAccount = prefs.getString('account');
+          final savedPassword = prefs.getString('password');
+
+          if (savedAccount != null) {
+            accountController.text = savedAccount;
+          }
+          if (savedPassword != null) {
+            passwordController.text = savedPassword;
+          }
+        }
+      });
+
+      return () {
+      };
+    }, []);
+
+    useEffect(() {
+      void updateIsClickable() {
+        _isClickable.value = accountController.text.isNotEmpty && passwordController.text.isNotEmpty;
+      }
+
+      accountController.addListener(updateIsClickable);
+      passwordController.addListener(updateIsClickable);
+
+      updateIsClickable();
+
+      return () {
+        accountController.removeListener(updateIsClickable);
+        passwordController.removeListener(updateIsClickable);
+      };
+    }, [accountController.text, passwordController.text]);
+
+    Future<bool> _onWillPop() async {
+      final now = DateTime.now();
+      if (lastBackPressed.value == null || now.difference(lastBackPressed.value!) > Duration(seconds: 2)) {
+        lastBackPressed.value = now;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('再按一次退出程式'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+        return false; // 禁止立刻退出，等待下一次按鍵
+      }
+      return true; // 兩次按鍵間隔短，允許退出
+    }
+
+    return BasePage(
+      backgroundColor: AppColors.bgColor,
+      onWillPop: _onWillPop,
+      child: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              gapH24,
+              LoginInput(
+                title: AppStrings.account,
+                hintText: AppStrings.plsEnterAccount,
+                inputType: InputType.ALL,
+                controller: accountController,
+                onChanged: (_) => validateForm(),
+                validator: (text) {
+                  // if (text.length < 6 || text.length > 20) {
+                  //   return AppStrings.passwordLengthHint;
+                  // }
+                  return null;
+                },
+              ),
+              LoginInput(
+                title: AppStrings.password,
+                hintText: AppStrings.plsEnterPassword,
+                inputType: InputType.PASSWORD,
+                controller: passwordController,
+                onChanged: (_) => validateForm(),
+                validator: (text) {
+                  // if (text.length < 6 || text.length > 20) {
+                  //   return AppStrings.passwordLengthHint;
+                  // }
+                  return null;
+                },
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    side: BorderSide(color: AppColors.primaryBlack, width: 2),
+                    checkColor: Colors.white,
+                    activeColor: AppColors.primaryBlack,
+                    value: _isKeepLogin.value,
+                    onChanged: (bool? value) {
+                      _isKeepLogin.value = value ?? false;
+                    },
+                  ),
+                  AppText(
+                    text: AppStrings.keepLoginState,
+                    textStyle: bodyMedium,
+                    onTap: () {
+                      _isKeepLogin.value = !_isKeepLogin.value;
+                    },
+                  ),
+                ],
+              ),
+              gapH24,
+              SizedBox(
+                  width: double.infinity,
+                  child: AppButton(
+                      text: AppStrings.login,
+                      backgroundColor: (_isClickable.value)?AppColors.primaryBlack:AppColors.disableGrey,
+                      fontColor: AppColors.white,
+                      onPressed: (_isClickable.value)?() {
+                        _login();
+                      }:null)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

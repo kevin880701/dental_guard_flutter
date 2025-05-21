@@ -1,0 +1,57 @@
+import 'dart:async';
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:dental_guard_flutter/core/providers/version_info_provider.dart';
+import 'package:dental_guard_flutter/core/widgets/image/asset_image_widget.dart';
+import 'package:dental_guard_flutter/core/widgets/text/app_text.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../core/constants/app_images.dart';
+import '../../../../core/constants/app_strings.dart';
+import '../../../../routes/app_router.dart';
+
+@RoutePage()
+class LaunchScreen extends HookConsumerWidget {
+  const LaunchScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    useEffect(() {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        ref.read(versionInfoProvider.notifier).loadVersionInfo().then((_) {
+          Timer(const Duration(seconds: 2), () async {
+            AutoRouter.of(context).replace(const LoginRoute());
+          });
+        });
+      });
+      return null;
+    }, []);
+
+    return Scaffold(
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AssetImageWidget(image: AppImages.appIcon, width: screenWidth * 0.4, height: screenWidth * 0.4,),
+                  AppText(text: AppStrings.appName)
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
