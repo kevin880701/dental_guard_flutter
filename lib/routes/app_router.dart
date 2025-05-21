@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../features/auth/data/models/response/user_info/user_info_data.dart';
 import '../features/launch/presentation/pages/launch_screen.dart';
 import '../features/login/presentation/pages/login_screen.dart';
 import '../features/main/presentation/pages/main_screen.dart';
+import '../features/member/presentation/pages/member_info_screen.dart';
 import '../features/member/presentation/pages/member_list_screen.dart';
 import '../features/organization/data/models/response/group/group_data.dart';
 
@@ -44,6 +46,12 @@ class AppRouter extends RootStackRouter {
     CustomRoute(
       page: MemberListRoute.page,
       path: '/memberList',
+      duration: _duration,
+      transitionsBuilder: TransitionsBuilders.slideLeft,
+    ),
+    CustomRoute(
+      page: MemberInfoRoute.page,
+      path: '/memberInfo',
       duration: _duration,
       transitionsBuilder: TransitionsBuilders.slideLeft,
     ),

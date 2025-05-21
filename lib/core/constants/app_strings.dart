@@ -38,6 +38,9 @@ class AppStrings {
   // MemberListScreen
   static const studentList = '學生列表';
 
+  // MemberInfo
+  static const noTeethRecord = '尚無潔牙紀錄';
+
   //設定帳號
   static const setAccount = '設定帳號';
   static const plsEnterYourAccount = '請輸入你的帳號';
@@ -49,7 +52,7 @@ class AppStrings {
 
   // 學生資訊
   static const studentInfo = '學生資訊';
-  static const toothBrushingRecord = '刷牙記錄';
+  static const toothBrushingRecord = '潔牙記錄';
   static const addRecordPlus = '新增記錄+';
 
   // 圖片偵測

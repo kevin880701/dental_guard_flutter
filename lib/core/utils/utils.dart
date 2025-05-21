@@ -24,6 +24,15 @@ extension DateTimeFormatExtension on DateTime {
     final time = toIso8601String().split('.').first;
     return '$time$sign$hours:$minutes';
   }
+
+  String formatDateTime() {
+    return "${year}年"
+        "${month.toString().padLeft(2, '0')}月"
+        "${day.toString().padLeft(2, '0')}日 "
+        "${hour.toString().padLeft(2, '0')}:"
+        "${minute.toString().padLeft(2, '0')}:"
+        "${second.toString().padLeft(2, '0')}";
+  }
 }
 
 DateTime? parseIsoToDateTimeOrNull(String? isoString) {
