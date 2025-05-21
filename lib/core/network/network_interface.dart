@@ -169,6 +169,34 @@ class NetworkInterface {
     }
   }
 
+  Future<Response> postFormData({
+    required String url,
+    required FormData data,
+    Map<String, dynamic>? query,
+    Map<String, String>? extraHeaders,
+  }) async {
+    try {
+      final options = Options(
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          ...?extraHeaders,
+        },
+      );
+
+      _logRequest("POST (FormData)", url: url, options: options, body: data, query: query);
+      final response = await _dio.post(
+        url,
+        data: data,
+        queryParameters: query,
+        options: options,
+      );
+      _logResponse("POST (FormData)", url, response);
+      return response;
+    } catch (e) {
+      throw Exception('Failed to post form data: $e');
+    }
+  }
+
   Future<Response> delete({
     required String url,
     dynamic body,
