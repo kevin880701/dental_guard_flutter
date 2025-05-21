@@ -32,8 +32,11 @@ class AppStrings {
   static const passwordLengthHint = '密碼長度需為6~20字';
   static const passwordsNotMatch = '兩次密碼不一致';
 
-  // GroupManageScreen
+  // GroupListScreen
   static const classList = '班級列表';
+
+  // MemberListScreen
+  static const studentList = '學生列表';
 
   //設定帳號
   static const setAccount = '設定帳號';

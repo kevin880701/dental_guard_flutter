@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import '../features/launch/presentation/pages/launch_screen.dart';
 import '../features/login/presentation/pages/login_screen.dart';
 import '../features/main/presentation/pages/main_screen.dart';
+import '../features/member/presentation/pages/member_list_screen.dart';
+import '../features/organization/data/models/response/group/group_data.dart';
 
 part 'app_router.gr.dart';
 
@@ -28,7 +30,7 @@ class AppRouter extends RootStackRouter {
     // Login
     CustomRoute(
       page: LoginRoute.page,
-      path: '/groups_manage',
+      path: '/login',
       duration: _duration,
       transitionsBuilder: TransitionsBuilders.slideLeft,
     ),
@@ -36,6 +38,12 @@ class AppRouter extends RootStackRouter {
     CustomRoute(
       page: MainRoute.page,
       path: '/main',
+      duration: _duration,
+      transitionsBuilder: TransitionsBuilders.slideLeft,
+    ),
+    CustomRoute(
+      page: MemberListRoute.page,
+      path: '/memberList',
       duration: _duration,
       transitionsBuilder: TransitionsBuilders.slideLeft,
     ),

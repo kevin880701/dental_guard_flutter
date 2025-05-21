@@ -57,3 +57,40 @@ class MainRoute extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [MemberListScreen]
+class MemberListRoute extends PageRouteInfo<MemberListRouteArgs> {
+  MemberListRoute({
+    Key? key,
+    required GroupData group,
+    List<PageRouteInfo>? children,
+  }) : super(
+         MemberListRoute.name,
+         args: MemberListRouteArgs(key: key, group: group),
+         initialChildren: children,
+       );
+
+  static const String name = 'MemberListRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<MemberListRouteArgs>();
+      return MemberListScreen(key: args.key, group: args.group);
+    },
+  );
+}
+
+class MemberListRouteArgs {
+  const MemberListRouteArgs({this.key, required this.group});
+
+  final Key? key;
+
+  final GroupData group;
+
+  @override
+  String toString() {
+    return 'MemberListRouteArgs{key: $key, group: $group}';
+  }
+}

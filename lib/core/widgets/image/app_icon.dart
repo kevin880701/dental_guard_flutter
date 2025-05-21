@@ -68,7 +68,7 @@ class AppIcon extends StatelessWidget {
     this.borderRadius = 96.0,
     this.onTap,
     this.tapColor,
-    this.padding = 8.0,
+    this.padding = 0.0,
   });
 
   @override
