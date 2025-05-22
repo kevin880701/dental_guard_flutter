@@ -11,6 +11,22 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [CameraScreen]
+class CameraRoute extends PageRouteInfo<void> {
+  const CameraRoute({List<PageRouteInfo>? children})
+    : super(CameraRoute.name, initialChildren: children);
+
+  static const String name = 'CameraRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return CameraScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [LaunchScreen]
 class LaunchRoute extends PageRouteInfo<void> {
   const LaunchRoute({List<PageRouteInfo>? children})
@@ -129,5 +145,57 @@ class MemberListRouteArgs {
   @override
   String toString() {
     return 'MemberListRouteArgs{key: $key, group: $group}';
+  }
+}
+
+/// generated route for
+/// [TeethDetectionScreen]
+class TeethDetectionRoute extends PageRouteInfo<TeethDetectionRouteArgs> {
+  TeethDetectionRoute({
+    Key? key,
+    required String userId,
+    BrushingRecordData? brushingRecordData,
+    List<PageRouteInfo>? children,
+  }) : super(
+         TeethDetectionRoute.name,
+         args: TeethDetectionRouteArgs(
+           key: key,
+           userId: userId,
+           brushingRecordData: brushingRecordData,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'TeethDetectionRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TeethDetectionRouteArgs>();
+      return TeethDetectionScreen(
+        key: args.key,
+        userId: args.userId,
+        brushingRecordData: args.brushingRecordData,
+      );
+    },
+  );
+}
+
+class TeethDetectionRouteArgs {
+  const TeethDetectionRouteArgs({
+    this.key,
+    required this.userId,
+    this.brushingRecordData,
+  });
+
+  final Key? key;
+
+  final String userId;
+
+  final BrushingRecordData? brushingRecordData;
+
+  @override
+  String toString() {
+    return 'TeethDetectionRouteArgs{key: $key, userId: $userId, brushingRecordData: $brushingRecordData}';
   }
 }

@@ -10,6 +10,8 @@ import 'core/constants/app_colors.dart';
 import 'core/constants/app_fonts.dart';
 import 'core/network/network_interface.dart';
 import 'core/providers/page_provider.dart';
+import 'core/utils/app_toast.dart';
+import 'core/utils/shared_prefs_util.dart';
 
 final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -21,6 +23,8 @@ final autoRouteObserver = AutoRouteObserver();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await SharedPrefsUtil.init();
+  AppToast.init(navigatorKey);
   await NetworkInterface.createInstance();
 
   runApp(

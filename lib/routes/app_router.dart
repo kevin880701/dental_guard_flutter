@@ -8,6 +8,9 @@ import '../features/main/presentation/pages/main_screen.dart';
 import '../features/member/presentation/pages/member_info_screen.dart';
 import '../features/member/presentation/pages/member_list_screen.dart';
 import '../features/organization/data/models/response/group/group_data.dart';
+import '../features/teeth_detection/presentation/pages/camera_screen.dart';
+import '../features/teeth_detection/presentation/pages/teeth_detection_screen.dart';
+import '../features/teeth_record/data/models/response/brushing_record/brushing_record_data.dart';
 
 part 'app_router.gr.dart';
 
@@ -52,6 +55,18 @@ class AppRouter extends RootStackRouter {
     CustomRoute(
       page: MemberInfoRoute.page,
       path: '/memberInfo',
+      duration: _duration,
+      transitionsBuilder: TransitionsBuilders.slideLeft,
+    ),
+    CustomRoute(
+      page: TeethDetectionRoute.page,
+      path: '/teethDetection',
+      duration: _duration,
+      transitionsBuilder: TransitionsBuilders.slideLeft,
+    ),
+    CustomRoute(
+      page: CameraRoute.page,
+      path: '/camera',
       duration: _duration,
       transitionsBuilder: TransitionsBuilders.slideLeft,
     ),

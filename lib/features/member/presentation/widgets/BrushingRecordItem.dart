@@ -1,3 +1,4 @@
+import 'package:dental_guard_flutter/core/constants/app_resources.dart';
 import 'package:dental_guard_flutter/core/utils/utils.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class BrushingRecordItem extends HookWidget {
                   ),
                   SizedBox(height: 4),
                   AppText(
-                    text: "牙菌斑佔比：$score",
+                    text: (isSuccess == 1)?"牙菌斑佔比：$score": AppStrings.detectionFailed,
                     textStyle: bodyMedium,
                       color: scoreColor,
                   ),

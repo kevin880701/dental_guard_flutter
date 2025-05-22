@@ -23,10 +23,12 @@ CreateBrushingRecordRequest _$CreateBrushingRecordRequestFromJson(
 mixin _$CreateBrushingRecordRequest {
   @JsonKey(name: 'user_id')
   String get userId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'score')
-  int get score => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'remarks')
   String? get remarks => throw _privateConstructorUsedError;
+  @JsonKey(name: 'analyze_result_id')
+  String? get analyzeResultId => throw _privateConstructorUsedError;
 
   /// Serializes this CreateBrushingRecordRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,8 +50,9 @@ abstract class $CreateBrushingRecordRequestCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'user_id') String userId,
-      @JsonKey(name: 'score') int score,
-      @JsonKey(name: 'remarks') String? remarks});
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'remarks') String? remarks,
+      @JsonKey(name: 'analyze_result_id') String? analyzeResultId});
 }
 
 /// @nodoc
@@ -69,21 +72,26 @@ class _$CreateBrushingRecordRequestCopyWithImpl<$Res,
   @override
   $Res call({
     Object? userId = null,
-    Object? score = null,
+    Object? name = freezed,
     Object? remarks = freezed,
+    Object? analyzeResultId = freezed,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as int,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       remarks: freezed == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
+              as String?,
+      analyzeResultId: freezed == analyzeResultId
+          ? _value.analyzeResultId
+          : analyzeResultId // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -100,8 +108,9 @@ abstract class _$$CreateBrushingRecordRequestImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'user_id') String userId,
-      @JsonKey(name: 'score') int score,
-      @JsonKey(name: 'remarks') String? remarks});
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'remarks') String? remarks,
+      @JsonKey(name: 'analyze_result_id') String? analyzeResultId});
 }
 
 /// @nodoc
@@ -120,21 +129,26 @@ class __$$CreateBrushingRecordRequestImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
-    Object? score = null,
+    Object? name = freezed,
     Object? remarks = freezed,
+    Object? analyzeResultId = freezed,
   }) {
     return _then(_$CreateBrushingRecordRequestImpl(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as int,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
       remarks: freezed == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
+              as String?,
+      analyzeResultId: freezed == analyzeResultId
+          ? _value.analyzeResultId
+          : analyzeResultId // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -146,8 +160,9 @@ class _$CreateBrushingRecordRequestImpl
     implements _CreateBrushingRecordRequest {
   const _$CreateBrushingRecordRequestImpl(
       {@JsonKey(name: 'user_id') required this.userId,
-      @JsonKey(name: 'score') required this.score,
-      @JsonKey(name: 'remarks') this.remarks});
+      @JsonKey(name: 'name') this.name,
+      @JsonKey(name: 'remarks') this.remarks,
+      @JsonKey(name: 'analyze_result_id') this.analyzeResultId});
 
   factory _$CreateBrushingRecordRequestImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -157,15 +172,18 @@ class _$CreateBrushingRecordRequestImpl
   @JsonKey(name: 'user_id')
   final String userId;
   @override
-  @JsonKey(name: 'score')
-  final int score;
+  @JsonKey(name: 'name')
+  final String? name;
   @override
   @JsonKey(name: 'remarks')
   final String? remarks;
+  @override
+  @JsonKey(name: 'analyze_result_id')
+  final String? analyzeResultId;
 
   @override
   String toString() {
-    return 'CreateBrushingRecordRequest(userId: $userId, score: $score, remarks: $remarks)';
+    return 'CreateBrushingRecordRequest(userId: $userId, name: $name, remarks: $remarks, analyzeResultId: $analyzeResultId)';
   }
 
   @override
@@ -174,13 +192,16 @@ class _$CreateBrushingRecordRequestImpl
         (other.runtimeType == runtimeType &&
             other is _$CreateBrushingRecordRequestImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.score, score) || other.score == score) &&
-            (identical(other.remarks, remarks) || other.remarks == remarks));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.remarks, remarks) || other.remarks == remarks) &&
+            (identical(other.analyzeResultId, analyzeResultId) ||
+                other.analyzeResultId == analyzeResultId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, score, remarks);
+  int get hashCode =>
+      Object.hash(runtimeType, userId, name, remarks, analyzeResultId);
 
   /// Create a copy of CreateBrushingRecordRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -203,8 +224,9 @@ abstract class _CreateBrushingRecordRequest
     implements CreateBrushingRecordRequest {
   const factory _CreateBrushingRecordRequest(
           {@JsonKey(name: 'user_id') required final String userId,
-          @JsonKey(name: 'score') required final int score,
-          @JsonKey(name: 'remarks') final String? remarks}) =
+          @JsonKey(name: 'name') final String? name,
+          @JsonKey(name: 'remarks') final String? remarks,
+          @JsonKey(name: 'analyze_result_id') final String? analyzeResultId}) =
       _$CreateBrushingRecordRequestImpl;
 
   factory _CreateBrushingRecordRequest.fromJson(Map<String, dynamic> json) =
@@ -214,11 +236,14 @@ abstract class _CreateBrushingRecordRequest
   @JsonKey(name: 'user_id')
   String get userId;
   @override
-  @JsonKey(name: 'score')
-  int get score;
+  @JsonKey(name: 'name')
+  String? get name;
   @override
   @JsonKey(name: 'remarks')
   String? get remarks;
+  @override
+  @JsonKey(name: 'analyze_result_id')
+  String? get analyzeResultId;
 
   /// Create a copy of CreateBrushingRecordRequest
   /// with the given fields replaced by the non-null parameter values.

@@ -41,6 +41,23 @@ class AppStrings {
   // MemberInfo
   static const noTeethRecord = '尚無潔牙紀錄';
 
+  // TeethDetection
+  static const selectFromAlbum = '從相簿中選擇...';
+  static const takePhotos = '拍攝照片';
+  static const photosFailed = '照片檔案錯誤';
+  static const detectionFailed = '偵測失敗';
+  static const storageFailed = '儲存失敗';
+  static const storageSuccess = '儲存成功';
+
+  // Permission
+  static const storagePermissionDenied = '存儲權限被拒絕';
+
+  // FileManager
+  static const selectionsExceedsLimit = '選擇數量超過上限！';
+
+  // Camera
+  static const shootingFailed = '拍攝失敗';
+
   //設定帳號
   static const setAccount = '設定帳號';
   static const plsEnterYourAccount = '請輸入你的帳號';

@@ -4,7 +4,7 @@ import '../models/request/create_brushing_record/create_brushing_record_request.
 import '../models/response/brushing_record/brushing_record_data.dart';
 
 abstract class TeethRecordRepository {
-  Future<bool> createBrushingRecord(CreateBrushingRecordRequest request);
+  Future<BrushingRecordData?> createBrushingRecord(CreateBrushingRecordRequest request);
   Future<bool> deleteBrushingRecord(String recordId);
 
   /// 取得指定使用者的潔牙紀錄列表
@@ -20,7 +20,7 @@ class TeethRecordRepositoryImpl implements TeethRecordRepository {
   TeethRecordRepositoryImpl(this.remoteDataSource);
 
   @override
-  Future<bool> createBrushingRecord(CreateBrushingRecordRequest request) async {
+  Future<BrushingRecordData?> createBrushingRecord(CreateBrushingRecordRequest request) async {
     return await remoteDataSource.createBrushingRecord(request);
   }
 

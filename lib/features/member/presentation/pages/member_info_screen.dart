@@ -5,6 +5,7 @@ import 'package:dental_guard_flutter/core/constants/app_colors.dart';
 import 'package:dental_guard_flutter/core/constants/app_resources.dart';
 import 'package:dental_guard_flutter/core/widgets/text/app_text.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
+import 'package:dental_guard_flutter/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -67,6 +68,7 @@ class MemberInfoScreen extends HookConsumerWidget {
                   fontColor: AppColors.white,
                   backgroundColor: AppColors.primaryBlack,
                   onPressed: () {
+                    context.pushRoute(TeethDetectionRoute(userId: user.id));
                   },
                 )
               ],
@@ -83,7 +85,9 @@ class MemberInfoScreen extends HookConsumerWidget {
                 itemCount: state.brushingRecords.length,
                 itemBuilder: (context, index) {
                   final record = state.brushingRecords[index];
-                  return BrushingRecordItem(brushingRecordData:record);
+                  return BrushingRecordItem(brushingRecordData:record,onTap: (){
+                    context.pushRoute(TeethDetectionRoute(userId: user.id, brushingRecordData: record));
+                  },);
                 },
               ),
             ),

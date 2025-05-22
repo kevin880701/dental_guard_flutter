@@ -7,8 +7,9 @@ part 'create_brushing_record_request.g.dart';
 class CreateBrushingRecordRequest with _$CreateBrushingRecordRequest {
   const factory CreateBrushingRecordRequest({
     @JsonKey(name: 'user_id') required String userId,
-    @JsonKey(name: 'score') required int score,
+    @JsonKey(name: 'name') String? name,
     @JsonKey(name: 'remarks') String? remarks,
+    @JsonKey(name: 'analyze_result_id') String? analyzeResultId,
   }) = _CreateBrushingRecordRequest;
 
   factory CreateBrushingRecordRequest.fromJson(Map<String, dynamic> json) =>

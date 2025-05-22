@@ -12,15 +12,15 @@ class TeethRecordRemoteDataSource {
   TeethRecordRemoteDataSource(this.networkInterface);
 
   /// 建立潔牙紀錄
-  Future<bool> createBrushingRecord(CreateBrushingRecordRequest request) async {
+  Future<BrushingRecordData?> createBrushingRecord(CreateBrushingRecordRequest request) async {
     final response = await networkInterface.post(
       url: ApiEndPoint.createBrushingRecord,
       body: request.toJson(),
     );
 
-    final apiResponse = ApiResponse<bool>.fromJson(
+    final apiResponse = ApiResponse<BrushingRecordData?>.fromJson(
       response.data,
-          (json) => json as bool,
+          (json) => BrushingRecordData?.fromJson(json as Map<String, dynamic>),
     );
 
     return apiResponse.data;

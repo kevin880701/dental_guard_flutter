@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 
 import '../constants/app_resources.dart';
 import '../widgets/dialog/window/bottom_edit_dialog.dart';
+import '../widgets/dialog/window/choose_image_dialog.dart';
 import '../widgets/dialog/window/default_dialog.dart';
 import '../widgets/dialog/window/error_dialog.dart';
 import '../widgets/input/input_type.dart';
@@ -87,6 +88,21 @@ Future<bool?> showErrorDialog(
     position: DialogPosition.center,
     barrierDismissible: barrierDismissible,
     canPop: canPop,
+  );
+}
+
+Future<void> showChooseImageDialog(
+    BuildContext context, {
+      required VoidCallback onChooseImageTap,
+      required VoidCallback onCapturePhotoTap,
+      bool barrierDismissible = true,
+    }) async {
+  await showDialogBox(
+    position: DialogPosition.bottom,
+    barrierDismissible: barrierDismissible,
+    context,
+    child: ChooseImageDialog(onChooseImageTap: onChooseImageTap,
+        onCapturePhotoTap: onCapturePhotoTap),
   );
 }
 

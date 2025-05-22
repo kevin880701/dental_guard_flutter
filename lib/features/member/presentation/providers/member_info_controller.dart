@@ -48,6 +48,15 @@ class MemberInfoController extends StateNotifier<MemberInfoState> {
     }
   }
 
+  void appendBrushingRecords(List<BrushingRecordData> newRecords) {
+    state = state.copyWith(
+      brushingRecords: [
+        ...state.brushingRecords,
+        ...newRecords,
+      ],
+    );
+  }
+
   void clear() {
     state = const MemberInfoState(brushingRecords: []);
   }
