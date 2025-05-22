@@ -1,4 +1,5 @@
 import '../../data/models/request/create_group/create_group_request.dart';
+import '../../data/models/response/group/group_data.dart';
 import '../../data/repositories/organization_repository_impl.dart';
 
 class CreateGroupUseCase {
@@ -6,7 +7,12 @@ class CreateGroupUseCase {
 
   CreateGroupUseCase(this.repository);
 
-  Future<bool> call(CreateGroupRequest request) {
-    return repository.createGroup(request);
+  Future<GroupData?> call({
+    required String organizationId,
+    required String groupName,
+    required String userId,
+  }) {
+    return repository.createGroup(CreateGroupRequest(
+        organizationId: organizationId, groupName: groupName, userId: userId));
   }
 }

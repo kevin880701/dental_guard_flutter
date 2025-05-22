@@ -29,15 +29,15 @@ class OrganizationRemoteDataSource {
   }
 
   /// 建立群組
-  Future<bool> createGroup(CreateGroupRequest request) async {
+  Future<GroupData?> createGroup(CreateGroupRequest request) async {
     final response = await networkInterface.post(
       url: ApiEndPoint.createGroup,
       body: request.toJson(),
     );
 
-    final apiResponse = ApiResponse<bool>.fromJson(
+    final apiResponse = ApiResponse<GroupData?>.fromJson(
       response.data,
-          (json) => json as bool,
+          (json) => GroupData?.fromJson(json as Map<String, dynamic>),
     );
 
     return apiResponse.data;

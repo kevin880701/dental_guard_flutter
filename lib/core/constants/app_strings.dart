@@ -31,9 +31,14 @@ class AppStrings {
   static const informalNameCannotEmpty = '暱稱不能為空';
   static const passwordLengthHint = '密碼長度需為6~20字';
   static const passwordsNotMatch = '兩次密碼不一致';
+  static const plsEnterClassName = '請輸入班級名稱';
+  static const enterFailed = '輸入錯誤';
 
   // GroupListScreen
   static const classList = '班級列表';
+  static const addClass = '新增班級';
+  static const createSuccess = '新增成功';
+  static const createFailed = '新增失敗';
 
   // MemberListScreen
   static const studentList = '學生列表';

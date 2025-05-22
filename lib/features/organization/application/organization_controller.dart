@@ -3,13 +3,17 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/utils/app_log.dart';
 import '../../../features/auth/data/models/response/user_info/user_info_data.dart';
-import '../data/models/request/create_group/create_group_request.dart';
 import '../data/models/request/group_member/group_member_request.dart';
 import '../data/models/response/group/group_data.dart';
 import '../data/models/response/groups_manage/groups_manage_data.dart';
 import 'organization_usecases_provider.dart';
 
 part 'organization_controller.freezed.dart';
+
+final organizationControllerProvider =
+StateNotifierProvider<OrganizationController, OrganizationState>(
+      (ref) => OrganizationController(ref),
+);
 
 @freezed
 class OrganizationState with _$OrganizationState {
@@ -18,11 +22,6 @@ class OrganizationState with _$OrganizationState {
     List<GroupData>? allParentGroups,
   }) = _OrganizationState;
 }
-
-final organizationControllerProvider =
-    StateNotifierProvider<OrganizationController, OrganizationState>(
-  (ref) => OrganizationController(ref),
-);
 
 class OrganizationController extends StateNotifier<OrganizationState> {
   final Ref ref;
@@ -45,15 +44,19 @@ class OrganizationController extends StateNotifier<OrganizationState> {
     }
   }
 
-
   /// 建立群組
-  Future<bool> createGroup(CreateGroupRequest request) async {
+  Future<GroupData?> createGroup({
+    required String organizationId,
+    required String groupName,
+    required String userId,
+  }) async {
     try {
       final useCase = ref.read(createGroupUseCaseProvider);
-      return await useCase(request);
+      return await useCase(
+          organizationId: organizationId, groupName: groupName, userId: userId);
     } catch (e, st) {
       AppLog.e('建立群組失敗: $e\n$st');
-      return false;
+      return null;
     }
   }
 

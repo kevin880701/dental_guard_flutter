@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AuthState {
-  String? get registerEmail => throw _privateConstructorUsedError;
+  LoginData? get loginData => throw _privateConstructorUsedError;
+  UserInfoData? get userInfoData => throw _privateConstructorUsedError;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -30,7 +31,10 @@ abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
-  $Res call({String? registerEmail});
+  $Res call({LoginData? loginData, UserInfoData? userInfoData});
+
+  $LoginDataCopyWith<$Res>? get loginData;
+  $UserInfoDataCopyWith<$Res>? get userInfoData;
 }
 
 /// @nodoc
@@ -48,14 +52,47 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? registerEmail = freezed,
+    Object? loginData = freezed,
+    Object? userInfoData = freezed,
   }) {
     return _then(_value.copyWith(
-      registerEmail: freezed == registerEmail
-          ? _value.registerEmail
-          : registerEmail // ignore: cast_nullable_to_non_nullable
-              as String?,
+      loginData: freezed == loginData
+          ? _value.loginData
+          : loginData // ignore: cast_nullable_to_non_nullable
+              as LoginData?,
+      userInfoData: freezed == userInfoData
+          ? _value.userInfoData
+          : userInfoData // ignore: cast_nullable_to_non_nullable
+              as UserInfoData?,
     ) as $Val);
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LoginDataCopyWith<$Res>? get loginData {
+    if (_value.loginData == null) {
+      return null;
+    }
+
+    return $LoginDataCopyWith<$Res>(_value.loginData!, (value) {
+      return _then(_value.copyWith(loginData: value) as $Val);
+    });
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserInfoDataCopyWith<$Res>? get userInfoData {
+    if (_value.userInfoData == null) {
+      return null;
+    }
+
+    return $UserInfoDataCopyWith<$Res>(_value.userInfoData!, (value) {
+      return _then(_value.copyWith(userInfoData: value) as $Val);
+    });
   }
 }
 
@@ -67,7 +104,12 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       __$$AuthStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? registerEmail});
+  $Res call({LoginData? loginData, UserInfoData? userInfoData});
+
+  @override
+  $LoginDataCopyWith<$Res>? get loginData;
+  @override
+  $UserInfoDataCopyWith<$Res>? get userInfoData;
 }
 
 /// @nodoc
@@ -83,13 +125,18 @@ class __$$AuthStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? registerEmail = freezed,
+    Object? loginData = freezed,
+    Object? userInfoData = freezed,
   }) {
     return _then(_$AuthStateImpl(
-      registerEmail: freezed == registerEmail
-          ? _value.registerEmail
-          : registerEmail // ignore: cast_nullable_to_non_nullable
-              as String?,
+      loginData: freezed == loginData
+          ? _value.loginData
+          : loginData // ignore: cast_nullable_to_non_nullable
+              as LoginData?,
+      userInfoData: freezed == userInfoData
+          ? _value.userInfoData
+          : userInfoData // ignore: cast_nullable_to_non_nullable
+              as UserInfoData?,
     ));
   }
 }
@@ -97,14 +144,16 @@ class __$$AuthStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AuthStateImpl implements _AuthState {
-  const _$AuthStateImpl({this.registerEmail});
+  const _$AuthStateImpl({this.loginData, this.userInfoData});
 
   @override
-  final String? registerEmail;
+  final LoginData? loginData;
+  @override
+  final UserInfoData? userInfoData;
 
   @override
   String toString() {
-    return 'AuthState(registerEmail: $registerEmail)';
+    return 'AuthState(loginData: $loginData, userInfoData: $userInfoData)';
   }
 
   @override
@@ -112,12 +161,14 @@ class _$AuthStateImpl implements _AuthState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthStateImpl &&
-            (identical(other.registerEmail, registerEmail) ||
-                other.registerEmail == registerEmail));
+            (identical(other.loginData, loginData) ||
+                other.loginData == loginData) &&
+            (identical(other.userInfoData, userInfoData) ||
+                other.userInfoData == userInfoData));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, registerEmail);
+  int get hashCode => Object.hash(runtimeType, loginData, userInfoData);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -129,10 +180,14 @@ class _$AuthStateImpl implements _AuthState {
 }
 
 abstract class _AuthState implements AuthState {
-  const factory _AuthState({final String? registerEmail}) = _$AuthStateImpl;
+  const factory _AuthState(
+      {final LoginData? loginData,
+      final UserInfoData? userInfoData}) = _$AuthStateImpl;
 
   @override
-  String? get registerEmail;
+  LoginData? get loginData;
+  @override
+  UserInfoData? get userInfoData;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
