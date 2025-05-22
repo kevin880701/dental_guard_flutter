@@ -12,10 +12,24 @@ class AnalyzeResultData with _$AnalyzeResultData {
     @JsonKey(name: 'is_success') required int isSuccess,
     @JsonKey(name: 'mark') required String mark,
     @JsonKey(name: 'exec_time') required String execTime,
-    @JsonKey(name: 'teeth_info') required String teethInfo,
+    @JsonKey(name: 'teeth_info') required List<TeethInfo> teethInfo,
     @JsonKey(name: 'created_at') required DateTime createdAt,
   }) = _AnalyzeResultData;
 
   factory AnalyzeResultData.fromJson(Map<String, dynamic> json) =>
       _$AnalyzeResultDataFromJson(json);
+}
+
+
+@freezed
+class TeethInfo with _$TeethInfo {
+  const factory TeethInfo({
+    required int x,
+    required int y,
+    required int w,
+    required int h,
+  }) = _TeethInfo;
+
+  factory TeethInfo.fromJson(Map<String, dynamic> json) =>
+      _$TeethInfoFromJson(json);
 }
