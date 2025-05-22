@@ -18,7 +18,7 @@ class MainScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final TabController _tabController = useTabController(initialLength: 3);
+    final TabController _tabController = useTabController(initialLength: 2);
     final _tabSelectedIndex = useState(0);
 
     useEffect(() {
