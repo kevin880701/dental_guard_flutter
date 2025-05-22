@@ -10,7 +10,8 @@ class BrushingRecordData with _$BrushingRecordData {
   const factory BrushingRecordData({
     @JsonKey(name: 'id') required String id,
     @JsonKey(name: 'user_id') required String userId,
-    @JsonKey(name: 'remarks') required String remarks,
+    @JsonKey(name: 'name') String? name,
+    @JsonKey(name: 'remarks') String? remarks,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
     @JsonKey(name: 'analyze_result') required AnalyzeResultData analyzeResult,

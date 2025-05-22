@@ -18,7 +18,9 @@ _$AnalyzeResultDataImpl _$$AnalyzeResultDataImplFromJson(
       teethInfo: (json['teeth_info'] as List<dynamic>)
           .map((e) => TeethInfo.fromJson(e as Map<String, dynamic>))
           .toList(),
-      createdAt: DateTime.parse(json['created_at'] as String),
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
     );
 
 Map<String, dynamic> _$$AnalyzeResultDataImplToJson(
@@ -31,7 +33,7 @@ Map<String, dynamic> _$$AnalyzeResultDataImplToJson(
       'mark': instance.mark,
       'exec_time': instance.execTime,
       'teeth_info': instance.teethInfo,
-      'created_at': instance.createdAt.toIso8601String(),
+      'created_at': instance.createdAt?.toIso8601String(),
     };
 
 _$TeethInfoImpl _$$TeethInfoImplFromJson(Map<String, dynamic> json) =>

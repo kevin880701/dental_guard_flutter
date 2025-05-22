@@ -1,5 +1,5 @@
 
-import '../datasources/organization_remote_datasource.dart';
+import '../datasources/teeth_record_remote_datasource.dart';
 import '../models/request/create_brushing_record/create_brushing_record_request.dart';
 import '../models/response/brushing_record/brushing_record_data.dart';
 

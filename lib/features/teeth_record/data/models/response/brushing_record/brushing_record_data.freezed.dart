@@ -24,8 +24,10 @@ mixin _$BrushingRecordData {
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
   String get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'remarks')
-  String get remarks => throw _privateConstructorUsedError;
+  String? get remarks => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -52,7 +54,8 @@ abstract class $BrushingRecordDataCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'user_id') String userId,
-      @JsonKey(name: 'remarks') String remarks,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'remarks') String? remarks,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime updatedAt,
       @JsonKey(name: 'analyze_result') AnalyzeResultData analyzeResult});
@@ -77,7 +80,8 @@ class _$BrushingRecordDataCopyWithImpl<$Res, $Val extends BrushingRecordData>
   $Res call({
     Object? id = null,
     Object? userId = null,
-    Object? remarks = null,
+    Object? name = freezed,
+    Object? remarks = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? analyzeResult = null,
@@ -91,10 +95,14 @@ class _$BrushingRecordDataCopyWithImpl<$Res, $Val extends BrushingRecordData>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      remarks: null == remarks
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      remarks: freezed == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -132,7 +140,8 @@ abstract class _$$BrushingRecordDataImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'user_id') String userId,
-      @JsonKey(name: 'remarks') String remarks,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'remarks') String? remarks,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime updatedAt,
       @JsonKey(name: 'analyze_result') AnalyzeResultData analyzeResult});
@@ -156,7 +165,8 @@ class __$$BrushingRecordDataImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? userId = null,
-    Object? remarks = null,
+    Object? name = freezed,
+    Object? remarks = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? analyzeResult = null,
@@ -170,10 +180,14 @@ class __$$BrushingRecordDataImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      remarks: null == remarks
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      remarks: freezed == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -196,7 +210,8 @@ class _$BrushingRecordDataImpl implements _BrushingRecordData {
   const _$BrushingRecordDataImpl(
       {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'user_id') required this.userId,
-      @JsonKey(name: 'remarks') required this.remarks,
+      @JsonKey(name: 'name') this.name,
+      @JsonKey(name: 'remarks') this.remarks,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'updated_at') required this.updatedAt,
       @JsonKey(name: 'analyze_result') required this.analyzeResult});
@@ -211,8 +226,11 @@ class _$BrushingRecordDataImpl implements _BrushingRecordData {
   @JsonKey(name: 'user_id')
   final String userId;
   @override
+  @JsonKey(name: 'name')
+  final String? name;
+  @override
   @JsonKey(name: 'remarks')
-  final String remarks;
+  final String? remarks;
   @override
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
@@ -225,7 +243,7 @@ class _$BrushingRecordDataImpl implements _BrushingRecordData {
 
   @override
   String toString() {
-    return 'BrushingRecordData(id: $id, userId: $userId, remarks: $remarks, createdAt: $createdAt, updatedAt: $updatedAt, analyzeResult: $analyzeResult)';
+    return 'BrushingRecordData(id: $id, userId: $userId, name: $name, remarks: $remarks, createdAt: $createdAt, updatedAt: $updatedAt, analyzeResult: $analyzeResult)';
   }
 
   @override
@@ -235,6 +253,7 @@ class _$BrushingRecordDataImpl implements _BrushingRecordData {
             other is _$BrushingRecordDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.remarks, remarks) || other.remarks == remarks) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -246,8 +265,8 @@ class _$BrushingRecordDataImpl implements _BrushingRecordData {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, userId, remarks, createdAt, updatedAt, analyzeResult);
+  int get hashCode => Object.hash(runtimeType, id, userId, name, remarks,
+      createdAt, updatedAt, analyzeResult);
 
   /// Create a copy of BrushingRecordData
   /// with the given fields replaced by the non-null parameter values.
@@ -270,7 +289,8 @@ abstract class _BrushingRecordData implements BrushingRecordData {
   const factory _BrushingRecordData(
           {@JsonKey(name: 'id') required final String id,
           @JsonKey(name: 'user_id') required final String userId,
-          @JsonKey(name: 'remarks') required final String remarks,
+          @JsonKey(name: 'name') final String? name,
+          @JsonKey(name: 'remarks') final String? remarks,
           @JsonKey(name: 'created_at') required final DateTime createdAt,
           @JsonKey(name: 'updated_at') required final DateTime updatedAt,
           @JsonKey(name: 'analyze_result')
@@ -287,8 +307,11 @@ abstract class _BrushingRecordData implements BrushingRecordData {
   @JsonKey(name: 'user_id')
   String get userId;
   @override
+  @JsonKey(name: 'name')
+  String? get name;
+  @override
   @JsonKey(name: 'remarks')
-  String get remarks;
+  String? get remarks;
   @override
   @JsonKey(name: 'created_at')
   DateTime get createdAt;

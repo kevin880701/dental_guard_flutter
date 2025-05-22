@@ -13,7 +13,7 @@ class AnalyzeResultData with _$AnalyzeResultData {
     @JsonKey(name: 'mark') required String mark,
     @JsonKey(name: 'exec_time') required String execTime,
     @JsonKey(name: 'teeth_info') required List<TeethInfo> teethInfo,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
+    @JsonKey(name: 'created_at') DateTime? createdAt,
   }) = _AnalyzeResultData;
 
   factory AnalyzeResultData.fromJson(Map<String, dynamic> json) =>

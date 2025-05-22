@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/network/network_interface.dart';
-import '../data/datasources/organization_remote_datasource.dart';
+import '../data/datasources/teeth_record_remote_datasource.dart';
 import '../data/repositories/teeth_record_repository_impl.dart';
 import '../domain/usecase/create_brushing_record_usecase.dart';
 import '../domain/usecase/delete_brushing_record_usecase.dart';

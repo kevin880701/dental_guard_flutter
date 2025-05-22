@@ -11,7 +11,8 @@ _$BrushingRecordDataImpl _$$BrushingRecordDataImplFromJson(
     _$BrushingRecordDataImpl(
       id: json['id'] as String,
       userId: json['user_id'] as String,
-      remarks: json['remarks'] as String,
+      name: json['name'] as String?,
+      remarks: json['remarks'] as String?,
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
       analyzeResult: AnalyzeResultData.fromJson(
@@ -23,6 +24,7 @@ Map<String, dynamic> _$$BrushingRecordDataImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
+      'name': instance.name,
       'remarks': instance.remarks,
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt.toIso8601String(),

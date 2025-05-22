@@ -35,7 +35,7 @@ mixin _$AnalyzeResultData {
   @JsonKey(name: 'teeth_info')
   List<TeethInfo> get teethInfo => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this AnalyzeResultData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $AnalyzeResultDataCopyWith<$Res> {
       @JsonKey(name: 'mark') String mark,
       @JsonKey(name: 'exec_time') String execTime,
       @JsonKey(name: 'teeth_info') List<TeethInfo> teethInfo,
-      @JsonKey(name: 'created_at') DateTime createdAt});
+      @JsonKey(name: 'created_at') DateTime? createdAt});
 }
 
 /// @nodoc
@@ -86,7 +86,7 @@ class _$AnalyzeResultDataCopyWithImpl<$Res, $Val extends AnalyzeResultData>
     Object? mark = null,
     Object? execTime = null,
     Object? teethInfo = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -117,10 +117,10 @@ class _$AnalyzeResultDataCopyWithImpl<$Res, $Val extends AnalyzeResultData>
           ? _value.teethInfo
           : teethInfo // ignore: cast_nullable_to_non_nullable
               as List<TeethInfo>,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -141,7 +141,7 @@ abstract class _$$AnalyzeResultDataImplCopyWith<$Res>
       @JsonKey(name: 'mark') String mark,
       @JsonKey(name: 'exec_time') String execTime,
       @JsonKey(name: 'teeth_info') List<TeethInfo> teethInfo,
-      @JsonKey(name: 'created_at') DateTime createdAt});
+      @JsonKey(name: 'created_at') DateTime? createdAt});
 }
 
 /// @nodoc
@@ -164,7 +164,7 @@ class __$$AnalyzeResultDataImplCopyWithImpl<$Res>
     Object? mark = null,
     Object? execTime = null,
     Object? teethInfo = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_$AnalyzeResultDataImpl(
       id: null == id
@@ -195,10 +195,10 @@ class __$$AnalyzeResultDataImplCopyWithImpl<$Res>
           ? _value._teethInfo
           : teethInfo // ignore: cast_nullable_to_non_nullable
               as List<TeethInfo>,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ));
   }
 }
@@ -214,7 +214,7 @@ class _$AnalyzeResultDataImpl implements _AnalyzeResultData {
       @JsonKey(name: 'mark') required this.mark,
       @JsonKey(name: 'exec_time') required this.execTime,
       @JsonKey(name: 'teeth_info') required final List<TeethInfo> teethInfo,
-      @JsonKey(name: 'created_at') required this.createdAt})
+      @JsonKey(name: 'created_at') this.createdAt})
       : _teethInfo = teethInfo;
 
   factory _$AnalyzeResultDataImpl.fromJson(Map<String, dynamic> json) =>
@@ -249,7 +249,7 @@ class _$AnalyzeResultDataImpl implements _AnalyzeResultData {
 
   @override
   @JsonKey(name: 'created_at')
-  final DateTime createdAt;
+  final DateTime? createdAt;
 
   @override
   String toString() {
@@ -315,7 +315,7 @@ abstract class _AnalyzeResultData implements AnalyzeResultData {
           @JsonKey(name: 'mark') required final String mark,
           @JsonKey(name: 'exec_time') required final String execTime,
           @JsonKey(name: 'teeth_info') required final List<TeethInfo> teethInfo,
-          @JsonKey(name: 'created_at') required final DateTime createdAt}) =
+          @JsonKey(name: 'created_at') final DateTime? createdAt}) =
       _$AnalyzeResultDataImpl;
 
   factory _AnalyzeResultData.fromJson(Map<String, dynamic> json) =
@@ -344,7 +344,7 @@ abstract class _AnalyzeResultData implements AnalyzeResultData {
   List<TeethInfo> get teethInfo;
   @override
   @JsonKey(name: 'created_at')
-  DateTime get createdAt;
+  DateTime? get createdAt;
 
   /// Create a copy of AnalyzeResultData
   /// with the given fields replaced by the non-null parameter values.
