@@ -16,7 +16,7 @@ class OrganizationRemoteDataSource {
   OrganizationRemoteDataSource(this.networkInterface);
 
   /// 取得管理的群組
-  Future<GroupsManageData> getManagedGroups() async {
+  Future<GroupsManageData?> getManagedGroups() async {
     final response = await networkInterface.get(
       url: ApiEndPoint.getManagedGroups,
     );
@@ -56,7 +56,7 @@ class OrganizationRemoteDataSource {
           (json) => json as bool,
     );
 
-    return apiResponse.data;
+    return apiResponse.data == true;
   }
 
   /// 移除群組成員
@@ -71,7 +71,7 @@ class OrganizationRemoteDataSource {
           (json) => json as bool,
     );
 
-    return apiResponse.data;
+    return apiResponse.data == true;
   }
 
   /// 查詢群組成員
@@ -87,11 +87,11 @@ class OrganizationRemoteDataSource {
           .toList(),
     );
 
-    return apiResponse.data;
+    return apiResponse.data ?? [];
   }
 
   /// 查詢指定群組資訊
-  Future<GroupData> getGroupById(String groupId) async {
+  Future<GroupData?> getGroupById(String groupId) async {
     final response = await networkInterface.get(
       url: ApiEndPoint.getGroupById(groupId),
     );

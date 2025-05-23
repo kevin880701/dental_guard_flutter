@@ -7,7 +7,7 @@ class GetAnalyzeResultUseCase {
 
   GetAnalyzeResultUseCase(this.repository);
 
-  Future<AnalyzeResultData> call(String id) {
+  Future<AnalyzeResultData?> call(String id) {
     return repository.getAnalyzeResultById(id);
   }
 }

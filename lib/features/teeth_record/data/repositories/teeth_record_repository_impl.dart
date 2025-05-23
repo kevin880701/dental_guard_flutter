@@ -11,7 +11,7 @@ abstract class TeethRecordRepository {
   Future<List<BrushingRecordData>> getUserBrushingRecords(String userId);
 
   /// 取得指定潔牙紀錄
-  Future<BrushingRecordData> getBrushingRecordById(String recordId);
+  Future<BrushingRecordData?> getBrushingRecordById(String recordId);
 }
 
 class TeethRecordRepositoryImpl implements TeethRecordRepository {
@@ -35,7 +35,7 @@ class TeethRecordRepositoryImpl implements TeethRecordRepository {
   }
 
   @override
-  Future<BrushingRecordData> getBrushingRecordById(String recordId) async {
+  Future<BrushingRecordData?> getBrushingRecordById(String recordId) async {
     return await remoteDataSource.getBrushingRecordById(recordId);
   }
 }

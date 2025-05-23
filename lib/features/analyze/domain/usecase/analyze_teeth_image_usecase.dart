@@ -8,7 +8,7 @@ class AnalyzeTeethImageUseCase {
 
   AnalyzeTeethImageUseCase(this.repository);
 
-  Future<AnalyzeResultData> call(File imageFile) {
+  Future<AnalyzeResultData?> call(File imageFile) {
     return repository.analyzeTeethImage(imageFile);
   }
 }

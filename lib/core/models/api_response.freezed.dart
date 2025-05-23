@@ -26,7 +26,7 @@ mixin _$ApiResponse<T> {
   @JsonKey(name: 'result_code')
   int get resultCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'data')
-  T get data => throw _privateConstructorUsedError;
+  T? get data => throw _privateConstructorUsedError;
 
   /// Serializes this ApiResponse to a JSON map.
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) =>
@@ -48,7 +48,7 @@ abstract class $ApiResponseCopyWith<T, $Res> {
   $Res call(
       {@JsonKey(name: 'message') String message,
       @JsonKey(name: 'result_code') int resultCode,
-      @JsonKey(name: 'data') T data});
+      @JsonKey(name: 'data') T? data});
 }
 
 /// @nodoc
@@ -82,7 +82,7 @@ class _$ApiResponseCopyWithImpl<T, $Res, $Val extends ApiResponse<T>>
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as T,
+              as T?,
     ) as $Val);
   }
 }
@@ -98,7 +98,7 @@ abstract class _$$ApiResponseImplCopyWith<T, $Res>
   $Res call(
       {@JsonKey(name: 'message') String message,
       @JsonKey(name: 'result_code') int resultCode,
-      @JsonKey(name: 'data') T data});
+      @JsonKey(name: 'data') T? data});
 }
 
 /// @nodoc
@@ -130,7 +130,7 @@ class __$$ApiResponseImplCopyWithImpl<T, $Res>
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as T,
+              as T?,
     ));
   }
 }
@@ -155,7 +155,7 @@ class _$ApiResponseImpl<T> implements _ApiResponse<T> {
   final int resultCode;
   @override
   @JsonKey(name: 'data')
-  final T data;
+  final T? data;
 
   @override
   String toString() {
@@ -197,7 +197,7 @@ abstract class _ApiResponse<T> implements ApiResponse<T> {
   const factory _ApiResponse(
       {@JsonKey(name: 'message') required final String message,
       @JsonKey(name: 'result_code') required final int resultCode,
-      @JsonKey(name: 'data') required final T data}) = _$ApiResponseImpl<T>;
+      @JsonKey(name: 'data') required final T? data}) = _$ApiResponseImpl<T>;
 
   factory _ApiResponse.fromJson(
           Map<String, dynamic> json, T Function(Object?) fromJsonT) =
@@ -211,7 +211,7 @@ abstract class _ApiResponse<T> implements ApiResponse<T> {
   int get resultCode;
   @override
   @JsonKey(name: 'data')
-  T get data;
+  T? get data;
 
   /// Create a copy of ApiResponse
   /// with the given fields replaced by the non-null parameter values.

@@ -138,13 +138,15 @@ class TeethDetectionScreen extends HookConsumerWidget {
                               final analyzeResult = await ref.read(
                                       analyzeTeethImageUseCaseUseCaseProvider)(
                                   teethDetectionControllerState.tempImage!);
-                              teethDetectionControllerNotifier
-                                  .setAnalyzeResult(analyzeResult);
-                              if (analyzeResult.isSuccess == 1) {
-                              } else {
-                                AppToast.showToast(
-                                    message:
-                                        "${AppStrings.detectionFailed}：${analyzeResult.mark}");
+                              if(analyzeResult != null){
+                                teethDetectionControllerNotifier
+                                    .setAnalyzeResult(analyzeResult);
+                                if (analyzeResult.isSuccess == 1) {
+                                } else {
+                                  AppToast.showToast(
+                                      message:
+                                      "${AppStrings.detectionFailed}：${analyzeResult.mark}");
+                                }
                               }
                             } else {
                               AppToast.showToast(

@@ -3,8 +3,8 @@ import '../../data/datasources/analyze_remote_datasource.dart';
 import '../models/response/analyze_result/analyze_result_data.dart';
 
 abstract class AnalyzeRepository {
-  Future<AnalyzeResultData> analyzeTeethImage(File imageFile);
-  Future<AnalyzeResultData> getAnalyzeResultById(String id);
+  Future<AnalyzeResultData?> analyzeTeethImage(File imageFile);
+  Future<AnalyzeResultData?> getAnalyzeResultById(String id);
   String getAnalyzeImageUrl(String relativePath);
 }
 
@@ -14,12 +14,12 @@ class AnalyzeRepositoryImpl implements AnalyzeRepository {
   AnalyzeRepositoryImpl(this.remoteDataSource);
 
   @override
-  Future<AnalyzeResultData> analyzeTeethImage(File imageFile) {
+  Future<AnalyzeResultData?> analyzeTeethImage(File imageFile) {
     return remoteDataSource.analyzeTeethImage(imageFile);
   }
 
   @override
-  Future<AnalyzeResultData> getAnalyzeResultById(String id) {
+  Future<AnalyzeResultData?> getAnalyzeResultById(String id) {
     return remoteDataSource.getAnalyzeResultById(id);
   }
 

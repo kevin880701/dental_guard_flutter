@@ -13,7 +13,7 @@ _$ApiResponseImpl<T> _$$ApiResponseImplFromJson<T>(
     _$ApiResponseImpl<T>(
       message: json['message'] as String,
       resultCode: (json['result_code'] as num).toInt(),
-      data: fromJsonT(json['data']),
+      data: _$nullableGenericFromJson(json['data'], fromJsonT),
     );
 
 Map<String, dynamic> _$$ApiResponseImplToJson<T>(
@@ -23,5 +23,17 @@ Map<String, dynamic> _$$ApiResponseImplToJson<T>(
     <String, dynamic>{
       'message': instance.message,
       'result_code': instance.resultCode,
-      'data': toJsonT(instance.data),
+      'data': _$nullableGenericToJson(instance.data, toJsonT),
     };
+
+T? _$nullableGenericFromJson<T>(
+  Object? input,
+  T Function(Object? json) fromJson,
+) =>
+    input == null ? null : fromJson(input);
+
+Object? _$nullableGenericToJson<T>(
+  T? input,
+  Object? Function(T value) toJson,
+) =>
+    input == null ? null : toJson(input);

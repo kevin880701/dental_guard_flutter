@@ -37,7 +37,7 @@ class TeethRecordRemoteDataSource {
           (json) => json as bool,
     );
 
-    return apiResponse.data;
+    return apiResponse.data == true;
   }
 
   /// 取得指定使用者的潔牙紀錄
@@ -53,12 +53,12 @@ class TeethRecordRemoteDataSource {
           .toList(),
     );
 
-    return apiResponse.data;
+    return apiResponse.data ??[];
   }
 
 
   /// 取得指定潔牙紀錄
-  Future<BrushingRecordData> getBrushingRecordById(String recordId) async {
+  Future<BrushingRecordData?> getBrushingRecordById(String recordId) async {
     final response = await networkInterface.get(
       url: ApiEndPoint.getBrushingRecordById(recordId),
     );

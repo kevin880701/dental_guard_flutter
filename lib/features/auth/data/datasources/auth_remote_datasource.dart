@@ -20,7 +20,7 @@ class AuthRemoteDataSource {
 
   AuthRemoteDataSource(this.networkInterface);
 
-  Future<LoginData> login(LoginRequest loginRequest) async {
+  Future<LoginData?> login(LoginRequest loginRequest) async {
     final response = await networkInterface.post(
       url: ApiEndPoint.login,
       body: loginRequest.toJson(),
@@ -30,13 +30,13 @@ class AuthRemoteDataSource {
       (json) => LoginData.fromJson(json as Map<String, dynamic>),
     );
     TokenManager.setTokens(
-      accessToken: apiResponse.data.accessToken,
-      refreshToken: apiResponse.data.refreshToken,
+      accessToken: apiResponse.data?.accessToken ?? "",
+      refreshToken: apiResponse.data?.refreshToken ?? "",
     );
     return apiResponse.data;
   }
 
-  Future<UserInfoData> getUserInfo() async {
+  Future<UserInfoData?> getUserInfo() async {
     final response = await networkInterface.get(
       url: ApiEndPoint.userInfo,
     );

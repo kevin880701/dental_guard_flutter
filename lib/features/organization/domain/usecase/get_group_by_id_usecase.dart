@@ -6,7 +6,7 @@ class GetGroupByIdUseCase {
 
   GetGroupByIdUseCase(this.repository);
 
-  Future<GroupData> call(String groupId) {
+  Future<GroupData?> call(String groupId) {
     return repository.getGroupById(groupId);
   }
 }

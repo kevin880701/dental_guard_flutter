@@ -11,7 +11,7 @@ class AnalyzeRemoteDataSource {
   AnalyzeRemoteDataSource(this.networkInterface);
 
   /// 上傳照片進行分析
-  Future<AnalyzeResultData> analyzeTeethImage(File imageFile) async {
+  Future<AnalyzeResultData?> analyzeTeethImage(File imageFile) async {
     final formData = FormData.fromMap({
       'image': await MultipartFile.fromFile(imageFile.path),
     });
@@ -28,7 +28,7 @@ class AnalyzeRemoteDataSource {
   }
 
   /// 根據 ID 查詢分析結果
-  Future<AnalyzeResultData> getAnalyzeResultById(String id) async {
+  Future<AnalyzeResultData?> getAnalyzeResultById(String id) async {
     final response = await networkInterface.get(
       url: ApiEndPoint.getAnalyzeResultById(id),
     );

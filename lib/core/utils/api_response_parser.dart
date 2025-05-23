@@ -2,7 +2,7 @@
 import '../models/api_response.dart';
 import 'app_toast.dart';
 
-Future<T> parseApiResponse<T>(
+Future<T?> parseApiResponse<T>(
     Map<String, dynamic> json,
     T Function(Object?) fromJsonT, {
       bool showToastOnError = true,

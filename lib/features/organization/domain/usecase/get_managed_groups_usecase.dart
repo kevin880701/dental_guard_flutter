@@ -6,7 +6,7 @@ class GetManagedGroupsUseCase {
 
   GetManagedGroupsUseCase(this.repository);
 
-  Future<GroupsManageData> call() {
+  Future<GroupsManageData?> call() {
     return repository.getManagedGroups();
   }
 }

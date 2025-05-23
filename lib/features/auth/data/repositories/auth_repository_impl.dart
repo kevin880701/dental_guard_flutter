@@ -11,8 +11,8 @@ import '../models/response/refresh_token/refresh_token_data.dart';
 import '../models/response/user_info/user_info_data.dart';
 
 abstract class AuthRepository {
-  Future<LoginData> login(LoginRequest loginRequest);
-  Future<UserInfoData> getUserInfo();
+  Future<LoginData?> login(LoginRequest loginRequest);
+  Future<UserInfoData?> getUserInfo();
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -21,12 +21,12 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this.remoteDataSource);
 
   @override
-  Future<LoginData> login(LoginRequest loginRequest) async {
+  Future<LoginData?> login(LoginRequest loginRequest) async {
     return await remoteDataSource.login(loginRequest);
   }
 
   @override
-  Future<UserInfoData> getUserInfo() async {
+  Future<UserInfoData?> getUserInfo() async {
     return await remoteDataSource.getUserInfo();
   }
 }

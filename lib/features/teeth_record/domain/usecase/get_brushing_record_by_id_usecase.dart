@@ -6,7 +6,7 @@ class GetBrushingRecordByIdUseCase {
 
   GetBrushingRecordByIdUseCase(this.repository);
 
-  Future<BrushingRecordData> call(String recordId) {
+  Future<BrushingRecordData?> call(String recordId) {
     return repository.getBrushingRecordById(recordId);
   }
 }

@@ -34,7 +34,7 @@ class OrganizationController extends StateNotifier<OrganizationState> {
       final getManagedGroupsUseCase = ref.read(getManagedGroupsUseCaseProvider);
       final data = await getManagedGroupsUseCase();
 
-      final flattenedGroups = flattenHierarchy(data.hierarchy);
+      final flattenedGroups = flattenHierarchy(data?.hierarchy);
       state = state.copyWith(
         groupsManageData: data,
         allParentGroups: flattenedGroups,
@@ -135,7 +135,9 @@ class OrganizationController extends StateNotifier<OrganizationState> {
 
 }
 
-List<GroupData> flattenHierarchy(List<GroupHierarchyNode> nodes) {
+List<GroupData> flattenHierarchy(List<GroupHierarchyNode>? nodes) {
+  if (nodes == null) return [];
+
   final result = <GroupData>[];
 
   void walk(List<GroupHierarchyNode> list) {
