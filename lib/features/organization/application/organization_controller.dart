@@ -110,6 +110,29 @@ class OrganizationController extends StateNotifier<OrganizationState> {
   void clear() {
     state = const OrganizationState();
   }
+
+  void appendGroupMembers({
+    required String groupId,
+    required List<UserInfoData> users,
+  }) {
+    final currentData = state.groupsManageData;
+    if (currentData == null) return;
+
+    final updatedMembers = currentData.members.map((member) {
+      if (member.group.id == groupId) {
+        final existingUsers = member.children;
+        final mergedUsers = [...existingUsers, ...users];
+        return member.copyWith(children: mergedUsers);
+      } else {
+        return member;
+      }
+    }).toList();
+
+    final updatedData = currentData.copyWith(members: updatedMembers);
+    state = state.copyWith(groupsManageData: updatedData);
+  }
+
+
 }
 
 List<GroupData> flattenHierarchy(List<GroupHierarchyNode> nodes) {

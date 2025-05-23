@@ -14,3 +14,11 @@ class ApiResponse<T> with _$ApiResponse<T> {
   factory ApiResponse.fromJson(Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
       _$ApiResponseFromJson(json, fromJsonT);
 }
+
+T? nullableFromJson<T>(
+    Object? json,
+    T Function(Map<String, dynamic>) fromJson,
+    ) {
+  if (json == null) return null;
+  return fromJson(json as Map<String, dynamic>);
+}

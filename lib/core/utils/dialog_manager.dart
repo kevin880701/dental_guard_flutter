@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../constants/app_resources.dart';
+import '../widgets/dialog/window/add_member_dialog.dart';
 import '../widgets/dialog/window/bottom_edit_dialog.dart';
 import '../widgets/dialog/window/choose_image_dialog.dart';
 import '../widgets/dialog/window/default_dialog.dart';
@@ -103,6 +104,25 @@ Future<void> showChooseImageDialog(
     context,
     child: ChooseImageDialog(onChooseImageTap: onChooseImageTap,
         onCapturePhotoTap: onCapturePhotoTap),
+  );
+}
+
+/// 新增學生 Dialog（回傳輸入結果或 null）
+Future<void> showAddMemberDialog(
+    BuildContext context, {
+      required void Function({
+      required String number,
+      required String name,
+      required DateTime birthday,
+      required int gender,
+      }) onSubmit,
+      bool barrierDismissible = true,
+    }) async {
+  await showDialogBox(
+    context,
+    child: AddMemberDialog(onSubmit: onSubmit),
+    position: DialogPosition.bottom,
+    barrierDismissible: barrierDismissible,
   );
 }
 

@@ -4,6 +4,7 @@ import 'package:dental_guard_flutter/features/auth/data/models/response/user_inf
 import '../../../../core/constants/api_endpoints.dart';
 import '../../../../core/models/api_response.dart';
 import '../../../../core/network/network_interface.dart';
+import '../models/request/add_group_member_extended/add_group_member_extended_request.dart';
 import '../models/request/create_group/create_group_request.dart';
 import '../models/request/group_member/group_member_request.dart';
 import '../models/response/group/group_data.dart';
@@ -101,5 +102,20 @@ class OrganizationRemoteDataSource {
     );
 
     return apiResponse.data;
+  }
+
+  /// 新增群組成員（含帳號）
+  Future<ApiResponse<UserInfoData?>> addGroupMemberExtended(AddGroupMemberExtendedRequest request) async {
+    final response = await networkInterface.post(
+      url: ApiEndPoint.addGroupMemberExtended,
+      body: request.toJson(),
+    );
+
+    final apiResponse = ApiResponse<UserInfoData?>.fromJson(
+      response.data,
+          (json) => nullableFromJson(json, UserInfoData.fromJson),
+    );
+
+    return apiResponse;
   }
 }

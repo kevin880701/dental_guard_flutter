@@ -1,8 +1,10 @@
 import 'package:dental_guard_flutter/features/auth/data/models/response/user_info/user_info_data.dart';
+import '../../../../core/models/api_response.dart';
 import '../../data/models/request/create_group/create_group_request.dart';
 import '../../data/models/request/group_member/group_member_request.dart';
 import '../../data/models/response/groups_manage/groups_manage_data.dart';
 import '../../data/datasources/organization_remote_datasource.dart';
+import '../models/request/add_group_member_extended/add_group_member_extended_request.dart';
 import '../models/response/group/group_data.dart';
 
 abstract class OrganizationRepository {
@@ -12,6 +14,7 @@ abstract class OrganizationRepository {
   Future<bool> removeGroupMember(GroupMemberRequest request);
   Future<List<UserInfoData>> getGroupUsers(String groupId);
   Future<GroupData> getGroupById(String groupId);
+  Future<ApiResponse<UserInfoData?>> addGroupMemberExtended(AddGroupMemberExtendedRequest request);
 }
 
 class OrganizationRepositoryImpl implements OrganizationRepository {
@@ -47,5 +50,10 @@ class OrganizationRepositoryImpl implements OrganizationRepository {
   @override
   Future<GroupData> getGroupById(String groupId) async {
     return await remoteDataSource.getGroupById(groupId);
+  }
+
+  @override
+  Future<ApiResponse<UserInfoData?>> addGroupMemberExtended(AddGroupMemberExtendedRequest request) async {
+    return await remoteDataSource.addGroupMemberExtended(request);
   }
 }

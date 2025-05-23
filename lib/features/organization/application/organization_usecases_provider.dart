@@ -2,6 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/network/network_interface.dart';
 import '../data/datasources/organization_remote_datasource.dart';
 import '../data/repositories/organization_repository_impl.dart';
+import '../domain/usecase/add_group_member_extended_usecase.dart';
 import '../domain/usecase/add_group_member_usecase.dart';
 import '../domain/usecase/create_group_usecase.dart';
 import '../domain/usecase/get_group_by_id_usecase.dart';
@@ -44,4 +45,9 @@ final getGroupUsersUseCaseProvider = Provider<GetGroupUsersUseCase>((ref) {
 final getGroupByIdUseCaseProvider = Provider<GetGroupByIdUseCase>((ref) {
   final repo = ref.read(organizationRepositoryProvider);
   return GetGroupByIdUseCase(repo);
+});
+
+final addGroupMemberExtendedUseCaseProvider = Provider<AddGroupMemberExtendedUseCase>((ref) {
+  final repo = ref.read(organizationRepositoryProvider);
+  return AddGroupMemberExtendedUseCase(repo);
 });

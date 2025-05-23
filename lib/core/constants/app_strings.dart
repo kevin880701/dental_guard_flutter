@@ -7,8 +7,6 @@ class AppStrings {
   // 登入
   static const login = '登入';
   static const classField = '班級：';
-  static const studentNumberField = '學號';
-  static const plsEnterStudentNumber = '請輸入學號';
   static const keepLoginState = '保持登入狀態';
   static const registerMember = '註冊會員';
   static const account = '帳號';
@@ -33,6 +31,8 @@ class AppStrings {
   static const passwordsNotMatch = '兩次密碼不一致';
   static const plsEnterClassName = '請輸入班級名稱';
   static const enterFailed = '輸入錯誤';
+  static const plsEnterStudentNumber = '請輸入學號';
+  static const plsEnterName = '請輸入姓名';
 
   // GroupListScreen
   static const classList = '班級列表';
@@ -42,6 +42,10 @@ class AppStrings {
 
   // MemberListScreen
   static const studentList = '學生列表';
+  static const studentNumber = '學號';
+  static const addStudent = '新增學生';
+  static const name = '姓名';
+  static const birthday = '生日';
 
   // MemberInfo
   static const noTeethRecord = '尚無潔牙紀錄';
@@ -85,9 +89,6 @@ class AppStrings {
   static const imageStorage = '圖片儲存';
   static const clearImage = '清除圖片';
   static const notDetectedYet = '尚未偵測';
-
-  // 圖片偵測
-  static const addStudent = '新增學生';
 
   static const home = 'Home';
   static const notify = 'Notify';

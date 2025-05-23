@@ -17,6 +17,7 @@ class ApiEndPoint {
   static const String createGroup = '/organization/group';
   static const String addGroupMember = '/organization/group/member';
   static const String removeGroupMember = '/organization/group/member';
+  static const String addGroupMemberExtended = '/organization/group/member-extended';
 
   /// /organization/group/{groupId}/members
   static String getGroupUsers(String groupId) => '/organization/group/$groupId/members';
