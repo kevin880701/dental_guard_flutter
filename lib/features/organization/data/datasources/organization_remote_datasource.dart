@@ -38,7 +38,7 @@ class OrganizationRemoteDataSource {
 
     final apiResponse = ApiResponse<GroupData?>.fromJson(
       response.data,
-          (json) => GroupData?.fromJson(json as Map<String, dynamic>),
+          (json) => nullableFromJson(json, GroupData.fromJson),
     );
 
     return apiResponse.data;

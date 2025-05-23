@@ -20,7 +20,7 @@ class TeethRecordRemoteDataSource {
 
     final apiResponse = ApiResponse<BrushingRecordData?>.fromJson(
       response.data,
-          (json) => BrushingRecordData?.fromJson(json as Map<String, dynamic>),
+          (json) => nullableFromJson(json, BrushingRecordData.fromJson),
     );
 
     return apiResponse.data;
