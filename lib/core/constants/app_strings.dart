@@ -53,9 +53,12 @@ class AppStrings {
   static const addStudent = '新增學生';
   static const name = '姓名';
   static const birthday = '生日';
+  static const editSuccess = '編輯成功';
+  static const editFailed = '編輯失敗';
 
   // MemberInfo
   static const noTeethRecord = '尚無潔牙紀錄';
+  static const editStudent = '編輯學生資訊';
 
   // TeethDetection
   static const selectFromAlbum = '從相簿中選擇...';

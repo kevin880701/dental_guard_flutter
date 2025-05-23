@@ -26,12 +26,13 @@ class MemberListScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final memberListControllerNotifier =ref.read(memberListControllerProvider.notifier);
-    final members = ref.watch(memberListControllerProvider);
+    final memberListState = ref.watch(memberListControllerProvider);
     final organizationControllerNotifier = ref.read(organizationControllerProvider.notifier);
 
     useEffect(() {
       Future.microtask(() async {
-        await memberListControllerNotifier.loadMembersByGroupId(group.id);
+         memberListControllerNotifier.setGroupId(group.id);
+        await memberListControllerNotifier.loadMembersByGroupId();
       });
       return null;
     }, []);
@@ -66,7 +67,7 @@ class MemberListScreen extends HookConsumerWidget {
                     );
                     if (result.data != null) {
                       organizationControllerNotifier.appendGroupMembers(groupId: group.id, users: [result.data!]);
-                      memberListControllerNotifier.loadMembersByGroupId(group.id);
+                      memberListControllerNotifier.loadMembersByGroupId();
                       AppToast.showToast(message: AppStrings.createSuccess);
                     } else {
                       AppToast.showToast(message: "${AppStrings.createFailed}: ${result.message}");
@@ -80,9 +81,9 @@ class MemberListScreen extends HookConsumerWidget {
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: members.length,
+                itemCount: memberListState.users.length,
                 itemBuilder: (context, index) {
-                  final user = members[index];
+                  final user = memberListState.users[index];
                   return MemberItem(
                     user: user,
                     onTap: () {

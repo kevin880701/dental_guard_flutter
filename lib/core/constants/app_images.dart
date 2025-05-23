@@ -17,4 +17,5 @@ class AppImages {
   static const personalActiveIcon = '${assetsImages}ic_personal_active.png';
   static const personalInactiveIcon = '${assetsImages}ic_personal_inactive.png';
   static const listIcon = '${assetsImages}ic_list.png';
+  static const editIcon = '${assetsIcons}ic_edit.svg';
 }
