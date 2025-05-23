@@ -9,9 +9,9 @@ import 'auth_interceptor.dart';
 
 class NetworkInterface {
   static NetworkInterface? _instance;
-  late final Dio _dio;
+  late final Dio dio;
 
-  NetworkInterface._(this._dio);
+  NetworkInterface._(this.dio);
 
   static NetworkInterface getInstance() {
     if (_instance == null) {
@@ -25,7 +25,7 @@ class NetworkInterface {
     String? certAssetPath,
   }) async {
     final dio = Dio(BaseOptions(baseUrl: ApiEndPoint.domain,
-      validateStatus: (status) => true,));
+      validateStatus: (status) => status != null && status >= 200 && status < 300,));
 
     dio.interceptors.add(AuthInterceptor());
     if (certAssetPath != null) {
@@ -68,7 +68,7 @@ class NetworkInterface {
         },
       );
 
-      Response response = await _dio.get(url, options: options);
+      Response response = await dio.get(url, options: options);
 
       File file = File(savePath);
       await file.writeAsBytes(response.data);
@@ -95,7 +95,7 @@ class NetworkInterface {
       );
 
       _logRequest("GET", url: url, options: options, body: body, query: query);
-      Response response = await _dio.get(
+      Response response = await dio.get(
         url,
         data: body,
         queryParameters: query,
@@ -125,7 +125,7 @@ class NetworkInterface {
       );
 
       _logRequest("PATCH", url: url, options: options, body: body, query: query);
-      Response response = await _dio.patch(
+      Response response = await dio.patch(
         url,
         data: body,
         queryParameters: query,
@@ -155,7 +155,7 @@ class NetworkInterface {
       );
 
       _logRequest("POST", url: url, options: options, body: body, query: query);
-      Response response = await _dio.post(
+      Response response = await dio.post(
         url,
         data: body,
         queryParameters: query,
@@ -184,7 +184,7 @@ class NetworkInterface {
       );
 
       _logRequest("POST (FormData)", url: url, options: options, body: data, query: query);
-      final response = await _dio.post(
+      final response = await dio.post(
         url,
         data: data,
         queryParameters: query,
@@ -217,7 +217,7 @@ class NetworkInterface {
         body: body,
         query: query,
       );
-      Response response = await _dio.delete(
+      Response response = await dio.delete(
         url,
         data: body,
         queryParameters: query,
@@ -247,7 +247,7 @@ class NetworkInterface {
       );
 
       _logRequest("PUT", url: url, options: options, body: body, query: query);
-      Response response = await _dio.put(
+      Response response = await dio.put(
         url,
         queryParameters: query,
         data: body,

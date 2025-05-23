@@ -6,9 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'core/base/loading_overlay.dart';
-import 'core/constants/app_colors.dart';
 import 'core/constants/app_fonts.dart';
 import 'core/network/network_interface.dart';
+import 'core/network/token_manager.dart';
 import 'core/providers/page_provider.dart';
 import 'core/utils/app_toast.dart';
 import 'core/utils/shared_prefs_util.dart';
@@ -24,6 +24,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await SharedPrefsUtil.init();
+  await TokenManager.loadTokens();
   AppToast.init(navigatorKey);
   await NetworkInterface.createInstance();
 

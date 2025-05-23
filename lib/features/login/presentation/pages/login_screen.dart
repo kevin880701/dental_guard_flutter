@@ -1,4 +1,5 @@
 
+import 'package:dental_guard_flutter/core/utils/app_toast.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -44,14 +45,16 @@ class LoginScreen extends HookConsumerWidget {
     void _login() async {
       ref.read(pageNotifierProvider.notifier).showLoading();
       authControllerNotifier.login(account: accountController.text, password: passwordController.text).then((response) async {
-        if(response != null){
+        if(response){
           if(_isKeepLogin.value){
             final prefs = await SharedPreferences.getInstance();
             await prefs.setBool('keepLogin', true);
             await prefs.setString('account', accountController.text);
             await prefs.setString('password', passwordController.text);
+            context.router.replaceAll([const MainRoute()]);
+          }else{
+            AppToast.showToast(message: AppStrings.loginFailed);
           }
-          context.pushRoute(MainRoute());
         }
         ref.read(pageNotifierProvider.notifier).hideLoading();
       });

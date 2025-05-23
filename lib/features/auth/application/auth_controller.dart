@@ -1,8 +1,11 @@
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../core/constants/params.dart';
 import '../../../core/providers/page_provider.dart';
 import '../../../core/utils/app_log.dart';
+import '../../../core/utils/shared_prefs_util.dart';
 import '../data/models/response/login/login_data.dart';
 import '../data/models/response/user_info/user_info_data.dart';
 import 'auth_provider.dart';
@@ -36,6 +39,8 @@ class AuthController extends StateNotifier<AuthState> {
       final loginResult = await loginUseCase.execute(account, password);
       final userResult = await getUserInfoUseCase.execute();
 
+      await SharedPrefsUtil.setString(REFRESH_TOKEN, loginResult?.refreshToken ?? "");
+
       state = state.copyWith(
         loginData: loginResult,
         userInfoData: userResult,
@@ -48,5 +53,10 @@ class AuthController extends StateNotifier<AuthState> {
       ref.read(pageNotifierProvider.notifier).hideLoading();
       return false;
     }
+  }
+
+  /// 清除登入資訊
+  void clear() {
+    state = const AuthState();
   }
 }

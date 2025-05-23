@@ -1,6 +1,13 @@
+import '../constants/params.dart';
+import '../utils/shared_prefs_util.dart';
+
 class TokenManager {
   static String? _accessToken;
   static String? _refreshToken;
+
+  static Future<void> loadTokens() async {
+    _refreshToken = SharedPrefsUtil.getString(REFRESH_TOKEN);
+  }
 
   /// 設定 accessToken 或 refreshToken
   static void setTokens({String? accessToken, String? refreshToken}) {
@@ -16,6 +23,7 @@ class TokenManager {
   static void clearTokens() {
     _accessToken = null;
     _refreshToken = null;
+    SharedPrefsUtil.remove(REFRESH_TOKEN);
   }
 
   /// 取得 accessToken

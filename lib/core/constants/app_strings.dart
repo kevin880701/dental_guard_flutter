@@ -1,11 +1,15 @@
 class AppStrings {
   static const appName = '口腔衛教';
   static const confirm = '確認';
-
+  static const cancel = '取消';
   static const plsChoose = '請選擇';
 
   // 登入
   static const login = '登入';
+  static const sessionExpiredTitle = '登入逾時';
+  static const sessionExpiredContent = '您的登入已過期，請重新登入。';
+  static const sessionExpiredConfirm = '重新登入';
+  static const loginFailed = '登入失敗';
   static const classField = '班級：';
   static const keepLoginState = '保持登入狀態';
   static const registerMember = '註冊會員';
@@ -33,6 +37,9 @@ class AppStrings {
   static const enterFailed = '輸入錯誤';
   static const plsEnterStudentNumber = '請輸入學號';
   static const plsEnterName = '請輸入姓名';
+
+  // Main
+  static const home = '首頁';
 
   // GroupListScreen
   static const classList = '班級列表';
@@ -88,19 +95,6 @@ class AppStrings {
   static const selectImage = '選擇圖片...';
   static const imageStorage = '圖片儲存';
   static const clearImage = '清除圖片';
-  static const notDetectedYet = '尚未偵測';
 
-  static const home = 'Home';
-  static const notify = 'Notify';
-  static const finish = 'Finish';
-  static const inputFieldCannotEmpty = 'Input Field Cannot Empty';
-  static const cancel = 'cancel';
   static const loading = 'Loading';
-
-  static const importData = '匯入資料';
-  static const addStudentInfo = '新增學生資訊';
-  static const edit = '編輯';
-  static const personalInfo = '個人資訊';
-  static const sure = '確定';
-  static const editStudentInfo = '編輯學生資訊';
 }

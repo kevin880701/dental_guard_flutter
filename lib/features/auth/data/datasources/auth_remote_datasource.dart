@@ -1,4 +1,3 @@
-
 import '../../../../core/constants/api_endpoints.dart';
 import '../../../../core/models/api_response.dart';
 import '../../../../core/network/network_interface.dart';
@@ -42,7 +41,23 @@ class AuthRemoteDataSource {
     );
     final apiResponse = ApiResponse<UserInfoData>.fromJson(
       response.data,
-          (json) => UserInfoData.fromJson(json as Map<String, dynamic>),
+      (json) => UserInfoData.fromJson(json as Map<String, dynamic>),
+    );
+    return apiResponse.data;
+  }
+
+  Future<RefreshTokenData?> refreshToken(
+    RefreshTokenRequest refreshTokenRequest,
+  ) async {
+    final networkInterface = NetworkInterface.getInstance();
+    final response = await networkInterface.post(
+      url: ApiEndPoint.refreshToken,
+      body: refreshTokenRequest.toJson(),
+    );
+
+    final apiResponse = ApiResponse<RefreshTokenData>.fromJson(
+      response.data,
+      (json) => RefreshTokenData.fromJson(json as Map<String, dynamic>),
     );
     return apiResponse.data;
   }
