@@ -132,7 +132,27 @@ class OrganizationController extends StateNotifier<OrganizationState> {
     state = state.copyWith(groupsManageData: updatedData);
   }
 
+  void updateGroupMembersByUserId(List<UserInfoData> updatedUsers) {
+    final currentData = state.groupsManageData;
+    if (currentData == null) return;
 
+    // 建立 id -> UserInfoData 的對照表
+    final updatedMap = {for (var user in updatedUsers) user.id: user};
+
+    final updatedMembers = currentData.members.map((groupWithUsers) {
+      final newChildren = groupWithUsers.children.map((user) {
+        if (updatedMap.containsKey(user.id)) {
+          return updatedMap[user.id]!;
+        }
+        return user;
+      }).toList();
+
+      return groupWithUsers.copyWith(children: newChildren);
+    }).toList();
+
+    final updatedData = currentData.copyWith(members: updatedMembers);
+    state = state.copyWith(groupsManageData: updatedData);
+  }
 }
 
 List<GroupData> flattenHierarchy(List<GroupHierarchyNode>? nodes) {

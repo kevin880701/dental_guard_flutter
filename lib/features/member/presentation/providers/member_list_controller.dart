@@ -24,16 +24,15 @@ class MemberListController extends StateNotifier<MemberListState> {
 
   MemberListController(this.ref) : super(const MemberListState()){
     // 監聽 organizationControllerProvider 的變化
-    ref.listen<OrganizationState>(organizationControllerProvider, (prev, next) {
-      final prevGroups = prev?.groupsManageData?.members;
-      final nextGroups = next.groupsManageData?.members;
-
-      if (prevGroups != nextGroups) {
-        loadMembersByGroupId();
-      }
-    });
+    // ref.listen<OrganizationState>(organizationControllerProvider, (prev, next) {
+    //   final prevGroups = prev?.groupsManageData?.members;
+    //   final nextGroups = next.groupsManageData?.members;
+    //
+    //   if (prevGroups != nextGroups) {
+    //     loadMembersByGroupId();
+    //   }
+    // });
   }
-
 
   void setGroupId(String groupId) {
     state = state.copyWith(groupId: groupId);
@@ -50,6 +49,19 @@ class MemberListController extends StateNotifier<MemberListState> {
     if (target != null) {
       state = state.copyWith(groupId: state.groupId, users: target.children);
     }
+  }
+
+  void updateUsers(List<UserInfoData> updatedUsers) {
+    final updatedUsersMap = {for (var user in updatedUsers) user.id: user};
+
+    final newUsers = state.users.map((user) {
+      if (updatedUsersMap.containsKey(user.id)) {
+        return updatedUsersMap[user.id]!;
+      }
+      return user;
+    }).toList();
+
+    state = state.copyWith(users: newUsers);
   }
 
   void clear() {

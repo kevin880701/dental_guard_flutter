@@ -19,6 +19,7 @@ import '../../../auth/application/auth_provider.dart';
 import '../../../auth/data/models/response/user_info/user_info_data.dart';
 import '../../../organization/application/organization_controller.dart';
 import '../providers/member_info_controller.dart';
+import '../providers/member_list_controller.dart';
 import '../widgets/BrushingRecordItem.dart';
 import '../widgets/MemberItem.dart';
 
@@ -68,7 +69,9 @@ class MemberInfoScreen extends HookConsumerWidget {
                     );
                     if (result != null) {
                       controller.setUser(result);
-                      ref.read(organizationControllerProvider.notifier).loadManagedGroups();
+                      ref.read(memberListControllerProvider.notifier).updateUsers([result]);
+                      ref.read(organizationControllerProvider.notifier).updateGroupMembersByUserId([result]);
+                      // ref.read(organizationControllerProvider.notifier).loadManagedGroups();
                       AppToast.showToast(message: AppStrings.createSuccess);
                     } else {
                       AppToast.showToast(message: AppStrings.createFailed);
