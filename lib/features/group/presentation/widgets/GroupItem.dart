@@ -2,17 +2,21 @@ import 'package:dental_guard_flutter/core/constants/app_colors.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/app_images.dart';
+import '../../../../core/widgets/image/app_icon.dart';
 import '../../../../core/widgets/text/app_text.dart';
 import '../../../organization/data/models/response/group/group_data.dart';
 
 class GroupItem extends StatelessWidget {
   final GroupData? group;
   final VoidCallback? onTap;
+  final VoidCallback? onEditTap;
 
   const GroupItem({
     super.key,
     required this.group,
     this.onTap,
+    this.onEditTap,
   });
 
   @override
@@ -36,8 +40,7 @@ class GroupItem extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
             ),
-            // Arrow Icon
-            Icon(Icons.chevron_right, color: Colors.grey),
+            AppIcon(icon: AppImages.editIcon,color: AppColors.primaryBlack,onTap: onEditTap,)
           ],
         ):SizedBox(),
       ),

@@ -122,7 +122,7 @@ class OrganizationRemoteDataSource {
 
   /// 更新群組名稱
   Future<ApiResponse<GroupData?>> updateGroupName(UpdateGroupNameRequest request) async {
-    final response = await networkInterface.post(
+    final response = await networkInterface.put(
       url: ApiEndPoint.updateGroupName,
       body: request.toJson(),
     );

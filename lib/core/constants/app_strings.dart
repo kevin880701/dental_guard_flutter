@@ -46,6 +46,7 @@ class AppStrings {
   static const addClass = '新增班級';
   static const createSuccess = '新增成功';
   static const createFailed = '新增失敗';
+  static const editClassInfo = '編輯班級資訊';
 
   // MemberListScreen
   static const studentList = '學生列表';
