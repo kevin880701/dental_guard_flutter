@@ -43,7 +43,7 @@ class MainScreen extends HookConsumerWidget {
               child: TabBar(
                 controller: _tabController,
                 indicatorColor: AppColors.transparent,
-                labelColor: AppColors.primaryColor,
+                labelColor: AppColors.primaryBlack,
                 unselectedLabelColor: AppColors.grey,
                 dividerColor: AppColors.transparent,
                 tabs: <Widget>[
@@ -52,7 +52,7 @@ class MainScreen extends HookConsumerWidget {
                         ? AppIcon(
                             icon: AppImages.homeActiveIcon,
                             size: 24.sp,
-                            color: AppColors.black)
+                            color: AppColors.primaryBlack)
                         : AppIcon(
                             icon: AppImages.homeInactiveIcon,
                             size: 24.sp,
@@ -64,7 +64,7 @@ class MainScreen extends HookConsumerWidget {
                         ? AppIcon(
                             icon: AppImages.personalActiveIcon,
                             size: 24.sp,
-                            color: AppColors.black)
+                            color: AppColors.primaryBlack)
                         : AppIcon(
                             icon: AppImages.personalInactiveIcon,
                             size: 24.sp,
