@@ -60,6 +60,8 @@ class AppStrings {
   // MemberInfo
   static const noTeethRecord = '尚無潔牙紀錄';
   static const editStudent = '編輯學生資訊';
+  static const toothBrushingRecord = '潔牙記錄';
+  static const addRecordPlus = '新增記錄+';
 
   // TeethDetection
   static const selectFromAlbum = '從相簿中選擇...';
@@ -68,6 +70,10 @@ class AppStrings {
   static const detectionFailed = '偵測失敗';
   static const storageFailed = '儲存失敗';
   static const storageSuccess = '儲存成功';
+  static const imageDetection = '圖片偵測';
+  static const selectImage = '選擇圖片...';
+  static const imageStorage = '圖片儲存';
+  static const clearImage = '清除圖片';
 
   // Permission
   static const storagePermissionDenied = '存儲權限被拒絕';
@@ -78,27 +84,12 @@ class AppStrings {
   // Camera
   static const shootingFailed = '拍攝失敗';
 
-  //設定帳號
-  static const setAccount = '設定帳號';
-  static const plsEnterYourAccount = '請輸入你的帳號';
-  static const checkDuplicates = '檢查是否重複';
-
-  //設定帳號
-  static const setPassword = '設定密碼';
-  static const plsEnterYourPassword = '請輸入你的密碼';
-
-  // 學生資訊
-  static const studentInfo = '學生資訊';
-  static const toothBrushingRecord = '潔牙記錄';
-  static const addRecordPlus = '新增記錄+';
-
-  // 圖片偵測
-  static const imageDetection = '圖片偵測';
-  static const originalImage = '原始圖片';
-  static const detectionResults = '偵測結果';
-  static const selectImage = '選擇圖片...';
-  static const imageStorage = '圖片儲存';
-  static const clearImage = '清除圖片';
+  // Personal
+  static const personal = '個人';
+  static const otherInformation = '其他資訊';
+  static const versionNumber = '版本號';
+  static const feedback = '意見反饋';
+  static const logout = '登出';
 
   static const loading = 'Loading';
 }

@@ -10,6 +10,7 @@ import '../../../../core/constants/app_images.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/widgets/image/app_icon.dart';
 import '../../../../core/widgets/keep_alive_wrapper.dart';
+import '../../../auth/presentation/pages/personal_screen.dart';
 import '../../../group/presentation/pages/group_list_screen.dart';
 
 @RoutePage()
@@ -35,7 +36,7 @@ class MainScreen extends HookConsumerWidget {
               controller: _tabController,
               children: <Widget>[
                 KeepAliveWrapper(child: GroupListScreen()),
-                KeepAliveWrapper(child: Text("data2")),
+                KeepAliveWrapper(child: PersonalScreen()),
               ],
             )),
             Container(
@@ -69,7 +70,7 @@ class MainScreen extends HookConsumerWidget {
                             icon: AppImages.personalInactiveIcon,
                             size: 24.sp,
                             color: AppColors.grey),
-                    text: AppStrings.account,
+                    text: AppStrings.personal,
                   ),
                 ],
                 onTap: (index) {

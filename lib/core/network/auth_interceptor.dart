@@ -58,7 +58,6 @@ class AuthInterceptor extends Interceptor {
 
             if (refreshTokenData == null ||
                 refreshTokenData.accessToken.isEmpty) {
-              TokenManager.clearTokens();
               refreshTokenExpire(context);
               return handler.reject(err);
             }
@@ -67,23 +66,19 @@ class AuthInterceptor extends Interceptor {
                 err.requestOptions, refreshTokenData.accessToken);
             return handler.resolve(clonedRequest);
           } catch (e) {
-            TokenManager.clearTokens();
             refreshTokenExpire(context);
             return handler.reject(err);
           }
 
         case 100003: // Refresh Token 也無效
-          TokenManager.clearTokens();
           refreshTokenExpire(context);
           return handler.reject(err);
 
         case 100004: // 格式錯誤，可能沒帶Bearer.....
-          TokenManager.clearTokens();
           refreshTokenExpire(context);
           return handler.reject(err);
 
         case 100002: // 未授權
-          TokenManager.clearTokens();
           refreshTokenExpire(context);
           return handler.reject(err);
 
@@ -146,7 +141,7 @@ void refreshTokenExpire(BuildContext? context) async {
 
     // 清除狀態
     final container = ProviderScope.containerOf(context, listen: false);
-    container.read(authControllerProvider.notifier).clear();
+    container.read(authControllerProvider.notifier).logout();
     context.router.replaceAll([const LoginRoute()]);
   } else {
     SystemNavigator.pop();
