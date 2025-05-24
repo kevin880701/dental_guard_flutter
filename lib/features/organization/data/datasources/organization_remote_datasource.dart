@@ -7,6 +7,7 @@ import '../../../../core/network/network_interface.dart';
 import '../models/request/add_group_member_extended/add_group_member_extended_request.dart';
 import '../models/request/create_group/create_group_request.dart';
 import '../models/request/group_member/group_member_request.dart';
+import '../models/request/update_group_name/update_group_name_request.dart';
 import '../models/response/group/group_data.dart';
 import '../models/response/groups_manage/groups_manage_data.dart';
 
@@ -114,6 +115,21 @@ class OrganizationRemoteDataSource {
     final apiResponse = ApiResponse<UserInfoData?>.fromJson(
       response.data,
           (json) => nullableFromJson(json, UserInfoData.fromJson),
+    );
+
+    return apiResponse;
+  }
+
+  /// 更新群組名稱
+  Future<ApiResponse<GroupData?>> updateGroupName(UpdateGroupNameRequest request) async {
+    final response = await networkInterface.post(
+      url: ApiEndPoint.updateGroupName,
+      body: request.toJson(),
+    );
+
+    final apiResponse = ApiResponse<GroupData?>.fromJson(
+      response.data,
+          (json) => nullableFromJson(json, GroupData.fromJson),
     );
 
     return apiResponse;
