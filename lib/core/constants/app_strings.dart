@@ -3,6 +3,7 @@ class AppStrings {
   static const confirm = '確認';
   static const cancel = '取消';
   static const plsChoose = '請選擇';
+  static const loading = '載入中...';
 
   // 登入
   static const login = '登入';
@@ -90,6 +91,4 @@ class AppStrings {
   static const versionNumber = '版本號';
   static const feedback = '意見反饋';
   static const logout = '登出';
-
-  static const loading = 'Loading';
 }
