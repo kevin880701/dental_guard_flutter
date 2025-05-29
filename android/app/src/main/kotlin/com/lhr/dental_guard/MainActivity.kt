@@ -1,4 +1,4 @@
-package com.lhr.dental_guard_flutter
+package com.lhr.dental_guard
 
 import android.os.Bundle
 import android.os.Build
