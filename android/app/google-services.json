@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "602076142232",
+    "project_id": "dental-guard-d0786",
+    "storage_bucket": "dental-guard-d0786.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602076142232:android:d0a8edc2794c55a7cb8eed",
+        "android_client_info": {
+          "package_name": "com.lhr.dental_guard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDLHkdk8KjoMuu2WJFLTUQJCTtIYgCc54"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

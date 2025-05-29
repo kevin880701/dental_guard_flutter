@@ -13,6 +13,8 @@ import 'core/network/token_manager.dart';
 import 'core/providers/page_provider.dart';
 import 'core/utils/app_toast.dart';
 import 'core/utils/shared_prefs_util.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -23,7 +25,9 @@ final autoRouteObserver = AutoRouteObserver();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await SharedPrefsUtil.init();
   await TokenManager.loadTokens();
   AppToast.init(navigatorKey);
