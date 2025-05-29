@@ -7,7 +7,7 @@ part 'user_info_data.g.dart';
 class UserInfoData with _$UserInfoData {
   const factory UserInfoData({
     @JsonKey(name: 'id') required String id,
-    @JsonKey(name: 'number') required String number,
+    @JsonKey(name: 'number') String? number,
     @JsonKey(name: 'name') required String name,
     @JsonKey(name: 'email') required String email,
     @JsonKey(name: 'phone') required String phone,

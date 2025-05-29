@@ -1,6 +1,8 @@
+import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../../../../core/widgets/text/app_text.dart';
 import '../../../auth/data/models/response/user_info/user_info_data.dart';
 
 class MemberItem extends HookWidget {
@@ -37,13 +39,13 @@ class MemberItem extends HookWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    user.name ?? "",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  AppText(
+                    text: user.name ?? "",
+                    textStyle: bodyMedium,
                   ),
-                  Text(
-                    user.number,
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                  AppText(
+                    text: user.number ?? "",
+                    textStyle: bodySmall,
                   ),
                 ],
               ),

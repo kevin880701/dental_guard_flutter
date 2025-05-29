@@ -23,7 +23,7 @@ mixin _$UserInfoData {
   @JsonKey(name: 'id')
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'number')
-  String get number => throw _privateConstructorUsedError;
+  String? get number => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'email')
@@ -65,7 +65,7 @@ abstract class $UserInfoDataCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'number') String number,
+      @JsonKey(name: 'number') String? number,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'email') String email,
       @JsonKey(name: 'phone') String phone,
@@ -95,7 +95,7 @@ class _$UserInfoDataCopyWithImpl<$Res, $Val extends UserInfoData>
   @override
   $Res call({
     Object? id = null,
-    Object? number = null,
+    Object? number = freezed,
     Object? name = null,
     Object? email = null,
     Object? phone = null,
@@ -113,10 +113,10 @@ class _$UserInfoDataCopyWithImpl<$Res, $Val extends UserInfoData>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      number: null == number
+      number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -175,7 +175,7 @@ abstract class _$$UserInfoDataImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'id') String id,
-      @JsonKey(name: 'number') String number,
+      @JsonKey(name: 'number') String? number,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'email') String email,
       @JsonKey(name: 'phone') String phone,
@@ -203,7 +203,7 @@ class __$$UserInfoDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? number = null,
+    Object? number = freezed,
     Object? name = null,
     Object? email = null,
     Object? phone = null,
@@ -221,10 +221,10 @@ class __$$UserInfoDataImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      number: null == number
+      number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -278,7 +278,7 @@ class __$$UserInfoDataImplCopyWithImpl<$Res>
 class _$UserInfoDataImpl implements _UserInfoData {
   const _$UserInfoDataImpl(
       {@JsonKey(name: 'id') required this.id,
-      @JsonKey(name: 'number') required this.number,
+      @JsonKey(name: 'number') this.number,
       @JsonKey(name: 'name') required this.name,
       @JsonKey(name: 'email') required this.email,
       @JsonKey(name: 'phone') required this.phone,
@@ -299,7 +299,7 @@ class _$UserInfoDataImpl implements _UserInfoData {
   final String id;
   @override
   @JsonKey(name: 'number')
-  final String number;
+  final String? number;
   @override
   @JsonKey(name: 'name')
   final String name;
@@ -404,7 +404,7 @@ class _$UserInfoDataImpl implements _UserInfoData {
 abstract class _UserInfoData implements UserInfoData {
   const factory _UserInfoData(
           {@JsonKey(name: 'id') required final String id,
-          @JsonKey(name: 'number') required final String number,
+          @JsonKey(name: 'number') final String? number,
           @JsonKey(name: 'name') required final String name,
           @JsonKey(name: 'email') required final String email,
           @JsonKey(name: 'phone') required final String phone,
@@ -426,7 +426,7 @@ abstract class _UserInfoData implements UserInfoData {
   String get id;
   @override
   @JsonKey(name: 'number')
-  String get number;
+  String? get number;
   @override
   @JsonKey(name: 'name')
   String get name;
