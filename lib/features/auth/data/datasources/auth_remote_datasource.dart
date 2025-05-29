@@ -10,6 +10,7 @@ import '../models/request/send_verification_code/send_verification_code_request.
 import '../models/request/enter_verification_code/enter_verification_code_request.dart';
 import '../models/request/set_password/set_password_request.dart';
 import '../models/request/set_user_profile/set_user_profile_request.dart';
+import '../models/request/updateUserProfile/update_user_profile_request.dart';
 import '../models/response/login/login_data.dart';
 import '../models/response/refresh_token/refresh_token_data.dart';
 import '../models/response/user_info/user_info_data.dart';
@@ -58,6 +59,19 @@ class AuthRemoteDataSource {
     final apiResponse = ApiResponse<RefreshTokenData>.fromJson(
       response.data,
       (json) => RefreshTokenData.fromJson(json as Map<String, dynamic>),
+    );
+    return apiResponse.data;
+  }
+
+  Future<UserInfoData?> updateUserProfile(UpdateUserProfileRequest request) async {
+    final response = await networkInterface.put(
+      url: ApiEndPoint.updateUserProfile,
+      body: request.toJson(),
+    );
+
+    final apiResponse = ApiResponse<UserInfoData>.fromJson(
+      response.data,
+          (json) => UserInfoData.fromJson(json as Map<String, dynamic>),
     );
     return apiResponse.data;
   }

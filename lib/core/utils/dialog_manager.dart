@@ -7,6 +7,7 @@ import '../widgets/dialog/window/add_member_dialog.dart';
 import '../widgets/dialog/window/bottom_edit_dialog.dart';
 import '../widgets/dialog/window/choose_image_dialog.dart';
 import '../widgets/dialog/window/default_dialog.dart';
+import '../widgets/dialog/window/edit_member_dialog.dart';
 import '../widgets/dialog/window/error_dialog.dart';
 import '../widgets/input/input_type.dart';
 
@@ -121,6 +122,21 @@ Future<void> showAddMemberDialog(
   await showDialogBox(
     context,
     child: AddMemberDialog(onSubmit: onSubmit),
+    position: DialogPosition.bottom,
+    barrierDismissible: barrierDismissible,
+  );
+}
+
+Future<void> showEditMemberDialog(
+    BuildContext context, {
+      required void Function({
+      required String name,
+      }) onSubmit,
+      bool barrierDismissible = true,
+    }) async {
+  await showDialogBox(
+    context,
+    child: EditMemberDialog(onSubmit: onSubmit),
     position: DialogPosition.bottom,
     barrierDismissible: barrierDismissible,
   );

@@ -4,6 +4,7 @@ import '../data/datasources/auth_remote_datasource.dart';
 import '../data/repositories/auth_repository_impl.dart';
 import '../domain/usecases/get_user_info_usecase.dart';
 import '../domain/usecases/login_use_case.dart';
+import '../domain/usecases/update_user_profile_usecase.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return AuthRepositoryImpl(
@@ -19,4 +20,9 @@ final loginUseCaseProvider = Provider<LoginUseCase>((ref) {
 final getUserInfoUseCaseProvider = Provider<GetUserInfoUseCase>((ref) {
   final repo = ref.read(authRepositoryProvider);
   return GetUserInfoUseCase(repo);
+});
+
+final updateUserProfileUseCaseProvider = Provider<UpdateUserProfileUseCase>((ref) {
+  final repo = ref.read(authRepositoryProvider);
+  return UpdateUserProfileUseCase(repo);
 });

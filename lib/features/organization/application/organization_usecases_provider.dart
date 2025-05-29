@@ -9,6 +9,7 @@ import '../domain/usecase/get_group_by_id_usecase.dart';
 import '../domain/usecase/get_group_users_usecase.dart';
 import '../domain/usecase/get_managed_groups_usecase.dart';
 import '../domain/usecase/remove_group_member_usecase.dart';
+import '../domain/usecase/update_group_name_usecase.dart';
 
 final organizationRepositoryProvider = Provider<OrganizationRepository>((ref) {
   return OrganizationRepositoryImpl(
@@ -50,4 +51,9 @@ final getGroupByIdUseCaseProvider = Provider<GetGroupByIdUseCase>((ref) {
 final addGroupMemberExtendedUseCaseProvider = Provider<AddGroupMemberExtendedUseCase>((ref) {
   final repo = ref.read(organizationRepositoryProvider);
   return AddGroupMemberExtendedUseCase(repo);
+});
+
+final updateGroupNameUseCaseProvider = Provider<UpdateGroupNameUseCase>((ref) {
+  final repo = ref.read(organizationRepositoryProvider);
+  return UpdateGroupNameUseCase(repo);
 });

@@ -48,8 +48,10 @@ class GroupListScreen extends HookConsumerWidget {
                   hintText: AppStrings.plsEnterClassName,
                   wordLimit: 8,
                 );
+                if (input == null) return;
+                if (input.isEmpty) return;
 
-                if (input != null && input.isNotEmpty) {
+                if (input.isNotEmpty) {
                   // TODO: 暫無組織層級，organizationId一率帶入org-001
                   final useCase = ref.read(createGroupUseCaseProvider);
                   final result = await useCase(
@@ -77,6 +79,31 @@ class GroupListScreen extends HookConsumerWidget {
                     group: group,
                     onTap: () {
                       context.pushRoute(MemberListRoute(group: group!));
+                    },
+                    onEditTap: () async {
+                      final input = await showBottomEditDialog(
+                        context,
+                        title: AppStrings.editClassInfo,
+                        hintText: AppStrings.plsEnterClassName,
+                        wordLimit: 8,
+                      );
+                      if (input == null) return;
+                      if (input.isEmpty) return;
+
+                      if (input.isNotEmpty) {
+                        final useCase = ref.read(updateGroupNameUseCaseProvider);
+                        final result = await useCase(
+                          groupId: group!.id,
+                          newName: input,
+                        );
+                        if (result.data != null) {
+
+                          AppToast.showToast(message: AppStrings.editSuccess);
+                          organizationControllerNotifier.updateGroupsById([result.data!]);
+                        } else {
+                          AppToast.showToast(message: "${AppStrings.editFailed}: ${result.message}");
+                        }
+                      }
                     },
                   );
                 },

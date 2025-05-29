@@ -3,6 +3,7 @@ class AppStrings {
   static const confirm = '確認';
   static const cancel = '取消';
   static const plsChoose = '請選擇';
+  static const loading = '載入中...';
 
   // 登入
   static const login = '登入';
@@ -46,6 +47,7 @@ class AppStrings {
   static const addClass = '新增班級';
   static const createSuccess = '新增成功';
   static const createFailed = '新增失敗';
+  static const editClassInfo = '編輯班級資訊';
 
   // MemberListScreen
   static const studentList = '學生列表';
@@ -53,9 +55,14 @@ class AppStrings {
   static const addStudent = '新增學生';
   static const name = '姓名';
   static const birthday = '生日';
+  static const editSuccess = '編輯成功';
+  static const editFailed = '編輯失敗';
 
   // MemberInfo
   static const noTeethRecord = '尚無潔牙紀錄';
+  static const editStudent = '編輯學生資訊';
+  static const toothBrushingRecord = '潔牙記錄';
+  static const addRecordPlus = '新增記錄+';
 
   // TeethDetection
   static const selectFromAlbum = '從相簿中選擇...';
@@ -64,6 +71,10 @@ class AppStrings {
   static const detectionFailed = '偵測失敗';
   static const storageFailed = '儲存失敗';
   static const storageSuccess = '儲存成功';
+  static const imageDetection = '圖片偵測';
+  static const selectImage = '選擇圖片...';
+  static const imageStorage = '圖片儲存';
+  static const clearImage = '清除圖片';
 
   // Permission
   static const storagePermissionDenied = '存儲權限被拒絕';
@@ -74,27 +85,10 @@ class AppStrings {
   // Camera
   static const shootingFailed = '拍攝失敗';
 
-  //設定帳號
-  static const setAccount = '設定帳號';
-  static const plsEnterYourAccount = '請輸入你的帳號';
-  static const checkDuplicates = '檢查是否重複';
-
-  //設定帳號
-  static const setPassword = '設定密碼';
-  static const plsEnterYourPassword = '請輸入你的密碼';
-
-  // 學生資訊
-  static const studentInfo = '學生資訊';
-  static const toothBrushingRecord = '潔牙記錄';
-  static const addRecordPlus = '新增記錄+';
-
-  // 圖片偵測
-  static const imageDetection = '圖片偵測';
-  static const originalImage = '原始圖片';
-  static const detectionResults = '偵測結果';
-  static const selectImage = '選擇圖片...';
-  static const imageStorage = '圖片儲存';
-  static const clearImage = '清除圖片';
-
-  static const loading = 'Loading';
+  // Personal
+  static const personal = '個人';
+  static const otherInformation = '其他資訊';
+  static const versionNumber = '版本號';
+  static const feedback = '意見反饋';
+  static const logout = '登出';
 }

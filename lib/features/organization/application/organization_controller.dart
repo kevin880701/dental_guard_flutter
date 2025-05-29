@@ -132,7 +132,59 @@ class OrganizationController extends StateNotifier<OrganizationState> {
     state = state.copyWith(groupsManageData: updatedData);
   }
 
+  void updateGroupMembersByUserId(List<UserInfoData> updatedUsers) {
+    final currentData = state.groupsManageData;
+    if (currentData == null) return;
 
+    // 建立 id -> UserInfoData 的對照表
+    final updatedMap = {for (var user in updatedUsers) user.id: user};
+
+    final updatedMembers = currentData.members.map((groupWithUsers) {
+      final newChildren = groupWithUsers.children.map((user) {
+        if (updatedMap.containsKey(user.id)) {
+          return updatedMap[user.id]!;
+        }
+        return user;
+      }).toList();
+
+      return groupWithUsers.copyWith(children: newChildren);
+    }).toList();
+
+    final updatedData = currentData.copyWith(members: updatedMembers);
+    state = state.copyWith(groupsManageData: updatedData);
+  }
+
+  void updateGroupsById(List<GroupData> updatedGroups) {
+    final currentData = state.groupsManageData;
+    final currentParents = state.allParentGroups;
+
+    if (currentData == null && currentParents == null) return;
+
+    // 建立 id -> GroupData 的對照表
+    final updatedMap = {for (var group in updatedGroups) group.id: group};
+
+    // 更新 groupsManageData.members 中的 group
+    final updatedMembers = currentData?.members.map((member) {
+      if (updatedMap.containsKey(member.group.id)) {
+        return member.copyWith(group: updatedMap[member.group.id]!);
+      }
+      return member;
+    }).toList();
+
+    // 更新 allParentGroups 中的 group
+    final updatedParentGroups = currentParents?.map((group) {
+      if (updatedMap.containsKey(group.id)) {
+        return updatedMap[group.id]!;
+      }
+      return group;
+    }).toList();
+
+    // 更新 state
+    state = state.copyWith(
+      groupsManageData: currentData?.copyWith(members: updatedMembers ?? []),
+      allParentGroups: updatedParentGroups ?? [],
+    );
+  }
 }
 
 List<GroupData> flattenHierarchy(List<GroupHierarchyNode>? nodes) {

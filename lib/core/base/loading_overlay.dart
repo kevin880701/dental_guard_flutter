@@ -1,9 +1,11 @@
+import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../constants/app_resources.dart';
 import '../providers/page_provider.dart';
 import '../utils/app_toast.dart';
+import '../widgets/text/app_text.dart';
 
 class LoadingOverlay extends HookConsumerWidget {
   final String loadingText;
@@ -44,7 +46,7 @@ class LoadingOverlay extends HookConsumerWidget {
           ),
           Center(
             child: Container(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(12.0),
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.7),
                 borderRadius: BorderRadius.circular(16.0),
@@ -60,14 +62,11 @@ class LoadingOverlay extends HookConsumerWidget {
                       ),
                       child: CupertinoActivityIndicator(radius: 18.0),
                     ),
-                    gapH12,
-                    Text(
-                      loadingText,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
+                    SizedBox(height: 12,),
+                    AppText(
+                      text: loadingText,
+                      textStyle: bodySmall,
+                      color: Colors.white,
                     ),
                     if (onCancel != null)
                       TextButton(

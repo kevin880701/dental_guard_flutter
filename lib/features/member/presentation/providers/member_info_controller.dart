@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/utils/app_log.dart';
 import '../../../auth/data/models/response/user_info/user_info_data.dart';
+import '../../../organization/application/organization_controller.dart';
 import '../../../teeth_record/application/teeth_record_usecases_provider.dart';
 import '../../../teeth_record/data/models/response/brushing_record/brushing_record_data.dart';
 
@@ -26,8 +27,19 @@ StateNotifierProvider.autoDispose<MemberInfoController, MemberInfoState>(
 class MemberInfoController extends StateNotifier<MemberInfoState> {
   final Ref ref;
 
-  MemberInfoController(this.ref)
-      : super(const MemberInfoState(brushingRecords: []));
+  MemberInfoController(this.ref) : super(const MemberInfoState(brushingRecords: [])) {
+    // 監聽 organizationControllerProvider 的變化
+    ref.listen<OrganizationState>(organizationControllerProvider, (prev, next) {
+      final userId = state.user?.id;
+      final prevGroups = prev?.groupsManageData?.members;
+      final nextGroups = next.groupsManageData?.members;
+
+      // 當群組成員資料變動且有設定 user 時，重新取得該 user 的刷牙紀錄
+      if (userId != null && prevGroups != nextGroups) {
+        loadUserBrushingRecords(userId);
+      }
+    });
+  }
 
   void setUser(UserInfoData user) {
     state = state.copyWith(user: user);

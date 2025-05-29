@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'core/base/loading_overlay.dart';
 import 'core/constants/app_fonts.dart';
+import 'core/constants/app_strings.dart';
 import 'core/network/network_interface.dart';
 import 'core/network/token_manager.dart';
 import 'core/providers/page_provider.dart';
@@ -62,7 +63,7 @@ class MyApp extends ConsumerWidget {
                 children: [
                   child ?? const SizedBox.shrink(),
                   LoadingOverlay(
-                    loadingText: pageState.message ?? 'Loading...',
+                    loadingText: pageState.message ?? AppStrings.loading,
                   ),
                 ],
               );

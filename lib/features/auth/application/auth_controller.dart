@@ -3,9 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/constants/params.dart';
+import '../../../core/network/token_manager.dart';
 import '../../../core/providers/page_provider.dart';
 import '../../../core/utils/app_log.dart';
 import '../../../core/utils/shared_prefs_util.dart';
+import '../../organization/application/organization_controller.dart';
 import '../data/models/response/login/login_data.dart';
 import '../data/models/response/user_info/user_info_data.dart';
 import 'auth_provider.dart';
@@ -58,5 +60,11 @@ class AuthController extends StateNotifier<AuthState> {
   /// 清除登入資訊
   void clear() {
     state = const AuthState();
+  }
+
+  void logout() {
+    ref.read(organizationControllerProvider.notifier).clear();
+    clear();
+    TokenManager.clearTokens();
   }
 }

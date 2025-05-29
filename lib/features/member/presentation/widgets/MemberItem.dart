@@ -1,3 +1,4 @@
+import 'package:dental_guard_flutter/core/constants/app_colors.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -20,21 +21,20 @@ class MemberItem extends HookWidget {
         }
       },
       child: Container(
-        padding: EdgeInsets.all(8.0),
+        margin: EdgeInsets.symmetric(vertical: 4),
+        padding: EdgeInsets.symmetric(vertical: 8,horizontal: 12),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.grey.shade300),
+          border: Border.all(color: AppColors.borderGrey),
         ),
         child: Row(
           children: [
-            // User Avatar
             CircleAvatar(
-              backgroundColor: Colors.grey,
+              backgroundColor: AppColors.grey,
               child: Icon(Icons.person, color: Colors.white),
             ),
-            SizedBox(width: 12), // Spacing between avatar and text
-            // Column for Name and ID
+            SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
