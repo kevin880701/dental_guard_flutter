@@ -25,27 +25,28 @@ class TeethImageView extends StatelessWidget {
         children: [
           Expanded(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (analyzeResult != null && analyzeResult!.score >= 0) ...[
-                    Expanded(
-                        flex: 1,
-                        child: NetworkImageWidget(
-                          imageUrl:
-                          '${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range.png',
-                        )),
+                    NetworkImageWidget(
+                      width: double.infinity,
+                      fit: BoxFit.contain,
+                      imageUrl:
+                      '${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range.png',
+                    ),
                     if(analyzeResult!.isSuccess == 1)...[
-                    Expanded(
-                        flex: 1,
-                        child: NetworkImageWidget(
-                          imageUrl:
-                          '${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range_detect.png',
-                        ))]
-                  ] else ...[
-                    Expanded(
-                      child: NetworkImageWidget(
+                      NetworkImageWidget(
+                        width: double.infinity,
+                        fit: BoxFit.contain,
                         imageUrl:
                         '${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range_detect.png',
-                      ),
+                      )]
+                  ] else ...[
+                    NetworkImageWidget(
+                      width: double.infinity,
+                      fit: BoxFit.contain,
+                      imageUrl:
+                      '${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range_detect.png',
                     ),
                   ],
                 ],
