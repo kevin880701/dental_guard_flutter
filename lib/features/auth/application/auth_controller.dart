@@ -1,8 +1,8 @@
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/constants/params.dart';
+import '../../../core/models/api_response.dart';
 import '../../../core/network/token_manager.dart';
 import '../../../core/providers/page_provider.dart';
 import '../../../core/utils/app_log.dart';
@@ -14,7 +14,8 @@ import 'auth_provider.dart';
 
 part 'auth_controller.freezed.dart';
 
-final authControllerProvider = StateNotifierProvider<AuthController, AuthState>((ref) {
+final authControllerProvider =
+    StateNotifierProvider<AuthController, AuthState>((ref) {
   return AuthController(ref);
 });
 
@@ -31,7 +32,8 @@ class AuthController extends StateNotifier<AuthState> {
 
   AuthController(this.ref) : super(const AuthState());
 
-  Future<bool> login({required String account, required String password}) async {
+  Future<ApiResponse<LoginData?>> login(
+      {required String account, required String password}) async {
     ref.read(pageNotifierProvider.notifier).showLoading();
 
     try {
@@ -39,21 +41,30 @@ class AuthController extends StateNotifier<AuthState> {
       final getUserInfoUseCase = ref.read(getUserInfoUseCaseProvider);
 
       final loginResult = await loginUseCase.execute(account, password);
-      final userResult = await getUserInfoUseCase.execute();
 
-      await SharedPrefsUtil.setString(REFRESH_TOKEN, loginResult?.refreshToken ?? "");
+      final loginData = loginResult.data;
+      if (loginData == null ||
+          loginData.accessToken.isEmpty ||
+          loginData.refreshToken.isEmpty) {
+        return loginResult;
+      }
+
+      final userResult = await getUserInfoUseCase.execute();
+      await SharedPrefsUtil.setString(
+          REFRESH_TOKEN, loginData.refreshToken ?? "");
 
       state = state.copyWith(
-        loginData: loginResult,
+        loginData: loginData,
         userInfoData: userResult,
       );
 
       ref.read(pageNotifierProvider.notifier).hideLoading();
-      return true;
+      return loginResult;
     } catch (e) {
       AppLog.e(e.toString());
       ref.read(pageNotifierProvider.notifier).hideLoading();
-      return false;
+      return ApiResponse(
+          resultCode: -99999, message: "登入失敗，請稍後再試或聯繫客服", data: null);
     }
   }
 

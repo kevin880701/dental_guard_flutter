@@ -16,7 +16,7 @@ import 'token_manager.dart';
 
 class AuthInterceptor extends Interceptor {
   static final List<String> noAuthPaths = [
-    '/login',
+    '/user/login',
     '/set_user_profile',
     '/send-verification-code',
     '/enter-verification-code',
@@ -45,6 +45,16 @@ class AuthInterceptor extends Interceptor {
     final context = navigatorKey.currentContext;
     final statusCode = err.response?.statusCode;
     final responseData = err.response?.data;
+
+    // 🔹 比對是否為白名單 API（不進行 refresh-token 處理）
+    final uri = Uri.parse(err.requestOptions.uri.toString());
+    final path = uri.path;
+    final isNoAuthPath = noAuthPaths.contains(path); 
+
+    // 若是白名單 API，直接回傳錯誤，不進行 token 處理
+    if (isNoAuthPath) {
+      return handler.next(err);
+    }
 
     if (statusCode == 401 && responseData != null) {
       // token相關錯誤

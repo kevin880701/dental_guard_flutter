@@ -1,4 +1,5 @@
 
+import '../../../../core/models/api_response.dart';
 import '../../data/models/request/login/login_request.dart';
 import '../../data/models/response/login/login_data.dart';
 import '../../data/repositories/auth_repository_impl.dart';
@@ -8,7 +9,7 @@ class LoginUseCase {
 
   LoginUseCase(this.authRepository);
 
-  Future<LoginData?> execute(String email, String password) async {
+  Future<ApiResponse<LoginData?>> execute(String email, String password) async {
     final loginData = await authRepository.login(LoginRequest(username: email, password: password));
     return loginData;
   }

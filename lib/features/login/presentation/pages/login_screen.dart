@@ -45,7 +45,7 @@ class LoginScreen extends HookConsumerWidget {
     void _login() async {
       ref.read(pageNotifierProvider.notifier).showLoading();
       authControllerNotifier.login(account: accountController.text, password: passwordController.text).then((response) async {
-        if(response){
+        if(response.resultCode == 0){
           if(_isKeepLogin.value){
             final prefs = await SharedPreferences.getInstance();
             await prefs.setBool('keepLogin', true);
@@ -55,6 +55,8 @@ class LoginScreen extends HookConsumerWidget {
           }else{
             AppToast.showToast(message: AppStrings.loginFailed);
           }
+        }else{
+          ref.read(pageNotifierProvider.notifier).showToastMessage(message: response.message);
         }
         ref.read(pageNotifierProvider.notifier).hideLoading();
       });

@@ -20,7 +20,7 @@ class AuthRemoteDataSource {
 
   AuthRemoteDataSource(this.networkInterface);
 
-  Future<LoginData?> login(LoginRequest loginRequest) async {
+  Future<ApiResponse<LoginData?>> login(LoginRequest loginRequest) async {
     final response = await networkInterface.post(
       url: ApiEndPoint.login,
       body: loginRequest.toJson(),
@@ -33,7 +33,7 @@ class AuthRemoteDataSource {
       accessToken: apiResponse.data?.accessToken ?? "",
       refreshToken: apiResponse.data?.refreshToken ?? "",
     );
-    return apiResponse.data;
+    return apiResponse;
   }
 
   Future<UserInfoData?> getUserInfo() async {

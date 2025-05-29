@@ -25,7 +25,7 @@ class NetworkInterface {
     String? certAssetPath,
   }) async {
     final dio = Dio(BaseOptions(baseUrl: ApiEndPoint.domain,
-      validateStatus: (status) => status != null && status >= 200 && status < 300,));
+      validateStatus: (status) => status != null && status >= 200 && status <= 401,));
 
     dio.interceptors.add(AuthInterceptor());
     if (certAssetPath != null) {
