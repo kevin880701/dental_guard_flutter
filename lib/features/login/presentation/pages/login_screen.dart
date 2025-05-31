@@ -1,4 +1,3 @@
-
 import 'package:dental_guard_flutter/core/utils/app_toast.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +9,12 @@ import 'package:dental_guard_flutter/core/providers/page_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/base/base_page.dart';
 import '../../../../core/widgets/button/app_button.dart';
+import '../../../../core/widgets/image/app_icon.dart';
 import '../../../../core/widgets/input/input_type.dart';
 import '../../../../core/widgets/text/app_text.dart';
 import '../../../../routes/app_router.dart';
 import '../../../auth/application/auth_controller.dart';
+import '../../../auth/application/auth_provider.dart';
 import '../widgets/login_input.dart';
 
 @RoutePage()
@@ -22,7 +23,6 @@ class LoginScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final authControllerNotifier = ref.read(authControllerProvider.notifier);
     final accountController = useTextEditingController();
     final passwordController = useTextEditingController();
@@ -35,37 +35,39 @@ class LoginScreen extends HookConsumerWidget {
       final account = accountController.text;
       final password = passwordController.text;
 
-      final isValid =
-          account.isNotEmpty &&
-              password.isNotEmpty;
+      final isValid = account.isNotEmpty && password.isNotEmpty;
 
       isFormValid.value = isValid;
     }
 
     void _login() async {
       ref.read(pageNotifierProvider.notifier).showLoading();
-      authControllerNotifier.login(account: accountController.text, password: passwordController.text).then((response) async {
-        if(response.resultCode == 0){
-          if(_isKeepLogin.value){
+      authControllerNotifier
+          .login(
+              account: accountController.text,
+              password: passwordController.text)
+          .then((response) async {
+        if (response.resultCode == 0) {
+          if (_isKeepLogin.value) {
             final prefs = await SharedPreferences.getInstance();
             await prefs.setBool('keepLogin', true);
             await prefs.setString('account', accountController.text);
             await prefs.setString('password', passwordController.text);
             context.router.replaceAll([const MainRoute()]);
-          }else{
+          } else {
             AppToast.showToast(message: AppStrings.loginFailed);
           }
-        }else{
-          ref.read(pageNotifierProvider.notifier).showToastMessage(message: response.message);
+        } else {
+          ref
+              .read(pageNotifierProvider.notifier)
+              .showToastMessage(message: response.message);
         }
         ref.read(pageNotifierProvider.notifier).hideLoading();
       });
     }
 
     useEffect(() {
-
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-
         final prefs = await SharedPreferences.getInstance();
         final keepLogin = prefs.getBool('keepLogin') ?? false;
 
@@ -83,13 +85,13 @@ class LoginScreen extends HookConsumerWidget {
         }
       });
 
-      return () {
-      };
+      return () {};
     }, []);
 
     useEffect(() {
       void updateIsClickable() {
-        _isClickable.value = accountController.text.isNotEmpty && passwordController.text.isNotEmpty;
+        _isClickable.value = accountController.text.isNotEmpty &&
+            passwordController.text.isNotEmpty;
       }
 
       accountController.addListener(updateIsClickable);
@@ -105,7 +107,8 @@ class LoginScreen extends HookConsumerWidget {
 
     Future<bool> _onWillPop() async {
       final now = DateTime.now();
-      if (lastBackPressed.value == null || now.difference(lastBackPressed.value!) > Duration(seconds: 2)) {
+      if (lastBackPressed.value == null ||
+          now.difference(lastBackPressed.value!) > Duration(seconds: 2)) {
         lastBackPressed.value = now;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -179,11 +182,37 @@ class LoginScreen extends HookConsumerWidget {
                   width: double.infinity,
                   child: AppButton(
                       text: AppStrings.login,
-                      backgroundColor: (_isClickable.value)?AppColors.primaryBlack:AppColors.disableGrey,
+                      backgroundColor: (_isClickable.value)
+                          ? AppColors.primaryBlack
+                          : AppColors.disableGrey,
                       fontColor: AppColors.white,
-                      onPressed: (_isClickable.value)?() {
-                        _login();
-                      }:null)),
+                      onPressed: (_isClickable.value)
+                          ? () {
+                              _login();
+                            }
+                          : null)),
+              Spacer(),
+              Container(
+                margin: EdgeInsets.only(bottom: 24),
+                child: Row(
+                  children: [
+                    Expanded(child: Container(height: 1, color: Colors.black)),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: AppIcon(
+                        icon: AppImages.googleIcon,
+                        size: 24,
+                        backgroundColor: Colors.white,
+                        padding: 4,
+                        onTap: () {
+                          ref.read(signInWithGoogleUseCaseProvider).execute();
+                        },
+                      ),
+                    ),
+                    Expanded(child: Container(height: 1, color: Colors.black)),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

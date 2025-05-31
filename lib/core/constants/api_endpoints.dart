@@ -4,11 +4,13 @@ class ApiEndPoint {
 
 
   // Auth
+  static const String firebaseOauthLogin = '/user/login/firebase-oauth';
   static const String login = '/user/login';
   static const String refreshToken = '/user/refresh-token';
   static const String userInfo = '/user/info';
   static const String deleteUser = '/user/delete';
   static const String updateUserProfile = '/user/profile';
+
 
   /// /user/{id}
   static String getUserById(String id) => '/user/$id';

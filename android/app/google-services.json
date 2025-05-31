@@ -12,7 +12,20 @@
           "package_name": "com.lhr.dental_guard"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "602076142232-uvmv2q8hpouebadvpj8tih4o75h3i6nl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lhr.dental_guard",
+            "certificate_hash": "0aff49cdcbe97ea57621aa676b8a86b41cfda7b8"
+          }
+        },
+        {
+          "client_id": "602076142232-si8drj52j66g98hju7s0h57a1n7gt6ll.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCDLHkdk8KjoMuu2WJFLTUQJCTtIYgCc54"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602076142232-si8drj52j66g98hju7s0h57a1n7gt6ll.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "602076142232-8m9391ctlo0jbqm6q9b5v68gqojh35f3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lhr.dentalGuardFlutter"
+              }
+            }
+          ]
         }
       }
     }
