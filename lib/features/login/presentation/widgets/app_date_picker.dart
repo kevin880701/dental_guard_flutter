@@ -5,7 +5,7 @@ import '../../../../core/widgets/date/date_picker_widget.dart';
 import '../../../../core/widgets/text/app_text.dart';
 import '../../../../core/widgets/text/text_theme.dart';
 
-class LoginDatePicker extends StatelessWidget {
+class AppDatePicker extends StatelessWidget {
   final String title;
   final DateTime? value;
   final bool isEnable;
@@ -17,7 +17,7 @@ class LoginDatePicker extends StatelessWidget {
   final Widget? icon;
   final ValueChanged<DateTime>? onDateSelected;
 
-  const LoginDatePicker({
+  const AppDatePicker({
     super.key,
     required this.title,
     this.value,

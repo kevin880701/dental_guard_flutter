@@ -3,7 +3,7 @@ import 'package:dental_guard_flutter/core/utils/app_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../features/login/presentation/widgets/login_date_picker.dart';
+import '../../../../features/login/presentation/widgets/app_date_picker.dart';
 import '../../../../features/login/presentation/widgets/app_input.dart';
 import '../../button/app_button.dart';
 import '../../input/input_type.dart';
@@ -61,7 +61,7 @@ class AddMemberDialog extends HookConsumerWidget {
               },
             ),
             const SizedBox(height: 8),
-            LoginDatePicker(
+            AppDatePicker(
               title: AppStrings.birthday,
               value: selectedDate.value,
               onDateSelected: (date) {
