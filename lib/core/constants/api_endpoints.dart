@@ -11,7 +11,6 @@ class ApiEndPoint {
   static const String deleteUser = '/user/delete';
   static const String updateUserProfile = '/user/profile';
 
-
   /// /user/{id}
   static String getUserById(String id) => '/user/$id';
 

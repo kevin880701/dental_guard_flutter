@@ -80,7 +80,7 @@ class AuthRemoteDataSource {
   }
 
   Future<UserInfoData?> updateUserProfile(UpdateUserProfileRequest request) async {
-    final response = await networkInterface.put(
+    final response = await networkInterface.patch(
       url: ApiEndPoint.updateUserProfile,
       body: request.toJson(),
     );

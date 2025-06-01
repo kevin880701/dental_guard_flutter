@@ -15,6 +15,7 @@ import '../../../../core/widgets/text/app_text.dart';
 import '../../../../routes/app_router.dart';
 import '../../../auth/application/auth_controller.dart';
 import '../../../auth/application/auth_provider.dart';
+import '../../../auth/domain/entities/OAuthProviderType.dart';
 import '../widgets/app_input.dart';
 
 @RoutePage()
@@ -24,6 +25,7 @@ class LoginScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authControllerNotifier = ref.read(authControllerProvider.notifier);
+    final authControllerState = ref.watch(authControllerProvider);
     final accountController = useTextEditingController();
     final passwordController = useTextEditingController();
     final lastBackPressed = useState<DateTime?>(null);
@@ -42,28 +44,26 @@ class LoginScreen extends HookConsumerWidget {
 
     void _login() async {
       ref.read(pageNotifierProvider.notifier).showLoading();
-      authControllerNotifier
-          .login(
-              account: accountController.text,
-              password: passwordController.text)
-          .then((response) async {
-        if (response.resultCode == 0) {
-          if (_isKeepLogin.value) {
-            final prefs = await SharedPreferences.getInstance();
-            await prefs.setBool('keepLogin', true);
-            await prefs.setString('account', accountController.text);
-            await prefs.setString('password', passwordController.text);
-            context.router.replaceAll([const MainRoute()]);
-          } else {
-            AppToast.showToast(message: AppStrings.loginFailed);
-          }
-        } else {
-          ref
-              .read(pageNotifierProvider.notifier)
-              .showToastMessage(message: response.message);
-        }
-        ref.read(pageNotifierProvider.notifier).hideLoading();
-      });
+      final response = await authControllerNotifier.login(
+        account: accountController.text,
+        password: passwordController.text,
+      );
+
+      if (response.resultCode == 0) {
+        _onLoginSuccess(
+          ref,
+          context,
+          _isKeepLogin.value,
+          accountController.text,
+          passwordController.text,
+        );
+      } else {
+        AppToast.showToast(message: AppStrings.loginFailed);
+        ref
+            .read(pageNotifierProvider.notifier)
+            .showToastMessage(message: response.message);
+      }
+      ref.read(pageNotifierProvider.notifier).hideLoading();
     }
 
     useEffect(() {
@@ -204,8 +204,20 @@ class LoginScreen extends HookConsumerWidget {
                         size: 24,
                         backgroundColor: Colors.white,
                         padding: 4,
-                        onTap: () {
-                          ref.read(signInWithGoogleUseCaseProvider).execute();
+                        onTap: () async {
+
+                          ref.read(pageNotifierProvider.notifier).showLoading();
+
+                          final response = await authControllerNotifier.oAuthLogin(OAuthProviderType.google);
+
+                          if (response.resultCode == 0) {
+                            // google login 不會自動記住帳密，所以 isKeepLogin/帳密可以不用存
+                            _onLoginSuccess(ref, context, false, null, null);
+                          } else {
+                            AppToast.showToast(message: response.message);
+                            ref.read(pageNotifierProvider.notifier).showToastMessage(message: response.message);
+                          }
+                          ref.read(pageNotifierProvider.notifier).hideLoading();
                         },
                       ),
                     ),
@@ -218,5 +230,26 @@ class LoginScreen extends HookConsumerWidget {
         ),
       ),
     );
+  }
+}
+
+void _onLoginSuccess(WidgetRef ref, BuildContext context, bool isKeepLogin, String? account, String? password) async {
+  final authState = ref.read(authControllerProvider);
+  final userData = authState.userInfoData;
+  final hasName = userData != null &&
+      userData.name != null &&
+      userData.name!.trim().isNotEmpty;
+
+  if (isKeepLogin && account != null && password != null) {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('keepLogin', true);
+    await prefs.setString('account', account);
+    await prefs.setString('password', password);
+  }
+
+  if (hasName) {
+    context.router.replaceAll([const MainRoute()]);
+  } else {
+    context.router.replaceAll([const CreateUserProfileRoute()]);
   }
 }

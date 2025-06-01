@@ -39,7 +39,7 @@ class SignInWithGoogleUseCase {
 
       // idToken 或 firebaseUid 不存在就當失敗
       if (idToken == null || firebaseUid == null) {
-        await _signOut();
+        await signOut();
         return ApiResponse<LoginData?>(
           message: "無法取得登入資訊",
           resultCode: 4001,
@@ -60,7 +60,7 @@ class SignInWithGoogleUseCase {
       } catch (e) {
         // 後端登入失敗 → 登出 Firebase
         print("OAuth 登入失敗: $e");
-        await _signOut();
+        await signOut();
         return ApiResponse<LoginData?>(
           message: "Google 登入失敗",
           resultCode: 4001,
@@ -70,7 +70,7 @@ class SignInWithGoogleUseCase {
 
     } catch (e) {
       print("Google 登入失敗: $e");
-      await _signOut();
+      await signOut();
       return ApiResponse<LoginData?>(
         message: "Google 登入失敗",
         resultCode: 4001,
@@ -80,7 +80,7 @@ class SignInWithGoogleUseCase {
   }
 
   // 登出 Google 與 Firebase
-  Future<void> _signOut() async {
+  Future<void> signOut() async {
     await _auth.signOut();
     await _googleSignIn.signOut();
   }

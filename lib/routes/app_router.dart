@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../features/auth/data/models/response/user_info/user_info_data.dart';
+import '../features/auth/presentation/pages/create_user_profile_screen.dart';
 import '../features/launch/presentation/pages/launch_screen.dart';
 import '../features/login/presentation/pages/login_screen.dart';
 import '../features/main/presentation/pages/main_screen.dart';
@@ -36,6 +37,12 @@ class AppRouter extends RootStackRouter {
     CustomRoute(
       page: LoginRoute.page,
       path: '/login',
+      duration: _duration,
+      transitionsBuilder: TransitionsBuilders.slideLeft,
+    ),
+    CustomRoute(
+      page: CreateUserProfileRoute.page,
+      path: '/createUserProfile',
       duration: _duration,
       transitionsBuilder: TransitionsBuilders.slideLeft,
     ),

@@ -19,6 +19,11 @@ class AppStrings {
   static const password = '密碼';
   static const passwordField = '密碼：';
 
+  // CreateUserProfile
+  static const gender = '性別';
+  static const createUserProfile = '建立個人資料';
+  static const createFailedPlsLoginAgain = '建立失敗，請重新登入';
+
   // Input
   static const plsEnter = '請輸入';
   static const plsEnterAccount = '請輸入帳號';

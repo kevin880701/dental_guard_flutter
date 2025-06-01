@@ -8,12 +8,12 @@ class UserInfoData with _$UserInfoData {
   const factory UserInfoData({
     @JsonKey(name: 'id') required String id,
     @JsonKey(name: 'number') String? number,
-    @JsonKey(name: 'name') required String name,
-    @JsonKey(name: 'email') required String email,
-    @JsonKey(name: 'phone') required String phone,
+    @JsonKey(name: 'name') String? name,
+    @JsonKey(name: 'email') String? email,
+    @JsonKey(name: 'phone') String? phone,
     @JsonKey(name: 'avatar_url') String? avatarUrl,
     @JsonKey(name: 'birthday') String? birthday,  // ISO 8601 格式日期字串
-    @JsonKey(name: 'gender') required int gender,
+    @JsonKey(name: 'gender') int? gender,
     @JsonKey(name: 'is_verified') required bool isVerified,
     @JsonKey(name: 'login_type') int? loginType,
     @JsonKey(name: 'role') required int role,

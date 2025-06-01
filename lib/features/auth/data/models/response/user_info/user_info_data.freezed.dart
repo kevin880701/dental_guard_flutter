@@ -25,17 +25,17 @@ mixin _$UserInfoData {
   @JsonKey(name: 'number')
   String? get number => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
-  String get name => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'email')
-  String get email => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
   @JsonKey(name: 'phone')
-  String get phone => throw _privateConstructorUsedError;
+  String? get phone => throw _privateConstructorUsedError;
   @JsonKey(name: 'avatar_url')
   String? get avatarUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'birthday')
   String? get birthday => throw _privateConstructorUsedError; // ISO 8601 格式日期字串
   @JsonKey(name: 'gender')
-  int get gender => throw _privateConstructorUsedError;
+  int? get gender => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_verified')
   bool get isVerified => throw _privateConstructorUsedError;
   @JsonKey(name: 'login_type')
@@ -66,12 +66,12 @@ abstract class $UserInfoDataCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'number') String? number,
-      @JsonKey(name: 'name') String name,
-      @JsonKey(name: 'email') String email,
-      @JsonKey(name: 'phone') String phone,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'email') String? email,
+      @JsonKey(name: 'phone') String? phone,
       @JsonKey(name: 'avatar_url') String? avatarUrl,
       @JsonKey(name: 'birthday') String? birthday,
-      @JsonKey(name: 'gender') int gender,
+      @JsonKey(name: 'gender') int? gender,
       @JsonKey(name: 'is_verified') bool isVerified,
       @JsonKey(name: 'login_type') int? loginType,
       @JsonKey(name: 'role') int role,
@@ -96,12 +96,12 @@ class _$UserInfoDataCopyWithImpl<$Res, $Val extends UserInfoData>
   $Res call({
     Object? id = null,
     Object? number = freezed,
-    Object? name = null,
-    Object? email = null,
-    Object? phone = null,
+    Object? name = freezed,
+    Object? email = freezed,
+    Object? phone = freezed,
     Object? avatarUrl = freezed,
     Object? birthday = freezed,
-    Object? gender = null,
+    Object? gender = freezed,
     Object? isVerified = null,
     Object? loginType = freezed,
     Object? role = null,
@@ -117,18 +117,18 @@ class _$UserInfoDataCopyWithImpl<$Res, $Val extends UserInfoData>
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
+              as String?,
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
+              as String?,
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
@@ -137,10 +137,10 @@ class _$UserInfoDataCopyWithImpl<$Res, $Val extends UserInfoData>
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
               as String?,
-      gender: null == gender
+      gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       isVerified: null == isVerified
           ? _value.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
@@ -176,12 +176,12 @@ abstract class _$$UserInfoDataImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'id') String id,
       @JsonKey(name: 'number') String? number,
-      @JsonKey(name: 'name') String name,
-      @JsonKey(name: 'email') String email,
-      @JsonKey(name: 'phone') String phone,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'email') String? email,
+      @JsonKey(name: 'phone') String? phone,
       @JsonKey(name: 'avatar_url') String? avatarUrl,
       @JsonKey(name: 'birthday') String? birthday,
-      @JsonKey(name: 'gender') int gender,
+      @JsonKey(name: 'gender') int? gender,
       @JsonKey(name: 'is_verified') bool isVerified,
       @JsonKey(name: 'login_type') int? loginType,
       @JsonKey(name: 'role') int role,
@@ -204,12 +204,12 @@ class __$$UserInfoDataImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? number = freezed,
-    Object? name = null,
-    Object? email = null,
-    Object? phone = null,
+    Object? name = freezed,
+    Object? email = freezed,
+    Object? phone = freezed,
     Object? avatarUrl = freezed,
     Object? birthday = freezed,
-    Object? gender = null,
+    Object? gender = freezed,
     Object? isVerified = null,
     Object? loginType = freezed,
     Object? role = null,
@@ -225,18 +225,18 @@ class __$$UserInfoDataImplCopyWithImpl<$Res>
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
+              as String?,
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
+              as String?,
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
@@ -245,10 +245,10 @@ class __$$UserInfoDataImplCopyWithImpl<$Res>
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
               as String?,
-      gender: null == gender
+      gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       isVerified: null == isVerified
           ? _value.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
@@ -279,12 +279,12 @@ class _$UserInfoDataImpl implements _UserInfoData {
   const _$UserInfoDataImpl(
       {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'number') this.number,
-      @JsonKey(name: 'name') required this.name,
-      @JsonKey(name: 'email') required this.email,
-      @JsonKey(name: 'phone') required this.phone,
+      @JsonKey(name: 'name') this.name,
+      @JsonKey(name: 'email') this.email,
+      @JsonKey(name: 'phone') this.phone,
       @JsonKey(name: 'avatar_url') this.avatarUrl,
       @JsonKey(name: 'birthday') this.birthday,
-      @JsonKey(name: 'gender') required this.gender,
+      @JsonKey(name: 'gender') this.gender,
       @JsonKey(name: 'is_verified') required this.isVerified,
       @JsonKey(name: 'login_type') this.loginType,
       @JsonKey(name: 'role') required this.role,
@@ -302,13 +302,13 @@ class _$UserInfoDataImpl implements _UserInfoData {
   final String? number;
   @override
   @JsonKey(name: 'name')
-  final String name;
+  final String? name;
   @override
   @JsonKey(name: 'email')
-  final String email;
+  final String? email;
   @override
   @JsonKey(name: 'phone')
-  final String phone;
+  final String? phone;
   @override
   @JsonKey(name: 'avatar_url')
   final String? avatarUrl;
@@ -318,7 +318,7 @@ class _$UserInfoDataImpl implements _UserInfoData {
 // ISO 8601 格式日期字串
   @override
   @JsonKey(name: 'gender')
-  final int gender;
+  final int? gender;
   @override
   @JsonKey(name: 'is_verified')
   final bool isVerified;
@@ -405,12 +405,12 @@ abstract class _UserInfoData implements UserInfoData {
   const factory _UserInfoData(
           {@JsonKey(name: 'id') required final String id,
           @JsonKey(name: 'number') final String? number,
-          @JsonKey(name: 'name') required final String name,
-          @JsonKey(name: 'email') required final String email,
-          @JsonKey(name: 'phone') required final String phone,
+          @JsonKey(name: 'name') final String? name,
+          @JsonKey(name: 'email') final String? email,
+          @JsonKey(name: 'phone') final String? phone,
           @JsonKey(name: 'avatar_url') final String? avatarUrl,
           @JsonKey(name: 'birthday') final String? birthday,
-          @JsonKey(name: 'gender') required final int gender,
+          @JsonKey(name: 'gender') final int? gender,
           @JsonKey(name: 'is_verified') required final bool isVerified,
           @JsonKey(name: 'login_type') final int? loginType,
           @JsonKey(name: 'role') required final int role,
@@ -429,13 +429,13 @@ abstract class _UserInfoData implements UserInfoData {
   String? get number;
   @override
   @JsonKey(name: 'name')
-  String get name;
+  String? get name;
   @override
   @JsonKey(name: 'email')
-  String get email;
+  String? get email;
   @override
   @JsonKey(name: 'phone')
-  String get phone;
+  String? get phone;
   @override
   @JsonKey(name: 'avatar_url')
   String? get avatarUrl;
@@ -444,7 +444,7 @@ abstract class _UserInfoData implements UserInfoData {
   String? get birthday; // ISO 8601 格式日期字串
   @override
   @JsonKey(name: 'gender')
-  int get gender;
+  int? get gender;
   @override
   @JsonKey(name: 'is_verified')
   bool get isVerified;

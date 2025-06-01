@@ -10,6 +10,7 @@ import '../../../core/utils/shared_prefs_util.dart';
 import '../../organization/application/organization_controller.dart';
 import '../data/models/response/login/login_data.dart';
 import '../data/models/response/user_info/user_info_data.dart';
+import '../domain/entities/OAuthProviderType.dart';
 import 'auth_provider.dart';
 
 part 'auth_controller.freezed.dart';
@@ -68,6 +69,56 @@ class AuthController extends StateNotifier<AuthState> {
     }
   }
 
+  Future<ApiResponse<LoginData?>> oAuthLogin(OAuthProviderType providerType) async {
+    ref.read(pageNotifierProvider.notifier).showLoading();
+
+    try {
+      ApiResponse<LoginData?>? loginResult;
+
+      switch (providerType) {
+        case OAuthProviderType.google:
+          final googleUseCase = ref.read(signInWithGoogleUseCaseProvider);
+          loginResult = await googleUseCase.execute();
+          break;
+        case OAuthProviderType.apple:
+          // final appleUseCase = ref.read(signInWithAppleUseCaseProvider);
+          // loginResult = await appleUseCase.execute();
+          break;
+        case OAuthProviderType.facebook:
+          // final facebookUseCase = ref.read(signInWithFacebookUseCaseProvider);
+          // loginResult = await facebookUseCase.execute();
+          break;
+        case OAuthProviderType.line:
+          break;
+      }
+
+      final loginData = loginResult?.data;
+      if (loginData == null ||
+          loginData.accessToken.isEmpty ||
+          loginData.refreshToken.isEmpty) {
+        return loginResult ?? ApiResponse(resultCode: -1, message: "第三方登入失敗", data: null);
+      }
+
+      final getUserInfoUseCase = ref.read(getUserInfoUseCaseProvider);
+      final userResult = await getUserInfoUseCase.execute();
+      await SharedPrefsUtil.setString(
+          REFRESH_TOKEN, loginData.refreshToken ?? "");
+
+      state = state.copyWith(
+        loginData: loginData,
+        userInfoData: userResult,
+      );
+
+      ref.read(pageNotifierProvider.notifier).hideLoading();
+      return loginResult!;
+    } catch (e) {
+      AppLog.e(e.toString());
+      ref.read(pageNotifierProvider.notifier).hideLoading();
+      return ApiResponse(
+          resultCode: -99999, message: "第三方登入失敗，請稍後再試或聯繫客服", data: null);
+    }
+  }
+
   /// 清除登入資訊
   void clear() {
     state = const AuthState();
@@ -75,6 +126,7 @@ class AuthController extends StateNotifier<AuthState> {
 
   void logout() {
     ref.read(organizationControllerProvider.notifier).clear();
+    ref.read(signInWithGoogleUseCaseProvider).signOut();
     clear();
     TokenManager.clearTokens();
   }

@@ -27,6 +27,22 @@ class CameraRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [CreateUserProfileScreen]
+class CreateUserProfileRoute extends PageRouteInfo<void> {
+  const CreateUserProfileRoute({List<PageRouteInfo>? children})
+    : super(CreateUserProfileRoute.name, initialChildren: children);
+
+  static const String name = 'CreateUserProfileRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CreateUserProfileScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [LaunchScreen]
 class LaunchRoute extends PageRouteInfo<void> {
   const LaunchRoute({List<PageRouteInfo>? children})
