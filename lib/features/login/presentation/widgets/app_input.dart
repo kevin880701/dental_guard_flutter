@@ -14,7 +14,7 @@ import '../../../../core/widgets/text/text_theme.dart';
 /// LoginInput(title: '帳號', inputType: InputType.USERNAME),
 /// LoginInput(title: '密碼', inputType: InputType.PASSWORD),
 /// ```
-class LoginInput extends StatelessWidget {
+class AppInput extends StatelessWidget {
   final String title;
   final InputType inputType;
   final String? hintText;
@@ -23,7 +23,7 @@ class LoginInput extends StatelessWidget {
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
 
-  const LoginInput({
+  const AppInput({
     super.key,
     required this.title,
     required this.inputType,

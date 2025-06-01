@@ -15,7 +15,7 @@ import '../../../../core/widgets/text/app_text.dart';
 import '../../../../routes/app_router.dart';
 import '../../../auth/application/auth_controller.dart';
 import '../../../auth/application/auth_provider.dart';
-import '../widgets/login_input.dart';
+import '../widgets/app_input.dart';
 
 @RoutePage()
 class LoginScreen extends HookConsumerWidget {
@@ -131,7 +131,7 @@ class LoginScreen extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               gapH24,
-              LoginInput(
+              AppInput(
                 title: AppStrings.account,
                 hintText: AppStrings.plsEnterAccount,
                 inputType: InputType.ALL,
@@ -144,7 +144,7 @@ class LoginScreen extends HookConsumerWidget {
                   return null;
                 },
               ),
-              LoginInput(
+              AppInput(
                 title: AppStrings.password,
                 hintText: AppStrings.plsEnterPassword,
                 inputType: InputType.PASSWORD,
