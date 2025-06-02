@@ -35,8 +35,8 @@ class TitleBar extends HookWidget {
       decoration: BoxDecoration(
         color: AppColors.primaryBlack,
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(18),
-          bottomRight: Radius.circular(18),
+          bottomLeft: Radius.circular(0),
+          bottomRight: Radius.circular(0),
         ),
       ),
       padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
