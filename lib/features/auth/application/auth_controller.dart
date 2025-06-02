@@ -89,6 +89,8 @@ class AuthController extends StateNotifier<AuthState> {
           // loginResult = await facebookUseCase.execute();
           break;
         case OAuthProviderType.line:
+          final lineUseCase = ref.read(lineOAuthLoginUseCaseProvider);
+          loginResult = await lineUseCase.execute();
           break;
       }
 
@@ -115,7 +117,7 @@ class AuthController extends StateNotifier<AuthState> {
       AppLog.e(e.toString());
       ref.read(pageNotifierProvider.notifier).hideLoading();
       return ApiResponse(
-          resultCode: -99999, message: "第三方登入失敗，請稍後再試或聯繫客服", data: null);
+          resultCode: -99999, message: "登入失敗，請稍後再試或聯繫客服", data: null);
     }
   }
 

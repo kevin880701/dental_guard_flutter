@@ -10,7 +10,8 @@ class AppImages {
   static const editIcon = '${assetsIcons}ic_edit.svg';
 
   static const appleIcon = '${assetsImages}ic_apple.png';
-  static const googleIcon = '${assetsImages}ic_google.png';
+  static const googleIcon = '${assetsIcons}ic_google.png';
+  static const lineIcon = '${assetsIcons}ic_line.png';
 
   static const informationIcon = '${assetsImages}ic_information.png';
   static const addIcon = '${assetsImages}ic_add.png';

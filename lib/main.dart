@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dental_guard_flutter/routes/app_router.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -39,6 +40,9 @@ void main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
+
+  // LINE 初始化
+  await LineSDK.instance.setup("2007513150");
 
   await SharedPrefsUtil.init();
   await TokenManager.loadTokens();

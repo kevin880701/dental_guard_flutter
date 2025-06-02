@@ -5,6 +5,7 @@ class ApiEndPoint {
 
   // Auth
   static const String firebaseOauthLogin = '/user/login/firebase-oauth';
+  static const String lineOauthLogin = '/user/login/line-oauth';
   static const String login = '/user/login';
   static const String refreshToken = '/user/refresh-token';
   static const String userInfo = '/user/info';

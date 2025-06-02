@@ -200,6 +200,25 @@ class LoginScreen extends HookConsumerWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8),
                       child: AppIcon(
+                        icon: AppImages.lineIcon,
+                        size: 24,
+                        backgroundColor: Colors.white,
+                        padding: 4,
+                        onTap: () async {
+                          final response = await ref.read(authControllerProvider.notifier).oAuthLogin(OAuthProviderType.line);
+
+                          if (response.resultCode == 0) {
+                            _onLoginSuccess(ref, context, false, null, null);
+                          } else {
+                            AppToast.showToast(message: response.message);
+                          }
+                        }
+                        ,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: AppIcon(
                         icon: AppImages.googleIcon,
                         size: 24,
                         backgroundColor: Colors.white,

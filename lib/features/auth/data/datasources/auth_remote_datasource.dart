@@ -3,6 +3,7 @@ import '../../../../core/models/api_response.dart';
 import '../../../../core/network/network_interface.dart';
 import '../../../../core/network/token_manager.dart';
 import '../../../../core/utils/api_response_parser.dart';
+import '../models/request/line_oauth_login/line_oauth_login_request.dart';
 import '../models/request/login/login_request.dart';
 import '../models/request/firebase_oauth_login_request/firebase_oauth_login_request.dart';
 import '../models/request/refresh_token/refresh_token_request.dart';
@@ -39,6 +40,23 @@ class AuthRemoteDataSource {
   Future<ApiResponse<LoginData?>> firebaseOAuthLogin(FirebaseOAuthLoginRequest request) async {
     final response = await networkInterface.post(
       url: ApiEndPoint.firebaseOauthLogin,
+      body: request.toJson(),
+    );
+    final apiResponse = ApiResponse<LoginData>.fromJson(
+      response.data,
+          (json) => LoginData.fromJson(json as Map<String, dynamic>),
+    );
+    TokenManager.setTokens(
+      accessToken: apiResponse.data?.accessToken ?? "",
+      refreshToken: apiResponse.data?.refreshToken ?? "",
+    );
+    return apiResponse;
+  }
+
+  // 新增：Line OAuth 登入
+  Future<ApiResponse<LoginData?>> lineOAuthLogin(LineOAuthLoginRequest request) async {
+    final response = await networkInterface.post(
+      url: ApiEndPoint.lineOauthLogin, // 你 API 路徑 /user/login/line-oauth
       body: request.toJson(),
     );
     final apiResponse = ApiResponse<LoginData>.fromJson(
