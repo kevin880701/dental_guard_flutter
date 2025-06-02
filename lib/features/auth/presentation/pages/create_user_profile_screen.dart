@@ -47,7 +47,10 @@ class CreateUserProfileScreen extends HookConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TitleBar(title: AppStrings.createUserProfile,isBack: true,),
+          TitleBar(title: AppStrings.createUserProfile,isBack: true,onBackTap: (){
+            authNotifier.logout();
+            context.router.replaceAll([const LoginRoute()]);
+          },),
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(12),
