@@ -9,12 +9,15 @@ part of 'groups_manage_data.dart';
 _$GroupsManageDataImpl _$$GroupsManageDataImplFromJson(
         Map<String, dynamic> json) =>
     _$GroupsManageDataImpl(
-      hierarchy: (json['hierarchy'] as List<dynamic>)
-          .map((e) => GroupHierarchyNode.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      members: (json['members'] as List<dynamic>)
-          .map((e) => GroupWithUsers.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      hierarchy: (json['hierarchy'] as List<dynamic>?)
+              ?.map(
+                  (e) => GroupHierarchyNode.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      members: (json['members'] as List<dynamic>?)
+              ?.map((e) => GroupWithUsers.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$GroupsManageDataImplToJson(
@@ -28,9 +31,11 @@ _$GroupHierarchyNodeImpl _$$GroupHierarchyNodeImplFromJson(
         Map<String, dynamic> json) =>
     _$GroupHierarchyNodeImpl(
       group: GroupData.fromJson(json['group'] as Map<String, dynamic>),
-      children: (json['children'] as List<dynamic>)
-          .map((e) => GroupHierarchyNode.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      children: (json['children'] as List<dynamic>?)
+              ?.map(
+                  (e) => GroupHierarchyNode.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$GroupHierarchyNodeImplToJson(
@@ -43,9 +48,10 @@ Map<String, dynamic> _$$GroupHierarchyNodeImplToJson(
 _$GroupWithUsersImpl _$$GroupWithUsersImplFromJson(Map<String, dynamic> json) =>
     _$GroupWithUsersImpl(
       group: GroupData.fromJson(json['group'] as Map<String, dynamic>),
-      children: (json['children'] as List<dynamic>)
-          .map((e) => UserInfoData.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      children: (json['children'] as List<dynamic>?)
+              ?.map((e) => UserInfoData.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$GroupWithUsersImplToJson(

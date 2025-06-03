@@ -124,8 +124,8 @@ class __$$GroupsManageDataImplCopyWithImpl<$Res>
 class _$GroupsManageDataImpl implements _GroupsManageData {
   const _$GroupsManageDataImpl(
       {@JsonKey(name: 'hierarchy')
-      required final List<GroupHierarchyNode> hierarchy,
-      @JsonKey(name: 'members') required final List<GroupWithUsers> members})
+      final List<GroupHierarchyNode> hierarchy = const [],
+      @JsonKey(name: 'members') final List<GroupWithUsers> members = const []})
       : _hierarchy = hierarchy,
         _members = members;
 
@@ -191,10 +191,9 @@ class _$GroupsManageDataImpl implements _GroupsManageData {
 
 abstract class _GroupsManageData implements GroupsManageData {
   const factory _GroupsManageData(
-      {@JsonKey(name: 'hierarchy')
-      required final List<GroupHierarchyNode> hierarchy,
-      @JsonKey(name: 'members')
-      required final List<GroupWithUsers> members}) = _$GroupsManageDataImpl;
+          {@JsonKey(name: 'hierarchy') final List<GroupHierarchyNode> hierarchy,
+          @JsonKey(name: 'members') final List<GroupWithUsers> members}) =
+      _$GroupsManageDataImpl;
 
   factory _GroupsManageData.fromJson(Map<String, dynamic> json) =
       _$GroupsManageDataImpl.fromJson;
@@ -340,7 +339,7 @@ class _$GroupHierarchyNodeImpl implements _GroupHierarchyNode {
   const _$GroupHierarchyNodeImpl(
       {@JsonKey(name: 'group') required this.group,
       @JsonKey(name: 'children')
-      required final List<GroupHierarchyNode> children})
+      final List<GroupHierarchyNode> children = const []})
       : _children = children;
 
   factory _$GroupHierarchyNodeImpl.fromJson(Map<String, dynamic> json) =>
@@ -397,8 +396,7 @@ class _$GroupHierarchyNodeImpl implements _GroupHierarchyNode {
 abstract class _GroupHierarchyNode implements GroupHierarchyNode {
   const factory _GroupHierarchyNode(
           {@JsonKey(name: 'group') required final GroupData group,
-          @JsonKey(name: 'children')
-          required final List<GroupHierarchyNode> children}) =
+          @JsonKey(name: 'children') final List<GroupHierarchyNode> children}) =
       _$GroupHierarchyNodeImpl;
 
   factory _GroupHierarchyNode.fromJson(Map<String, dynamic> json) =
@@ -544,7 +542,7 @@ class __$$GroupWithUsersImplCopyWithImpl<$Res>
 class _$GroupWithUsersImpl implements _GroupWithUsers {
   const _$GroupWithUsersImpl(
       {@JsonKey(name: 'group') required this.group,
-      @JsonKey(name: 'children') required final List<UserInfoData> children})
+      @JsonKey(name: 'children') final List<UserInfoData> children = const []})
       : _children = children;
 
   factory _$GroupWithUsersImpl.fromJson(Map<String, dynamic> json) =>
@@ -600,9 +598,9 @@ class _$GroupWithUsersImpl implements _GroupWithUsers {
 
 abstract class _GroupWithUsers implements GroupWithUsers {
   const factory _GroupWithUsers(
-      {@JsonKey(name: 'group') required final GroupData group,
-      @JsonKey(name: 'children')
-      required final List<UserInfoData> children}) = _$GroupWithUsersImpl;
+          {@JsonKey(name: 'group') required final GroupData group,
+          @JsonKey(name: 'children') final List<UserInfoData> children}) =
+      _$GroupWithUsersImpl;
 
   factory _GroupWithUsers.fromJson(Map<String, dynamic> json) =
       _$GroupWithUsersImpl.fromJson;

@@ -8,8 +8,8 @@ part 'groups_manage_data.g.dart';
 @freezed
 class GroupsManageData with _$GroupsManageData {
   const factory GroupsManageData({
-    @JsonKey(name: 'hierarchy') required List<GroupHierarchyNode> hierarchy,
-    @JsonKey(name: 'members') required List<GroupWithUsers> members,
+    @JsonKey(name: 'hierarchy') @Default([]) List<GroupHierarchyNode> hierarchy,
+    @JsonKey(name: 'members') @Default([]) List<GroupWithUsers> members,
   }) = _GroupsManageData;
 
   factory GroupsManageData.fromJson(Map<String, dynamic> json) =>
@@ -20,7 +20,7 @@ class GroupsManageData with _$GroupsManageData {
 class GroupHierarchyNode with _$GroupHierarchyNode {
   const factory GroupHierarchyNode({
     @JsonKey(name: 'group') required GroupData group,
-    @JsonKey(name: 'children') required List<GroupHierarchyNode> children,
+    @JsonKey(name: 'children') @Default([]) List<GroupHierarchyNode> children,
   }) = _GroupHierarchyNode;
 
   factory GroupHierarchyNode.fromJson(Map<String, dynamic> json) =>
@@ -31,7 +31,7 @@ class GroupHierarchyNode with _$GroupHierarchyNode {
 class GroupWithUsers with _$GroupWithUsers {
   const factory GroupWithUsers({
     @JsonKey(name: 'group') required GroupData group,
-    @JsonKey(name: 'children') required List<UserInfoData> children,
+    @JsonKey(name: 'children') @Default([]) List<UserInfoData> children,
   }) = _GroupWithUsers;
 
   factory GroupWithUsers.fromJson(Map<String, dynamic> json) =>
