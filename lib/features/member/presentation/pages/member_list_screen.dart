@@ -17,7 +17,6 @@ import '../../../organization/data/models/response/group/group_data.dart';
 import '../providers/member_list_controller.dart';
 import '../widgets/MemberItem.dart';
 
-@RoutePage()
 class MemberListScreen extends HookConsumerWidget {
   final GroupData group;
 
@@ -42,41 +41,6 @@ class MemberListScreen extends HookConsumerWidget {
       child: SafeArea(
         child: Column(
           children: [
-            TitleBar(
-              title: group.name,
-              onBackTap: () {
-                context.pop();
-              },
-
-              onAddTap: () async {
-                showAddMemberDialog(
-                  context,
-                  onSubmit: ({
-                    required String number,
-                    required String name,
-                    required DateTime birthday,
-                    required int gender,
-                  }) async {
-                    final useCase = ref.read(addGroupMemberExtendedUseCaseProvider);
-                    final result = await useCase(
-                      groupId: group.id,
-                      number: number,
-                      name: name,
-                      birthday: birthday.toIsoDateTime(),
-                      gender: gender,
-                    );
-                    if (result.data != null) {
-                      organizationControllerNotifier.appendGroupMembers(groupId: group.id, users: [result.data!]);
-                      memberListControllerNotifier.loadMembersByGroupId();
-                      AppToast.showToast(message: AppStrings.createSuccess);
-                    } else {
-                      AppToast.showToast(message: "${AppStrings.createFailed}: ${result.message}");
-                    }
-                  },
-                );
-              },
-            ),
-
             // 顯示成員列表
             Expanded(
               child: ListView.builder(

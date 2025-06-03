@@ -43,6 +43,43 @@ class CreateUserProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [GroupMainScreen]
+class GroupMainRoute extends PageRouteInfo<GroupMainRouteArgs> {
+  GroupMainRoute({
+    Key? key,
+    required GroupData group,
+    List<PageRouteInfo>? children,
+  }) : super(
+         GroupMainRoute.name,
+         args: GroupMainRouteArgs(key: key, group: group),
+         initialChildren: children,
+       );
+
+  static const String name = 'GroupMainRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<GroupMainRouteArgs>();
+      return GroupMainScreen(key: args.key, group: args.group);
+    },
+  );
+}
+
+class GroupMainRouteArgs {
+  const GroupMainRouteArgs({this.key, required this.group});
+
+  final Key? key;
+
+  final GroupData group;
+
+  @override
+  String toString() {
+    return 'GroupMainRouteArgs{key: $key, group: $group}';
+  }
+}
+
+/// generated route for
 /// [LaunchScreen]
 class LaunchRoute extends PageRouteInfo<void> {
   const LaunchRoute({List<PageRouteInfo>? children})
@@ -124,43 +161,6 @@ class MemberInfoRouteArgs {
   @override
   String toString() {
     return 'MemberInfoRouteArgs{key: $key, user: $user}';
-  }
-}
-
-/// generated route for
-/// [MemberListScreen]
-class MemberListRoute extends PageRouteInfo<MemberListRouteArgs> {
-  MemberListRoute({
-    Key? key,
-    required GroupData group,
-    List<PageRouteInfo>? children,
-  }) : super(
-         MemberListRoute.name,
-         args: MemberListRouteArgs(key: key, group: group),
-         initialChildren: children,
-       );
-
-  static const String name = 'MemberListRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      final args = data.argsAs<MemberListRouteArgs>();
-      return MemberListScreen(key: args.key, group: args.group);
-    },
-  );
-}
-
-class MemberListRouteArgs {
-  const MemberListRouteArgs({this.key, required this.group});
-
-  final Key? key;
-
-  final GroupData group;
-
-  @override
-  String toString() {
-    return 'MemberListRouteArgs{key: $key, group: $group}';
   }
 }
 

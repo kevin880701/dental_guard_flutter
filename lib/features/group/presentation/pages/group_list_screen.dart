@@ -78,7 +78,8 @@ class GroupListScreen extends HookConsumerWidget {
                   return GroupItem(
                     group: group,
                     onTap: () {
-                      context.pushRoute(MemberListRoute(group: group!));
+                      // context.pushRoute(MemberListRoute(group: group!));
+                      context.pushRoute(GroupMainRoute(group: group!));
                     },
                     onEditTap: () async {
                       final input = await showBottomEditDialog(

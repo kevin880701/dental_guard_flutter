@@ -49,3 +49,5 @@ extension ContextSizeExtension on BuildContext {
   double get screenWidth => MediaQuery.of(this).size.width;
   double get screenHeight => MediaQuery.of(this).size.height;
 }
+
+String addLeadingZero(dynamic value, {int width = 2}) => value.toString().padLeft(width, '0');

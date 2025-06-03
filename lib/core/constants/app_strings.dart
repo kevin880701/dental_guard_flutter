@@ -24,6 +24,10 @@ class AppStrings {
   static const createUserProfile = '建立個人資料';
   static const createFailedPlsLoginAgain = '建立失敗，請重新登入';
 
+//   PickerDateDialog
+  static const chooseTime = '選擇時間';
+  static const returnToCurrentTime = '返回當下時間';
+
   // Input
   static const plsEnter = '請輸入';
   static const plsEnterAccount = '請輸入帳號';
@@ -53,6 +57,8 @@ class AppStrings {
   static const createSuccess = '新增成功';
   static const createFailed = '新增失敗';
   static const editClassInfo = '編輯班級資訊';
+  static const group = '成員';
+  static const dataAnalysis = '資料分析';
 
   // MemberListScreen
   static const studentList = '學生列表';

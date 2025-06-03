@@ -12,6 +12,7 @@ class AppImages {
   static const appleIcon = '${assetsImages}ic_apple.png';
   static const googleIcon = '${assetsIcons}ic_google.png';
   static const lineIcon = '${assetsIcons}ic_line.png';
+  static const dateIcon = '${assetsIcons}ic_date.svg';
 
   static const informationIcon = '${assetsImages}ic_information.png';
   static const addIcon = '${assetsImages}ic_add.png';
@@ -22,4 +23,7 @@ class AppImages {
   static const personalActiveIcon = '${assetsImages}ic_personal_active.png';
   static const personalInactiveIcon = '${assetsImages}ic_personal_inactive.png';
   static const listIcon = '${assetsImages}ic_list.png';
+
+  static const teethIcon = '${assetsIcons}ic_teeth.svg';
+  static const toothBrushIcon = '${assetsIcons}ic_tooth_brush.svg';
 }

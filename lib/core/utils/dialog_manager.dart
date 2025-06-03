@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../features/teeth_record/domain/entity/chart_time_status.dart';
 import '../constants/app_resources.dart';
 import '../widgets/dialog/window/add_member_dialog.dart';
 import '../widgets/dialog/window/bottom_edit_dialog.dart';
@@ -9,6 +10,7 @@ import '../widgets/dialog/window/choose_image_dialog.dart';
 import '../widgets/dialog/window/default_dialog.dart';
 import '../widgets/dialog/window/edit_member_dialog.dart';
 import '../widgets/dialog/window/error_dialog.dart';
+import '../widgets/dialog/window/picker_date_dialog.dart';
 import '../widgets/input/input_type.dart';
 
 /// Dialog 顯示位置
@@ -105,6 +107,28 @@ Future<void> showChooseImageDialog(
     context,
     child: ChooseImageDialog(onChooseImageTap: onChooseImageTap,
         onCapturePhotoTap: onCapturePhotoTap),
+  );
+}
+
+/// 日期選擇 Dialog（回傳選擇的時間 & 類型）
+Future<void> showPickerDateDialog(
+    BuildContext context, {
+      required DateTime? selectTime,
+      required ChartTimeStatus chartTimeStatus,
+      required void Function(DateTime?, ChartTimeStatus?) onSelectTime,
+      bool barrierDismissible = true,
+    }) async {
+  await showDialogBox(
+    context,
+    child: PickerDateDialog(
+      selectTime: selectTime,
+      chartTimeStatus: chartTimeStatus,
+      onSelectTime: (date, status) {
+        onSelectTime(date, status);
+      },
+    ),
+    position: DialogPosition.bottom,
+    barrierDismissible: barrierDismissible,
   );
 }
 
