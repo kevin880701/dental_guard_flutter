@@ -6,6 +6,7 @@ import '../../../../core/base/base_page.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../organization/data/models/response/group/group_data.dart';
 import '../widgets/chart/group_brushing_bar_chart.dart';
+import '../widgets/chart/group_use_count_line_chart.dart';
 
 class GroupBrushingChartScreen extends HookConsumerWidget {
   final GroupData group;
@@ -16,13 +17,14 @@ class GroupBrushingChartScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return BasePage(
       backgroundColor: AppColors.bgColor,
-      child: SafeArea(
-        child: Column(
-          children: [
-            GroupBrushingBarChart(title: '平均牙菌斑百分比', )
-          ],
-        ),
-      ),
+      child: Container(height: double.infinity,child: SingleChildScrollView(child:
+      Column(
+        children: [
+          GroupBrushingBarChart(title: '平均牙菌斑百分比', ),
+          GroupUseCountLineChart(title: '平均牙菌斑百分比', ),
+          SizedBox(height: 96),
+        ],
+      ),),),
     );
   }
 }
