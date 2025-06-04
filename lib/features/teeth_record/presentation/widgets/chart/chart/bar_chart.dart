@@ -5,23 +5,31 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../../data/models/response/group_brushing_stats/group_brushing_stats_data.dart';
 import '../../../../domain/entity/chart_time_status.dart';
-import '../Indicator.dart';
+import '../indicator/bar_chart_Indicator.dart';
 
-class BarChartWidget extends StatelessWidget {
+class BarChart extends StatefulWidget {
   final List<GroupBrushingStatsData> data;
   final ChartTimeStatus chartTimeStatus;
-  final void Function(
-      GroupBrushingStatsData data, GroupBrushingStatsData baseLine)? onTap;
+  final void Function(GroupBrushingStatsData data, GroupBrushingStatsData baseLine)? onTap;
+  final bool isChartClicked;
 
-  const BarChartWidget({
+  const BarChart({
     super.key,
     required this.data,
     required this.chartTimeStatus,
     this.onTap,
+    required this.isChartClicked,
   });
 
+  @override
+  State<BarChart> createState() => _BarChartState();
+}
+
+class _BarChartState extends State<BarChart> {
+  int? selectedIndex;
+
   String _getXLabel(GroupBrushingStatsData d) {
-    switch (chartTimeStatus) {
+    switch (widget.chartTimeStatus) {
       case ChartTimeStatus.hour:
         return d.timeGroup.minute.toString().padLeft(2, '0'); // 分
       case ChartTimeStatus.day:
@@ -34,10 +42,21 @@ class BarChartWidget extends StatelessWidget {
   }
 
   @override
+  void didUpdateWidget(covariant BarChart oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // 當外部 isChartClicked 為 false 時重設選取狀態
+    if (!widget.isChartClicked) {
+      setState(() {
+        selectedIndex = null;
+      });
+    }
+    // 若資料變化時，視需要重置狀態（這裡保留擴充，通常不用特別處理）
+  }
+
+  @override
   Widget build(BuildContext context) {
     // X 軸標籤
-    final List<String> xLabels = data.map(_getXLabel).toList();
-
+    final List<String> xLabels = widget.data.map(_getXLabel).toList();
     String xValueMapper(GroupBrushingStatsData d, int i) => xLabels[i];
 
     return Column(
@@ -54,7 +73,7 @@ class BarChartWidget extends StatelessWidget {
                 int idx = details.value.toInt();
                 final lastIdx = xLabels.length - 1;
                 bool shouldShow = false;
-                switch (chartTimeStatus) {
+                switch (widget.chartTimeStatus) {
                   case ChartTimeStatus.hour:
                     shouldShow = idx % 15 == 0 || idx == lastIdx;
                     break;
@@ -86,31 +105,43 @@ class BarChartWidget extends StatelessWidget {
             series: <CartesianSeries<GroupBrushingStatsData, String>>[
               // 當前資料柱狀
               ColumnSeries<GroupBrushingStatsData, String>(
-                dataSource: data,
+                dataSource: widget.data,
                 xValueMapper: xValueMapper,
                 yValueMapper: (d, _) => d.value,
-                color: AppColors.chartYellow,
+                // 動態判斷顏色
+                pointColorMapper: (d, i) {
+                  if (selectedIndex == null) {
+                    return AppColors.chartYellow;
+                  } else {
+                    return i == selectedIndex
+                        ? AppColors.chartYellow
+                        : AppColors.disableGrey;
+                  }
+                },
                 width: 0.4,
                 borderRadius: BorderRadius.circular(4),
                 onPointTap: (ChartPointDetails details) {
-                  if (onTap != null) {
+                  setState(() {
+                    selectedIndex = details.pointIndex;
+                  });
+                  if (widget.onTap != null) {
                     final idx = details.pointIndex!;
-                    onTap!(data[idx], data[idx]);
+                    widget.onTap!(widget.data[idx], widget.data[idx]);
                   }
                 },
               ),
               // 基線資料折線
               LineSeries<GroupBrushingStatsData, String>(
-                dataSource: data,
+                dataSource: widget.data,
                 xValueMapper: xValueMapper,
                 yValueMapper: (d, _) => d.baseValue,
                 color: Colors.red,
                 width: 1,
                 markerSettings: MarkerSettings(isVisible: false),
                 onPointTap: (ChartPointDetails details) {
-                  if (onTap != null) {
+                  if (widget.onTap != null) {
                     final idx = details.pointIndex!;
-                    onTap!(data[idx], data[idx]);
+                    widget.onTap!(widget.data[idx], widget.data[idx]);
                   }
                 },
               ),
@@ -118,19 +149,19 @@ class BarChartWidget extends StatelessWidget {
             tooltipBehavior: TooltipBehavior(enable: false),
           ),
         ),
-        SizedBox(height: 4,),
+        const SizedBox(height: 4),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Indicator(
+            BarChartIndicator(
               color: AppColors.chartYellow,
-              text: getCurrentText(chartTimeStatus),
+              text: getCurrentText(widget.chartTimeStatus),
               isSquare: true,
             ),
-            SizedBox(width: 8,),
-            Indicator(
+            const SizedBox(width: 8,),
+            BarChartIndicator(
               color: Colors.red,
-              text: getBaseLineText(chartTimeStatus),
+              text: getBaseLineText(widget.chartTimeStatus),
               isSquare: true,
             )
           ],

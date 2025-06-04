@@ -10,7 +10,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../application/teeth_record_usecases_provider.dart';
 import '../../../data/models/response/group_brushing_stats/group_brushing_stats_data.dart';
 import '../../../domain/entity/chart_time_status.dart';
-import 'chart/bar_chart_widget.dart';
+import 'chart/bar_chart.dart';
 import 'date_controller_widget.dart';
 import 'info/chart_info_widget.dart';
 
@@ -27,6 +27,7 @@ class GroupBrushingBarChart extends HookConsumerWidget {
     final selectTime = useState<DateTime>(DateTime.now());
     final chartTimeStatus = useState<ChartTimeStatus>(ChartTimeStatus.month);
     final selectedIndex = useState<int?>(null);
+    final isChartClicked = useState<bool>(false);
 
     // 監聽 API 資料（根據時間和型態切換）
     final statsAsync = ref.watch(
@@ -36,7 +37,10 @@ class GroupBrushingBarChart extends HookConsumerWidget {
     );
 
     // 點背景可以關閉 ChartInfoWidget
-    void closeChartInfo() => selectedIndex.value = null;
+    void closeChartInfo() {
+      selectedIndex.value = null;
+      isChartClicked.value = false;
+    }
 
     return GestureDetector(
       onTap: closeChartInfo,
@@ -65,11 +69,12 @@ class GroupBrushingBarChart extends HookConsumerWidget {
               final double? baseValue =
               (data.isNotEmpty) ? data.last.baseValue : null;
 
-              // onTap 更新被點擊的 index
+              // onTap 更新被點擊的 index 和點擊狀態
               void handleBarTap(
                   GroupBrushingStatsData d, GroupBrushingStatsData baseLine) {
                 final idx = data.indexOf(d);
                 selectedIndex.value = idx;
+                isChartClicked.value = true;
               }
 
               return Column(
@@ -85,10 +90,10 @@ class GroupBrushingBarChart extends HookConsumerWidget {
                       BaselinePieChart(
                         chartColor: [
                           AppColors.chartYellow,
-                          AppColors.chartYellow.withValues(alpha: 0.9),
-                          AppColors.chartYellow.withValues(alpha: 0.8),
-                          AppColors.chartYellow.withValues(alpha: 0.6),
-                          AppColors.chartYellow.withValues(alpha: 0.5),
+                          AppColors.chartYellow.withAlpha(230),
+                          AppColors.chartYellow.withAlpha(205),
+                          AppColors.chartYellow.withAlpha(153),
+                          AppColors.chartYellow.withAlpha(128),
                         ],
                         value: percent * 100,
                         icon: AppImages.teethIcon,
@@ -110,9 +115,11 @@ class GroupBrushingBarChart extends HookConsumerWidget {
                     },
                   ),
                   const SizedBox(height: 12),
-                  BarChartWidget(
+                  // 點擊圖表時帶入 isChartClicked, selectedIndex
+                  BarChart(
                     data: data,
                     chartTimeStatus: chartTimeStatus.value,
+                    isChartClicked: isChartClicked.value,
                     onTap: (d, baseLine) => handleBarTap(d, baseLine),
                   ),
                   // 點擊時才顯示

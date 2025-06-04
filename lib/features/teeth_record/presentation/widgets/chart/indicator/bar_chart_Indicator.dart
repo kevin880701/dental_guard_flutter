@@ -2,10 +2,10 @@ import 'package:dental_guard_flutter/core/constants/app_colors.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/widgets/text/app_text.dart';
+import '../../../../../../core/widgets/text/app_text.dart';
 
-class Indicator extends StatelessWidget {
-  const Indicator({
+class BarChartIndicator extends StatelessWidget {
+  const BarChartIndicator({
     super.key,
     required this.color,
     required this.text,
