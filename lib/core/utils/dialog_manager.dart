@@ -9,6 +9,7 @@ import '../widgets/dialog/window/add_member_dialog.dart';
 import '../widgets/dialog/window/bottom_edit_dialog.dart';
 import '../widgets/dialog/window/choose_image_dialog.dart';
 import '../widgets/dialog/window/default_dialog.dart';
+import '../widgets/dialog/window/download_report_dialog.dart';
 import '../widgets/dialog/window/edit_member_dialog.dart';
 import '../widgets/dialog/window/error_dialog.dart';
 import '../widgets/dialog/window/picker_date_dialog.dart';
@@ -186,6 +187,22 @@ Future<bool?> showReportDialog(
     position: DialogPosition.center,
     barrierDismissible: barrierDismissible,
     canPop: canPop,
+  );
+}
+
+Future<void> showDownloadReportDialog(
+    BuildContext context, {
+      required void Function({
+      required DateTime startTime,
+      required DateTime endTime,
+      }) onSubmit,
+      bool barrierDismissible = true,
+    }) async {
+  await showDialogBox(
+    context,
+    child: DownloadReportDialog(onSubmit: onSubmit),
+    position: DialogPosition.bottom,
+    barrierDismissible: barrierDismissible,
   );
 }
 

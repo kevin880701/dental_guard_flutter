@@ -1,7 +1,9 @@
 
 import '../datasources/teeth_record_remote_datasource.dart';
 import '../models/request/create_brushing_record/create_brushing_record_request.dart';
+import '../models/request/get_groups_brushing_records/get_groups_brushing_records_request.dart';
 import '../models/response/brushing_record/brushing_record_data.dart';
+import '../models/response/groups_brushing_records/group_brushing_records_data.dart';
 
 abstract class TeethRecordRepository {
   Future<BrushingRecordData?> createBrushingRecord(CreateBrushingRecordRequest request);
@@ -12,6 +14,9 @@ abstract class TeethRecordRepository {
 
   /// 取得指定潔牙紀錄
   Future<BrushingRecordData?> getBrushingRecordById(String recordId);
+
+  /// 查詢群組刷牙紀錄(含群組、user資訊)
+  Future<List<GroupBrushingRecordsData>> getGroupsBrushingRecords(GetGroupsBrushingRecordsRequest request);
 }
 
 class TeethRecordRepositoryImpl implements TeethRecordRepository {
@@ -37,5 +42,10 @@ class TeethRecordRepositoryImpl implements TeethRecordRepository {
   @override
   Future<BrushingRecordData?> getBrushingRecordById(String recordId) async {
     return await remoteDataSource.getBrushingRecordById(recordId);
+  }
+
+  @override
+  Future<List<GroupBrushingRecordsData>> getGroupsBrushingRecords(GetGroupsBrushingRecordsRequest request) async {
+    return await remoteDataSource.getGroupsBrushingRecords(request);
   }
 }

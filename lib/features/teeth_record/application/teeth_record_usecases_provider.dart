@@ -9,6 +9,7 @@ import '../domain/entity/chart_time_status.dart';
 import '../domain/usecase/create_brushing_record_usecase.dart';
 import '../domain/usecase/delete_brushing_record_usecase.dart';
 import '../domain/usecase/get_brushing_record_by_id_usecase.dart';
+import '../domain/usecase/get_groups_brushing_records_usecase.dart';
 import '../domain/usecase/get_user_brushing_records_usecase.dart';
 
 /// Repository Provider
@@ -38,6 +39,11 @@ final getUserBrushingRecordsUseCaseProvider = Provider<GetUserBrushingRecordsUse
 final getBrushingRecordByIdUseCaseProvider = Provider<GetBrushingRecordByIdUseCase>((ref) {
   final repo = ref.read(teethRecordRepositoryProvider);
   return GetBrushingRecordByIdUseCase(repo);
+});
+
+final getGroupsBrushingRecordsUseCaseProvider = Provider<GetGroupsBrushingRecordsUseCase>((ref) {
+  final repo = ref.read(teethRecordRepositoryProvider);
+  return GetGroupsBrushingRecordsUseCase(repo);
 });
 
 // Provider

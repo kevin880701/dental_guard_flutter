@@ -52,7 +52,7 @@ class GroupBrushingBarChart extends HookConsumerWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
         ),
-        margin: const EdgeInsets.all(16),
+        margin: const EdgeInsets.symmetric(vertical: 16),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: statsAsync.when(

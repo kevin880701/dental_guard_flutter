@@ -31,6 +31,7 @@ class ApiEndPoint {
 
   // Teeth Record
   static const String createBrushingRecord = '/teeth-record/brushing-record';
+  static const String groupsBrushingRecords = '/teeth-record/groups-brushing-records';
 
   /// /teeth-record/brushing-record/{id}
   static String deleteBrushingRecord(String id) => '/teeth-record/brushing-record/$id';

@@ -69,6 +69,10 @@ class AppButton extends StatelessWidget {
   /// 右側 Icon（可選）
   final Widget? rightIcon;
 
+  final EdgeInsetsGeometry padding;
+
+  final double iconSpacing;
+
   const AppButton({
     super.key,
     required this.text,
@@ -92,6 +96,11 @@ class AppButton extends StatelessWidget {
     ),
     this.leftIcon,
     this.rightIcon,
+    this.padding = const EdgeInsets.symmetric(
+      vertical: 8,
+      horizontal: 12,
+    ),
+    this.iconSpacing = 8.0,
   });
 
   @override
@@ -117,10 +126,7 @@ class AppButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(borderRadius),
       child: Container(
         alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 12,
-        ),
+        padding: padding,
         decoration: BoxDecoration(
           color: currentBgColor,
           borderRadius: BorderRadius.circular(borderRadius),
@@ -136,14 +142,14 @@ class AppButton extends StatelessWidget {
           children: [
             if (leftIcon != null) ...[
               leftIcon!,
-              const SizedBox(width: 8),
+              SizedBox(width: iconSpacing),
             ],
             Text(
               text,
               style: textStyle.copyWith(color: currentFontColor),
             ),
             if (rightIcon != null) ...[
-              const SizedBox(width: 8),
+              SizedBox(width: iconSpacing),
               rightIcon!,
             ],
           ],

@@ -70,9 +70,17 @@ class AppStrings {
   static const editFailed = '編輯失敗';
 
   // GroupBrushingChart
+  static const averagePlaquePercentage = '平均牙菌斑百分比';
+  static const averageNumberOfUsers = '平均使用人數';
   static const date = '日期';
   static const userStatistics = '使用人數統計';
   static const dentalPlaquePercentageStatistics = '牙菌斑百分比統計';
+  static const reportDownload = '報表下載';
+  static const startTime = '起始時間';
+  static const endTime = '結束時間';
+  static const reportDownloadTimeRange = '報表下載時間範圍';
+  static const downloadFailed = '下載失敗';
+  static const searchFailed = '查無資料';
 
   // MemberInfo
   static const noTeethRecord = '尚無潔牙紀錄';
