@@ -55,7 +55,7 @@ class GroupUseCountLineChart extends HookConsumerWidget {
           child: statsAsync.when(
             loading: () => const SizedBox(
               height: 300,
-              child: Center(child: CircularProgressIndicator(color: AppColors.chartYellow)),
+              child: Center(child: CircularProgressIndicator(color: AppColors.blue)),
             ),
             error: (err, stack) => SizedBox(
               height: 300,
