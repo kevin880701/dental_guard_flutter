@@ -13,21 +13,24 @@ class DateControllerWidget extends StatelessWidget {
   final DateTime selectTime;
   final ChartTimeStatus currentTimeStatus;
   final void Function(DateTime, ChartTimeStatus?) onDateChange;
+  final VoidCallback? onReportTap;
 
   const DateControllerWidget({
     Key? key,
     required this.selectTime,
     required this.currentTimeStatus,
     required this.onDateChange,
+    this.onReportTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 40,
+      width: double.infinity,
       child: Row(
         children: [
-          Material(
+          Expanded(child: Material(
             color: Colors.transparent,
             borderRadius: BorderRadius.circular(8),
             child: InkWell(
@@ -62,21 +65,39 @@ class DateControllerWidget extends StatelessWidget {
                       text: formatDateByStatus(selectTime, currentTimeStatus),
                       textStyle: bodyMedium,
                     ),
+                    Spacer(),
                   ],
                 ),
               ),
             ),
+          ),)
+          ,
+          SizedBox(
+            width: 8,
           ),
-          Spacer(),
           AppIcon(
-              icon: AppImages.arrowLeftIcon,
-              backgroundColor: Colors.white,
-              color: AppColors.grey,
-              padding: 8,
-              size: 24,
-              borderColor: AppColors.borderGrey,
-              borderWidth: 1,
-              borderRadius: 8,
+            icon: AppImages.reportIcon,
+            backgroundColor: Colors.white,
+            color: AppColors.grey,
+            padding: 8,
+            size: 24,
+            borderColor: AppColors.borderGrey,
+            borderWidth: 1,
+            borderRadius: 8,
+            onTap: onReportTap,
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          AppIcon(
+            icon: AppImages.arrowLeftIcon,
+            backgroundColor: Colors.white,
+            color: AppColors.grey,
+            padding: 8,
+            size: 24,
+            borderColor: AppColors.borderGrey,
+            borderWidth: 1,
+            borderRadius: 8,
             onTap: () {
               DateTime newDate;
               switch (currentTimeStatus) {

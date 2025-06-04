@@ -7,9 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../../../../../core/constants/app_strings.dart';
+import '../../../../../core/utils/dialog_manager.dart';
 import '../../../application/teeth_record_usecases_provider.dart';
 import '../../../data/models/response/group_brushing_stats/group_brushing_stats_data.dart';
 import '../../../domain/entity/chart_time_status.dart';
+import '../../../domain/entity/report_data.dart';
 import 'chart/bar_chart.dart';
 import 'date_controller_widget.dart';
 import 'info/chart_info_widget.dart';
@@ -112,6 +115,31 @@ class GroupBrushingBarChart extends HookConsumerWidget {
                       if (status != null) {
                         chartTimeStatus.value = status;
                       }
+                    },
+
+                    onReportTap: () async {
+                      List<String> fieldTitle = [
+                        AppStrings.date,
+                        chartTimeStatus.value.currentText,
+                        chartTimeStatus.value.baseLineText,
+                      ];
+                      List<ReportData> reportDataList = data.map((d) {
+                        final time = chartTimeStatus.value.formatTime(d.timeGroup);
+                        return ReportData(
+                          index: time,
+                          values: [
+                            "${d.value.toString()}%",
+                            "${d.baseValue.toString()}%",
+                          ],
+                        );
+                      }).toList();
+
+                      await showReportDialog(
+                        context,
+                        fieldTitle: fieldTitle,
+                        data: reportDataList,
+                        title: AppStrings.dentalPlaquePercentageStatistics,
+                      );
                     },
                   ),
                   const SizedBox(height: 12),

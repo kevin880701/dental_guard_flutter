@@ -25,5 +25,5 @@ class AppImages {
   static const listIcon = '${assetsImages}ic_list.png';
 
   static const teethIcon = '${assetsIcons}ic_teeth.svg';
-  static const toothBrushIcon = '${assetsIcons}ic_tooth_brush.svg';
+  static const reportIcon = '${assetsIcons}ic_report.svg';
 }

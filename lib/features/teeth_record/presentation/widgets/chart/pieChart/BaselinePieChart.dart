@@ -62,9 +62,9 @@ class _BaselinePieChartState extends State<BaselinePieChart> {
       pointers.add(
         MarkerPointer(
           value: widget.baseValue!.toDouble(),
-          borderColor: Colors.red.withValues(alpha: 0.5),
+          borderColor: Colors.red.withValues(alpha: 0.7),
           borderWidth: 0,
-          color: Colors.red.withValues(alpha: 0.5),
+          color: Colors.red.withValues(alpha: 0.7),
           markerHeight: 10,
           markerWidth: 10,
           markerType: MarkerType.circle,

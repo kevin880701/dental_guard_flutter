@@ -24,7 +24,7 @@ class AppStrings {
   static const createUserProfile = '建立個人資料';
   static const createFailedPlsLoginAgain = '建立失敗，請重新登入';
 
-//   PickerDateDialog
+  // PickerDateDialog
   static const chooseTime = '選擇時間';
   static const returnToCurrentTime = '返回當下時間';
 
@@ -68,6 +68,11 @@ class AppStrings {
   static const birthday = '生日';
   static const editSuccess = '編輯成功';
   static const editFailed = '編輯失敗';
+
+  // GroupBrushingChart
+  static const date = '日期';
+  static const userStatistics = '使用人數統計';
+  static const dentalPlaquePercentageStatistics = '牙菌斑百分比統計';
 
   // MemberInfo
   static const noTeethRecord = '尚無潔牙紀錄';

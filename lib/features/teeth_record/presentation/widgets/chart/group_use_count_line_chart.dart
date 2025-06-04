@@ -1,4 +1,5 @@
 import 'package:dental_guard_flutter/core/constants/app_colors.dart';
+import 'package:dental_guard_flutter/core/constants/app_resources.dart';
 import 'package:dental_guard_flutter/core/widgets/text/app_text.dart';
 import 'package:dental_guard_flutter/features/teeth_record/presentation/widgets/chart/pieChart/BaselinePieChart.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +7,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../core/constants/app_images.dart';
+import '../../../../../core/utils/dialog_manager.dart';
 import '../../../../../core/widgets/text/text_theme.dart';
 import '../../../application/teeth_record_usecases_provider.dart';
 import '../../../domain/entity/chart_time_status.dart';
+import '../../../domain/entity/report_data.dart';
 import 'chart/smooth_line_chart.dart';
 import 'date_controller_widget.dart';
 import 'info/smooth_line_info_widget.dart';
@@ -106,6 +109,30 @@ class GroupUseCountLineChart extends HookConsumerWidget {
                         chartTimeStatus.value = status;
                       }
                     },
+                    onReportTap: () async {
+                      List<String> fieldTitle = [
+                        AppStrings.date,
+                        chartTimeStatus.value.currentText,
+                        chartTimeStatus.value.baseLineText,
+                      ];
+                      List<ReportData> reportDataList = data.map((d) {
+                        final time = chartTimeStatus.value.formatTime(d.timeGroup);
+                        return ReportData(
+                          index: time,
+                          values: [
+                            d.count.toString(),
+                            d.baseCount.toString(),
+                          ],
+                        );
+                      }).toList();
+
+                      await showReportDialog(
+                        context,
+                        fieldTitle: fieldTitle,
+                        data: reportDataList,
+                        title: AppStrings.userStatistics,
+                      );
+                    },
                   ),
                   const SizedBox(height: 12),
                   // 點擊圖表時會啟動 isChartClicked，onTap 設定資料清單
@@ -114,7 +141,6 @@ class GroupUseCountLineChart extends HookConsumerWidget {
                     chartTimeStatus: chartTimeStatus.value,
                     isChartClicked: isChartClicked.value,
                     onTap: (list) {
-                      // list 是 List<GroupBrushingStatsData?>（長度可能是1~3）
                       if (list.isNotEmpty) {
                         selectedData.value = list;
                         isChartClicked.value = true;

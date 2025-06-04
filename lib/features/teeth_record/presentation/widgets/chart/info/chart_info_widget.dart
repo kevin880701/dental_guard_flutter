@@ -17,20 +17,6 @@ class ChartInfoWidget extends StatelessWidget {
   final GroupBrushingStatsData? data;
   final ChartTimeStatus chartTimeStatus;
 
-  // 依據 ChartTimeStatus 轉換日期格式
-  String formatTime(DateTime dt) {
-    switch (chartTimeStatus) {
-      case ChartTimeStatus.day:
-        return DateFormat('HH:mm').format(dt);
-      case ChartTimeStatus.month:
-        return DateFormat('MM/dd').format(dt);
-      case ChartTimeStatus.year:
-        return DateFormat('yyyy/MM').format(dt);
-      case ChartTimeStatus.hour:
-        return DateFormat('mm').format(dt);
-    }
-  }
-
   // 根據 chartTimeStatus 給不同的 label
   String get avgLabel {
     switch (chartTimeStatus) {
@@ -60,7 +46,7 @@ class ChartInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String time = data != null ? formatTime(data!.timeGroup) : "--";
+    final String time = data != null ? chartTimeStatus.formatTime(data!.timeGroup) : "--";
     final String score = data != null ? data!.value.toStringAsFixed(1) : "--";
     final String baseScore = data != null ? data!.baseValue.toStringAsFixed(1) : "--";
 

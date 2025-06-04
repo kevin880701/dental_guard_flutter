@@ -155,44 +155,18 @@ class _BarChartState extends State<BarChart> {
           children: [
             BarChartIndicator(
               color: AppColors.chartYellow,
-              text: getCurrentText(widget.chartTimeStatus),
+              text: widget.chartTimeStatus.currentText,
               isSquare: true,
             ),
             const SizedBox(width: 8,),
             BarChartIndicator(
               color: Colors.red,
-              text: getBaseLineText(widget.chartTimeStatus),
+              text: widget.chartTimeStatus.baseLineText,
               isSquare: true,
             )
           ],
         )
       ],
     );
-  }
-}
-
-String getCurrentText(ChartTimeStatus status) {
-  switch (status) {
-    case ChartTimeStatus.day:
-      return '本日';
-    case ChartTimeStatus.month:
-      return '本月';
-    case ChartTimeStatus.year:
-      return '今年';
-    case ChartTimeStatus.hour:
-      return '本小時';
-  }
-}
-
-String getBaseLineText(ChartTimeStatus status) {
-  switch (status) {
-    case ChartTimeStatus.day:
-      return '昨日';
-    case ChartTimeStatus.month:
-      return '上個月';
-    case ChartTimeStatus.year:
-      return '歷年';
-    case ChartTimeStatus.hour:
-      return '上個小時';
   }
 }
