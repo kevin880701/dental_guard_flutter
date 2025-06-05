@@ -18,10 +18,12 @@ import 'date_controller_widget.dart';
 import 'info/chart_info_widget.dart';
 
 class GroupBrushingBarChart extends HookConsumerWidget {
+  final String groupId;
   final String title;
 
   const GroupBrushingBarChart({
     super.key,
+    required this.groupId,
     required this.title,
   });
 
@@ -34,9 +36,11 @@ class GroupBrushingBarChart extends HookConsumerWidget {
 
     // 監聽 API 資料（根據時間和型態切換）
     final statsAsync = ref.watch(
-      groupBrushingStatsProvider(
-        (time: selectTime.value, status: chartTimeStatus.value),
-      ),
+      groupBrushingStatsProvider((
+      groupId: groupId,
+      selectTime: selectTime.value,
+      status: chartTimeStatus.value,
+      )),
     );
 
     // 點背景可以關閉 ChartInfoWidget

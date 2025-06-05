@@ -12,7 +12,6 @@ String secondsToMMSS(int seconds) {
 extension DateTimeFormatExtension on DateTime {
   String toIsoDateTime() {
     return '${toUtc().toIso8601String().split('.').first}Z';
-
   }
 
   String toRfc3339WithOffset() {
@@ -32,6 +31,10 @@ extension DateTimeFormatExtension on DateTime {
         "${hour.toString().padLeft(2, '0')}:"
         "${minute.toString().padLeft(2, '0')}:"
         "${second.toString().padLeft(2, '0')}";
+  }
+
+  DateTime convertToTimeZone([int offsetHour = 8]) {
+    return toUtc().add(Duration(hours: offsetHour));
   }
 }
 

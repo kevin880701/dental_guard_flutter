@@ -7,7 +7,6 @@ import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../../core/base/base_page.dart';
 import '../../../../core/constants/app_colors.dart';
@@ -16,7 +15,6 @@ import '../../../../core/utils/dialog_manager.dart';
 import '../../../../core/widgets/image/app_icon.dart';
 import '../../../organization/data/models/response/group/group_data.dart';
 import '../../application/teeth_record_usecases_provider.dart';
-import '../../data/models/response/brushing_record/brushing_record_data.dart';
 import '../../data/models/response/groups_brushing_records/group_brushing_records_data.dart';
 import '../widgets/chart/group_brushing_bar_chart.dart';
 import '../widgets/chart/group_use_count_line_chart.dart';
@@ -136,9 +134,11 @@ class GroupBrushingChartScreen extends HookConsumerWidget {
                   iconSpacing: 4,
                 ),
                 GroupBrushingBarChart(
+                  groupId: group.id,
                   title: AppStrings.averagePlaquePercentage,
                 ),
                 GroupUseCountLineChart(
+                  groupId: group.id,
                   title: AppStrings.averageNumberOfUsers,
                 ),
                 SizedBox(height: 96),

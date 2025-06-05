@@ -3,8 +3,10 @@ import 'package:dental_guard_flutter/core/models/api_response.dart';
 import 'package:dental_guard_flutter/core/network/network_interface.dart';
 
 import '../models/request/create_brushing_record/create_brushing_record_request.dart';
+import '../models/request/get_group_brushing_stats/get_group_brushing_stats_request.dart';
 import '../models/request/get_groups_brushing_records/get_groups_brushing_records_request.dart';
 import '../models/response/brushing_record/brushing_record_data.dart';
+import '../models/response/group_brushing_stats/group_brushing_stats_data.dart';
 import '../models/response/groups_brushing_records/group_brushing_records_data.dart';
 
 
@@ -71,6 +73,23 @@ class TeethRecordRemoteDataSource {
     );
 
     return apiResponse.data;
+  }
+
+  /// 查詢單一群組潔牙平均統計
+  Future<List<GroupBrushingStatsData>> getGroupBrushingStats(GetGroupBrushingStatsRequest request) async {
+    final response = await networkInterface.post(
+      url: ApiEndPoint.groupBrushingStats, // 這要在 ApiEndPoint 新增
+      body: request.toJson(),
+    );
+
+    final apiResponse = ApiResponse<List<GroupBrushingStatsData>>.fromJson(
+      response.data,
+          (json) => (json as List)
+          .map((item) => GroupBrushingStatsData.fromJson(item as Map<String, dynamic>))
+          .toList(),
+    );
+
+    return apiResponse.data ?? [];
   }
 
   /// 查詢多群組使用者潔牙紀錄（含群組/使用者/分析結果）
