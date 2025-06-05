@@ -85,7 +85,7 @@ class AppIcon extends StatelessWidget {
           ? ColorFilter.mode(color!, BlendMode.srcIn)
           : null,
       fit: BoxFit.contain,
-      placeholderBuilder: (context) => Icon(
+      errorBuilder: (context, error, stackTrace) => Icon(
         Icons.image_not_supported,
         size: size,
         color: color,
