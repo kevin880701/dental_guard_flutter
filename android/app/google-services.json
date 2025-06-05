@@ -1,48 +1,48 @@
 {
   "project_info": {
-    "project_number": "602076142232",
-    "project_id": "dental-guard-d0786",
-    "storage_bucket": "dental-guard-d0786.firebasestorage.app"
+    "project_number": "143887662618",
+    "project_id": "oralcare-4245c",
+    "storage_bucket": "oralcare-4245c.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:602076142232:android:d0a8edc2794c55a7cb8eed",
+        "mobilesdk_app_id": "1:143887662618:android:fd2fba019663b747509ba3",
         "android_client_info": {
-          "package_name": "com.lhr.dental_guard"
+          "package_name": "com.lhr.oralcare"
         }
       },
       "oauth_client": [
         {
-          "client_id": "602076142232-uvmv2q8hpouebadvpj8tih4o75h3i6nl.apps.googleusercontent.com",
+          "client_id": "143887662618-vvcqaci4srqrfpuba7eeogje5thc5k4a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.lhr.dental_guard",
+            "package_name": "com.lhr.oralcare",
             "certificate_hash": "0aff49cdcbe97ea57621aa676b8a86b41cfda7b8"
           }
         },
         {
-          "client_id": "602076142232-si8drj52j66g98hju7s0h57a1n7gt6ll.apps.googleusercontent.com",
+          "client_id": "143887662618-1o1ea72g7krbj397f8ge82l3abnggihg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCDLHkdk8KjoMuu2WJFLTUQJCTtIYgCc54"
+          "current_key": "AIzaSyDsKm6shSPqASLZAcyV-nKiEfzSeChZokQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "602076142232-si8drj52j66g98hju7s0h57a1n7gt6ll.apps.googleusercontent.com",
+              "client_id": "143887662618-1o1ea72g7krbj397f8ge82l3abnggihg.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "602076142232-8m9391ctlo0jbqm6q9b5v68gqojh35f3.apps.googleusercontent.com",
+              "client_id": "143887662618-ar90umupiac35pme637foropuklokeer.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.lhr.dentalGuardFlutter"
+                "bundle_id": "com.lhr.oralcare"
               }
             }
           ]

@@ -41,48 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAZTifA7FMqABvJ50Vpkf0o0BT5EbGlL8M',
-    appId: '1:602076142232:web:fb3033dc91d0156bcb8eed',
-    messagingSenderId: '602076142232',
-    projectId: 'dental-guard-d0786',
-    authDomain: 'dental-guard-d0786.firebaseapp.com',
-    storageBucket: 'dental-guard-d0786.firebasestorage.app',
-    measurementId: 'G-5ZBKXNJZ0P',
+    apiKey: 'AIzaSyC-pA2Py0qSi8aiN62rqG4kFc9v9jUHyFc',
+    appId: '1:143887662618:web:eb3c087924c34a0c509ba3',
+    messagingSenderId: '143887662618',
+    projectId: 'oralcare-4245c',
+    authDomain: 'oralcare-4245c.firebaseapp.com',
+    storageBucket: 'oralcare-4245c.firebasestorage.app',
+    measurementId: 'G-P9NRPW0RXT',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCDLHkdk8KjoMuu2WJFLTUQJCTtIYgCc54',
-    appId: '1:602076142232:android:d0a8edc2794c55a7cb8eed',
-    messagingSenderId: '602076142232',
-    projectId: 'dental-guard-d0786',
-    storageBucket: 'dental-guard-d0786.firebasestorage.app',
+    apiKey: 'AIzaSyDsKm6shSPqASLZAcyV-nKiEfzSeChZokQ',
+    appId: '1:143887662618:android:fd2fba019663b747509ba3',
+    messagingSenderId: '143887662618',
+    projectId: 'oralcare-4245c',
+    storageBucket: 'oralcare-4245c.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBnk6QSSO-b1Cv5LB2BkkwqKUwZoBkiUPs',
-    appId: '1:602076142232:ios:9948481323e2e058cb8eed',
-    messagingSenderId: '602076142232',
-    projectId: 'dental-guard-d0786',
-    storageBucket: 'dental-guard-d0786.firebasestorage.app',
-    iosBundleId: 'com.lhr.dentalGuardFlutter',
+    apiKey: 'AIzaSyBMwviCSjeYURaGcWbCsfYS0dCRGTFJu0k',
+    appId: '1:143887662618:ios:edc68d7ef35d29f4509ba3',
+    messagingSenderId: '143887662618',
+    projectId: 'oralcare-4245c',
+    storageBucket: 'oralcare-4245c.firebasestorage.app',
+    iosBundleId: 'com.lhr.oralcare',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBnk6QSSO-b1Cv5LB2BkkwqKUwZoBkiUPs',
-    appId: '1:602076142232:ios:9948481323e2e058cb8eed',
-    messagingSenderId: '602076142232',
-    projectId: 'dental-guard-d0786',
-    storageBucket: 'dental-guard-d0786.firebasestorage.app',
-    iosBundleId: 'com.lhr.dentalGuardFlutter',
+    apiKey: 'AIzaSyBMwviCSjeYURaGcWbCsfYS0dCRGTFJu0k',
+    appId: '1:143887662618:ios:edc68d7ef35d29f4509ba3',
+    messagingSenderId: '143887662618',
+    projectId: 'oralcare-4245c',
+    storageBucket: 'oralcare-4245c.firebasestorage.app',
+    iosBundleId: 'com.lhr.oralcare',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAZTifA7FMqABvJ50Vpkf0o0BT5EbGlL8M',
-    appId: '1:602076142232:web:c9d8ce0f7fbc88fbcb8eed',
-    messagingSenderId: '602076142232',
-    projectId: 'dental-guard-d0786',
-    authDomain: 'dental-guard-d0786.firebaseapp.com',
-    storageBucket: 'dental-guard-d0786.firebasestorage.app',
-    measurementId: 'G-Q1EJQF81Q6',
+    apiKey: 'AIzaSyC-pA2Py0qSi8aiN62rqG4kFc9v9jUHyFc',
+    appId: '1:143887662618:web:6ffc631ccf02c513509ba3',
+    messagingSenderId: '143887662618',
+    projectId: 'oralcare-4245c',
+    authDomain: 'oralcare-4245c.firebaseapp.com',
+    storageBucket: 'oralcare-4245c.firebasestorage.app',
+    measurementId: 'G-57JMBP1MYS',
   );
+
 }

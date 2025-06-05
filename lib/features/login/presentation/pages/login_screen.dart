@@ -234,7 +234,6 @@ class LoginScreen extends HookConsumerWidget {
                             _onLoginSuccess(ref, context, false, null, null);
                           } else {
                             AppToast.showToast(message: response.message);
-                            ref.read(pageNotifierProvider.notifier).showToastMessage(message: response.message);
                           }
                           ref.read(pageNotifierProvider.notifier).hideLoading();
                         },

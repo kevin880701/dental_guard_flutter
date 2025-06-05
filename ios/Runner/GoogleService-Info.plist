@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>602076142232-8m9391ctlo0jbqm6q9b5v68gqojh35f3.apps.googleusercontent.com</string>
+	<string>143887662618-ar90umupiac35pme637foropuklokeer.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.602076142232-8m9391ctlo0jbqm6q9b5v68gqojh35f3</string>
+	<string>com.googleusercontent.apps.143887662618-ar90umupiac35pme637foropuklokeer</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>602076142232-uvmv2q8hpouebadvpj8tih4o75h3i6nl.apps.googleusercontent.com</string>
+	<string>143887662618-vvcqaci4srqrfpuba7eeogje5thc5k4a.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBnk6QSSO-b1Cv5LB2BkkwqKUwZoBkiUPs</string>
+	<string>AIzaSyBMwviCSjeYURaGcWbCsfYS0dCRGTFJu0k</string>
 	<key>GCM_SENDER_ID</key>
-	<string>602076142232</string>
+	<string>143887662618</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.lhr.dentalGuardFlutter</string>
+	<string>com.lhr.oralcare</string>
 	<key>PROJECT_ID</key>
-	<string>dental-guard-d0786</string>
+	<string>oralcare-4245c</string>
 	<key>STORAGE_BUCKET</key>
-	<string>dental-guard-d0786.firebasestorage.app</string>
+	<string>oralcare-4245c.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:602076142232:ios:9948481323e2e058cb8eed</string>
+	<string>1:143887662618:ios:edc68d7ef35d29f4509ba3</string>
 </dict>
 </plist>

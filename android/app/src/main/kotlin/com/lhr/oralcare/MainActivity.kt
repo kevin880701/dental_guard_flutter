@@ -1,4 +1,4 @@
-package com.lhr.dental_guard
+package com.lhr.oralcare
 
 import android.os.Bundle
 import android.os.Build
