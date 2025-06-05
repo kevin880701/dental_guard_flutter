@@ -27,20 +27,11 @@ class GroupMainScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final memberListControllerNotifier = ref.read(memberListControllerProvider.notifier);
-    final memberListState = ref.watch(memberListControllerProvider);
     final organizationControllerNotifier = ref.read(organizationControllerProvider.notifier);
 
     final tabIndex = useState(0);
     final tabs = [AppStrings.group, AppStrings.dataAnalysis];
     final pageController = usePageController(initialPage: 0);
-
-    useEffect(() {
-      Future.microtask(() async {
-        memberListControllerNotifier.setGroupId(group.id);
-        await memberListControllerNotifier.loadMembersByGroupId();
-      });
-      return null;
-    }, []);
 
     // 監聽 tabIndex.value 改變時同步 PageView
     useEffect(() {
@@ -82,10 +73,7 @@ class GroupMainScreen extends HookConsumerWidget {
                       gender: gender,
                     );
                     if (result.data != null) {
-                      organizationControllerNotifier.appendGroupMembers(
-                        groupId: group.id,
-                        users: [result.data!],
-                      );
+                      organizationControllerNotifier.loadManagedGroups();
                       memberListControllerNotifier.loadMembersByGroupId();
                       AppToast.showToast(message: AppStrings.createSuccess);
                     } else {

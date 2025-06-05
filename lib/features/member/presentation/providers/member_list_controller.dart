@@ -39,16 +39,9 @@ class MemberListController extends StateNotifier<MemberListState> {
   }
 
   Future<void> loadMembersByGroupId() async {
-    final members =
-        ref.read(organizationControllerProvider).groupsManageData?.members;
-    if (members == null) return;
+    final members = await ref.read(organizationControllerProvider.notifier).loadGroupUsers(state.groupId);
 
-    final target = members.firstWhereOrNull(
-          (element) => element.group.id == state.groupId,
-    );
-    if (target != null) {
-      state = state.copyWith(groupId: state.groupId, users: target.children);
-    }
+      state = state.copyWith(groupId: state.groupId, users: members);
   }
 
   void updateUsers(List<UserInfoData> updatedUsers) {

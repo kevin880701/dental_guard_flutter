@@ -111,49 +111,6 @@ class OrganizationController extends StateNotifier<OrganizationState> {
     state = const OrganizationState();
   }
 
-  void appendGroupMembers({
-    required String groupId,
-    required List<UserInfoData> users,
-  }) {
-    final currentData = state.groupsManageData;
-    if (currentData == null) return;
-
-    final updatedMembers = currentData.members.map((member) {
-      if (member.group.id == groupId) {
-        final existingUsers = member.children;
-        final mergedUsers = [...existingUsers, ...users];
-        return member.copyWith(children: mergedUsers);
-      } else {
-        return member;
-      }
-    }).toList();
-
-    final updatedData = currentData.copyWith(members: updatedMembers);
-    state = state.copyWith(groupsManageData: updatedData);
-  }
-
-  void updateGroupMembersByUserId(List<UserInfoData> updatedUsers) {
-    final currentData = state.groupsManageData;
-    if (currentData == null) return;
-
-    // 建立 id -> UserInfoData 的對照表
-    final updatedMap = {for (var user in updatedUsers) user.id: user};
-
-    final updatedMembers = currentData.members.map((groupWithUsers) {
-      final newChildren = groupWithUsers.children.map((user) {
-        if (updatedMap.containsKey(user.id)) {
-          return updatedMap[user.id]!;
-        }
-        return user;
-      }).toList();
-
-      return groupWithUsers.copyWith(children: newChildren);
-    }).toList();
-
-    final updatedData = currentData.copyWith(members: updatedMembers);
-    state = state.copyWith(groupsManageData: updatedData);
-  }
-
   void updateGroupsById(List<GroupData> updatedGroups) {
     final currentData = state.groupsManageData;
     final currentParents = state.allParentGroups;

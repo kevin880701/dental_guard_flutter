@@ -69,9 +69,8 @@ class MemberInfoScreen extends HookConsumerWidget {
                     );
                     if (result != null) {
                       controller.setUser(result);
-                      ref.read(memberListControllerProvider.notifier).updateUsers([result]);
-                      ref.read(organizationControllerProvider.notifier).updateGroupMembersByUserId([result]);
-                      // ref.read(organizationControllerProvider.notifier).loadManagedGroups();
+                      ref.read(organizationControllerProvider.notifier).loadManagedGroups();
+                      ref.read(memberListControllerProvider.notifier).loadMembersByGroupId();
                       AppToast.showToast(message: AppStrings.createSuccess);
                     } else {
                       AppToast.showToast(message: AppStrings.createFailed);
