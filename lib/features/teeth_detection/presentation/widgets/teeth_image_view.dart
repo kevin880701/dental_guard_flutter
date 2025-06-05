@@ -28,26 +28,27 @@ class TeethImageView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (analyzeResult != null && analyzeResult!.score >= 0) ...[
-                    NetworkImageWidget(
+                    Expanded(flex: 1,child: NetworkImageWidget(
                       width: double.infinity,
                       fit: BoxFit.contain,
                       imageUrl:
                       '${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range.png',
-                    ),
+                    ),)
+                    ,
                     if(analyzeResult!.isSuccess == 1)...[
-                      NetworkImageWidget(
+                      Expanded(flex: 1,child:NetworkImageWidget(
                         width: double.infinity,
                         fit: BoxFit.contain,
                         imageUrl:
                         '${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range_detect.png',
-                      )]
+                      ),)]
                   ] else ...[
-                    NetworkImageWidget(
+                    Expanded(flex: 1,child:NetworkImageWidget(
                       width: double.infinity,
                       fit: BoxFit.contain,
                       imageUrl:
                       '${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range_detect.png',
-                    ),
+                    ),),
                   ],
                 ],
               )),
