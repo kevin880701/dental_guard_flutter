@@ -15,6 +15,7 @@ import 'network_interface.dart';
 import 'token_manager.dart';
 
 class AuthInterceptor extends Interceptor {
+  static const int MAX_RETRY = 1; // 最多允許 retry 次數
   static final List<String> noAuthPaths = [
     '/user/login',
     '/set_user_profile',
@@ -46,14 +47,23 @@ class AuthInterceptor extends Interceptor {
     final statusCode = err.response?.statusCode;
     final responseData = err.response?.data;
 
-    // 🔹 比對是否為白名單 API（不進行 refresh-token 處理）
+    // 比對是否為白名單 API（不進行 refresh-token 處理）
     final uri = Uri.parse(err.requestOptions.uri.toString());
     final path = uri.path;
-    final isNoAuthPath = noAuthPaths.contains(path); 
+    final isNoAuthPath = noAuthPaths.contains(path);
 
     // 若是白名單 API，直接回傳錯誤，不進行 token 處理
     if (isNoAuthPath) {
       return handler.next(err);
+    }
+
+    // 取得 retry 次數（預設 0）
+    int retryCount = (err.requestOptions.extra['retryCount'] ?? 0);
+
+    // 如果 retry 次數 >= MAX_RETRY，就直接跳 session 過期，不再 retry
+    if (retryCount >= MAX_RETRY) {
+      refreshTokenExpire(context);
+      return handler.reject(err);
     }
 
     if (statusCode == 401 && responseData != null) {
@@ -62,7 +72,7 @@ class AuthInterceptor extends Interceptor {
 
       switch (resultCode) {
         case 100005: // Token 過期
-          // 嘗試刷新 token
+        // 嘗試刷新 token
           try {
             final refreshTokenData = await _refreshAccessToken();
 
@@ -72,8 +82,12 @@ class AuthInterceptor extends Interceptor {
               return handler.reject(err);
             }
 
+            TokenManager.setTokens(
+              accessToken: refreshTokenData.accessToken,
+            );
+
             final clonedRequest = await _retryRequest(
-                err.requestOptions, refreshTokenData.accessToken);
+                err.requestOptions, retryCount: retryCount + 1);
             return handler.resolve(clonedRequest);
           } catch (e) {
             refreshTokenExpire(context);
@@ -94,7 +108,7 @@ class AuthInterceptor extends Interceptor {
 
         default: // 其他未定義錯誤
           TokenManager.clearTokens();
-          refreshTokenExpire(context);
+          // refreshTokenExpire(context);
           return handler.reject(err);
       }
     }
@@ -112,17 +126,22 @@ Future<RefreshTokenData?> _refreshAccessToken() async {
     throw Exception('無效的 refresh token');
   }
   final apiResponse =
-      dataSource.refreshToken(RefreshTokenRequest(refreshToken: refreshToken));
+  dataSource.refreshToken(RefreshTokenRequest(refreshToken: refreshToken));
 
   return apiResponse;
 }
 
-/// 重試原始請求
+/// 重試原始請求，並加上 retryCount 標記
 Future<Response<dynamic>> _retryRequest(
-    RequestOptions requestOptions, String newToken) async {
+    RequestOptions requestOptions, {int retryCount = 1}) async {
+  // 將 retryCount 寫進 extra
+  final newExtra = Map<String, dynamic>.from(requestOptions.extra);
+  newExtra['retryCount'] = retryCount;
+
   final options = Options(
     method: requestOptions.method,
-    headers: {...requestOptions.headers, 'Authorization': 'Bearer $newToken'},
+    headers: requestOptions.headers,
+    extra: newExtra,
   );
 
   final dio = NetworkInterface.getInstance().dio;
