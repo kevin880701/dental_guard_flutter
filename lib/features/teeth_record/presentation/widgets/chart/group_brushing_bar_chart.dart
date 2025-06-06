@@ -20,11 +20,13 @@ import 'info/chart_info_widget.dart';
 class GroupBrushingBarChart extends HookConsumerWidget {
   final String groupId;
   final String title;
+  final int refreshKey;
 
   const GroupBrushingBarChart({
     super.key,
     required this.groupId,
     required this.title,
+    required this.refreshKey,
   });
 
   @override
@@ -40,6 +42,7 @@ class GroupBrushingBarChart extends HookConsumerWidget {
       groupId: groupId,
       selectTime: selectTime.value,
       status: chartTimeStatus.value,
+      refreshKey: refreshKey,
       )),
     );
 

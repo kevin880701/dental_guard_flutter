@@ -56,7 +56,8 @@ final getGroupBrushingStatsUseCaseProvider = Provider<GetGroupBrushingStatsUseCa
 
 final groupBrushingStatsProvider = FutureProvider.autoDispose.family<
     List<GroupBrushingStatsData>,
-    ({String groupId, DateTime selectTime, ChartTimeStatus status
+    ({String groupId, DateTime selectTime, ChartTimeStatus status,
+    int refreshKey,
     })
 >((ref, param) async {
   final useCase = ref.read(getGroupBrushingStatsUseCaseProvider);

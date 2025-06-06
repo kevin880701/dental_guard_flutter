@@ -19,11 +19,13 @@ import 'info/smooth_line_info_widget.dart';
 class GroupUseCountLineChart extends HookConsumerWidget {
   final String groupId;
   final String title;
+  final int refreshKey;
 
   const GroupUseCountLineChart({
     super.key,
     required this.groupId,
     required this.title,
+    required this.refreshKey,
   });
 
   @override
@@ -40,6 +42,7 @@ class GroupUseCountLineChart extends HookConsumerWidget {
       groupId: groupId,
       selectTime: selectTime.value,
       status: chartTimeStatus.value,
+      refreshKey: refreshKey,
       )),
     );
 

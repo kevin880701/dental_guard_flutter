@@ -10,13 +10,14 @@ import '../../../../core/base/base_page.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/utils/dialog_manager.dart';
+import '../../../../core/widgets/keep_alive_wrapper.dart';
 import '../../../../core/widgets/tab_navigation/tab_navigation.dart';
 import '../../../../core/widgets/title_bar.dart';
 import '../../../member/presentation/pages/member_list_screen.dart';
 import '../../../member/presentation/providers/member_list_controller.dart';
 import '../../../organization/application/organization_controller.dart';
 import '../../../organization/data/models/response/group/group_data.dart';
-import '../../../teeth_record/presentation/pages/group_brushing_chart_screen.dart';
+import 'group_brushing_chart_screen.dart';
 
 @RoutePage()
 class GroupMainScreen extends HookConsumerWidget {
@@ -106,8 +107,8 @@ class GroupMainScreen extends HookConsumerWidget {
                   tabIndex.value = idx;
                 },
                 children: [
-                  MemberListScreen(group: group,),
-                  GroupBrushingChartScreen(group: group,),
+                  KeepAliveWrapper(child: MemberListScreen(group: group,),),
+                  KeepAliveWrapper(child: GroupBrushingChartScreen(group: group,),),
                 ],
               ),
             ),

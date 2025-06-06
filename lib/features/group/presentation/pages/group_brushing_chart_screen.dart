@@ -10,14 +10,16 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../../core/base/base_page.dart';
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/providers/refresh_controller.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/utils/dialog_manager.dart';
 import '../../../../core/widgets/image/app_icon.dart';
 import '../../../organization/data/models/response/group/group_data.dart';
-import '../../application/teeth_record_usecases_provider.dart';
-import '../../data/models/response/groups_brushing_records/group_brushing_records_data.dart';
-import '../widgets/chart/group_brushing_bar_chart.dart';
-import '../widgets/chart/group_use_count_line_chart.dart';
+import '../../../teeth_record/application/teeth_record_usecases_provider.dart';
+import '../../../teeth_record/data/models/response/groups_brushing_records/group_brushing_records_data.dart';
+import '../../../teeth_record/presentation/widgets/chart/group_brushing_bar_chart.dart';
+import '../../../teeth_record/presentation/widgets/chart/group_use_count_line_chart.dart';
+import '../provider/group_main_controller.dart';
 
 class GroupBrushingChartScreen extends HookConsumerWidget {
   final GroupData group;
@@ -26,9 +28,16 @@ class GroupBrushingChartScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    final groupMainState = ref.watch(groupMainProvider);
+
     return BasePage(
       backgroundColor: AppColors.bgColor,
-      child: Container(
+      child: RefreshIndicator(
+        onRefresh: () async {
+          ref.read(groupMainProvider.notifier).refresh();
+        },
+        child: Container(
         height: double.infinity,
         child: SingleChildScrollView(
           child: Container(
@@ -136,17 +145,20 @@ class GroupBrushingChartScreen extends HookConsumerWidget {
                 GroupBrushingBarChart(
                   groupId: group.id,
                   title: AppStrings.averagePlaquePercentage,
+                  refreshKey: groupMainState.refreshKey,
                 ),
                 GroupUseCountLineChart(
                   groupId: group.id,
                   title: AppStrings.averageNumberOfUsers,
+                  refreshKey: groupMainState.refreshKey
+                  ,
                 ),
                 SizedBox(height: 96),
               ],
             ),
           ),
         ),
-      ),
+      ),),
     );
   }
 }

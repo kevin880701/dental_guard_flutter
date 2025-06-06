@@ -21,6 +21,7 @@ import '../../../../core/widgets/image/file_image_widget.dart';
 import '../../../../core/widgets/text/app_text.dart';
 import '../../../../core/widgets/title_bar.dart';
 import '../../../analyze/application/analyze_usecases_provider.dart';
+import '../../../group/presentation/provider/group_main_controller.dart';
 import '../../../member/presentation/providers/member_info_controller.dart';
 import '../../../teeth_record/application/teeth_record_usecases_provider.dart';
 import '../../../teeth_record/data/models/response/brushing_record/brushing_record_data.dart';
@@ -199,6 +200,7 @@ class TeethDetectionScreen extends HookConsumerWidget {
                                               .notifier);
                                       controller
                                           .appendBrushingRecords([result]);
+                                      ref.read(groupMainProvider.notifier).refresh();
                                       context.pop();
                                       AppToast.showToast(
                                           message: AppStrings.storageSuccess);
