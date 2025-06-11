@@ -54,4 +54,9 @@ class ApiEndPoint {
   /// /analyze/image/teeth/{filepath}
   static String getAnalyzeImage(String filepath) => '/analyze/image/teeth/$filepath';
 
+  // System
+  static const String getAppInfo = '/system/app/info';
+  static const String uploadAppVersion = '/system/app/version';
+  static const String getSystemMaintenance = '/system/maintenance';
+  static const String uploadSystemMaintenance = '/system/maintenance';
 }
