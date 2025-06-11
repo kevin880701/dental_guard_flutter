@@ -12,6 +12,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/utils/dialog_manager.dart';
+import '../../../../core/utils/utils.dart';
 import '../../../../routes/app_router.dart';
 
 @RoutePage()
@@ -23,12 +25,50 @@ class LaunchScreen extends HookConsumerWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     useEffect(() {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        ref.read(versionInfoProvider.notifier).loadVersionInfo().then((_) {
-          Timer(const Duration(seconds: 2), () async {
-            AutoRouter.of(context).replace(const LoginRoute());
-          });
-        });
+      SchedulerBinding.instance.addPostFrameCallback((_) async {
+        // 1. 先取得版本資訊
+        final success =
+            await ref.read(versionInfoProvider.notifier).loadVersionInfo();
+        if (!success) {
+          // 取得版本失敗
+          await showErrorDialog(
+            context,
+            title: AppStrings.getVersionFailed,
+            content: AppStrings.serverVersionUnavailable,
+            onPressed: () {
+              exitApp();
+            },
+          );
+          return;
+        }
+
+        final state = ref.read(versionInfoProvider);
+        final needUpdate = isDebugVersionGreater(
+          state.debugVersion,
+          state.appInfo?.appVersion,
+        );
+
+        if (!needUpdate) {
+          showDefaultDialog(
+            context,
+            title: AppStrings.versionOutdated,
+            content: AppStrings.pleaseUpdateToContinue,
+            onRightButtonPressed: () async {
+              await openStore();
+              exitApp();
+            },
+            leftButtonText: "結束",
+            onLeftButtonPressed: () {
+              context.router.pop(false);
+              exitApp();
+            },
+          );
+          return;
+        }
+
+        // 3. 通過檢查後再延遲跳頁
+        await Future.delayed(const Duration(seconds: 2));
+        AutoRouter.of(context).replace(const LoginRoute());
       });
       return null;
     }, []);
@@ -44,7 +84,11 @@ class LaunchScreen extends HookConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  AssetImageWidget(image: AppImages.appIcon, width: screenWidth * 0.4, height: screenWidth * 0.4,),
+                  AssetImageWidget(
+                    image: AppImages.appIcon,
+                    width: screenWidth * 0.4,
+                    height: screenWidth * 0.4,
+                  ),
                   AppText(text: AppStrings.appName)
                 ],
               ),

@@ -18,12 +18,16 @@ class DefaultDialog extends HookConsumerWidget {
     this.content,
     this.leftButtonText = AppStrings.cancel,
     this.rightButtonText = AppStrings.confirm,
+    this.onLeftButtonPressed,
+    this.onRightButtonPressed,
   });
 
   final String? title;
   final String? content;
   final String leftButtonText;
   final String rightButtonText;
+  final VoidCallback? onLeftButtonPressed;
+  final VoidCallback? onRightButtonPressed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -67,7 +71,7 @@ class DefaultDialog extends HookConsumerWidget {
                 children: [
                   AppButton(
                     text: leftButtonText,
-                    onPressed: (){
+                    onPressed: onLeftButtonPressed ?? () {
                       context.pop(false);
                     },
                     fontColor: AppColors.primaryBlack,
@@ -77,7 +81,7 @@ class DefaultDialog extends HookConsumerWidget {
                   SizedBox(width: 16,),
                   AppButton(
                     text: rightButtonText,
-                    onPressed: (){
+                    onPressed: onRightButtonPressed ?? () {
                       context.router.pop(true);
                     },
                   ),

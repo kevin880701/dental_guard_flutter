@@ -16,11 +16,13 @@ class ErrorDialog extends HookConsumerWidget {
     required this.title,
     this.content,
     this.buttonText = AppStrings.confirm,
+    this.onPressed,
   });
 
   final String title;
   final String? content;
   final String buttonText;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -46,7 +48,7 @@ class ErrorDialog extends HookConsumerWidget {
             ],
             AppButton(
               text: buttonText,
-              onPressed: () {
+              onPressed: onPressed ?? () {
                 context.router.pop(true);
               },
             ),

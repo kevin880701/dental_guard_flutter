@@ -1,6 +1,13 @@
 
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../main.dart';
 import '../constants/app_images.dart';
 
 String secondsToMMSS(int seconds) {
@@ -54,3 +61,47 @@ extension ContextSizeExtension on BuildContext {
 }
 
 String addLeadingZero(dynamic value, {int width = 2}) => value.toString().padLeft(width, '0');
+
+
+String getCurrentPlatform() {
+  if (kIsWeb) return "web";
+  if (Platform.isAndroid) return "android";
+  if (Platform.isIOS) return "ios";
+  if (Platform.isMacOS) return "macos";
+  if (Platform.isWindows) return "windows";
+  if (Platform.isLinux) return "linux";
+  return "unknown";
+}
+
+bool isDebugVersionGreater(String debugVersion, String? appVersion) {
+  if (appVersion == null) return true; // 沒有 app 版本就直接當 release 比較新
+
+  String normalize(String v) =>
+      v.replaceAll(RegExp(r'[^0-9]'), ''); // 移除所有非數字
+
+  final releaseNum = int.tryParse(normalize(debugVersion)) ?? 0;
+  final appNum = int.tryParse(normalize(appVersion)) ?? 0;
+  return releaseNum > appNum;
+}
+
+Future<void> openStore() async {
+  final androidUrl = 'https://play.google.com/store/apps/details?id=com.lhr.oralcare';
+  final iosUrl = 'https://apps.apple.com/app/com.lhr.oralcare';
+
+  final url = Theme.of(navigatorKey.currentContext!).platform == TargetPlatform.iOS
+      ? iosUrl
+      : androidUrl;
+
+  if (await canLaunchUrl(Uri.parse(url))) {
+    await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+  } else {
+  }
+}
+
+void exitApp() {
+  if (Platform.isAndroid) {
+    SystemNavigator.pop();
+  } else if (Platform.isIOS) {
+    exit(0); // 強制結束
+  }
+}

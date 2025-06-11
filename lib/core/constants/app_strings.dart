@@ -4,6 +4,10 @@ class AppStrings {
   static const cancel = '取消';
   static const plsChoose = '請選擇';
   static const loading = '載入中...';
+  static const getVersionFailed = '取得版本失敗';
+  static const serverVersionUnavailable = '無法取得伺服器版本資訊，請稍後再試。';
+  static const versionOutdated = '版本過舊';
+  static const pleaseUpdateToContinue = '請前往商店更新至最新版才能繼續使用。';
 
   // 登入
   static const login = '登入';

@@ -31,7 +31,10 @@ Future<bool?> showDefaultDialog(
       String rightButtonText = AppStrings.confirm,
       bool barrierDismissible = true,
       bool canPop = true,
-    }) async {
+      VoidCallback? onLeftButtonPressed,
+      VoidCallback? onRightButtonPressed,
+    }
+    ) async {
   return await showDialogBox<bool>(
     context,
     child: DefaultDialog(
@@ -39,6 +42,8 @@ Future<bool?> showDefaultDialog(
       content: content,
       leftButtonText: leftButtonText,
       rightButtonText: rightButtonText,
+      onLeftButtonPressed: onLeftButtonPressed,
+      onRightButtonPressed: onRightButtonPressed,
     ),
     position: DialogPosition.center,
     barrierDismissible: barrierDismissible,
@@ -84,6 +89,7 @@ Future<bool?> showErrorDialog(
       String buttonText = AppStrings.confirm,
       bool barrierDismissible = true,
       bool canPop = true,
+      VoidCallback? onPressed,
     }) async {
   return await showDialogBox<bool?>(
     context,
@@ -91,6 +97,7 @@ Future<bool?> showErrorDialog(
       title: title,
       content: content,
       buttonText: buttonText,
+      onPressed: onPressed,
     ),
     position: DialogPosition.center,
     barrierDismissible: barrierDismissible,
