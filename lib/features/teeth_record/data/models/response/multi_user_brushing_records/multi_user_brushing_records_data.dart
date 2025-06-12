@@ -9,7 +9,7 @@ part 'multi_user_brushing_records_data.g.dart';
 class MultiUserBrushingRecordsData with _$MultiUserBrushingRecordsData {
   const factory MultiUserBrushingRecordsData({
     @JsonKey(name: 'user') required UserInfoData user,
-    @JsonKey(name: 'brushing_records') required List<BrushingRecordData> brushingRecords,
+    @JsonKey(name: 'brushing_records') List<BrushingRecordData>? brushingRecords,
   }) = _MultiUserBrushingRecordsData;
 
   factory MultiUserBrushingRecordsData.fromJson(Map<String, dynamic> json) =>

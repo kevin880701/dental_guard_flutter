@@ -54,37 +54,37 @@ class MemberBrushingChartScreen extends HookConsumerWidget {
                         required DateTime startTime,
                         required DateTime endTime,
                       }) async {
-
                         final useCase = ref.read(getMultiUserBrushingRecordsUseCaseProvider);
                         final result = await useCase(
                           userIds: [state.user!.id],
-                          startDate:  startTime.toIsoDateTime(),
+                          startDate: startTime.toIsoDateTime(),
                           endDate: endTime.toIsoDateTime(),
                         );
-                        if (result.isNotEmpty) {
-                          final users = result[0].user;
 
-                          // 展開所有 user 的 brushingRecords，並且帶上 user info
-                          final allRecords = <Map<String, dynamic>>[];
-                          // for (final user in users) {
-                          //   for (final record in user.brushingRecords) {
-                          //     // 判斷偵測成功
-                          //     final scoreDisplay = (record.analyzeResult.isSuccess == 0)
-                          //         ? '偵測失敗'
-                          //         : record.analyzeResult.score.toString();
-                          //
-                          //     allRecords.add({
-                          //       'userName': user.user.name ?? '',
-                          //       'userNumber': user.user.number ?? '',
-                          //       'remark': record.remarks ?? '',
-                          //       'createdAt': record.createdAt,
-                          //       'score': scoreDisplay,
-                          //     });
-                          //   }
-                          // }
+                        final allRecords = <Map<String, dynamic>>[];
+
+                        if (result.isNotEmpty) {
+                          // result 是 List<MultiUserBrushingRecordsData>
+                          for (final data in result) {
+                            final userInfo = data.user;
+                            for (final record in (data.brushingRecords ?? [])) {
+                              final scoreDisplay = (record.analyzeResult.isSuccess == 0)
+                                  ? '偵測失敗'
+                                  : record.analyzeResult.score.toString();
+
+                              allRecords.add({
+                                'userName': userInfo.name ?? '',
+                                'userNumber': userInfo.number ?? '',
+                                'remark': record.remarks ?? '',
+                                'createdAt': record.createdAt,
+                                'score': scoreDisplay,
+                              });
+                            }
+                          }
 
                           // createdAt 遞增排序
-                          allRecords.sort((a, b) => (a['createdAt'] as DateTime).compareTo(b['createdAt'] as DateTime));
+                          allRecords.sort((a, b) =>
+                              (a['createdAt'] as DateTime).compareTo(b['createdAt'] as DateTime));
 
                           // 轉成 CSV
                           String toCsv(List<Map<String, dynamic>> records) {
@@ -96,7 +96,7 @@ class MemberBrushingChartScreen extends HookConsumerWidget {
                                 r['userNumber'],
                                 r['remark'],
                                 (r['createdAt'] as DateTime).toIso8601String(),
-                                r['score'].toString(),
+                                r['score'],
                               ].join(','));
                             }
                             return rows.join('\n');

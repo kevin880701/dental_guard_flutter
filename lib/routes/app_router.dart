@@ -7,8 +7,6 @@ import '../features/group/presentation/pages/group_main_screen.dart';
 import '../features/launch/presentation/pages/launch_screen.dart';
 import '../features/login/presentation/pages/login_screen.dart';
 import '../features/main/presentation/pages/main_screen.dart';
-import '../features/member/presentation/pages/member_info_screen.dart';
-import '../features/member/presentation/pages/member_list_screen.dart';
 import '../features/member/presentation/pages/member_main_screen.dart';
 import '../features/organization/data/models/response/group/group_data.dart';
 import '../features/teeth_detection/presentation/pages/camera_screen.dart';

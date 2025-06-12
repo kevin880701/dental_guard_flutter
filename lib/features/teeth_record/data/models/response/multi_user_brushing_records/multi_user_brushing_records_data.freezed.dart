@@ -24,7 +24,7 @@ mixin _$MultiUserBrushingRecordsData {
   @JsonKey(name: 'user')
   UserInfoData get user => throw _privateConstructorUsedError;
   @JsonKey(name: 'brushing_records')
-  List<BrushingRecordData> get brushingRecords =>
+  List<BrushingRecordData>? get brushingRecords =>
       throw _privateConstructorUsedError;
 
   /// Serializes this MultiUserBrushingRecordsData to a JSON map.
@@ -48,7 +48,7 @@ abstract class $MultiUserBrushingRecordsDataCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'user') UserInfoData user,
       @JsonKey(name: 'brushing_records')
-      List<BrushingRecordData> brushingRecords});
+      List<BrushingRecordData>? brushingRecords});
 
   $UserInfoDataCopyWith<$Res> get user;
 }
@@ -70,17 +70,17 @@ class _$MultiUserBrushingRecordsDataCopyWithImpl<$Res,
   @override
   $Res call({
     Object? user = null,
-    Object? brushingRecords = null,
+    Object? brushingRecords = freezed,
   }) {
     return _then(_value.copyWith(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserInfoData,
-      brushingRecords: null == brushingRecords
+      brushingRecords: freezed == brushingRecords
           ? _value.brushingRecords
           : brushingRecords // ignore: cast_nullable_to_non_nullable
-              as List<BrushingRecordData>,
+              as List<BrushingRecordData>?,
     ) as $Val);
   }
 
@@ -107,7 +107,7 @@ abstract class _$$MultiUserBrushingRecordsDataImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'user') UserInfoData user,
       @JsonKey(name: 'brushing_records')
-      List<BrushingRecordData> brushingRecords});
+      List<BrushingRecordData>? brushingRecords});
 
   @override
   $UserInfoDataCopyWith<$Res> get user;
@@ -129,17 +129,17 @@ class __$$MultiUserBrushingRecordsDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = null,
-    Object? brushingRecords = null,
+    Object? brushingRecords = freezed,
   }) {
     return _then(_$MultiUserBrushingRecordsDataImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserInfoData,
-      brushingRecords: null == brushingRecords
+      brushingRecords: freezed == brushingRecords
           ? _value._brushingRecords
           : brushingRecords // ignore: cast_nullable_to_non_nullable
-              as List<BrushingRecordData>,
+              as List<BrushingRecordData>?,
     ));
   }
 }
@@ -151,7 +151,7 @@ class _$MultiUserBrushingRecordsDataImpl
   const _$MultiUserBrushingRecordsDataImpl(
       {@JsonKey(name: 'user') required this.user,
       @JsonKey(name: 'brushing_records')
-      required final List<BrushingRecordData> brushingRecords})
+      final List<BrushingRecordData>? brushingRecords})
       : _brushingRecords = brushingRecords;
 
   factory _$MultiUserBrushingRecordsDataImpl.fromJson(
@@ -161,13 +161,15 @@ class _$MultiUserBrushingRecordsDataImpl
   @override
   @JsonKey(name: 'user')
   final UserInfoData user;
-  final List<BrushingRecordData> _brushingRecords;
+  final List<BrushingRecordData>? _brushingRecords;
   @override
   @JsonKey(name: 'brushing_records')
-  List<BrushingRecordData> get brushingRecords {
+  List<BrushingRecordData>? get brushingRecords {
+    final value = _brushingRecords;
+    if (value == null) return null;
     if (_brushingRecords is EqualUnmodifiableListView) return _brushingRecords;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_brushingRecords);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -213,7 +215,7 @@ abstract class _MultiUserBrushingRecordsData
   const factory _MultiUserBrushingRecordsData(
           {@JsonKey(name: 'user') required final UserInfoData user,
           @JsonKey(name: 'brushing_records')
-          required final List<BrushingRecordData> brushingRecords}) =
+          final List<BrushingRecordData>? brushingRecords}) =
       _$MultiUserBrushingRecordsDataImpl;
 
   factory _MultiUserBrushingRecordsData.fromJson(Map<String, dynamic> json) =
@@ -224,7 +226,7 @@ abstract class _MultiUserBrushingRecordsData
   UserInfoData get user;
   @override
   @JsonKey(name: 'brushing_records')
-  List<BrushingRecordData> get brushingRecords;
+  List<BrushingRecordData>? get brushingRecords;
 
   /// Create a copy of MultiUserBrushingRecordsData
   /// with the given fields replaced by the non-null parameter values.
