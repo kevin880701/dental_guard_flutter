@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'user_brushing_stats_data.dart';
+part of 'brushing_stats_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-UserBrushingStatsData _$UserBrushingStatsDataFromJson(
-    Map<String, dynamic> json) {
-  return _UserBrushingStatsData.fromJson(json);
+BrushingStatsData _$BrushingStatsDataFromJson(Map<String, dynamic> json) {
+  return _BrushingStatsData.fromJson(json);
 }
 
 /// @nodoc
-mixin _$UserBrushingStatsData {
+mixin _$BrushingStatsData {
   @JsonKey(name: 'time_group')
   DateTime get timeGroup => throw _privateConstructorUsedError;
   @JsonKey(name: 'value')
@@ -32,21 +31,21 @@ mixin _$UserBrushingStatsData {
   @JsonKey(name: 'base_count')
   int get baseCount => throw _privateConstructorUsedError;
 
-  /// Serializes this UserBrushingStatsData to a JSON map.
+  /// Serializes this BrushingStatsData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of UserBrushingStatsData
+  /// Create a copy of BrushingStatsData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $UserBrushingStatsDataCopyWith<UserBrushingStatsData> get copyWith =>
+  $BrushingStatsDataCopyWith<BrushingStatsData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserBrushingStatsDataCopyWith<$Res> {
-  factory $UserBrushingStatsDataCopyWith(UserBrushingStatsData value,
-          $Res Function(UserBrushingStatsData) then) =
-      _$UserBrushingStatsDataCopyWithImpl<$Res, UserBrushingStatsData>;
+abstract class $BrushingStatsDataCopyWith<$Res> {
+  factory $BrushingStatsDataCopyWith(
+          BrushingStatsData value, $Res Function(BrushingStatsData) then) =
+      _$BrushingStatsDataCopyWithImpl<$Res, BrushingStatsData>;
   @useResult
   $Res call(
       {@JsonKey(name: 'time_group') DateTime timeGroup,
@@ -57,17 +56,16 @@ abstract class $UserBrushingStatsDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserBrushingStatsDataCopyWithImpl<$Res,
-        $Val extends UserBrushingStatsData>
-    implements $UserBrushingStatsDataCopyWith<$Res> {
-  _$UserBrushingStatsDataCopyWithImpl(this._value, this._then);
+class _$BrushingStatsDataCopyWithImpl<$Res, $Val extends BrushingStatsData>
+    implements $BrushingStatsDataCopyWith<$Res> {
+  _$BrushingStatsDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UserBrushingStatsData
+  /// Create a copy of BrushingStatsData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -104,12 +102,11 @@ class _$UserBrushingStatsDataCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$UserBrushingStatsDataImplCopyWith<$Res>
-    implements $UserBrushingStatsDataCopyWith<$Res> {
-  factory _$$UserBrushingStatsDataImplCopyWith(
-          _$UserBrushingStatsDataImpl value,
-          $Res Function(_$UserBrushingStatsDataImpl) then) =
-      __$$UserBrushingStatsDataImplCopyWithImpl<$Res>;
+abstract class _$$BrushingStatsDataImplCopyWith<$Res>
+    implements $BrushingStatsDataCopyWith<$Res> {
+  factory _$$BrushingStatsDataImplCopyWith(_$BrushingStatsDataImpl value,
+          $Res Function(_$BrushingStatsDataImpl) then) =
+      __$$BrushingStatsDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -121,15 +118,14 @@ abstract class _$$UserBrushingStatsDataImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$UserBrushingStatsDataImplCopyWithImpl<$Res>
-    extends _$UserBrushingStatsDataCopyWithImpl<$Res,
-        _$UserBrushingStatsDataImpl>
-    implements _$$UserBrushingStatsDataImplCopyWith<$Res> {
-  __$$UserBrushingStatsDataImplCopyWithImpl(_$UserBrushingStatsDataImpl _value,
-      $Res Function(_$UserBrushingStatsDataImpl) _then)
+class __$$BrushingStatsDataImplCopyWithImpl<$Res>
+    extends _$BrushingStatsDataCopyWithImpl<$Res, _$BrushingStatsDataImpl>
+    implements _$$BrushingStatsDataImplCopyWith<$Res> {
+  __$$BrushingStatsDataImplCopyWithImpl(_$BrushingStatsDataImpl _value,
+      $Res Function(_$BrushingStatsDataImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UserBrushingStatsData
+  /// Create a copy of BrushingStatsData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -140,7 +136,7 @@ class __$$UserBrushingStatsDataImplCopyWithImpl<$Res>
     Object? count = null,
     Object? baseCount = null,
   }) {
-    return _then(_$UserBrushingStatsDataImpl(
+    return _then(_$BrushingStatsDataImpl(
       timeGroup: null == timeGroup
           ? _value.timeGroup
           : timeGroup // ignore: cast_nullable_to_non_nullable
@@ -167,16 +163,16 @@ class __$$UserBrushingStatsDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UserBrushingStatsDataImpl implements _UserBrushingStatsData {
-  const _$UserBrushingStatsDataImpl(
+class _$BrushingStatsDataImpl implements _BrushingStatsData {
+  const _$BrushingStatsDataImpl(
       {@JsonKey(name: 'time_group') required this.timeGroup,
       @JsonKey(name: 'value') required this.value,
       @JsonKey(name: 'base_value') required this.baseValue,
       @JsonKey(name: 'count') required this.count,
       @JsonKey(name: 'base_count') required this.baseCount});
 
-  factory _$UserBrushingStatsDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserBrushingStatsDataImplFromJson(json);
+  factory _$BrushingStatsDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BrushingStatsDataImplFromJson(json);
 
   @override
   @JsonKey(name: 'time_group')
@@ -196,14 +192,14 @@ class _$UserBrushingStatsDataImpl implements _UserBrushingStatsData {
 
   @override
   String toString() {
-    return 'UserBrushingStatsData(timeGroup: $timeGroup, value: $value, baseValue: $baseValue, count: $count, baseCount: $baseCount)';
+    return 'BrushingStatsData(timeGroup: $timeGroup, value: $value, baseValue: $baseValue, count: $count, baseCount: $baseCount)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserBrushingStatsDataImpl &&
+            other is _$BrushingStatsDataImpl &&
             (identical(other.timeGroup, timeGroup) ||
                 other.timeGroup == timeGroup) &&
             (identical(other.value, value) || other.value == value) &&
@@ -219,34 +215,34 @@ class _$UserBrushingStatsDataImpl implements _UserBrushingStatsData {
   int get hashCode =>
       Object.hash(runtimeType, timeGroup, value, baseValue, count, baseCount);
 
-  /// Create a copy of UserBrushingStatsData
+  /// Create a copy of BrushingStatsData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UserBrushingStatsDataImplCopyWith<_$UserBrushingStatsDataImpl>
-      get copyWith => __$$UserBrushingStatsDataImplCopyWithImpl<
-          _$UserBrushingStatsDataImpl>(this, _$identity);
+  _$$BrushingStatsDataImplCopyWith<_$BrushingStatsDataImpl> get copyWith =>
+      __$$BrushingStatsDataImplCopyWithImpl<_$BrushingStatsDataImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserBrushingStatsDataImplToJson(
+    return _$$BrushingStatsDataImplToJson(
       this,
     );
   }
 }
 
-abstract class _UserBrushingStatsData implements UserBrushingStatsData {
-  const factory _UserBrushingStatsData(
+abstract class _BrushingStatsData implements BrushingStatsData {
+  const factory _BrushingStatsData(
           {@JsonKey(name: 'time_group') required final DateTime timeGroup,
           @JsonKey(name: 'value') required final double value,
           @JsonKey(name: 'base_value') required final double baseValue,
           @JsonKey(name: 'count') required final int count,
           @JsonKey(name: 'base_count') required final int baseCount}) =
-      _$UserBrushingStatsDataImpl;
+      _$BrushingStatsDataImpl;
 
-  factory _UserBrushingStatsData.fromJson(Map<String, dynamic> json) =
-      _$UserBrushingStatsDataImpl.fromJson;
+  factory _BrushingStatsData.fromJson(Map<String, dynamic> json) =
+      _$BrushingStatsDataImpl.fromJson;
 
   @override
   @JsonKey(name: 'time_group')
@@ -264,10 +260,10 @@ abstract class _UserBrushingStatsData implements UserBrushingStatsData {
   @JsonKey(name: 'base_count')
   int get baseCount;
 
-  /// Create a copy of UserBrushingStatsData
+  /// Create a copy of BrushingStatsData
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UserBrushingStatsDataImplCopyWith<_$UserBrushingStatsDataImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$BrushingStatsDataImplCopyWith<_$BrushingStatsDataImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -1,13 +1,10 @@
-import 'dart:math';
 
 import 'package:dental_guard_flutter/core/utils/utils.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/network/network_interface.dart';
 import '../data/datasources/teeth_record_remote_datasource.dart';
 import '../data/models/request/get_group_brushing_stats/get_group_brushing_stats_request.dart';
-import '../data/models/request/get_user_brushing_stats/get_user_brushing_stats_request.dart';
-import '../data/models/response/group_brushing_stats/group_brushing_stats_data.dart';
-import '../data/models/response/user_brushing_stats/user_brushing_stats_data.dart';
+import '../data/models/response/brushing_stats/brushing_stats_data.dart';
 import '../data/repositories/teeth_record_repository_impl.dart';
 import '../domain/entity/chart_time_status.dart';
 import '../domain/usecase/create_brushing_record_usecase.dart';
@@ -69,7 +66,7 @@ final getMultiUserBrushingRecordsUseCaseProvider = Provider<GetMultiUserBrushing
 });
 
 final groupBrushingStatsProvider = FutureProvider.autoDispose.family<
-    List<GroupBrushingStatsData>,
+    List<BrushingStatsData>,
     ({String groupId, DateTime selectTime, ChartTimeStatus status,
     int refreshKey,
     })
@@ -98,17 +95,31 @@ final groupBrushingStatsProvider = FutureProvider.autoDispose.family<
   return convertedResult;
 });
 
-final userBrushingStatsProvider = FutureProvider.autoDispose
-    .family<List<UserBrushingStatsData>, GetUserBrushingStatsRequest>(
-      (ref, request) async {
-    final useCase = ref.read(getUserBrushingStatsUseCaseProvider);
-    final result = await useCase(request);
+final memberBrushingStatsProvider = FutureProvider.autoDispose.family<
+    List<BrushingStatsData>,
+    ({
+    String userId,
+    DateTime selectTime,
+    ChartTimeStatus status,
+    int refreshKey,
+    })
+>((ref, param) async {
+  final useCase = ref.read(getUserBrushingStatsUseCaseProvider);
 
-    // 轉換時區
-    return result
-        .map((item) => item.copyWith(
-      timeGroup: item.timeGroup.convertToTimeZone(),
-    ))
-        .toList();
-  },
-);
+  final timeSpace = param.status.timeSpace;
+  final dateRange = getChartDateRange(param.selectTime, param.status);
+
+  final result = await useCase(
+    userId: param.userId,
+    startDate: dateRange.start,
+    endDate: dateRange.end,
+    timeSpace: timeSpace,
+  );
+
+  // 轉換時區
+  return result
+      .map((item) => item.copyWith(
+    timeGroup: item.timeGroup.convertToTimeZone(),
+  ))
+      .toList();
+});

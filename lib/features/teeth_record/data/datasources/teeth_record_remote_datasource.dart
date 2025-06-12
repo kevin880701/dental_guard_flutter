@@ -8,10 +8,9 @@ import '../models/request/get_groups_brushing_records/get_groups_brushing_record
 import '../models/request/get_multi_user_brushing_records/get_multi_user_brushing_records_request.dart';
 import '../models/request/get_user_brushing_stats/get_user_brushing_stats_request.dart';
 import '../models/response/brushing_record/brushing_record_data.dart';
-import '../models/response/group_brushing_stats/group_brushing_stats_data.dart';
+import '../models/response/brushing_stats/brushing_stats_data.dart';
 import '../models/response/groups_brushing_records/group_brushing_records_data.dart';
 import '../models/response/multi_user_brushing_records/multi_user_brushing_records_data.dart';
-import '../models/response/user_brushing_stats/user_brushing_stats_data.dart';
 
 
 class TeethRecordRemoteDataSource {
@@ -80,16 +79,16 @@ class TeethRecordRemoteDataSource {
   }
 
   /// 查詢單一群組潔牙平均統計
-  Future<List<GroupBrushingStatsData>> getGroupBrushingStats(GetGroupBrushingStatsRequest request) async {
+  Future<List<BrushingStatsData>> getGroupBrushingStats(GetGroupBrushingStatsRequest request) async {
     final response = await networkInterface.post(
       url: ApiEndPoint.groupBrushingStats, // 這要在 ApiEndPoint 新增
       body: request.toJson(),
     );
 
-    final apiResponse = ApiResponse<List<GroupBrushingStatsData>>.fromJson(
+    final apiResponse = ApiResponse<List<BrushingStatsData>>.fromJson(
       response.data,
           (json) => (json as List)
-          .map((item) => GroupBrushingStatsData.fromJson(item as Map<String, dynamic>))
+          .map((item) => BrushingStatsData.fromJson(item as Map<String, dynamic>))
           .toList(),
     );
 
@@ -114,16 +113,16 @@ class TeethRecordRemoteDataSource {
   }
 
   /// 取得使用者刷牙統計資料（可包含 baseline）
-  Future<List<UserBrushingStatsData>> getUserBrushingStats(GetUserBrushingStatsRequest request) async {
+  Future<List<BrushingStatsData>> getUserBrushingStats(GetUserBrushingStatsRequest request) async {
     final response = await networkInterface.post(
       url: ApiEndPoint.userBrushingStats,
       body: request.toJson(),
     );
 
-    final apiResponse = ApiResponse<List<UserBrushingStatsData>>.fromJson(
+    final apiResponse = ApiResponse<List<BrushingStatsData>>.fromJson(
       response.data,
           (json) => (json as List)
-          .map((item) => UserBrushingStatsData.fromJson(item as Map<String, dynamic>))
+          .map((item) => BrushingStatsData.fromJson(item as Map<String, dynamic>))
           .toList(),
     );
 

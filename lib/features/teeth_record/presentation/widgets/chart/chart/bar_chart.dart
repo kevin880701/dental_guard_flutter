@@ -3,14 +3,14 @@ import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../../data/models/response/group_brushing_stats/group_brushing_stats_data.dart';
+import '../../../../data/models/response/brushing_stats/brushing_stats_data.dart';
 import '../../../../domain/entity/chart_time_status.dart';
 import '../indicator/bar_chart_Indicator.dart';
 
 class BarChart extends StatefulWidget {
-  final List<GroupBrushingStatsData> data;
+  final List<BrushingStatsData> data;
   final ChartTimeStatus chartTimeStatus;
-  final void Function(GroupBrushingStatsData data, GroupBrushingStatsData baseLine)? onTap;
+  final void Function(BrushingStatsData data, BrushingStatsData baseLine)? onTap;
   final bool isChartClicked;
 
   const BarChart({
@@ -28,7 +28,7 @@ class BarChart extends StatefulWidget {
 class _BarChartState extends State<BarChart> {
   int? selectedIndex;
 
-  String _getXLabel(GroupBrushingStatsData d) {
+  String _getXLabel(BrushingStatsData d) {
     switch (widget.chartTimeStatus) {
       case ChartTimeStatus.hour:
         return d.timeGroup.minute.toString().padLeft(2, '0'); // 分
@@ -57,7 +57,7 @@ class _BarChartState extends State<BarChart> {
   Widget build(BuildContext context) {
     // X 軸標籤
     final List<String> xLabels = widget.data.map(_getXLabel).toList();
-    String xValueMapper(GroupBrushingStatsData d, int i) => xLabels[i];
+    String xValueMapper(BrushingStatsData d, int i) => xLabels[i];
 
     return Column(
       children: [
@@ -102,9 +102,9 @@ class _BarChartState extends State<BarChart> {
               labelStyle: labelSmall,
             ),
             legend: Legend(isVisible: false),
-            series: <CartesianSeries<GroupBrushingStatsData, String>>[
+            series: <CartesianSeries<BrushingStatsData, String>>[
               // 當前資料柱狀
-              ColumnSeries<GroupBrushingStatsData, String>(
+              ColumnSeries<BrushingStatsData, String>(
                 dataSource: widget.data,
                 xValueMapper: xValueMapper,
                 yValueMapper: (d, _) => d.value,
@@ -131,7 +131,7 @@ class _BarChartState extends State<BarChart> {
                 },
               ),
               // 基線資料折線
-              LineSeries<GroupBrushingStatsData, String>(
+              LineSeries<BrushingStatsData, String>(
                 dataSource: widget.data,
                 xValueMapper: xValueMapper,
                 yValueMapper: (d, _) => d.baseValue,

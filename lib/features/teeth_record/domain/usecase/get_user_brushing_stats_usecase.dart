@@ -1,5 +1,5 @@
 import '../../data/models/request/get_user_brushing_stats/get_user_brushing_stats_request.dart';
-import '../../data/models/response/user_brushing_stats/user_brushing_stats_data.dart';
+import '../../data/models/response/brushing_stats/brushing_stats_data.dart';
 import '../../data/repositories/teeth_record_repository_impl.dart';
 
 class GetUserBrushingStatsUseCase {
@@ -7,7 +7,12 @@ class GetUserBrushingStatsUseCase {
 
   GetUserBrushingStatsUseCase(this.repository);
 
-  Future<List<UserBrushingStatsData>> call(GetUserBrushingStatsRequest request) {
-    return repository.getUserBrushingStats(request);
+  Future<List<BrushingStatsData>> call({
+    required String userId,
+    required String startDate,
+    required String endDate,
+    required int timeSpace,
+  }) {
+    return repository.getUserBrushingStats(GetUserBrushingStatsRequest(userId: userId, startDate: startDate, endDate: endDate, timeSpace: timeSpace));
   }
 }

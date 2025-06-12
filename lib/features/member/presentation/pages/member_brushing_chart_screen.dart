@@ -10,32 +10,29 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../../core/base/base_page.dart';
 import '../../../../core/constants/app_colors.dart';
-import '../../../../core/providers/refresh_controller.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/utils/dialog_manager.dart';
 import '../../../../core/widgets/image/app_icon.dart';
-import '../../../organization/data/models/response/group/group_data.dart';
 import '../../../teeth_record/application/teeth_record_usecases_provider.dart';
-import '../../../teeth_record/data/models/response/groups_brushing_records/group_brushing_records_data.dart';
-import '../../../teeth_record/presentation/widgets/chart/group_plaque_bar_chart.dart';
-import '../../../teeth_record/presentation/widgets/chart/group_use_count_line_chart.dart';
-import '../provider/group_main_controller.dart';
+import '../../../teeth_record/presentation/widgets/chart/member_plaque_bar_chart.dart';
+import '../../../teeth_record/presentation/widgets/chart/member_use_count_line_chart.dart';
+import '../providers/member_main_controller.dart';
 
-class GroupBrushingChartScreen extends HookConsumerWidget {
-  final GroupData group;
+class MemberBrushingChartScreen extends HookConsumerWidget {
 
-  const GroupBrushingChartScreen({super.key, required this.group});
+  const MemberBrushingChartScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final groupMainState = ref.watch(groupMainProvider);
+    final state = ref.watch(memberMainControllerProvider);
+    final controller = ref.read(memberMainControllerProvider.notifier);
 
     return BasePage(
       backgroundColor: AppColors.bgColor,
       child: RefreshIndicator(
         onRefresh: () async {
-          ref.read(groupMainProvider.notifier).refresh();
+          controller.refresh();
         },
         child: Container(
         height: double.infinity,
@@ -58,37 +55,33 @@ class GroupBrushingChartScreen extends HookConsumerWidget {
                         required DateTime endTime,
                       }) async {
 
-                        final useCase = ref.read(getGroupsBrushingRecordsUseCaseProvider);
-                        List<GroupBrushingRecordsData> result = await useCase(
-                          groupIds: [group.id],
+                        final useCase = ref.read(getMultiUserBrushingRecordsUseCaseProvider);
+                        final result = await useCase(
+                          userIds: [state.user!.id],
                           startDate:  startTime.toIsoDateTime(),
                           endDate: endTime.toIsoDateTime(),
                         );
                         if (result.isNotEmpty) {
-                          final users = result[0].users;
-                          if (users.isEmpty) {
-                            AppToast.showToast(message: "沒有使用者資料");
-                            return;
-                          }
+                          final users = result[0].user;
 
                           // 展開所有 user 的 brushingRecords，並且帶上 user info
                           final allRecords = <Map<String, dynamic>>[];
-                          for (final user in users) {
-                            for (final record in user.brushingRecords) {
-                              // 判斷偵測成功
-                              final scoreDisplay = (record.analyzeResult.isSuccess == 0)
-                                  ? '偵測失敗'
-                                  : record.analyzeResult.score.toString();
-
-                              allRecords.add({
-                                'userName': user.user.name ?? '',
-                                'userNumber': user.user.number ?? '',
-                                'remark': record.remarks ?? '',
-                                'createdAt': record.createdAt,
-                                'score': scoreDisplay,
-                              });
-                            }
-                          }
+                          // for (final user in users) {
+                          //   for (final record in user.brushingRecords) {
+                          //     // 判斷偵測成功
+                          //     final scoreDisplay = (record.analyzeResult.isSuccess == 0)
+                          //         ? '偵測失敗'
+                          //         : record.analyzeResult.score.toString();
+                          //
+                          //     allRecords.add({
+                          //       'userName': user.user.name ?? '',
+                          //       'userNumber': user.user.number ?? '',
+                          //       'remark': record.remarks ?? '',
+                          //       'createdAt': record.createdAt,
+                          //       'score': scoreDisplay,
+                          //     });
+                          //   }
+                          // }
 
                           // createdAt 遞增排序
                           allRecords.sort((a, b) => (a['createdAt'] as DateTime).compareTo(b['createdAt'] as DateTime));
@@ -142,15 +135,15 @@ class GroupBrushingChartScreen extends HookConsumerWidget {
                   ),
                   iconSpacing: 4,
                 ),
-                GroupPlaqueBarChart(
-                  groupId: group.id,
+                MemberPlaqueBarChart(
+                  userId: state.user!.id,
                   title: AppStrings.averagePlaquePercentage,
-                  refreshKey: groupMainState.refreshKey,
+                  refreshKey: state.refreshKey,
                 ),
-                GroupUseCountLineChart(
-                  groupId: group.id,
+                MemberUseCountLineChart(
+                  userId: state.user!.id,
                   title: AppStrings.averageNumberOfUsers,
-                  refreshKey: groupMainState.refreshKey
+                  refreshKey: state.refreshKey
                   ,
                 ),
                 SizedBox(height: 96),

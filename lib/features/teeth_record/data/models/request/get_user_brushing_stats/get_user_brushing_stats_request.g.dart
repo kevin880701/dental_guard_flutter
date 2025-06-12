@@ -12,8 +12,7 @@ _$GetUserBrushingStatsRequestImpl _$$GetUserBrushingStatsRequestImplFromJson(
       userId: json['user_id'] as String,
       startDate: json['start_date'] as String,
       endDate: json['end_date'] as String,
-      timeSpace: json['time_space'] as String,
-      needBaseLineData: json['need_base_line_data'] as bool,
+      timeSpace: (json['time_space'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$GetUserBrushingStatsRequestImplToJson(
@@ -23,5 +22,4 @@ Map<String, dynamic> _$$GetUserBrushingStatsRequestImplToJson(
       'start_date': instance.startDate,
       'end_date': instance.endDate,
       'time_space': instance.timeSpace,
-      'need_base_line_data': instance.needBaseLineData,
     };

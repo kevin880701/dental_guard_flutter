@@ -9,6 +9,7 @@ import '../features/login/presentation/pages/login_screen.dart';
 import '../features/main/presentation/pages/main_screen.dart';
 import '../features/member/presentation/pages/member_info_screen.dart';
 import '../features/member/presentation/pages/member_list_screen.dart';
+import '../features/member/presentation/pages/member_main_screen.dart';
 import '../features/organization/data/models/response/group/group_data.dart';
 import '../features/teeth_detection/presentation/pages/camera_screen.dart';
 import '../features/teeth_detection/presentation/pages/teeth_detection_screen.dart';
@@ -61,8 +62,8 @@ class AppRouter extends RootStackRouter {
       transitionsBuilder: TransitionsBuilders.slideLeft,
     ),
     CustomRoute(
-      page: MemberInfoRoute.page,
-      path: '/memberInfo',
+      page: MemberMainRoute.page,
+      path: '/memberMain',
       duration: _duration,
       transitionsBuilder: TransitionsBuilders.slideLeft,
     ),

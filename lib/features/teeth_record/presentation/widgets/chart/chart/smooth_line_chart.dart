@@ -4,14 +4,14 @@ import '../../../../../../core/constants/app_colors.dart';
 import '../../../../../../core/utils/utils.dart';
 import '../../../../../../core/widgets/text/app_text.dart';
 import '../../../../../../core/widgets/text/text_theme.dart';
-import '../../../../data/models/response/group_brushing_stats/group_brushing_stats_data.dart';
+import '../../../../data/models/response/brushing_stats/brushing_stats_data.dart';
 import '../../../../domain/entity/chart_time_status.dart';
 import '../indicator/smooth_line_Indicator.dart';
 
 class SmoothLineChart extends StatefulWidget {
-  final List<GroupBrushingStatsData> data;
+  final List<BrushingStatsData> data;
   final ChartTimeStatus chartTimeStatus;
-  final void Function(List<GroupBrushingStatsData?> data)? onTap;
+  final void Function(List<BrushingStatsData?> data)? onTap;
   final bool isChartClicked;
 
   const SmoothLineChart({

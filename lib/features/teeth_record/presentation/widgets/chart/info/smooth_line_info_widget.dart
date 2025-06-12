@@ -4,7 +4,7 @@ import '../../../../../../core/constants/app_colors.dart';
 import '../../../../../../core/widgets/shape/line_widget.dart';
 import '../../../../../../core/widgets/text/app_text.dart';
 import '../../../../../../core/widgets/text/text_theme.dart';
-import '../../../../data/models/response/group_brushing_stats/group_brushing_stats_data.dart';
+import '../../../../data/models/response/brushing_stats/brushing_stats_data.dart';
 import '../../../../domain/entity/chart_time_status.dart';
 
 class SmoothLineInfoWidget extends StatelessWidget {
@@ -14,7 +14,7 @@ class SmoothLineInfoWidget extends StatelessWidget {
     required this.chartTimeStatus,
   });
 
-  final List<GroupBrushingStatsData?> data;
+  final List<BrushingStatsData?> data;
   final ChartTimeStatus chartTimeStatus;
 
   // 依據 ChartTimeStatus 轉換日期格式

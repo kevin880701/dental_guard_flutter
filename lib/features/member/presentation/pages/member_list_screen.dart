@@ -51,7 +51,7 @@ class MemberListScreen extends HookConsumerWidget {
                   return MemberItem(
                     user: user,
                     onTap: () {
-                      context.pushRoute(MemberInfoRoute(user: user));
+                      context.pushRoute(MemberMainRoute(user: user));
                     },
                   );
                 },

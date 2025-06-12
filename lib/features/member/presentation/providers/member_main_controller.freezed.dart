@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'member_info_controller.dart';
+part of 'member_main_controller.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,46 +15,48 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$MemberInfoState {
+mixin _$MemberMainState {
   UserInfoData? get user => throw _privateConstructorUsedError;
   List<BrushingRecordData> get brushingRecords =>
       throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
+  int get refreshKey => throw _privateConstructorUsedError;
 
-  /// Create a copy of MemberInfoState
+  /// Create a copy of MemberMainState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $MemberInfoStateCopyWith<MemberInfoState> get copyWith =>
+  $MemberMainStateCopyWith<MemberMainState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MemberInfoStateCopyWith<$Res> {
-  factory $MemberInfoStateCopyWith(
-          MemberInfoState value, $Res Function(MemberInfoState) then) =
-      _$MemberInfoStateCopyWithImpl<$Res, MemberInfoState>;
+abstract class $MemberMainStateCopyWith<$Res> {
+  factory $MemberMainStateCopyWith(
+          MemberMainState value, $Res Function(MemberMainState) then) =
+      _$MemberMainStateCopyWithImpl<$Res, MemberMainState>;
   @useResult
   $Res call(
       {UserInfoData? user,
       List<BrushingRecordData> brushingRecords,
       bool isLoading,
-      String? errorMessage});
+      String? errorMessage,
+      int refreshKey});
 
   $UserInfoDataCopyWith<$Res>? get user;
 }
 
 /// @nodoc
-class _$MemberInfoStateCopyWithImpl<$Res, $Val extends MemberInfoState>
-    implements $MemberInfoStateCopyWith<$Res> {
-  _$MemberInfoStateCopyWithImpl(this._value, this._then);
+class _$MemberMainStateCopyWithImpl<$Res, $Val extends MemberMainState>
+    implements $MemberMainStateCopyWith<$Res> {
+  _$MemberMainStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MemberInfoState
+  /// Create a copy of MemberMainState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -63,6 +65,7 @@ class _$MemberInfoStateCopyWithImpl<$Res, $Val extends MemberInfoState>
     Object? brushingRecords = null,
     Object? isLoading = null,
     Object? errorMessage = freezed,
+    Object? refreshKey = null,
   }) {
     return _then(_value.copyWith(
       user: freezed == user
@@ -81,10 +84,14 @@ class _$MemberInfoStateCopyWithImpl<$Res, $Val extends MemberInfoState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      refreshKey: null == refreshKey
+          ? _value.refreshKey
+          : refreshKey // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
-  /// Create a copy of MemberInfoState
+  /// Create a copy of MemberMainState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -100,32 +107,33 @@ class _$MemberInfoStateCopyWithImpl<$Res, $Val extends MemberInfoState>
 }
 
 /// @nodoc
-abstract class _$$MemberInfoStateImplCopyWith<$Res>
-    implements $MemberInfoStateCopyWith<$Res> {
-  factory _$$MemberInfoStateImplCopyWith(_$MemberInfoStateImpl value,
-          $Res Function(_$MemberInfoStateImpl) then) =
-      __$$MemberInfoStateImplCopyWithImpl<$Res>;
+abstract class _$$MemberMainStateImplCopyWith<$Res>
+    implements $MemberMainStateCopyWith<$Res> {
+  factory _$$MemberMainStateImplCopyWith(_$MemberMainStateImpl value,
+          $Res Function(_$MemberMainStateImpl) then) =
+      __$$MemberMainStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {UserInfoData? user,
       List<BrushingRecordData> brushingRecords,
       bool isLoading,
-      String? errorMessage});
+      String? errorMessage,
+      int refreshKey});
 
   @override
   $UserInfoDataCopyWith<$Res>? get user;
 }
 
 /// @nodoc
-class __$$MemberInfoStateImplCopyWithImpl<$Res>
-    extends _$MemberInfoStateCopyWithImpl<$Res, _$MemberInfoStateImpl>
-    implements _$$MemberInfoStateImplCopyWith<$Res> {
-  __$$MemberInfoStateImplCopyWithImpl(
-      _$MemberInfoStateImpl _value, $Res Function(_$MemberInfoStateImpl) _then)
+class __$$MemberMainStateImplCopyWithImpl<$Res>
+    extends _$MemberMainStateCopyWithImpl<$Res, _$MemberMainStateImpl>
+    implements _$$MemberMainStateImplCopyWith<$Res> {
+  __$$MemberMainStateImplCopyWithImpl(
+      _$MemberMainStateImpl _value, $Res Function(_$MemberMainStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MemberInfoState
+  /// Create a copy of MemberMainState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -134,8 +142,9 @@ class __$$MemberInfoStateImplCopyWithImpl<$Res>
     Object? brushingRecords = null,
     Object? isLoading = null,
     Object? errorMessage = freezed,
+    Object? refreshKey = null,
   }) {
-    return _then(_$MemberInfoStateImpl(
+    return _then(_$MemberMainStateImpl(
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -152,18 +161,23 @@ class __$$MemberInfoStateImplCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      refreshKey: null == refreshKey
+          ? _value.refreshKey
+          : refreshKey // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 
-class _$MemberInfoStateImpl implements _MemberInfoState {
-  const _$MemberInfoStateImpl(
+class _$MemberMainStateImpl implements _MemberMainState {
+  const _$MemberMainStateImpl(
       {this.user,
       required final List<BrushingRecordData> brushingRecords,
       this.isLoading = false,
-      this.errorMessage})
+      this.errorMessage,
+      this.refreshKey = 99})
       : _brushingRecords = brushingRecords;
 
   @override
@@ -181,24 +195,29 @@ class _$MemberInfoStateImpl implements _MemberInfoState {
   final bool isLoading;
   @override
   final String? errorMessage;
+  @override
+  @JsonKey()
+  final int refreshKey;
 
   @override
   String toString() {
-    return 'MemberInfoState(user: $user, brushingRecords: $brushingRecords, isLoading: $isLoading, errorMessage: $errorMessage)';
+    return 'MemberMainState(user: $user, brushingRecords: $brushingRecords, isLoading: $isLoading, errorMessage: $errorMessage, refreshKey: $refreshKey)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MemberInfoStateImpl &&
+            other is _$MemberMainStateImpl &&
             (identical(other.user, user) || other.user == user) &&
             const DeepCollectionEquality()
                 .equals(other._brushingRecords, _brushingRecords) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.refreshKey, refreshKey) ||
+                other.refreshKey == refreshKey));
   }
 
   @override
@@ -207,24 +226,26 @@ class _$MemberInfoStateImpl implements _MemberInfoState {
       user,
       const DeepCollectionEquality().hash(_brushingRecords),
       isLoading,
-      errorMessage);
+      errorMessage,
+      refreshKey);
 
-  /// Create a copy of MemberInfoState
+  /// Create a copy of MemberMainState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$MemberInfoStateImplCopyWith<_$MemberInfoStateImpl> get copyWith =>
-      __$$MemberInfoStateImplCopyWithImpl<_$MemberInfoStateImpl>(
+  _$$MemberMainStateImplCopyWith<_$MemberMainStateImpl> get copyWith =>
+      __$$MemberMainStateImplCopyWithImpl<_$MemberMainStateImpl>(
           this, _$identity);
 }
 
-abstract class _MemberInfoState implements MemberInfoState {
-  const factory _MemberInfoState(
+abstract class _MemberMainState implements MemberMainState {
+  const factory _MemberMainState(
       {final UserInfoData? user,
       required final List<BrushingRecordData> brushingRecords,
       final bool isLoading,
-      final String? errorMessage}) = _$MemberInfoStateImpl;
+      final String? errorMessage,
+      final int refreshKey}) = _$MemberMainStateImpl;
 
   @override
   UserInfoData? get user;
@@ -234,11 +255,13 @@ abstract class _MemberInfoState implements MemberInfoState {
   bool get isLoading;
   @override
   String? get errorMessage;
+  @override
+  int get refreshKey;
 
-  /// Create a copy of MemberInfoState
+  /// Create a copy of MemberMainState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MemberInfoStateImplCopyWith<_$MemberInfoStateImpl> get copyWith =>
+  _$$MemberMainStateImplCopyWith<_$MemberMainStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

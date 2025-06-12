@@ -21,10 +21,9 @@ import '../providers/member_main_controller.dart';
 import '../providers/member_list_controller.dart';
 import '../widgets/BrushingRecordItem.dart';
 
-class MemberInfoScreen extends HookConsumerWidget {
-  final UserInfoData user;
+class MemberTeethRecordScreen extends HookConsumerWidget {
 
-  const MemberInfoScreen({super.key, required this.user});
+  const MemberTeethRecordScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,22 +32,15 @@ class MemberInfoScreen extends HookConsumerWidget {
 
     useEffect(() {
       Future.microtask(() {
-        controller.setUser(user);
-        controller.loadUserBrushingRecords(user.id);
+        controller.loadUserBrushingRecords(state.user!.id);
       });
       return null;
-    }, []);
+    }, [state.user]);
 
     return BasePage(
       backgroundColor: AppColors.bgColor,
       child: Column(
         children: [
-          TitleBar(
-            title: state.user?.name ?? "",
-            onBackTap: () {
-              context.pop();
-            },
-          ),
           Padding(
             padding: const EdgeInsets.all(16),
             child: MemberInfoWidget(
@@ -92,7 +84,7 @@ class MemberInfoScreen extends HookConsumerWidget {
                   fontColor: AppColors.white,
                   backgroundColor: AppColors.primaryBlack,
                   onPressed: () {
-                    context.pushRoute(TeethDetectionRoute(userId: user.id));
+                    context.pushRoute(TeethDetectionRoute(userId: state.user!.id));
                   },
                 )
               ],
@@ -118,7 +110,7 @@ class MemberInfoScreen extends HookConsumerWidget {
                     brushingRecordData: record,
                     onTap: () {
                       context.pushRoute(TeethDetectionRoute(
-                          userId: user.id, brushingRecordData: record));
+                          userId: state.user!.id, brushingRecordData: record));
                     },
                   );
                 },

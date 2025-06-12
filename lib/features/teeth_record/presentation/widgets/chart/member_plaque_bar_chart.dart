@@ -10,21 +10,21 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../../../core/constants/app_strings.dart';
 import '../../../../../core/utils/dialog_manager.dart';
 import '../../../application/teeth_record_usecases_provider.dart';
-import '../../../data/models/response/group_brushing_stats/group_brushing_stats_data.dart';
+import '../../../data/models/response/brushing_stats/brushing_stats_data.dart';
 import '../../../domain/entity/chart_time_status.dart';
 import '../../../domain/entity/report_data.dart';
 import 'chart/bar_chart.dart';
 import 'date_controller_widget.dart';
 import 'info/chart_info_widget.dart';
 
-class GroupBrushingBarChart extends HookConsumerWidget {
-  final String groupId;
+class MemberPlaqueBarChart extends HookConsumerWidget {
+  final String userId;
   final String title;
   final int refreshKey;
 
-  const GroupBrushingBarChart({
+  const MemberPlaqueBarChart({
     super.key,
-    required this.groupId,
+    required this.userId,
     required this.title,
     required this.refreshKey,
   });
@@ -38,8 +38,8 @@ class GroupBrushingBarChart extends HookConsumerWidget {
 
     // 監聽 API 資料（根據時間和型態切換）
     final statsAsync = ref.watch(
-      groupBrushingStatsProvider((
-      groupId: groupId,
+      memberBrushingStatsProvider((
+      userId: userId,
       selectTime: selectTime.value,
       status: chartTimeStatus.value,
       refreshKey: refreshKey,
@@ -81,7 +81,7 @@ class GroupBrushingBarChart extends HookConsumerWidget {
 
               // onTap 更新被點擊的 index 和點擊狀態
               void handleBarTap(
-                  GroupBrushingStatsData d, GroupBrushingStatsData baseLine) {
+                  BrushingStatsData d, BrushingStatsData baseLine) {
                 final idx = data.indexOf(d);
                 selectedIndex.value = idx;
                 isChartClicked.value = true;

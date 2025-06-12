@@ -22,7 +22,7 @@ import '../../../../core/widgets/text/app_text.dart';
 import '../../../../core/widgets/title_bar.dart';
 import '../../../analyze/application/analyze_usecases_provider.dart';
 import '../../../group/presentation/provider/group_main_controller.dart';
-import '../../../member/presentation/providers/member_info_controller.dart';
+import '../../../member/presentation/providers/member_main_controller.dart';
 import '../../../teeth_record/application/teeth_record_usecases_provider.dart';
 import '../../../teeth_record/data/models/response/brushing_record/brushing_record_data.dart';
 import '../provider/teeth_detection_controller.dart';
@@ -196,7 +196,7 @@ class TeethDetectionScreen extends HookConsumerWidget {
 
                                     if (result != null) {
                                       final controller = ref.read(
-                                          memberInfoControllerProvider
+                                          memberMainControllerProvider
                                               .notifier);
                                       controller
                                           .appendBrushingRecords([result]);

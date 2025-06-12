@@ -1,33 +1,35 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../core/providers/refresh_controller.dart';
 import '../../../../core/utils/app_log.dart';
 import '../../../auth/data/models/response/user_info/user_info_data.dart';
 import '../../../organization/application/organization_controller.dart';
 import '../../../teeth_record/application/teeth_record_usecases_provider.dart';
 import '../../../teeth_record/data/models/response/brushing_record/brushing_record_data.dart';
 
-part 'member_info_controller.freezed.dart';
+part 'member_main_controller.freezed.dart';
 
 @freezed
-class MemberInfoState with _$MemberInfoState {
-  const factory MemberInfoState({
+class MemberMainState with _$MemberMainState {
+  const factory MemberMainState({
     UserInfoData? user,
     required List<BrushingRecordData> brushingRecords,
     @Default(false) bool isLoading,
     String? errorMessage,
-  }) = _MemberInfoState;
+    @Default(99) int refreshKey
+  }) = _MemberMainState;
 }
 
-final memberInfoControllerProvider =
-StateNotifierProvider.autoDispose<MemberInfoController, MemberInfoState>(
+final memberMainControllerProvider =
+StateNotifierProvider.autoDispose<MemberInfoController, MemberMainState>(
       (ref) => MemberInfoController(ref),
 );
 
-class MemberInfoController extends StateNotifier<MemberInfoState> {
+class MemberInfoController extends StateNotifier<MemberMainState> {
   final Ref ref;
 
-  MemberInfoController(this.ref) : super(const MemberInfoState(brushingRecords: [])) {
+  MemberInfoController(this.ref) : super(const MemberMainState(brushingRecords: [])) {
     // 監聽 organizationControllerProvider 的變化
     ref.listen<OrganizationState>(organizationControllerProvider, (prev, next) {
       final userId = state.user?.id;
@@ -39,6 +41,14 @@ class MemberInfoController extends StateNotifier<MemberInfoState> {
         loadUserBrushingRecords(userId);
       }
     });
+  }
+
+  void refresh() {
+    state = state.copyWith(
+      refreshKey: DateTime.now().millisecondsSinceEpoch,
+    );
+
+    ref.read(refreshControllerProvider.notifier).refresh();
   }
 
   void setUser(UserInfoData user) {
@@ -70,6 +80,6 @@ class MemberInfoController extends StateNotifier<MemberInfoState> {
   }
 
   void clear() {
-    state = const MemberInfoState(brushingRecords: []);
+    state = const MemberMainState(brushingRecords: []);
   }
 }

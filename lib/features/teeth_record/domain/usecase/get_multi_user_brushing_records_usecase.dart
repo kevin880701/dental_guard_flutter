@@ -7,7 +7,12 @@ class GetMultiUserBrushingRecordsUseCase {
 
   GetMultiUserBrushingRecordsUseCase(this.repository);
 
-  Future<List<MultiUserBrushingRecordsData>> call(GetMultiUserBrushingRecordsRequest request) {
-    return repository.getMultiUserBrushingRecords(request);
+  Future<List<MultiUserBrushingRecordsData>> call(
+      {required List<String> userIds,
+      required String startDate,
+      required String endDate}) {
+    return repository.getMultiUserBrushingRecords(
+        GetMultiUserBrushingRecordsRequest(
+            userIds: userIds, startDate: startDate, endDate: endDate));
   }
 }

@@ -4,7 +4,7 @@ import '../../../../../../core/constants/app_colors.dart';
 import '../../../../../../core/widgets/shape/line_widget.dart';
 import '../../../../../../core/widgets/text/app_text.dart';
 import '../../../../../../core/widgets/text/text_theme.dart';
-import '../../../../data/models/response/group_brushing_stats/group_brushing_stats_data.dart';
+import '../../../../data/models/response/brushing_stats/brushing_stats_data.dart';
 import '../../../../domain/entity/chart_time_status.dart';
 
 class ChartInfoWidget extends StatelessWidget {
@@ -14,7 +14,7 @@ class ChartInfoWidget extends StatelessWidget {
     required this.chartTimeStatus,
   });
 
-  final GroupBrushingStatsData? data;
+  final BrushingStatsData? data;
   final ChartTimeStatus chartTimeStatus;
 
   // 根據 chartTimeStatus 給不同的 label

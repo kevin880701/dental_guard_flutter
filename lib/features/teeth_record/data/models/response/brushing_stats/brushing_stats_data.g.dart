@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_brushing_stats_data.dart';
+part of 'brushing_stats_data.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserBrushingStatsDataImpl _$$UserBrushingStatsDataImplFromJson(
+_$BrushingStatsDataImpl _$$BrushingStatsDataImplFromJson(
         Map<String, dynamic> json) =>
-    _$UserBrushingStatsDataImpl(
+    _$BrushingStatsDataImpl(
       timeGroup: DateTime.parse(json['time_group'] as String),
       value: (json['value'] as num).toDouble(),
       baseValue: (json['base_value'] as num).toDouble(),
@@ -16,8 +16,8 @@ _$UserBrushingStatsDataImpl _$$UserBrushingStatsDataImplFromJson(
       baseCount: (json['base_count'] as num).toInt(),
     );
 
-Map<String, dynamic> _$$UserBrushingStatsDataImplToJson(
-        _$UserBrushingStatsDataImpl instance) =>
+Map<String, dynamic> _$$BrushingStatsDataImplToJson(
+        _$BrushingStatsDataImpl instance) =>
     <String, dynamic>{
       'time_group': instance.timeGroup.toIso8601String(),
       'value': instance.value,
