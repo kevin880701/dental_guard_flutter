@@ -14,8 +14,10 @@ _$AppInfoDataImpl _$$AppInfoDataImplFromJson(Map<String, dynamic> json) =>
       releaseNotes: json['release_notes'] as String?,
       releaseDate: json['release_date'] as String?,
       isCurrent: json['is_current'] as bool,
-      maintenance:
-          MaintenanceData.fromJson(json['maintenance'] as Map<String, dynamic>),
+      maintenance: json['maintenance'] == null
+          ? null
+          : MaintenanceData.fromJson(
+              json['maintenance'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$AppInfoDataImplToJson(_$AppInfoDataImpl instance) =>

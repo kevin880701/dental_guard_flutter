@@ -33,7 +33,7 @@ mixin _$AppInfoData {
   @JsonKey(name: 'is_current')
   bool get isCurrent => throw _privateConstructorUsedError;
   @JsonKey(name: 'maintenance')
-  MaintenanceData get maintenance => throw _privateConstructorUsedError;
+  MaintenanceData? get maintenance => throw _privateConstructorUsedError;
 
   /// Serializes this AppInfoData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -58,9 +58,9 @@ abstract class $AppInfoDataCopyWith<$Res> {
       @JsonKey(name: 'release_notes') String? releaseNotes,
       @JsonKey(name: 'release_date') String? releaseDate,
       @JsonKey(name: 'is_current') bool isCurrent,
-      @JsonKey(name: 'maintenance') MaintenanceData maintenance});
+      @JsonKey(name: 'maintenance') MaintenanceData? maintenance});
 
-  $MaintenanceDataCopyWith<$Res> get maintenance;
+  $MaintenanceDataCopyWith<$Res>? get maintenance;
 }
 
 /// @nodoc
@@ -84,7 +84,7 @@ class _$AppInfoDataCopyWithImpl<$Res, $Val extends AppInfoData>
     Object? releaseNotes = freezed,
     Object? releaseDate = freezed,
     Object? isCurrent = null,
-    Object? maintenance = null,
+    Object? maintenance = freezed,
   }) {
     return _then(_value.copyWith(
       appVersion: null == appVersion
@@ -111,10 +111,10 @@ class _$AppInfoDataCopyWithImpl<$Res, $Val extends AppInfoData>
           ? _value.isCurrent
           : isCurrent // ignore: cast_nullable_to_non_nullable
               as bool,
-      maintenance: null == maintenance
+      maintenance: freezed == maintenance
           ? _value.maintenance
           : maintenance // ignore: cast_nullable_to_non_nullable
-              as MaintenanceData,
+              as MaintenanceData?,
     ) as $Val);
   }
 
@@ -122,8 +122,12 @@ class _$AppInfoDataCopyWithImpl<$Res, $Val extends AppInfoData>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $MaintenanceDataCopyWith<$Res> get maintenance {
-    return $MaintenanceDataCopyWith<$Res>(_value.maintenance, (value) {
+  $MaintenanceDataCopyWith<$Res>? get maintenance {
+    if (_value.maintenance == null) {
+      return null;
+    }
+
+    return $MaintenanceDataCopyWith<$Res>(_value.maintenance!, (value) {
       return _then(_value.copyWith(maintenance: value) as $Val);
     });
   }
@@ -144,10 +148,10 @@ abstract class _$$AppInfoDataImplCopyWith<$Res>
       @JsonKey(name: 'release_notes') String? releaseNotes,
       @JsonKey(name: 'release_date') String? releaseDate,
       @JsonKey(name: 'is_current') bool isCurrent,
-      @JsonKey(name: 'maintenance') MaintenanceData maintenance});
+      @JsonKey(name: 'maintenance') MaintenanceData? maintenance});
 
   @override
-  $MaintenanceDataCopyWith<$Res> get maintenance;
+  $MaintenanceDataCopyWith<$Res>? get maintenance;
 }
 
 /// @nodoc
@@ -169,7 +173,7 @@ class __$$AppInfoDataImplCopyWithImpl<$Res>
     Object? releaseNotes = freezed,
     Object? releaseDate = freezed,
     Object? isCurrent = null,
-    Object? maintenance = null,
+    Object? maintenance = freezed,
   }) {
     return _then(_$AppInfoDataImpl(
       appVersion: null == appVersion
@@ -196,10 +200,10 @@ class __$$AppInfoDataImplCopyWithImpl<$Res>
           ? _value.isCurrent
           : isCurrent // ignore: cast_nullable_to_non_nullable
               as bool,
-      maintenance: null == maintenance
+      maintenance: freezed == maintenance
           ? _value.maintenance
           : maintenance // ignore: cast_nullable_to_non_nullable
-              as MaintenanceData,
+              as MaintenanceData?,
     ));
   }
 }
@@ -214,7 +218,7 @@ class _$AppInfoDataImpl implements _AppInfoData {
       @JsonKey(name: 'release_notes') this.releaseNotes,
       @JsonKey(name: 'release_date') this.releaseDate,
       @JsonKey(name: 'is_current') required this.isCurrent,
-      @JsonKey(name: 'maintenance') required this.maintenance});
+      @JsonKey(name: 'maintenance') this.maintenance});
 
   factory _$AppInfoDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$AppInfoDataImplFromJson(json);
@@ -239,7 +243,7 @@ class _$AppInfoDataImpl implements _AppInfoData {
   final bool isCurrent;
   @override
   @JsonKey(name: 'maintenance')
-  final MaintenanceData maintenance;
+  final MaintenanceData? maintenance;
 
   @override
   String toString() {
@@ -290,14 +294,14 @@ class _$AppInfoDataImpl implements _AppInfoData {
 
 abstract class _AppInfoData implements AppInfoData {
   const factory _AppInfoData(
-      {@JsonKey(name: 'app_version') required final String appVersion,
-      @JsonKey(name: 'package_name') required final String packageName,
-      @JsonKey(name: 'platform') required final String platform,
-      @JsonKey(name: 'release_notes') final String? releaseNotes,
-      @JsonKey(name: 'release_date') final String? releaseDate,
-      @JsonKey(name: 'is_current') required final bool isCurrent,
-      @JsonKey(name: 'maintenance')
-      required final MaintenanceData maintenance}) = _$AppInfoDataImpl;
+          {@JsonKey(name: 'app_version') required final String appVersion,
+          @JsonKey(name: 'package_name') required final String packageName,
+          @JsonKey(name: 'platform') required final String platform,
+          @JsonKey(name: 'release_notes') final String? releaseNotes,
+          @JsonKey(name: 'release_date') final String? releaseDate,
+          @JsonKey(name: 'is_current') required final bool isCurrent,
+          @JsonKey(name: 'maintenance') final MaintenanceData? maintenance}) =
+      _$AppInfoDataImpl;
 
   factory _AppInfoData.fromJson(Map<String, dynamic> json) =
       _$AppInfoDataImpl.fromJson;
@@ -322,7 +326,7 @@ abstract class _AppInfoData implements AppInfoData {
   bool get isCurrent;
   @override
   @JsonKey(name: 'maintenance')
-  MaintenanceData get maintenance;
+  MaintenanceData? get maintenance;
 
   /// Create a copy of AppInfoData
   /// with the given fields replaced by the non-null parameter values.

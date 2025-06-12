@@ -12,7 +12,7 @@ class AppInfoData with _$AppInfoData {
     @JsonKey(name: 'release_notes') String? releaseNotes,
     @JsonKey(name: 'release_date') String? releaseDate,
     @JsonKey(name: 'is_current') required bool isCurrent,
-    @JsonKey(name: 'maintenance') required MaintenanceData maintenance,
+    @JsonKey(name: 'maintenance') MaintenanceData? maintenance,
   }) = _AppInfoData;
 
   factory AppInfoData.fromJson(Map<String, dynamic> json) =>
