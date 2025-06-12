@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:dental_guard_flutter/core/constants/app_colors.dart';
 import 'package:dental_guard_flutter/core/providers/version_info_provider.dart';
 import 'package:dental_guard_flutter/core/widgets/image/asset_image_widget.dart';
 import 'package:dental_guard_flutter/core/widgets/text/app_text.dart';
@@ -77,6 +78,7 @@ class LaunchScreen extends HookConsumerWidget {
       body: Container(
         height: double.infinity,
         width: double.infinity,
+        color: AppColors.bgColor,
         child: Stack(
           children: [
             Align(
