@@ -16,6 +16,7 @@ class BasePage extends HookConsumerWidget {
   final SystemUiOverlayStyle systemOverlayStyle;
 
   const BasePage({
+    super.key,
     required this.child,
     this.onWillPop,
     this.loadingText = AppStrings.loading,
@@ -31,20 +32,25 @@ class BasePage extends HookConsumerWidget {
     final pageState = ref.watch(pageNotifierProvider);
 
     return PopScope(
-      canPop: false,
+      canPop: onWillPop == null,
       onPopInvokedWithResult: (bool didPop, Object? result) async {
+
         // 檢查小鍵盤是否顯示
         if (MediaQuery.of(context).viewInsets.bottom > 0) {
           FocusScope.of(context).unfocus(); // 收起小鍵盤
           return;
         }
 
-        if (!didPop) {
-          if (onWillPop != null) {
-            final canProceed = await onWillPop!();
-            if (canProceed && context.mounted) {
-              Navigator.of(context).pop();
-            }
+        // 如果頁面已經成功 pop (didPop 為 true)，就什麼都不做
+        if (didPop) {
+          return;
+        }
+
+        // 只有在 didPop 為 false 時，才執行自訂的返回邏輯
+        if (onWillPop != null) {
+          final canProceed = await onWillPop!();
+          if (canProceed && context.mounted) {
+            Navigator.of(context).pop();
           }
         }
       },
