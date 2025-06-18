@@ -8,6 +8,7 @@ import 'package:dental_guard_flutter/core/constants/app_resources.dart';
 import 'package:dental_guard_flutter/core/providers/page_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/base/base_page.dart';
+import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/button/app_button.dart';
 import '../../../../core/widgets/image/app_icon.dart';
 import '../../../../core/widgets/input/input_type.dart';
@@ -110,14 +111,12 @@ class LoginScreen extends HookConsumerWidget {
       if (lastBackPressed.value == null ||
           now.difference(lastBackPressed.value!) > Duration(seconds: 2)) {
         lastBackPressed.value = now;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('再按一次退出程式'),
-            duration: Duration(seconds: 2),
-          ),
-        );
+        ref.read(pageNotifierProvider.notifier)
+            .showToastMessage(
+            message: AppStrings.pressAgainExit);
         return false; // 禁止立刻退出，等待下一次按鍵
       }
+      exitApp();
       return true; // 兩次按鍵間隔短，允許退出
     }
 

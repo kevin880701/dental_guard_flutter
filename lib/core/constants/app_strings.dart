@@ -11,6 +11,7 @@ class AppStrings {
 
   // 登入
   static const login = '登入';
+  static const pressAgainExit = '再按一次退出程式';
   static const sessionExpiredTitle = '登入逾時';
   static const sessionExpiredContent = '您的登入已過期，請重新登入。';
   static const sessionExpiredConfirm = '重新登入';
