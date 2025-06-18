@@ -31,6 +31,7 @@ class MemberMainScreen extends HookConsumerWidget {
     useEffect(() {
       Future.microtask(() {
         controller.setUser(user);
+        controller.loadUserBrushingRecords();
       });
       return null;
     }, []);

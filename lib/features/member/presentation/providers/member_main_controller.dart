@@ -38,7 +38,7 @@ class MemberInfoController extends StateNotifier<MemberMainState> {
 
       // 當群組成員資料變動且有設定 user 時，重新取得該 user 的刷牙紀錄
       if (userId != null && prevGroups != nextGroups) {
-        loadUserBrushingRecords(userId);
+        loadUserBrushingRecords();
       }
     });
   }
@@ -55,7 +55,15 @@ class MemberInfoController extends StateNotifier<MemberMainState> {
     state = state.copyWith(user: user);
   }
 
-  Future<void> loadUserBrushingRecords(String userId) async {
+  Future<void> loadUserBrushingRecords() async {
+    final userId = state.user?.id;
+    if (userId == null) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: '找不到使用者',
+      );
+      return;
+    }
     state = state.copyWith(isLoading: true, errorMessage: null);
     try {
       final useCase = ref.read(getUserBrushingRecordsUseCaseProvider);

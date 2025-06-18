@@ -32,7 +32,7 @@ class MemberTeethRecordScreen extends HookConsumerWidget {
 
     useEffect(() {
       Future.microtask(() {
-        controller.loadUserBrushingRecords(state.user!.id);
+        controller.loadUserBrushingRecords();
       });
       return null;
     }, [state.user]);
