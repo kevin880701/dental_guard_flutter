@@ -192,57 +192,57 @@ class LoginScreen extends HookConsumerWidget {
                             }
                           : null)),
               Spacer(),
-              Container(
-                margin: EdgeInsets.only(bottom: 24),
-                child: Row(
-                  children: [
-                    Expanded(child: Container(height: 1, color: Colors.black)),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
-                      child: AppIcon(
-                        icon: AppImages.lineIcon,
-                        size: 24,
-                        backgroundColor: Colors.white,
-                        padding: 4,
-                        onTap: () async {
-                          final response = await ref.read(authControllerProvider.notifier).oAuthLogin(OAuthProviderType.line);
-
-                          if (response.resultCode == 0) {
-                            _onLoginSuccess(ref, context, false, null, null);
-                          } else {
-                            AppToast.showToast(message: response.message);
-                          }
-                        }
-                        ,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
-                      child: AppIcon(
-                        icon: AppImages.googleIcon,
-                        size: 24,
-                        backgroundColor: Colors.white,
-                        padding: 4,
-                        onTap: () async {
-
-                          ref.read(pageNotifierProvider.notifier).showLoading();
-
-                          final response = await authControllerNotifier.oAuthLogin(OAuthProviderType.google);
-
-                          if (response.resultCode == 0) {
-                            // google login 不會自動記住帳密，所以 isKeepLogin/帳密可以不用存
-                            _onLoginSuccess(ref, context, false, null, null);
-                          } else {
-                            AppToast.showToast(message: response.message);
-                          }
-                          ref.read(pageNotifierProvider.notifier).hideLoading();
-                        },
-                      ),
-                    ),
-                    Expanded(child: Container(height: 1, color: Colors.black)),
-                  ],
-                ),
-              ),
+              // Container(
+              //   margin: EdgeInsets.only(bottom: 24),
+              //   child: Row(
+              //     children: [
+              //       Expanded(child: Container(height: 1, color: Colors.black)),
+              //       Padding(
+              //         padding: EdgeInsets.symmetric(horizontal: 8),
+              //         child: AppIcon(
+              //           icon: AppImages.lineIcon,
+              //           size: 24,
+              //           backgroundColor: Colors.white,
+              //           padding: 4,
+              //           onTap: () async {
+              //             final response = await ref.read(authControllerProvider.notifier).oAuthLogin(OAuthProviderType.line);
+              //
+              //             if (response.resultCode == 0) {
+              //               _onLoginSuccess(ref, context, false, null, null);
+              //             } else {
+              //               AppToast.showToast(message: response.message);
+              //             }
+              //           }
+              //           ,
+              //         ),
+              //       ),
+              //       Padding(
+              //         padding: EdgeInsets.symmetric(horizontal: 8),
+              //         child: AppIcon(
+              //           icon: AppImages.googleIcon,
+              //           size: 24,
+              //           backgroundColor: Colors.white,
+              //           padding: 4,
+              //           onTap: () async {
+              //
+              //             ref.read(pageNotifierProvider.notifier).showLoading();
+              //
+              //             final response = await authControllerNotifier.oAuthLogin(OAuthProviderType.google);
+              //
+              //             if (response.resultCode == 0) {
+              //               // google login 不會自動記住帳密，所以 isKeepLogin/帳密可以不用存
+              //               _onLoginSuccess(ref, context, false, null, null);
+              //             } else {
+              //               AppToast.showToast(message: response.message);
+              //             }
+              //             ref.read(pageNotifierProvider.notifier).hideLoading();
+              //           },
+              //         ),
+              //       ),
+              //       Expanded(child: Container(height: 1, color: Colors.black)),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),
