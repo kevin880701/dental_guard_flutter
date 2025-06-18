@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/base/base_page.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/providers/version_info_provider.dart';
+import '../../../../core/utils/dialog_manager.dart';
 import '../../../../core/widgets/image/app_icon.dart';
 import '../../../../core/widgets/text/app_text.dart';
 import '../../../../core/widgets/text/text_theme.dart';
@@ -66,8 +67,17 @@ class PersonalScreen extends HookConsumerWidget {
                       child: AppButton(
                         text: AppStrings.logout,
                         onPressed: (){
-                          authNotifier.logout();
-                          context.router.replaceAll([const LoginRoute()]);
+                          showDefaultDialog(
+                            context,
+                            title: AppStrings.logout,
+                            content: AppStrings.logoutConfirmation,
+                            leftButtonText: AppStrings.cancel,
+                            rightButtonText: AppStrings.confirm,
+                            onRightButtonPressed: () async {
+                              authNotifier.logout();
+                              context.router.replaceAll([const LoginRoute()]);
+                            },
+                          );
                         },
                         width: double.infinity,
                         backgroundColor: AppColors.primaryBlack,

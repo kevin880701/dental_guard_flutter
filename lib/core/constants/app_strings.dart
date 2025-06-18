@@ -120,4 +120,5 @@ class AppStrings {
   static const versionNumber = '版本號';
   static const feedback = '意見反饋';
   static const logout = '登出';
+  static const logoutConfirmation = '確定要登出您的帳號嗎？';
 }
