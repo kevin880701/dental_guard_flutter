@@ -29,8 +29,8 @@ class PersonalScreen extends HookConsumerWidget {
       return null;
     }, []);
 
-    return BasePage(
-      backgroundColor: AppColors.bgColor,
+    return Container(
+      color: AppColors.bgColor,
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

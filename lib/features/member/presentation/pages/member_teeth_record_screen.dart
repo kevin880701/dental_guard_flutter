@@ -37,8 +37,8 @@ class MemberTeethRecordScreen extends HookConsumerWidget {
       return null;
     }, [state.user]);
 
-    return BasePage(
-      backgroundColor: AppColors.bgColor,
+    return Container(
+      color: AppColors.bgColor,
       child: Column(
         children: [
           Padding(

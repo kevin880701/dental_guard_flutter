@@ -28,8 +28,8 @@ class MemberBrushingChartScreen extends HookConsumerWidget {
     final state = ref.watch(memberMainControllerProvider);
     final controller = ref.read(memberMainControllerProvider.notifier);
 
-    return BasePage(
-      backgroundColor: AppColors.bgColor,
+    return Container(
+      color: AppColors.bgColor,
       child: RefreshIndicator(
         onRefresh: () async {
           controller.refresh();
