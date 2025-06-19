@@ -52,6 +52,7 @@ class LaunchScreen extends HookConsumerWidget {
         if (!needUpdate) {
           showDefaultDialog(
             context,
+            canPop: false,
             title: AppStrings.versionOutdated,
             content: AppStrings.pleaseUpdateToContinue,
             onRightButtonPressed: () async {
