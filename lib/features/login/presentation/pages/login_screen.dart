@@ -8,6 +8,7 @@ import 'package:dental_guard_flutter/core/constants/app_resources.dart';
 import 'package:dental_guard_flutter/core/providers/page_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/base/base_page.dart';
+import '../../../../core/providers/version_info_provider.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/button/app_button.dart';
 import '../../../../core/widgets/image/app_icon.dart';
@@ -242,6 +243,7 @@ class LoginScreen extends HookConsumerWidget {
               //     ],
               //   ),
               // ),
+              AppText(text: ref.watch(versionInfoProvider).releaseVersion)
             ],
           ),
         ),

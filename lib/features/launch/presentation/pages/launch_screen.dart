@@ -27,7 +27,7 @@ class LaunchScreen extends HookConsumerWidget {
 
     useEffect(() {
       SchedulerBinding.instance.addPostFrameCallback((_) async {
-        // 1. 先取得版本資訊
+        // 先取得版本資訊
         final success =
             await ref.read(versionInfoProvider.notifier).loadVersionInfo();
         if (!success) {
@@ -68,7 +68,7 @@ class LaunchScreen extends HookConsumerWidget {
           return;
         }
 
-        // 3. 通過檢查後再延遲跳頁
+        // 通過檢查後再延遲跳頁
         await Future.delayed(const Duration(seconds: 2));
         AutoRouter.of(context).replace(const LoginRoute());
       });
@@ -96,6 +96,8 @@ class LaunchScreen extends HookConsumerWidget {
                 ],
               ),
             ),
+            Positioned(bottom: 0,right: 4,child: AppText(text: ref.watch(versionInfoProvider).releaseVersion)),
+
           ],
         ),
       ),
