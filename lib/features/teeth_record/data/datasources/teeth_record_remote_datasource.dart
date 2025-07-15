@@ -47,23 +47,6 @@ class TeethRecordRemoteDataSource {
     return apiResponse.data == true;
   }
 
-  /// 取得指定使用者的潔牙紀錄
-  Future<List<BrushingRecordData>> getUserBrushingRecords(String userId) async {
-    final response = await networkInterface.get(
-      url: ApiEndPoint.getUserBrushingRecords(userId),
-    );
-
-    final apiResponse = ApiResponse<List<BrushingRecordData>>.fromJson(
-      response.data,
-          (json) => (json as List)
-          .map((item) => BrushingRecordData.fromJson(item as Map<String, dynamic>))
-          .toList(),
-    );
-
-    return apiResponse.data ??[];
-  }
-
-
   /// 取得指定潔牙紀錄
   Future<BrushingRecordData?> getBrushingRecordById(String recordId) async {
     final response = await networkInterface.get(
@@ -132,7 +115,7 @@ class TeethRecordRemoteDataSource {
   /// 查詢多使用者潔牙紀錄（含分析結果）
   Future<List<MultiUserBrushingRecordsData>> getMultiUserBrushingRecords(GetMultiUserBrushingRecordsRequest request) async {
     final response = await networkInterface.post(
-      url: ApiEndPoint.multiUserBrushingRecords,
+      url: ApiEndPoint.usersBrushingRecords,
       body: request.toJson(),
     );
 

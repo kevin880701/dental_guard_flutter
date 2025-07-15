@@ -25,7 +25,11 @@ class NetworkInterface {
     String? certAssetPath,
   }) async {
     final dio = Dio(BaseOptions(baseUrl: ApiEndPoint.domain,
-      validateStatus: (status) => status != null && status >= 200 && status < 300,));
+      validateStatus: (status) => status != null && status >= 200 && status < 300,
+      connectTimeout: const Duration(seconds: 120), // 連接超時：與伺服器建立連接的最長時間
+      sendTimeout: const Duration(seconds: 120),    // 發送超時：向伺服器發送請求數據的最長時間
+      receiveTimeout: const Duration(seconds: 120), // 接收超時：從伺服器接收響應的最長時間
+    ));
 
     dio.interceptors.add(AuthInterceptor());
     if (certAssetPath != null) {

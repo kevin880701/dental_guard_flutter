@@ -1,3 +1,4 @@
+import 'package:dental_guard_flutter/core/utils/utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -66,9 +67,18 @@ class MemberInfoController extends StateNotifier<MemberMainState> {
     }
     state = state.copyWith(isLoading: true, errorMessage: null);
     try {
-      final useCase = ref.read(getUserBrushingRecordsUseCaseProvider);
-      final records = await useCase(userId);
-      state = state.copyWith(brushingRecords: records, isLoading: false);
+      final useCase = ref.read(getMultiUserBrushingRecordsUseCaseProvider);
+      final DateTime startTime = DateTime.utc(2000, 1, 1);
+      final DateTime endTime = DateTime.utc(2099, 12, 31);
+
+      final result = await useCase(
+        userIds: [state.user!.id],
+        startDate: startTime.toIsoDateTime(),
+        endDate: endTime.toIsoDateTime(),
+      );
+
+
+      state = state.copyWith(brushingRecords: result.first.brushingRecords ?? [], isLoading: false);
     } catch (e, st) {
       AppLog.e('取得潔牙紀錄失敗: $e\n$st');
       state = state.copyWith(

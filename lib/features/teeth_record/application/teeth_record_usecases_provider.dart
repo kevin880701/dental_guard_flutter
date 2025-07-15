@@ -13,7 +13,6 @@ import '../domain/usecase/get_brushing_record_by_id_usecase.dart';
 import '../domain/usecase/get_group_brushing_stats_usecase.dart';
 import '../domain/usecase/get_groups_brushing_records_usecase.dart';
 import '../domain/usecase/get_multi_user_brushing_records_usecase.dart';
-import '../domain/usecase/get_user_brushing_records_usecase.dart';
 import '../domain/usecase/get_user_brushing_stats_usecase.dart';
 
 /// Repository Provider
@@ -33,11 +32,6 @@ final createBrushingRecordUseCaseProvider = Provider<CreateBrushingRecordUseCase
 final deleteBrushingRecordUseCaseProvider = Provider<DeleteBrushingRecordUseCase>((ref) {
   final repo = ref.read(teethRecordRepositoryProvider);
   return DeleteBrushingRecordUseCase(repo);
-});
-
-final getUserBrushingRecordsUseCaseProvider = Provider<GetUserBrushingRecordsUseCase>((ref) {
-  final repo = ref.read(teethRecordRepositoryProvider);
-  return GetUserBrushingRecordsUseCase(repo);
 });
 
 final getBrushingRecordByIdUseCaseProvider = Provider<GetBrushingRecordByIdUseCase>((ref) {
