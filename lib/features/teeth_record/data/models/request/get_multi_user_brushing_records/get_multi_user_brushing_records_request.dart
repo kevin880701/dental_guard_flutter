@@ -9,6 +9,7 @@ class GetMultiUserBrushingRecordsRequest with _$GetMultiUserBrushingRecordsReque
     @JsonKey(name: 'user_ids') required List<String> userIds,
     @JsonKey(name: 'start_date') required String startDate,
     @JsonKey(name: 'end_date') required String endDate,
+    @JsonKey(name: 'time_zone') required String timeZone,
   }) = _GetMultiUserBrushingRecordsRequest;
 
   factory GetMultiUserBrushingRecordsRequest.fromJson(Map<String, dynamic> json) =>

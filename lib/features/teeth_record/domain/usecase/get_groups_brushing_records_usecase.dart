@@ -11,8 +11,9 @@ class GetGroupsBrushingRecordsUseCase {
     required List<String> groupIds,
     required String startDate,
     required String endDate,
+    required String timeZone,
   }) {
     return repository.getGroupsBrushingRecords(GetGroupsBrushingRecordsRequest(
-        groupIds: groupIds, startDate: startDate, endDate: endDate));
+        groupIds: groupIds, startDate: startDate, endDate: endDate, timeZone: timeZone));
   }
 }

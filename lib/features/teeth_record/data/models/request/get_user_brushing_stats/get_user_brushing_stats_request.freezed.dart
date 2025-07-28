@@ -28,7 +28,9 @@ mixin _$GetUserBrushingStatsRequest {
   @JsonKey(name: 'end_date')
   String get endDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'time_space')
-  int get timeSpace => throw _privateConstructorUsedError;
+  String get timeSpace => throw _privateConstructorUsedError;
+  @JsonKey(name: 'time_zone')
+  String get timeZone => throw _privateConstructorUsedError;
 
   /// Serializes this GetUserBrushingStatsRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,7 +54,8 @@ abstract class $GetUserBrushingStatsRequestCopyWith<$Res> {
       {@JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'start_date') String startDate,
       @JsonKey(name: 'end_date') String endDate,
-      @JsonKey(name: 'time_space') int timeSpace});
+      @JsonKey(name: 'time_space') String timeSpace,
+      @JsonKey(name: 'time_zone') String timeZone});
 }
 
 /// @nodoc
@@ -75,6 +78,7 @@ class _$GetUserBrushingStatsRequestCopyWithImpl<$Res,
     Object? startDate = null,
     Object? endDate = null,
     Object? timeSpace = null,
+    Object? timeZone = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -92,7 +96,11 @@ class _$GetUserBrushingStatsRequestCopyWithImpl<$Res,
       timeSpace: null == timeSpace
           ? _value.timeSpace
           : timeSpace // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
+      timeZone: null == timeZone
+          ? _value.timeZone
+          : timeZone // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -110,7 +118,8 @@ abstract class _$$GetUserBrushingStatsRequestImplCopyWith<$Res>
       {@JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'start_date') String startDate,
       @JsonKey(name: 'end_date') String endDate,
-      @JsonKey(name: 'time_space') int timeSpace});
+      @JsonKey(name: 'time_space') String timeSpace,
+      @JsonKey(name: 'time_zone') String timeZone});
 }
 
 /// @nodoc
@@ -132,6 +141,7 @@ class __$$GetUserBrushingStatsRequestImplCopyWithImpl<$Res>
     Object? startDate = null,
     Object? endDate = null,
     Object? timeSpace = null,
+    Object? timeZone = null,
   }) {
     return _then(_$GetUserBrushingStatsRequestImpl(
       userId: null == userId
@@ -149,7 +159,11 @@ class __$$GetUserBrushingStatsRequestImplCopyWithImpl<$Res>
       timeSpace: null == timeSpace
           ? _value.timeSpace
           : timeSpace // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
+      timeZone: null == timeZone
+          ? _value.timeZone
+          : timeZone // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -162,7 +176,8 @@ class _$GetUserBrushingStatsRequestImpl
       {@JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'start_date') required this.startDate,
       @JsonKey(name: 'end_date') required this.endDate,
-      @JsonKey(name: 'time_space') required this.timeSpace});
+      @JsonKey(name: 'time_space') required this.timeSpace,
+      @JsonKey(name: 'time_zone') required this.timeZone});
 
   factory _$GetUserBrushingStatsRequestImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -179,11 +194,14 @@ class _$GetUserBrushingStatsRequestImpl
   final String endDate;
   @override
   @JsonKey(name: 'time_space')
-  final int timeSpace;
+  final String timeSpace;
+  @override
+  @JsonKey(name: 'time_zone')
+  final String timeZone;
 
   @override
   String toString() {
-    return 'GetUserBrushingStatsRequest(userId: $userId, startDate: $startDate, endDate: $endDate, timeSpace: $timeSpace)';
+    return 'GetUserBrushingStatsRequest(userId: $userId, startDate: $startDate, endDate: $endDate, timeSpace: $timeSpace, timeZone: $timeZone)';
   }
 
   @override
@@ -196,13 +214,15 @@ class _$GetUserBrushingStatsRequestImpl
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.timeSpace, timeSpace) ||
-                other.timeSpace == timeSpace));
+                other.timeSpace == timeSpace) &&
+            (identical(other.timeZone, timeZone) ||
+                other.timeZone == timeZone));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, userId, startDate, endDate, timeSpace);
+      Object.hash(runtimeType, userId, startDate, endDate, timeSpace, timeZone);
 
   /// Create a copy of GetUserBrushingStatsRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -227,7 +247,8 @@ abstract class _GetUserBrushingStatsRequest
           {@JsonKey(name: 'user_id') required final String userId,
           @JsonKey(name: 'start_date') required final String startDate,
           @JsonKey(name: 'end_date') required final String endDate,
-          @JsonKey(name: 'time_space') required final int timeSpace}) =
+          @JsonKey(name: 'time_space') required final String timeSpace,
+          @JsonKey(name: 'time_zone') required final String timeZone}) =
       _$GetUserBrushingStatsRequestImpl;
 
   factory _GetUserBrushingStatsRequest.fromJson(Map<String, dynamic> json) =
@@ -244,7 +265,10 @@ abstract class _GetUserBrushingStatsRequest
   String get endDate;
   @override
   @JsonKey(name: 'time_space')
-  int get timeSpace;
+  String get timeSpace;
+  @override
+  @JsonKey(name: 'time_zone')
+  String get timeZone;
 
   /// Create a copy of GetUserBrushingStatsRequest
   /// with the given fields replaced by the non-null parameter values.

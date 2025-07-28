@@ -31,7 +31,7 @@ class GroupUseCountLineChart extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectTime = useState<DateTime>(DateTime.now());
-    final chartTimeStatus = useState<ChartTimeStatus>(ChartTimeStatus.month);
+    final chartTimeStatus = useState<ChartTimeStatus>(ChartTimeStatus.hour);
     // 用 state 儲存「被選到的那一段資料」(List)
     final selectedData = useState<List<dynamic>>(<dynamic>[]);
     final isChartClicked = useState<bool>(false);
@@ -74,9 +74,9 @@ class GroupUseCountLineChart extends HookConsumerWidget {
             data: (data) {
               // 最新資料
               final double percent =
-              (data.isNotEmpty) ? (data.last.value / 100).clamp(0.0, 1.0) : 0.0;
+              (data.isNotEmpty) ? (data.last.avgPlaquePercent / 100).clamp(0.0, 1.0) : 0.0;
               // 最新基線，直接從最後一筆資料取得
-              final double? baseValue = (data.isNotEmpty) ? data.last.baseValue : null;
+              final double? baseValue = (data.isNotEmpty) ? data.last.baselineAvgPlaquePercent : null;
 
               return Column(
                 children: [
@@ -123,12 +123,12 @@ class GroupUseCountLineChart extends HookConsumerWidget {
                         chartTimeStatus.value.baseLineText,
                       ];
                       List<ReportData> reportDataList = data.map((d) {
-                        final time = chartTimeStatus.value.formatTime(d.timeGroup);
+                        final time = chartTimeStatus.value.formatTime(d.time);
                         return ReportData(
                           index: time,
                           values: [
-                            d.count.toString(),
-                            d.baseCount.toString(),
+                            d.recordCount.toString(),
+                            d.baselineRecordCount.toString(),
                           ],
                         );
                       }).toList();

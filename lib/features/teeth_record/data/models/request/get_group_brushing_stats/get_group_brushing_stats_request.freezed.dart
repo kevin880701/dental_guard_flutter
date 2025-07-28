@@ -28,7 +28,9 @@ mixin _$GetGroupBrushingStatsRequest {
   @JsonKey(name: 'end_date')
   String get endDate => throw _privateConstructorUsedError; // ISO8601 格式
   @JsonKey(name: 'time_space')
-  int get timeSpace => throw _privateConstructorUsedError;
+  String get timeSpace => throw _privateConstructorUsedError;
+  @JsonKey(name: 'time_zone')
+  String get timeZone => throw _privateConstructorUsedError;
 
   /// Serializes this GetGroupBrushingStatsRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,7 +54,8 @@ abstract class $GetGroupBrushingStatsRequestCopyWith<$Res> {
       {@JsonKey(name: 'group_id') String groupId,
       @JsonKey(name: 'start_date') String startDate,
       @JsonKey(name: 'end_date') String endDate,
-      @JsonKey(name: 'time_space') int timeSpace});
+      @JsonKey(name: 'time_space') String timeSpace,
+      @JsonKey(name: 'time_zone') String timeZone});
 }
 
 /// @nodoc
@@ -75,6 +78,7 @@ class _$GetGroupBrushingStatsRequestCopyWithImpl<$Res,
     Object? startDate = null,
     Object? endDate = null,
     Object? timeSpace = null,
+    Object? timeZone = null,
   }) {
     return _then(_value.copyWith(
       groupId: null == groupId
@@ -92,7 +96,11 @@ class _$GetGroupBrushingStatsRequestCopyWithImpl<$Res,
       timeSpace: null == timeSpace
           ? _value.timeSpace
           : timeSpace // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
+      timeZone: null == timeZone
+          ? _value.timeZone
+          : timeZone // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -110,7 +118,8 @@ abstract class _$$GetGroupBrushingStatsRequestImplCopyWith<$Res>
       {@JsonKey(name: 'group_id') String groupId,
       @JsonKey(name: 'start_date') String startDate,
       @JsonKey(name: 'end_date') String endDate,
-      @JsonKey(name: 'time_space') int timeSpace});
+      @JsonKey(name: 'time_space') String timeSpace,
+      @JsonKey(name: 'time_zone') String timeZone});
 }
 
 /// @nodoc
@@ -132,6 +141,7 @@ class __$$GetGroupBrushingStatsRequestImplCopyWithImpl<$Res>
     Object? startDate = null,
     Object? endDate = null,
     Object? timeSpace = null,
+    Object? timeZone = null,
   }) {
     return _then(_$GetGroupBrushingStatsRequestImpl(
       groupId: null == groupId
@@ -149,7 +159,11 @@ class __$$GetGroupBrushingStatsRequestImplCopyWithImpl<$Res>
       timeSpace: null == timeSpace
           ? _value.timeSpace
           : timeSpace // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
+      timeZone: null == timeZone
+          ? _value.timeZone
+          : timeZone // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -162,7 +176,8 @@ class _$GetGroupBrushingStatsRequestImpl
       {@JsonKey(name: 'group_id') required this.groupId,
       @JsonKey(name: 'start_date') required this.startDate,
       @JsonKey(name: 'end_date') required this.endDate,
-      @JsonKey(name: 'time_space') required this.timeSpace});
+      @JsonKey(name: 'time_space') required this.timeSpace,
+      @JsonKey(name: 'time_zone') required this.timeZone});
 
   factory _$GetGroupBrushingStatsRequestImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -181,11 +196,14 @@ class _$GetGroupBrushingStatsRequestImpl
 // ISO8601 格式
   @override
   @JsonKey(name: 'time_space')
-  final int timeSpace;
+  final String timeSpace;
+  @override
+  @JsonKey(name: 'time_zone')
+  final String timeZone;
 
   @override
   String toString() {
-    return 'GetGroupBrushingStatsRequest(groupId: $groupId, startDate: $startDate, endDate: $endDate, timeSpace: $timeSpace)';
+    return 'GetGroupBrushingStatsRequest(groupId: $groupId, startDate: $startDate, endDate: $endDate, timeSpace: $timeSpace, timeZone: $timeZone)';
   }
 
   @override
@@ -198,13 +216,15 @@ class _$GetGroupBrushingStatsRequestImpl
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.timeSpace, timeSpace) ||
-                other.timeSpace == timeSpace));
+                other.timeSpace == timeSpace) &&
+            (identical(other.timeZone, timeZone) ||
+                other.timeZone == timeZone));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, groupId, startDate, endDate, timeSpace);
+  int get hashCode => Object.hash(
+      runtimeType, groupId, startDate, endDate, timeSpace, timeZone);
 
   /// Create a copy of GetGroupBrushingStatsRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -230,7 +250,8 @@ abstract class _GetGroupBrushingStatsRequest
           {@JsonKey(name: 'group_id') required final String groupId,
           @JsonKey(name: 'start_date') required final String startDate,
           @JsonKey(name: 'end_date') required final String endDate,
-          @JsonKey(name: 'time_space') required final int timeSpace}) =
+          @JsonKey(name: 'time_space') required final String timeSpace,
+          @JsonKey(name: 'time_zone') required final String timeZone}) =
       _$GetGroupBrushingStatsRequestImpl;
 
   factory _GetGroupBrushingStatsRequest.fromJson(Map<String, dynamic> json) =
@@ -247,7 +268,10 @@ abstract class _GetGroupBrushingStatsRequest
   String get endDate; // ISO8601 格式
   @override
   @JsonKey(name: 'time_space')
-  int get timeSpace;
+  String get timeSpace;
+  @override
+  @JsonKey(name: 'time_zone')
+  String get timeZone;
 
   /// Create a copy of GetGroupBrushingStatsRequest
   /// with the given fields replaced by the non-null parameter values.

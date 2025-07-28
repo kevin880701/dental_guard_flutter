@@ -20,35 +20,43 @@ class ChartInfoWidget extends StatelessWidget {
   // 根據 chartTimeStatus 給不同的 label
   String get avgLabel {
     switch (chartTimeStatus) {
-      case ChartTimeStatus.day:
-        return "本日平均";
-      case ChartTimeStatus.month:
-        return "本月平均";
-      case ChartTimeStatus.year:
-        return "本年平均";
       case ChartTimeStatus.hour:
+        return "本日平均";
+      case ChartTimeStatus.day:
+        return "本月平均";
+      case ChartTimeStatus.month:
+        return "本年平均";
+      case ChartTimeStatus.minute:
         return "本小時平均";
+      case ChartTimeStatus.quarter:
+      case ChartTimeStatus.quarterHour:
+      default:
+        return "";
     }
   }
 
   String get baselineLabel {
     switch (chartTimeStatus) {
-      case ChartTimeStatus.day:
-        return "昨日平均";
-      case ChartTimeStatus.month:
-        return "上個月平均";
-      case ChartTimeStatus.year:
-        return "去年平均";
       case ChartTimeStatus.hour:
+        return "昨日平均";
+      case ChartTimeStatus.day:
+        return "上個月平均";
+      case ChartTimeStatus.month:
+        return "去年平均";
+      case ChartTimeStatus.minute:
         return "上個小時平均";
+      case ChartTimeStatus.quarter:
+      case ChartTimeStatus.quarterHour:
+      default:
+        return "";
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final String time = data != null ? chartTimeStatus.formatTime(data!.timeGroup) : "--";
-    final String score = data != null ? data!.value.toStringAsFixed(1) : "--";
-    final String baseScore = data != null ? data!.baseValue.toStringAsFixed(1) : "--";
+    final String time = data != null ? chartTimeStatus.formatTime(data!.time) : "--";
+    final String score = data != null ? data!.avgPlaquePercent.toStringAsFixed(1) : "--";
+    final String baseScore = data != null ? data!.baselineAvgPlaquePercent.toStringAsFixed(1) : "--";
 
     return Container(
       color: Colors.white,

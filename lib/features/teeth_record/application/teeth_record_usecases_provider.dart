@@ -1,5 +1,6 @@
 
 import 'package:dental_guard_flutter/core/utils/utils.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/network/network_interface.dart';
 import '../data/datasources/teeth_record_remote_datasource.dart';
@@ -67,22 +68,23 @@ final groupBrushingStatsProvider = FutureProvider.autoDispose.family<
 >((ref, param) async {
   final useCase = ref.read(getGroupBrushingStatsUseCaseProvider);
 
-  final timeSpace = param.status.timeSpace;
   final dateRange = getChartDateRange(param.selectTime, param.status);
+  final String timeZone = await FlutterTimezone.getLocalTimezone();
 
   final result = await useCase(
     GetGroupBrushingStatsRequest(
       groupId: param.groupId,
       startDate: dateRange.start,
       endDate: dateRange.end,
-      timeSpace: timeSpace,
+      timeSpace: param.status.name,
+      timeZone: timeZone,
     ),
   );
 
   // 將 timeGroup 轉換時區
   final convertedResult = result
       .map((item) => item.copyWith(
-    timeGroup: item.timeGroup.convertToTimeZone(),
+    time: item.time.convertToTimeZone(),
   ))
       .toList();
 
@@ -100,20 +102,21 @@ final memberBrushingStatsProvider = FutureProvider.autoDispose.family<
 >((ref, param) async {
   final useCase = ref.read(getUserBrushingStatsUseCaseProvider);
 
-  final timeSpace = param.status.timeSpace;
   final dateRange = getChartDateRange(param.selectTime, param.status);
+  final String timeZone = await FlutterTimezone.getLocalTimezone();
 
   final result = await useCase(
     userId: param.userId,
     startDate: dateRange.start,
     endDate: dateRange.end,
-    timeSpace: timeSpace,
+    timeSpace: param.status.name,
+      timeZone: timeZone,
   );
 
   // 轉換時區
   return result
       .map((item) => item.copyWith(
-    timeGroup: item.timeGroup.convertToTimeZone(),
+    time: item.time.convertToTimeZone(),
   ))
       .toList();
 });

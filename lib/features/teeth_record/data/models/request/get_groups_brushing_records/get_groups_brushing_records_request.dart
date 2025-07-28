@@ -9,6 +9,7 @@ class GetGroupsBrushingRecordsRequest with _$GetGroupsBrushingRecordsRequest {
     @JsonKey(name: 'group_ids') required List<String> groupIds,
     @JsonKey(name: 'start_date') required String startDate,
     @JsonKey(name: 'end_date') required String endDate,
+    @JsonKey(name: 'time_zone') required String timeZone,
   }) = _GetGroupsBrushingRecordsRequest;
 
   factory GetGroupsBrushingRecordsRequest.fromJson(Map<String, dynamic> json) =>

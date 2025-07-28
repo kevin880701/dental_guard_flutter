@@ -15,6 +15,7 @@ _$GetMultiUserBrushingRecordsRequestImpl
               .toList(),
           startDate: json['start_date'] as String,
           endDate: json['end_date'] as String,
+          timeZone: json['time_zone'] as String,
         );
 
 Map<String, dynamic> _$$GetMultiUserBrushingRecordsRequestImplToJson(
@@ -23,4 +24,5 @@ Map<String, dynamic> _$$GetMultiUserBrushingRecordsRequestImplToJson(
       'user_ids': instance.userIds,
       'start_date': instance.startDate,
       'end_date': instance.endDate,
+      'time_zone': instance.timeZone,
     };

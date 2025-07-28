@@ -14,6 +14,7 @@ _$GetGroupsBrushingRecordsRequestImpl
               .toList(),
           startDate: json['start_date'] as String,
           endDate: json['end_date'] as String,
+          timeZone: json['time_zone'] as String,
         );
 
 Map<String, dynamic> _$$GetGroupsBrushingRecordsRequestImplToJson(
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$GetGroupsBrushingRecordsRequestImplToJson(
       'group_ids': instance.groupIds,
       'start_date': instance.startDate,
       'end_date': instance.endDate,
+      'time_zone': instance.timeZone,
     };

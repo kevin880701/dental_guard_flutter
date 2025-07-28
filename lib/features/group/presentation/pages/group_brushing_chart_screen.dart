@@ -5,6 +5,7 @@ import 'package:dental_guard_flutter/core/utils/utils.dart';
 import 'package:dental_guard_flutter/core/widgets/button/app_button.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -57,12 +58,13 @@ class GroupBrushingChartScreen extends HookConsumerWidget {
                         required DateTime startTime,
                         required DateTime endTime,
                       }) async {
-
+                        final String timeZone = await FlutterTimezone.getLocalTimezone();
                         final useCase = ref.read(getGroupsBrushingRecordsUseCaseProvider);
                         List<GroupBrushingRecordsData> result = await useCase(
                           groupIds: [group.id],
                           startDate:  startTime.toIsoDateTime(),
                           endDate: endTime.toIsoDateTime(),
+                          timeZone: timeZone,
                         );
                         if (result.isNotEmpty) {
                           final users = result[0].users;

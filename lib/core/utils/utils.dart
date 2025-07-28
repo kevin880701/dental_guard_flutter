@@ -45,16 +45,6 @@ extension DateTimeFormatExtension on DateTime {
   }
 }
 
-DateTime? parseIsoToDateTimeOrNull(String? isoString) {
-  if (isoString == null || isoString.isEmpty) return null;
-
-  try {
-    return DateTime.parse(isoString).toLocal(); // 轉為本地時間可視需要去掉
-  } catch (e) {
-    return null;
-  }
-}
-
 extension ContextSizeExtension on BuildContext {
   double get screenWidth => MediaQuery.of(this).size.width;
   double get screenHeight => MediaQuery.of(this).size.height;

@@ -9,19 +9,20 @@ part of 'brushing_stats_data.dart';
 _$BrushingStatsDataImpl _$$BrushingStatsDataImplFromJson(
         Map<String, dynamic> json) =>
     _$BrushingStatsDataImpl(
-      timeGroup: DateTime.parse(json['time_group'] as String),
-      value: (json['value'] as num).toDouble(),
-      baseValue: (json['base_value'] as num).toDouble(),
-      count: (json['count'] as num).toInt(),
-      baseCount: (json['base_count'] as num).toInt(),
+      time: DateTime.parse(json['time'] as String),
+      avgPlaquePercent: (json['avg_plaque_percent'] as num).toDouble(),
+      baselineAvgPlaquePercent:
+          (json['baseline_avg_plaque_percent'] as num).toDouble(),
+      recordCount: (json['record_count'] as num).toInt(),
+      baselineRecordCount: (json['baseline_record_count'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$BrushingStatsDataImplToJson(
         _$BrushingStatsDataImpl instance) =>
     <String, dynamic>{
-      'time_group': instance.timeGroup.toIso8601String(),
-      'value': instance.value,
-      'base_value': instance.baseValue,
-      'count': instance.count,
-      'base_count': instance.baseCount,
+      'time': instance.time.toIso8601String(),
+      'avg_plaque_percent': instance.avgPlaquePercent,
+      'baseline_avg_plaque_percent': instance.baselineAvgPlaquePercent,
+      'record_count': instance.recordCount,
+      'baseline_record_count': instance.baselineRecordCount,
     };

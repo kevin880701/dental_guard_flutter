@@ -10,9 +10,10 @@ class GetMultiUserBrushingRecordsUseCase {
   Future<List<MultiUserBrushingRecordsData>> call(
       {required List<String> userIds,
       required String startDate,
-      required String endDate}) {
+        required String endDate,
+        required String timeZone}) {
     return repository.getMultiUserBrushingRecords(
         GetMultiUserBrushingRecordsRequest(
-            userIds: userIds, startDate: startDate, endDate: endDate));
+            userIds: userIds, startDate: startDate, endDate: endDate, timeZone: timeZone));
   }
 }

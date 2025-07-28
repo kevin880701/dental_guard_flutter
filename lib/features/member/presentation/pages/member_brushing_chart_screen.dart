@@ -5,6 +5,7 @@ import 'package:dental_guard_flutter/core/utils/utils.dart';
 import 'package:dental_guard_flutter/core/widgets/button/app_button.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -54,11 +55,13 @@ class MemberBrushingChartScreen extends HookConsumerWidget {
                         required DateTime startTime,
                         required DateTime endTime,
                       }) async {
+                        final String timeZone = await FlutterTimezone.getLocalTimezone();
                         final useCase = ref.read(getMultiUserBrushingRecordsUseCaseProvider);
                         final result = await useCase(
                           userIds: [state.user!.id],
                           startDate: startTime.toIsoDateTime(),
                           endDate: endTime.toIsoDateTime(),
+                          timeZone: timeZone,
                         );
 
                         final allRecords = <Map<String, dynamic>>[];

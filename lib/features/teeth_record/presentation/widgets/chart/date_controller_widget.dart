@@ -101,18 +101,23 @@ class DateControllerWidget extends StatelessWidget {
             onTap: () {
               DateTime newDate;
               switch (currentTimeStatus) {
-                case ChartTimeStatus.day:
+                case ChartTimeStatus.hour:
                   newDate = selectTime.subtract(Duration(days: 1));
                   break;
-                case ChartTimeStatus.month:
+                case ChartTimeStatus.day:
                   newDate = addMonths(selectTime, -1);
                   break;
-                case ChartTimeStatus.year:
+                case ChartTimeStatus.month:
                   newDate = addYears(selectTime, -1);
                   break;
-                case ChartTimeStatus.hour:
+                case ChartTimeStatus.minute:
                   newDate = selectTime.subtract(Duration(hours: 1));
                   break;
+                case ChartTimeStatus.quarter:
+                case ChartTimeStatus.quarterHour:
+                  newDate = selectTime.subtract(Duration(hours: 3));
+                  break;
+
               }
               onDateChange(newDate, null);
             },
@@ -132,17 +137,21 @@ class DateControllerWidget extends StatelessWidget {
             onTap: () {
               DateTime newDate;
               switch (currentTimeStatus) {
-                case ChartTimeStatus.day:
+                case ChartTimeStatus.hour:
                   newDate = selectTime.add(Duration(days: 1));
                   break;
-                case ChartTimeStatus.month:
+                case ChartTimeStatus.day:
                   newDate = addMonths(selectTime, 1);
                   break;
-                case ChartTimeStatus.year:
+                case ChartTimeStatus.month:
                   newDate = addYears(selectTime, 1);
                   break;
-                case ChartTimeStatus.hour:
+                case ChartTimeStatus.minute:
                   newDate = selectTime.add(Duration(hours: 1));
+                  break;
+                case ChartTimeStatus.quarter:
+                case ChartTimeStatus.quarterHour:
+                  newDate = selectTime.add(Duration(hours: 3));
                   break;
               }
               onDateChange(newDate, null);
@@ -182,13 +191,18 @@ DateTime addYears(DateTime date, int years) {
 
 String formatDateByStatus(DateTime date, ChartTimeStatus status) {
   switch (status) {
-    case ChartTimeStatus.day:
-      return DateFormat('yyyy-MM-dd').format(date);
-    case ChartTimeStatus.month:
-      return DateFormat('yyyy-MM').format(date);
-    case ChartTimeStatus.year:
-      return DateFormat('yyyy').format(date);
     case ChartTimeStatus.hour:
-      return DateFormat('yyyy-MM-dd HH:00').format(date); // hour 預設這樣顯示
+      return DateFormat('yyyy-MM-dd').format(date);
+    case ChartTimeStatus.day:
+      return DateFormat('yyyy-MM').format(date);
+    case ChartTimeStatus.month:
+      return DateFormat('yyyy').format(date);
+    case ChartTimeStatus.minute:
+      return DateFormat('yyyy-MM-dd HH:00').format(date);
+    case ChartTimeStatus.quarter:
+    case ChartTimeStatus.quarterHour:
+    default:
+      return '';
+
   }
 }

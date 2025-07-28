@@ -35,14 +35,18 @@ class _SmoothLineChartState extends State<SmoothLineChart> {
 
   String _getXLabel(DateTime t, ChartTimeStatus status) {
     switch (status) {
-      case ChartTimeStatus.hour:
+      case ChartTimeStatus.minute:
         return t.minute.toString().padLeft(2, '0');
-      case ChartTimeStatus.day:
+      case ChartTimeStatus.hour:
         return t.hour.toString().padLeft(2, '0');
-      case ChartTimeStatus.month:
+      case ChartTimeStatus.day:
         return t.day.toString().padLeft(2, '0');
-      case ChartTimeStatus.year:
+      case ChartTimeStatus.month:
         return t.month.toString().padLeft(2, '0');
+      case ChartTimeStatus.quarter:
+      case ChartTimeStatus.quarterHour:
+      default:
+        return '';
     }
   }
 
@@ -72,12 +76,12 @@ class _SmoothLineChartState extends State<SmoothLineChart> {
     ];
 
     final xLabels = data
-        .map((d) => _getXLabel(d.timeGroup, widget.chartTimeStatus))
+        .map((d) => _getXLabel(d.time, widget.chartTimeStatus))
         .toList();
 
     // 取 count 跟 baseCount 最大
     final maxYData = data
-        .map((d) => d.count > d.baseCount ? d.count : d.baseCount)
+        .map((d) => d.recordCount > d.baselineRecordCount ? d.recordCount : d.baselineRecordCount)
         .fold<int>(0, (p, c) => c > p ? c : p)
         .toDouble();
 
@@ -85,12 +89,12 @@ class _SmoothLineChartState extends State<SmoothLineChart> {
 
     final List<FlSpot> dataSpots = [
       for (int i = 0; i < data.length; i++)
-        FlSpot(i.toDouble(), data[i].count.toDouble()),
+        FlSpot(i.toDouble(), data[i].recordCount.toDouble()),
     ];
 
     final List<FlSpot> dataBaseSpots = [
       for (int i = 0; i < data.length; i++)
-        FlSpot(i.toDouble(), data[i].baseCount.toDouble()),
+        FlSpot(i.toDouble(), data[i].baselineRecordCount.toDouble()),
     ];
 
     return Column(
@@ -137,23 +141,27 @@ class _SmoothLineChartState extends State<SmoothLineChart> {
                       final lastIdx = xLabels.length - 1;
 
                       switch (widget.chartTimeStatus) {
-                        case ChartTimeStatus.hour:
+                        case ChartTimeStatus.minute:
                           // 60 筆，只顯示每 15 間距
                           shouldShow = idx % 15 == 0 || idx == lastIdx;
                           break;
-                        case ChartTimeStatus.day:
+                        case ChartTimeStatus.hour:
                           // 24 筆，只顯示每 4 間距
                           shouldShow = idx % 4 == 0 || idx == lastIdx;
                           break;
-                        case ChartTimeStatus.month:
+                        case ChartTimeStatus.day:
                           // 28~31 筆，1~25只顯示每5，最後一天一定顯示
                           shouldShow =
                               (idx % 5 == 0 && idx <= 25) || idx == lastIdx;
                           break;
-                        case ChartTimeStatus.year:
+                        case ChartTimeStatus.month:
                           // 12 筆，每個都顯示
                           shouldShow = true;
                           break;
+                        case ChartTimeStatus.quarter:
+                        case ChartTimeStatus.quarterHour:
+                        default:
+                          shouldShow = true;
                       }
 
                       if (!shouldShow) return const SizedBox.shrink();

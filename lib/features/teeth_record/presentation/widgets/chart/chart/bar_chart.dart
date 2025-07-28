@@ -30,14 +30,18 @@ class _BarChartState extends State<BarChart> {
 
   String _getXLabel(BrushingStatsData d) {
     switch (widget.chartTimeStatus) {
+      case ChartTimeStatus.minute:
+        return d.time.minute.toString().padLeft(2, '0'); // 分
       case ChartTimeStatus.hour:
-        return d.timeGroup.minute.toString().padLeft(2, '0'); // 分
+        return d.time.hour.toString().padLeft(2, '0'); // 小時
       case ChartTimeStatus.day:
-        return d.timeGroup.hour.toString().padLeft(2, '0'); // 小時
+        return d.time.day.toString().padLeft(2, '0'); // 日
       case ChartTimeStatus.month:
-        return d.timeGroup.day.toString().padLeft(2, '0'); // 日
-      case ChartTimeStatus.year:
-        return d.timeGroup.month.toString().padLeft(2, '0'); // 月
+        return d.time.month.toString().padLeft(2, '0'); // 月
+      case ChartTimeStatus.quarter:
+      case ChartTimeStatus.quarterHour:
+      default:
+        return '';
     }
   }
 
@@ -74,18 +78,22 @@ class _BarChartState extends State<BarChart> {
                 final lastIdx = xLabels.length - 1;
                 bool shouldShow = false;
                 switch (widget.chartTimeStatus) {
-                  case ChartTimeStatus.hour:
+                  case ChartTimeStatus.minute:
                     shouldShow = idx % 15 == 0 || idx == lastIdx;
                     break;
-                  case ChartTimeStatus.day:
+                  case ChartTimeStatus.hour:
                     shouldShow = idx % 4 == 0 || idx == lastIdx;
                     break;
-                  case ChartTimeStatus.month:
+                  case ChartTimeStatus.day:
                     shouldShow = (idx % 5 == 0 && idx <= 25) || idx == lastIdx;
                     break;
-                  case ChartTimeStatus.year:
+                  case ChartTimeStatus.month:
                     shouldShow = true;
                     break;
+                  case ChartTimeStatus.quarter:
+                  case ChartTimeStatus.quarterHour:
+                  default:
+                    shouldShow = true;
                 }
                 return ChartAxisLabel(
                   shouldShow ? xLabels[idx] : '',
@@ -107,7 +115,7 @@ class _BarChartState extends State<BarChart> {
               ColumnSeries<BrushingStatsData, String>(
                 dataSource: widget.data,
                 xValueMapper: xValueMapper,
-                yValueMapper: (d, _) => d.value,
+                yValueMapper: (d, _) => d.avgPlaquePercent,
                 // 動態判斷顏色
                 pointColorMapper: (d, i) {
                   if (selectedIndex == null) {
@@ -134,7 +142,7 @@ class _BarChartState extends State<BarChart> {
               LineSeries<BrushingStatsData, String>(
                 dataSource: widget.data,
                 xValueMapper: xValueMapper,
-                yValueMapper: (d, _) => d.baseValue,
+                yValueMapper: (d, _) => d.baselineAvgPlaquePercent,
                 color: Colors.red,
                 width: 1,
                 markerSettings: MarkerSettings(isVisible: false),

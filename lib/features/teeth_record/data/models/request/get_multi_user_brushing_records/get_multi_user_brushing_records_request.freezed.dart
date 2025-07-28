@@ -27,6 +27,8 @@ mixin _$GetMultiUserBrushingRecordsRequest {
   String get startDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'end_date')
   String get endDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'time_zone')
+  String get timeZone => throw _privateConstructorUsedError;
 
   /// Serializes this GetMultiUserBrushingRecordsRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +52,8 @@ abstract class $GetMultiUserBrushingRecordsRequestCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'user_ids') List<String> userIds,
       @JsonKey(name: 'start_date') String startDate,
-      @JsonKey(name: 'end_date') String endDate});
+      @JsonKey(name: 'end_date') String endDate,
+      @JsonKey(name: 'time_zone') String timeZone});
 }
 
 /// @nodoc
@@ -72,6 +75,7 @@ class _$GetMultiUserBrushingRecordsRequestCopyWithImpl<$Res,
     Object? userIds = null,
     Object? startDate = null,
     Object? endDate = null,
+    Object? timeZone = null,
   }) {
     return _then(_value.copyWith(
       userIds: null == userIds
@@ -85,6 +89,10 @@ class _$GetMultiUserBrushingRecordsRequestCopyWithImpl<$Res,
       endDate: null == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      timeZone: null == timeZone
+          ? _value.timeZone
+          : timeZone // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -102,7 +110,8 @@ abstract class _$$GetMultiUserBrushingRecordsRequestImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'user_ids') List<String> userIds,
       @JsonKey(name: 'start_date') String startDate,
-      @JsonKey(name: 'end_date') String endDate});
+      @JsonKey(name: 'end_date') String endDate,
+      @JsonKey(name: 'time_zone') String timeZone});
 }
 
 /// @nodoc
@@ -123,6 +132,7 @@ class __$$GetMultiUserBrushingRecordsRequestImplCopyWithImpl<$Res>
     Object? userIds = null,
     Object? startDate = null,
     Object? endDate = null,
+    Object? timeZone = null,
   }) {
     return _then(_$GetMultiUserBrushingRecordsRequestImpl(
       userIds: null == userIds
@@ -137,6 +147,10 @@ class __$$GetMultiUserBrushingRecordsRequestImplCopyWithImpl<$Res>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as String,
+      timeZone: null == timeZone
+          ? _value.timeZone
+          : timeZone // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -148,7 +162,8 @@ class _$GetMultiUserBrushingRecordsRequestImpl
   const _$GetMultiUserBrushingRecordsRequestImpl(
       {@JsonKey(name: 'user_ids') required final List<String> userIds,
       @JsonKey(name: 'start_date') required this.startDate,
-      @JsonKey(name: 'end_date') required this.endDate})
+      @JsonKey(name: 'end_date') required this.endDate,
+      @JsonKey(name: 'time_zone') required this.timeZone})
       : _userIds = userIds;
 
   factory _$GetMultiUserBrushingRecordsRequestImpl.fromJson(
@@ -170,10 +185,13 @@ class _$GetMultiUserBrushingRecordsRequestImpl
   @override
   @JsonKey(name: 'end_date')
   final String endDate;
+  @override
+  @JsonKey(name: 'time_zone')
+  final String timeZone;
 
   @override
   String toString() {
-    return 'GetMultiUserBrushingRecordsRequest(userIds: $userIds, startDate: $startDate, endDate: $endDate)';
+    return 'GetMultiUserBrushingRecordsRequest(userIds: $userIds, startDate: $startDate, endDate: $endDate, timeZone: $timeZone)';
   }
 
   @override
@@ -184,13 +202,19 @@ class _$GetMultiUserBrushingRecordsRequestImpl
             const DeepCollectionEquality().equals(other._userIds, _userIds) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate));
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.timeZone, timeZone) ||
+                other.timeZone == timeZone));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_userIds), startDate, endDate);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_userIds),
+      startDate,
+      endDate,
+      timeZone);
 
   /// Create a copy of GetMultiUserBrushingRecordsRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -215,7 +239,8 @@ abstract class _GetMultiUserBrushingRecordsRequest
   const factory _GetMultiUserBrushingRecordsRequest(
           {@JsonKey(name: 'user_ids') required final List<String> userIds,
           @JsonKey(name: 'start_date') required final String startDate,
-          @JsonKey(name: 'end_date') required final String endDate}) =
+          @JsonKey(name: 'end_date') required final String endDate,
+          @JsonKey(name: 'time_zone') required final String timeZone}) =
       _$GetMultiUserBrushingRecordsRequestImpl;
 
   factory _GetMultiUserBrushingRecordsRequest.fromJson(
@@ -231,6 +256,9 @@ abstract class _GetMultiUserBrushingRecordsRequest
   @override
   @JsonKey(name: 'end_date')
   String get endDate;
+  @override
+  @JsonKey(name: 'time_zone')
+  String get timeZone;
 
   /// Create a copy of GetMultiUserBrushingRecordsRequest
   /// with the given fields replaced by the non-null parameter values.

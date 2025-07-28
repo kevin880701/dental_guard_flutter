@@ -32,7 +32,7 @@ class GroupPlaqueBarChart extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectTime = useState<DateTime>(DateTime.now());
-    final chartTimeStatus = useState<ChartTimeStatus>(ChartTimeStatus.month);
+    final chartTimeStatus = useState<ChartTimeStatus>(ChartTimeStatus.hour);
     final selectedIndex = useState<int?>(null);
     final isChartClicked = useState<bool>(false);
 
@@ -74,10 +74,10 @@ class GroupPlaqueBarChart extends HookConsumerWidget {
             data: (data) {
               // 最新資料
               final double percent =
-              (data.isNotEmpty) ? (data.last.value / 100).clamp(0.0, 1.0) : 0.0;
+              (data.isNotEmpty) ? (data.last.avgPlaquePercent / 100).clamp(0.0, 1.0) : 0.0;
               // 最新基線，直接從最後一筆資料取得
               final double? baseValue =
-              (data.isNotEmpty) ? data.last.baseValue : null;
+              (data.isNotEmpty) ? data.last.baselineAvgPlaquePercent : null;
 
               // onTap 更新被點擊的 index 和點擊狀態
               void handleBarTap(
@@ -131,12 +131,12 @@ class GroupPlaqueBarChart extends HookConsumerWidget {
                         chartTimeStatus.value.baseLineText,
                       ];
                       List<ReportData> reportDataList = data.map((d) {
-                        final time = chartTimeStatus.value.formatTime(d.timeGroup);
+                        final time = chartTimeStatus.value.formatTime(d.time);
                         return ReportData(
                           index: time,
                           values: [
-                            "${d.value.toString()}%",
-                            "${d.baseValue.toString()}%",
+                            "${d.avgPlaquePercent.toString()}%",
+                            "${d.baselineAvgPlaquePercent.toString()}%",
                           ],
                         );
                       }).toList();

@@ -1,5 +1,6 @@
 import 'package:dental_guard_flutter/core/utils/utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/providers/refresh_controller.dart';
@@ -57,6 +58,7 @@ class MemberInfoController extends StateNotifier<MemberMainState> {
   }
 
   Future<void> loadUserBrushingRecords() async {
+    final String timeZone = await FlutterTimezone.getLocalTimezone();
     final userId = state.user?.id;
     if (userId == null) {
       state = state.copyWith(
@@ -75,6 +77,7 @@ class MemberInfoController extends StateNotifier<MemberMainState> {
         userIds: [state.user!.id],
         startDate: startTime.toIsoDateTime(),
         endDate: endTime.toIsoDateTime(),
+        timeZone: timeZone,
       );
 
 

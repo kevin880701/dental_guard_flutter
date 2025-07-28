@@ -20,14 +20,18 @@ class SmoothLineInfoWidget extends StatelessWidget {
   // 依據 ChartTimeStatus 轉換日期格式
   String formatTime(DateTime dt) {
     switch (chartTimeStatus) {
-      case ChartTimeStatus.day:
-        return DateFormat('HH:mm').format(dt);
-      case ChartTimeStatus.month:
-        return DateFormat('MM/dd').format(dt);
-      case ChartTimeStatus.year:
-        return DateFormat('yyyy/MM').format(dt);
       case ChartTimeStatus.hour:
+        return DateFormat('HH:mm').format(dt);
+      case ChartTimeStatus.day:
+        return DateFormat('MM/dd').format(dt);
+      case ChartTimeStatus.month:
+        return DateFormat('yyyy/MM').format(dt);
+      case ChartTimeStatus.minute:
         return DateFormat('mm').format(dt);
+      case ChartTimeStatus.quarter:
+      case ChartTimeStatus.quarterHour:
+      default:
+        return "";
     }
   }
 
@@ -46,8 +50,8 @@ class SmoothLineInfoWidget extends StatelessWidget {
           const SizedBox(height: 4),
           for (int i = 0; i < data.length; i++)
             _infoRow(
-              label: formatTime(data[i]!.timeGroup),
-              value: data[i]!.count.toString(),
+              label: formatTime(data[i]!.time),
+              value: data[i]!.recordCount.toString(),
               unit: '次',
             ),
         ],

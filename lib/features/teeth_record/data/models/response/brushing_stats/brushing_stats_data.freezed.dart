@@ -20,16 +20,16 @@ BrushingStatsData _$BrushingStatsDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BrushingStatsData {
-  @JsonKey(name: 'time_group')
-  DateTime get timeGroup => throw _privateConstructorUsedError;
-  @JsonKey(name: 'value')
-  double get value => throw _privateConstructorUsedError;
-  @JsonKey(name: 'base_value')
-  double get baseValue => throw _privateConstructorUsedError;
-  @JsonKey(name: 'count')
-  int get count => throw _privateConstructorUsedError;
-  @JsonKey(name: 'base_count')
-  int get baseCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'time')
+  DateTime get time => throw _privateConstructorUsedError;
+  @JsonKey(name: 'avg_plaque_percent')
+  double get avgPlaquePercent => throw _privateConstructorUsedError;
+  @JsonKey(name: 'baseline_avg_plaque_percent')
+  double get baselineAvgPlaquePercent => throw _privateConstructorUsedError;
+  @JsonKey(name: 'record_count')
+  int get recordCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'baseline_record_count')
+  int get baselineRecordCount => throw _privateConstructorUsedError;
 
   /// Serializes this BrushingStatsData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,11 +48,12 @@ abstract class $BrushingStatsDataCopyWith<$Res> {
       _$BrushingStatsDataCopyWithImpl<$Res, BrushingStatsData>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'time_group') DateTime timeGroup,
-      @JsonKey(name: 'value') double value,
-      @JsonKey(name: 'base_value') double baseValue,
-      @JsonKey(name: 'count') int count,
-      @JsonKey(name: 'base_count') int baseCount});
+      {@JsonKey(name: 'time') DateTime time,
+      @JsonKey(name: 'avg_plaque_percent') double avgPlaquePercent,
+      @JsonKey(name: 'baseline_avg_plaque_percent')
+      double baselineAvgPlaquePercent,
+      @JsonKey(name: 'record_count') int recordCount,
+      @JsonKey(name: 'baseline_record_count') int baselineRecordCount});
 }
 
 /// @nodoc
@@ -70,32 +71,32 @@ class _$BrushingStatsDataCopyWithImpl<$Res, $Val extends BrushingStatsData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? timeGroup = null,
-    Object? value = null,
-    Object? baseValue = null,
-    Object? count = null,
-    Object? baseCount = null,
+    Object? time = null,
+    Object? avgPlaquePercent = null,
+    Object? baselineAvgPlaquePercent = null,
+    Object? recordCount = null,
+    Object? baselineRecordCount = null,
   }) {
     return _then(_value.copyWith(
-      timeGroup: null == timeGroup
-          ? _value.timeGroup
-          : timeGroup // ignore: cast_nullable_to_non_nullable
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
+      avgPlaquePercent: null == avgPlaquePercent
+          ? _value.avgPlaquePercent
+          : avgPlaquePercent // ignore: cast_nullable_to_non_nullable
               as double,
-      baseValue: null == baseValue
-          ? _value.baseValue
-          : baseValue // ignore: cast_nullable_to_non_nullable
+      baselineAvgPlaquePercent: null == baselineAvgPlaquePercent
+          ? _value.baselineAvgPlaquePercent
+          : baselineAvgPlaquePercent // ignore: cast_nullable_to_non_nullable
               as double,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
+      recordCount: null == recordCount
+          ? _value.recordCount
+          : recordCount // ignore: cast_nullable_to_non_nullable
               as int,
-      baseCount: null == baseCount
-          ? _value.baseCount
-          : baseCount // ignore: cast_nullable_to_non_nullable
+      baselineRecordCount: null == baselineRecordCount
+          ? _value.baselineRecordCount
+          : baselineRecordCount // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -110,11 +111,12 @@ abstract class _$$BrushingStatsDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'time_group') DateTime timeGroup,
-      @JsonKey(name: 'value') double value,
-      @JsonKey(name: 'base_value') double baseValue,
-      @JsonKey(name: 'count') int count,
-      @JsonKey(name: 'base_count') int baseCount});
+      {@JsonKey(name: 'time') DateTime time,
+      @JsonKey(name: 'avg_plaque_percent') double avgPlaquePercent,
+      @JsonKey(name: 'baseline_avg_plaque_percent')
+      double baselineAvgPlaquePercent,
+      @JsonKey(name: 'record_count') int recordCount,
+      @JsonKey(name: 'baseline_record_count') int baselineRecordCount});
 }
 
 /// @nodoc
@@ -130,32 +132,32 @@ class __$$BrushingStatsDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? timeGroup = null,
-    Object? value = null,
-    Object? baseValue = null,
-    Object? count = null,
-    Object? baseCount = null,
+    Object? time = null,
+    Object? avgPlaquePercent = null,
+    Object? baselineAvgPlaquePercent = null,
+    Object? recordCount = null,
+    Object? baselineRecordCount = null,
   }) {
     return _then(_$BrushingStatsDataImpl(
-      timeGroup: null == timeGroup
-          ? _value.timeGroup
-          : timeGroup // ignore: cast_nullable_to_non_nullable
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
+      avgPlaquePercent: null == avgPlaquePercent
+          ? _value.avgPlaquePercent
+          : avgPlaquePercent // ignore: cast_nullable_to_non_nullable
               as double,
-      baseValue: null == baseValue
-          ? _value.baseValue
-          : baseValue // ignore: cast_nullable_to_non_nullable
+      baselineAvgPlaquePercent: null == baselineAvgPlaquePercent
+          ? _value.baselineAvgPlaquePercent
+          : baselineAvgPlaquePercent // ignore: cast_nullable_to_non_nullable
               as double,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
+      recordCount: null == recordCount
+          ? _value.recordCount
+          : recordCount // ignore: cast_nullable_to_non_nullable
               as int,
-      baseCount: null == baseCount
-          ? _value.baseCount
-          : baseCount // ignore: cast_nullable_to_non_nullable
+      baselineRecordCount: null == baselineRecordCount
+          ? _value.baselineRecordCount
+          : baselineRecordCount // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -165,34 +167,36 @@ class __$$BrushingStatsDataImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BrushingStatsDataImpl implements _BrushingStatsData {
   const _$BrushingStatsDataImpl(
-      {@JsonKey(name: 'time_group') required this.timeGroup,
-      @JsonKey(name: 'value') required this.value,
-      @JsonKey(name: 'base_value') required this.baseValue,
-      @JsonKey(name: 'count') required this.count,
-      @JsonKey(name: 'base_count') required this.baseCount});
+      {@JsonKey(name: 'time') required this.time,
+      @JsonKey(name: 'avg_plaque_percent') required this.avgPlaquePercent,
+      @JsonKey(name: 'baseline_avg_plaque_percent')
+      required this.baselineAvgPlaquePercent,
+      @JsonKey(name: 'record_count') required this.recordCount,
+      @JsonKey(name: 'baseline_record_count')
+      required this.baselineRecordCount});
 
   factory _$BrushingStatsDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$BrushingStatsDataImplFromJson(json);
 
   @override
-  @JsonKey(name: 'time_group')
-  final DateTime timeGroup;
+  @JsonKey(name: 'time')
+  final DateTime time;
   @override
-  @JsonKey(name: 'value')
-  final double value;
+  @JsonKey(name: 'avg_plaque_percent')
+  final double avgPlaquePercent;
   @override
-  @JsonKey(name: 'base_value')
-  final double baseValue;
+  @JsonKey(name: 'baseline_avg_plaque_percent')
+  final double baselineAvgPlaquePercent;
   @override
-  @JsonKey(name: 'count')
-  final int count;
+  @JsonKey(name: 'record_count')
+  final int recordCount;
   @override
-  @JsonKey(name: 'base_count')
-  final int baseCount;
+  @JsonKey(name: 'baseline_record_count')
+  final int baselineRecordCount;
 
   @override
   String toString() {
-    return 'BrushingStatsData(timeGroup: $timeGroup, value: $value, baseValue: $baseValue, count: $count, baseCount: $baseCount)';
+    return 'BrushingStatsData(time: $time, avgPlaquePercent: $avgPlaquePercent, baselineAvgPlaquePercent: $baselineAvgPlaquePercent, recordCount: $recordCount, baselineRecordCount: $baselineRecordCount)';
   }
 
   @override
@@ -200,20 +204,22 @@ class _$BrushingStatsDataImpl implements _BrushingStatsData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BrushingStatsDataImpl &&
-            (identical(other.timeGroup, timeGroup) ||
-                other.timeGroup == timeGroup) &&
-            (identical(other.value, value) || other.value == value) &&
-            (identical(other.baseValue, baseValue) ||
-                other.baseValue == baseValue) &&
-            (identical(other.count, count) || other.count == count) &&
-            (identical(other.baseCount, baseCount) ||
-                other.baseCount == baseCount));
+            (identical(other.time, time) || other.time == time) &&
+            (identical(other.avgPlaquePercent, avgPlaquePercent) ||
+                other.avgPlaquePercent == avgPlaquePercent) &&
+            (identical(
+                    other.baselineAvgPlaquePercent, baselineAvgPlaquePercent) ||
+                other.baselineAvgPlaquePercent == baselineAvgPlaquePercent) &&
+            (identical(other.recordCount, recordCount) ||
+                other.recordCount == recordCount) &&
+            (identical(other.baselineRecordCount, baselineRecordCount) ||
+                other.baselineRecordCount == baselineRecordCount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, timeGroup, value, baseValue, count, baseCount);
+  int get hashCode => Object.hash(runtimeType, time, avgPlaquePercent,
+      baselineAvgPlaquePercent, recordCount, baselineRecordCount);
 
   /// Create a copy of BrushingStatsData
   /// with the given fields replaced by the non-null parameter values.
@@ -234,31 +240,33 @@ class _$BrushingStatsDataImpl implements _BrushingStatsData {
 
 abstract class _BrushingStatsData implements BrushingStatsData {
   const factory _BrushingStatsData(
-          {@JsonKey(name: 'time_group') required final DateTime timeGroup,
-          @JsonKey(name: 'value') required final double value,
-          @JsonKey(name: 'base_value') required final double baseValue,
-          @JsonKey(name: 'count') required final int count,
-          @JsonKey(name: 'base_count') required final int baseCount}) =
-      _$BrushingStatsDataImpl;
+      {@JsonKey(name: 'time') required final DateTime time,
+      @JsonKey(name: 'avg_plaque_percent')
+      required final double avgPlaquePercent,
+      @JsonKey(name: 'baseline_avg_plaque_percent')
+      required final double baselineAvgPlaquePercent,
+      @JsonKey(name: 'record_count') required final int recordCount,
+      @JsonKey(name: 'baseline_record_count')
+      required final int baselineRecordCount}) = _$BrushingStatsDataImpl;
 
   factory _BrushingStatsData.fromJson(Map<String, dynamic> json) =
       _$BrushingStatsDataImpl.fromJson;
 
   @override
-  @JsonKey(name: 'time_group')
-  DateTime get timeGroup;
+  @JsonKey(name: 'time')
+  DateTime get time;
   @override
-  @JsonKey(name: 'value')
-  double get value;
+  @JsonKey(name: 'avg_plaque_percent')
+  double get avgPlaquePercent;
   @override
-  @JsonKey(name: 'base_value')
-  double get baseValue;
+  @JsonKey(name: 'baseline_avg_plaque_percent')
+  double get baselineAvgPlaquePercent;
   @override
-  @JsonKey(name: 'count')
-  int get count;
+  @JsonKey(name: 'record_count')
+  int get recordCount;
   @override
-  @JsonKey(name: 'base_count')
-  int get baseCount;
+  @JsonKey(name: 'baseline_record_count')
+  int get baselineRecordCount;
 
   /// Create a copy of BrushingStatsData
   /// with the given fields replaced by the non-null parameter values.

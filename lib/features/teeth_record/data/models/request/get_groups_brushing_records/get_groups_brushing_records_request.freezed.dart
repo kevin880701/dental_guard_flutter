@@ -27,6 +27,8 @@ mixin _$GetGroupsBrushingRecordsRequest {
   String get startDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'end_date')
   String get endDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'time_zone')
+  String get timeZone => throw _privateConstructorUsedError;
 
   /// Serializes this GetGroupsBrushingRecordsRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,7 +51,8 @@ abstract class $GetGroupsBrushingRecordsRequestCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'group_ids') List<String> groupIds,
       @JsonKey(name: 'start_date') String startDate,
-      @JsonKey(name: 'end_date') String endDate});
+      @JsonKey(name: 'end_date') String endDate,
+      @JsonKey(name: 'time_zone') String timeZone});
 }
 
 /// @nodoc
@@ -71,6 +74,7 @@ class _$GetGroupsBrushingRecordsRequestCopyWithImpl<$Res,
     Object? groupIds = null,
     Object? startDate = null,
     Object? endDate = null,
+    Object? timeZone = null,
   }) {
     return _then(_value.copyWith(
       groupIds: null == groupIds
@@ -84,6 +88,10 @@ class _$GetGroupsBrushingRecordsRequestCopyWithImpl<$Res,
       endDate: null == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      timeZone: null == timeZone
+          ? _value.timeZone
+          : timeZone // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -101,7 +109,8 @@ abstract class _$$GetGroupsBrushingRecordsRequestImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'group_ids') List<String> groupIds,
       @JsonKey(name: 'start_date') String startDate,
-      @JsonKey(name: 'end_date') String endDate});
+      @JsonKey(name: 'end_date') String endDate,
+      @JsonKey(name: 'time_zone') String timeZone});
 }
 
 /// @nodoc
@@ -122,6 +131,7 @@ class __$$GetGroupsBrushingRecordsRequestImplCopyWithImpl<$Res>
     Object? groupIds = null,
     Object? startDate = null,
     Object? endDate = null,
+    Object? timeZone = null,
   }) {
     return _then(_$GetGroupsBrushingRecordsRequestImpl(
       groupIds: null == groupIds
@@ -136,6 +146,10 @@ class __$$GetGroupsBrushingRecordsRequestImplCopyWithImpl<$Res>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as String,
+      timeZone: null == timeZone
+          ? _value.timeZone
+          : timeZone // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -147,7 +161,8 @@ class _$GetGroupsBrushingRecordsRequestImpl
   const _$GetGroupsBrushingRecordsRequestImpl(
       {@JsonKey(name: 'group_ids') required final List<String> groupIds,
       @JsonKey(name: 'start_date') required this.startDate,
-      @JsonKey(name: 'end_date') required this.endDate})
+      @JsonKey(name: 'end_date') required this.endDate,
+      @JsonKey(name: 'time_zone') required this.timeZone})
       : _groupIds = groupIds;
 
   factory _$GetGroupsBrushingRecordsRequestImpl.fromJson(
@@ -169,10 +184,13 @@ class _$GetGroupsBrushingRecordsRequestImpl
   @override
   @JsonKey(name: 'end_date')
   final String endDate;
+  @override
+  @JsonKey(name: 'time_zone')
+  final String timeZone;
 
   @override
   String toString() {
-    return 'GetGroupsBrushingRecordsRequest(groupIds: $groupIds, startDate: $startDate, endDate: $endDate)';
+    return 'GetGroupsBrushingRecordsRequest(groupIds: $groupIds, startDate: $startDate, endDate: $endDate, timeZone: $timeZone)';
   }
 
   @override
@@ -183,13 +201,19 @@ class _$GetGroupsBrushingRecordsRequestImpl
             const DeepCollectionEquality().equals(other._groupIds, _groupIds) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate));
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.timeZone, timeZone) ||
+                other.timeZone == timeZone));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_groupIds), startDate, endDate);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_groupIds),
+      startDate,
+      endDate,
+      timeZone);
 
   /// Create a copy of GetGroupsBrushingRecordsRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -214,7 +238,8 @@ abstract class _GetGroupsBrushingRecordsRequest
   const factory _GetGroupsBrushingRecordsRequest(
           {@JsonKey(name: 'group_ids') required final List<String> groupIds,
           @JsonKey(name: 'start_date') required final String startDate,
-          @JsonKey(name: 'end_date') required final String endDate}) =
+          @JsonKey(name: 'end_date') required final String endDate,
+          @JsonKey(name: 'time_zone') required final String timeZone}) =
       _$GetGroupsBrushingRecordsRequestImpl;
 
   factory _GetGroupsBrushingRecordsRequest.fromJson(Map<String, dynamic> json) =
@@ -229,6 +254,9 @@ abstract class _GetGroupsBrushingRecordsRequest
   @override
   @JsonKey(name: 'end_date')
   String get endDate;
+  @override
+  @JsonKey(name: 'time_zone')
+  String get timeZone;
 
   /// Create a copy of GetGroupsBrushingRecordsRequest
   /// with the given fields replaced by the non-null parameter values.

@@ -11,8 +11,9 @@ class GetUserBrushingStatsUseCase {
     required String userId,
     required String startDate,
     required String endDate,
-    required int timeSpace,
+    required String timeSpace,
+    required String timeZone
   }) {
-    return repository.getUserBrushingStats(GetUserBrushingStatsRequest(userId: userId, startDate: startDate, endDate: endDate, timeSpace: timeSpace));
+    return repository.getUserBrushingStats(GetUserBrushingStatsRequest(userId: userId, startDate: startDate, endDate: endDate, timeSpace: timeSpace, timeZone: timeZone));
   }
 }

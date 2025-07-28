@@ -217,7 +217,7 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
       monthFormat: 'MM',
       onSelectionChanged: (details) {
         final DateTime time = details.value;
-        _updateTime(time, ChartTimeStatus.day);
+        _updateTime(time, ChartTimeStatus.hour);
       },
       headerStyle: DateRangePickerHeaderStyle(
         textAlign: TextAlign.center,
@@ -312,7 +312,7 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
               onTap: () {
                 final selectedMonth = index + 1;
                 final time = DateTime(viewMonthSelectorYear, selectedMonth, 1);
-                _updateTime(time, ChartTimeStatus.month);
+                _updateTime(time, ChartTimeStatus.day);
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -400,7 +400,7 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
                 onTap: () {
                   final year = int.parse(yearList[index]);
                   final time = DateTime(year, 1, 1);
-                  _updateTime(time, ChartTimeStatus.year);
+                  _updateTime(time, ChartTimeStatus.month);
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -464,13 +464,13 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
 
 int getDateSwitcherIndex(ChartTimeStatus status) {
   switch (status) {
-    case ChartTimeStatus.day:
+    case ChartTimeStatus.hour:
       return 0;
-    case ChartTimeStatus.month:
+    case ChartTimeStatus.day:
       return 1;
-    case ChartTimeStatus.year:
+    case ChartTimeStatus.month:
       return 2;
     default:
-      return 0; // 預設用 day
+      return 0;
   }
 }
