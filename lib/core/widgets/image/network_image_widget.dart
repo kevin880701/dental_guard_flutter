@@ -78,9 +78,9 @@ class NetworkImageWidget extends StatelessWidget {
             width: width,
             height: height,
             alignment: Alignment.center,
-            child: Icon(
+            child: const Icon(
               Icons.image_not_supported,
-              size: width ?? 24.0,
+              size: 24.0,
               color: Colors.grey,
             ),
           );
@@ -89,8 +89,8 @@ class NetworkImageWidget extends StatelessWidget {
           if (loadingProgress == null) return child;
           return Center(
             child: SizedBox(
-              width: width ?? 24.0,
-              height: height ?? 24.0,
+              width: 24.0,
+              height: 24.0,
               child: CircularProgressIndicator(
                 strokeWidth: 2.0,
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
