@@ -11,6 +11,7 @@ class GetUserBrushingStatsRequest with _$GetUserBrushingStatsRequest {
     @JsonKey(name: 'end_date') required String endDate,
     @JsonKey(name: 'time_space') required String timeSpace,
     @JsonKey(name: 'time_zone') required String timeZone,
+    @JsonKey(name: 'need_base_line_data') @Default(true)  bool needBaseLineData,
   }) = _GetUserBrushingStatsRequest;
 
   factory GetUserBrushingStatsRequest.fromJson(Map<String, dynamic> json) =>

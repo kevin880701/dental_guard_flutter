@@ -14,6 +14,7 @@ _$GetGroupBrushingStatsRequestImpl _$$GetGroupBrushingStatsRequestImplFromJson(
       endDate: json['end_date'] as String,
       timeSpace: json['time_space'] as String,
       timeZone: json['time_zone'] as String,
+      needBaseLineData: json['need_base_line_data'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$$GetGroupBrushingStatsRequestImplToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$GetGroupBrushingStatsRequestImplToJson(
       'end_date': instance.endDate,
       'time_space': instance.timeSpace,
       'time_zone': instance.timeZone,
+      'need_base_line_data': instance.needBaseLineData,
     };

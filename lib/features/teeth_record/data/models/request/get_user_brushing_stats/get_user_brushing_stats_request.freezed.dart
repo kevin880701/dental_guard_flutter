@@ -31,6 +31,8 @@ mixin _$GetUserBrushingStatsRequest {
   String get timeSpace => throw _privateConstructorUsedError;
   @JsonKey(name: 'time_zone')
   String get timeZone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'need_base_line_data')
+  bool get needBaseLineData => throw _privateConstructorUsedError;
 
   /// Serializes this GetUserBrushingStatsRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -55,7 +57,8 @@ abstract class $GetUserBrushingStatsRequestCopyWith<$Res> {
       @JsonKey(name: 'start_date') String startDate,
       @JsonKey(name: 'end_date') String endDate,
       @JsonKey(name: 'time_space') String timeSpace,
-      @JsonKey(name: 'time_zone') String timeZone});
+      @JsonKey(name: 'time_zone') String timeZone,
+      @JsonKey(name: 'need_base_line_data') bool needBaseLineData});
 }
 
 /// @nodoc
@@ -79,6 +82,7 @@ class _$GetUserBrushingStatsRequestCopyWithImpl<$Res,
     Object? endDate = null,
     Object? timeSpace = null,
     Object? timeZone = null,
+    Object? needBaseLineData = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -101,6 +105,10 @@ class _$GetUserBrushingStatsRequestCopyWithImpl<$Res,
           ? _value.timeZone
           : timeZone // ignore: cast_nullable_to_non_nullable
               as String,
+      needBaseLineData: null == needBaseLineData
+          ? _value.needBaseLineData
+          : needBaseLineData // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -119,7 +127,8 @@ abstract class _$$GetUserBrushingStatsRequestImplCopyWith<$Res>
       @JsonKey(name: 'start_date') String startDate,
       @JsonKey(name: 'end_date') String endDate,
       @JsonKey(name: 'time_space') String timeSpace,
-      @JsonKey(name: 'time_zone') String timeZone});
+      @JsonKey(name: 'time_zone') String timeZone,
+      @JsonKey(name: 'need_base_line_data') bool needBaseLineData});
 }
 
 /// @nodoc
@@ -142,6 +151,7 @@ class __$$GetUserBrushingStatsRequestImplCopyWithImpl<$Res>
     Object? endDate = null,
     Object? timeSpace = null,
     Object? timeZone = null,
+    Object? needBaseLineData = null,
   }) {
     return _then(_$GetUserBrushingStatsRequestImpl(
       userId: null == userId
@@ -164,6 +174,10 @@ class __$$GetUserBrushingStatsRequestImplCopyWithImpl<$Res>
           ? _value.timeZone
           : timeZone // ignore: cast_nullable_to_non_nullable
               as String,
+      needBaseLineData: null == needBaseLineData
+          ? _value.needBaseLineData
+          : needBaseLineData // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -177,7 +191,8 @@ class _$GetUserBrushingStatsRequestImpl
       @JsonKey(name: 'start_date') required this.startDate,
       @JsonKey(name: 'end_date') required this.endDate,
       @JsonKey(name: 'time_space') required this.timeSpace,
-      @JsonKey(name: 'time_zone') required this.timeZone});
+      @JsonKey(name: 'time_zone') required this.timeZone,
+      @JsonKey(name: 'need_base_line_data') this.needBaseLineData = true});
 
   factory _$GetUserBrushingStatsRequestImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -198,10 +213,13 @@ class _$GetUserBrushingStatsRequestImpl
   @override
   @JsonKey(name: 'time_zone')
   final String timeZone;
+  @override
+  @JsonKey(name: 'need_base_line_data')
+  final bool needBaseLineData;
 
   @override
   String toString() {
-    return 'GetUserBrushingStatsRequest(userId: $userId, startDate: $startDate, endDate: $endDate, timeSpace: $timeSpace, timeZone: $timeZone)';
+    return 'GetUserBrushingStatsRequest(userId: $userId, startDate: $startDate, endDate: $endDate, timeSpace: $timeSpace, timeZone: $timeZone, needBaseLineData: $needBaseLineData)';
   }
 
   @override
@@ -216,13 +234,15 @@ class _$GetUserBrushingStatsRequestImpl
             (identical(other.timeSpace, timeSpace) ||
                 other.timeSpace == timeSpace) &&
             (identical(other.timeZone, timeZone) ||
-                other.timeZone == timeZone));
+                other.timeZone == timeZone) &&
+            (identical(other.needBaseLineData, needBaseLineData) ||
+                other.needBaseLineData == needBaseLineData));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, userId, startDate, endDate, timeSpace, timeZone);
+  int get hashCode => Object.hash(runtimeType, userId, startDate, endDate,
+      timeSpace, timeZone, needBaseLineData);
 
   /// Create a copy of GetUserBrushingStatsRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -248,7 +268,8 @@ abstract class _GetUserBrushingStatsRequest
           @JsonKey(name: 'start_date') required final String startDate,
           @JsonKey(name: 'end_date') required final String endDate,
           @JsonKey(name: 'time_space') required final String timeSpace,
-          @JsonKey(name: 'time_zone') required final String timeZone}) =
+          @JsonKey(name: 'time_zone') required final String timeZone,
+          @JsonKey(name: 'need_base_line_data') final bool needBaseLineData}) =
       _$GetUserBrushingStatsRequestImpl;
 
   factory _GetUserBrushingStatsRequest.fromJson(Map<String, dynamic> json) =
@@ -269,6 +290,9 @@ abstract class _GetUserBrushingStatsRequest
   @override
   @JsonKey(name: 'time_zone')
   String get timeZone;
+  @override
+  @JsonKey(name: 'need_base_line_data')
+  bool get needBaseLineData;
 
   /// Create a copy of GetUserBrushingStatsRequest
   /// with the given fields replaced by the non-null parameter values.
