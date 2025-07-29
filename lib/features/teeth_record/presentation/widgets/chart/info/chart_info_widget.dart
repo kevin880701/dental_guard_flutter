@@ -28,6 +28,8 @@ class ChartInfoWidget extends StatelessWidget {
         return "本年平均";
       case ChartTimeStatus.minute:
         return "本小時平均";
+      case ChartTimeStatus.semester:
+        return "本學期平均";
       case ChartTimeStatus.quarter:
       case ChartTimeStatus.quarterHour:
       default:
@@ -45,6 +47,8 @@ class ChartInfoWidget extends StatelessWidget {
         return "去年平均";
       case ChartTimeStatus.minute:
         return "上個小時平均";
+      case ChartTimeStatus.semester:
+        return "去年學期平均";
       case ChartTimeStatus.quarter:
       case ChartTimeStatus.quarterHour:
       default:

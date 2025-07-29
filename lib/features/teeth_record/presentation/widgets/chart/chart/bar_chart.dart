@@ -38,6 +38,8 @@ class _BarChartState extends State<BarChart> {
         return d.time.day.toString().padLeft(2, '0'); // 日
       case ChartTimeStatus.month:
         return d.time.month.toString().padLeft(2, '0'); // 月
+      case ChartTimeStatus.semester:
+        return d.time.month.toString().padLeft(2, '0'); // 月
       case ChartTimeStatus.quarter:
       case ChartTimeStatus.quarterHour:
       default:
@@ -88,6 +90,7 @@ class _BarChartState extends State<BarChart> {
                     shouldShow = (idx % 5 == 0 && idx <= 25) || idx == lastIdx;
                     break;
                   case ChartTimeStatus.month:
+                  case ChartTimeStatus.semester:
                     shouldShow = true;
                     break;
                   case ChartTimeStatus.quarter:
@@ -126,7 +129,7 @@ class _BarChartState extends State<BarChart> {
                         : AppColors.disableGrey;
                   }
                 },
-                width: 0.4,
+                width: (widget.chartTimeStatus == ChartTimeStatus.semester)?0.1:(widget.chartTimeStatus == ChartTimeStatus.month)?0.2:0.4,
                 borderRadius: BorderRadius.circular(4),
                 onPointTap: (ChartPointDetails details) {
                   setState(() {

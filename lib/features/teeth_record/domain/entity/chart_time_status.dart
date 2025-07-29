@@ -7,6 +7,7 @@ enum ChartTimeStatus {
   day,
   month,
   quarter,
+  semester,
 }
 
 extension ChartTimeStatusExtension on ChartTimeStatus {
@@ -92,6 +93,23 @@ extension ChartTimeStatusExtension on ChartTimeStatus {
     // 當小時的00:00 ~ 59:59
       start = DateTime(selectTime.year, selectTime.month, selectTime.day, selectTime.hour, 0, 0);
       end = DateTime(selectTime.year, selectTime.month, selectTime.day, selectTime.hour, 59, 59);
+      break;
+    case ChartTimeStatus.semester:
+    // 判斷 selectTime 的月份來決定是上學期還是下學期
+      if (selectTime.month >= 8 || selectTime.month <= 1) {
+        // 上學期 (8月 ~ 次年1月)
+        int startYear = selectTime.year;
+        // 如果 selectTime 是當年的 1 月，則視為前一學年度的上學期
+        if (selectTime.month <= 1) {
+          startYear = selectTime.year - 1;
+        }
+        start = DateTime(startYear, 8, 1, 8, 0, 0); // 上學期從8月1日開始
+        end = DateTime(startYear + 1, 1, 31, 23, 59, 59); // 上學期到次年1月31日結束
+      } else {
+        // 下學期 (2月 ~ 7月)
+        start = DateTime(selectTime.year, 2, 1, 8, 0, 0); // 下學期從2月1日開始
+        end = DateTime(selectTime.year, 7, 31, 23, 59, 59); // 下學期到7月31日結束
+      }
       break;
     case ChartTimeStatus.quarterHour:
     case ChartTimeStatus.quarter:

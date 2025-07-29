@@ -43,6 +43,8 @@ class _SmoothLineChartState extends State<SmoothLineChart> {
         return t.day.toString().padLeft(2, '0');
       case ChartTimeStatus.month:
         return t.month.toString().padLeft(2, '0');
+      case ChartTimeStatus.semester:
+        return t.month.toString().padLeft(2, '0');
       case ChartTimeStatus.quarter:
       case ChartTimeStatus.quarterHour:
       default:

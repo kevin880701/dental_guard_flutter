@@ -33,7 +33,7 @@ class PickerDateDialog extends StatefulWidget {
 }
 
 class _PickerDateDialogState extends State<PickerDateDialog> {
-  final List<String> dateOptions = ["日", "月", "年"];
+  final List<String> dateOptions = ["日", "月", "年", "學期"];
   final List<String> monthList = [
     '1月',
     '2月',
@@ -74,6 +74,11 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
   late int monthSelectorIndex;
   late int viewMonthSelectorYear;
 
+  // 學期相關變數
+  late List<String> semesterList;
+  late int semesterSelectorIndex;
+  late int currentSemesterSelectorIndex;
+
   final DateRangePickerController _controller = DateRangePickerController();
 
   @override
@@ -92,9 +97,57 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
     monthSelectorIndex = selectedTime.month - 1;
     viewMonthSelectorYear = selectedTime.year;
 
+    // 建立 semesterList 並設定預設值
+    _initSemesterList();
+
     _controller.selectedDate = selectedTime;
 
     super.initState();
+  }
+
+  void _initSemesterList() {
+    semesterList = [];
+    int currentYear = DateTime.now().year;
+    int currentTaiwanYear = currentYear - 1911; // 轉換為民國年
+
+    // 顯示從現在開始前十年的學期
+    for (int i = 0; i < 11; i++) {
+      int taiwanYear = currentTaiwanYear - 10 + i;
+      semesterList.add("${taiwanYear}上學期");
+      semesterList.add("${taiwanYear}下學期");
+    }
+
+    // 計算當前時間對應的學期索引
+    int selectedTaiwanYear = selectedTime.year - 1911;
+    String selectedSemesterString;
+    if (selectedTime.month >= 8 || selectedTime.month <= 1) { // 上學期 (8月到1月)
+      selectedSemesterString = "${selectedTaiwanYear}上學期";
+      if (selectedTime.month <= 1) { // 如果是1月，則歸為前一年的上學期
+        selectedSemesterString = "${selectedTaiwanYear - 1}上學期";
+      }
+    } else { // 下學期 (2月到7月)
+      selectedSemesterString = "${selectedTaiwanYear}下學期";
+    }
+    semesterSelectorIndex = semesterList.indexOf(selectedSemesterString);
+    if (semesterSelectorIndex == -1) { // 如果找不到，可能是初始時間不在範圍內，預設為當前學期
+      semesterSelectorIndex = _getCurrentSemesterIndex();
+    }
+    currentSemesterSelectorIndex = _getCurrentSemesterIndex();
+  }
+
+  int _getCurrentSemesterIndex() {
+    int currentYear = DateTime.now().year;
+    int currentTaiwanYear = currentYear - 1911;
+    String currentSemesterString;
+    if (DateTime.now().month >= 8 || DateTime.now().month <= 1) {
+      currentSemesterString = "${currentTaiwanYear}上學期";
+      if (DateTime.now().month <= 1) {
+        currentSemesterString = "${currentTaiwanYear - 1}上學期";
+      }
+    } else {
+      currentSemesterString = "${currentTaiwanYear}下學期";
+    }
+    return semesterList.indexOf(currentSemesterString);
   }
 
   void _updateTime(DateTime time, ChartTimeStatus status) {
@@ -152,6 +205,11 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
                         visible: dateSwitcherIndex == 2,
                         maintainState: false,
                         child: yearSelectorWidget(),
+                      ),
+                      Visibility(
+                        visible: dateSwitcherIndex == 3,
+                        maintainState: false,
+                        child: semesterSelectorWidget(),
                       ),
                     ],
                   ),
@@ -460,7 +518,129 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
       ],
     );
   }
+
+  Widget semesterSelectorWidget() {
+    ScrollController _semesterScrollController = ScrollController();
+
+    void scrollToSelectedSemester() {
+      if (_semesterScrollController.hasClients) {
+        // 確保選中的學期在可視範圍內，並盡量居中
+        // 這裡的 itemWidth 需要根據實際學期文字長度調整
+        final double itemWidth = 120; // 估計一個學期項目的寬度，可能需要微調
+        final double offset = (semesterSelectorIndex != -1)
+            ? (semesterSelectorIndex * itemWidth) - (itemWidth * 2)
+            : ((semesterList.length - 1) * itemWidth) - (itemWidth * 2);
+
+        _semesterScrollController.animateTo(
+          offset.clamp(0.0, _semesterScrollController.position.maxScrollExtent), // 限制在有效範圍內
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      }
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scrollToSelectedSemester();
+    });
+
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
+          height: 36,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: semesterList.length,
+            controller: _semesterScrollController,
+            itemBuilder: (BuildContext context, int index) {
+              bool isSelected = semesterSelectorIndex == index;
+              bool isCurrentSemester = currentSemesterSelectorIndex == index;
+              return GestureDetector(
+                onTap: () {
+                  final String semesterText = semesterList[index];
+                  // 解析學期字串，例如 "101上學期"
+                  RegExp regExp = RegExp(r'(\d+)(上學期|下學期)');
+                  Match? match = regExp.firstMatch(semesterText);
+                  if (match != null) {
+                    int taiwanYear = int.parse(match.group(1)!);
+                    String term = match.group(2)!;
+                    int westernYear = taiwanYear + 1911;
+
+                    DateTime selectedSemesterStart;
+                    if (term == "上學期") {
+                      selectedSemesterStart = DateTime(westernYear, 8, 1); // 上學期從8月開始
+                    } else {
+                      selectedSemesterStart = DateTime(westernYear, 2, 1); // 下學期從2月開始
+                    }
+                    _updateTime(selectedSemesterStart, ChartTimeStatus.semester);
+                  }
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(24)),
+                    color: isSelected
+                        ? AppColors.blue
+                        : isCurrentSemester
+                        ? AppColors.milkBlue
+                        : AppColors.white,
+                  ),
+                  child: AppText(
+                    text: semesterList[index],
+                    textStyle: bodyMedium,
+                    color: isSelected
+                        ? AppColors.white
+                        : isCurrentSemester
+                        ? AppColors.blue
+                        : AppColors.primaryBlack,
+                  ),
+                ),
+              );
+            },
+            separatorBuilder: (context, index) => const SizedBox(width: 12),
+          ),
+        ),
+        const SizedBox(height: 24),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              // 當點擊回到現在時，更新 selectedTime 並重新初始化學期列表，以更新 currentSemesterSelectorIndex 和 semesterSelectorIndex
+              selectedTime = DateTime.now();
+              _initSemesterList(); // 確保重新計算當前學期索引和選中索引
+            });
+            if (_semesterScrollController.hasClients) {
+              // 滾動到當前學期
+              final double itemWidth = 120; // 估計一個學期項目的寬度，可能需要微調
+              final double offset = (currentSemesterSelectorIndex * itemWidth) - (itemWidth * 2);
+              _semesterScrollController.animateTo(
+                offset.clamp(0.0, _semesterScrollController.position.maxScrollExtent),
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+              );
+            }
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AppIcon(
+                  icon: AppImages.dateIcon, size: 24, color: AppColors.blue),
+              const SizedBox(width: 4),
+              AppText(
+                  text: AppStrings.returnToCurrentTime,
+                  textStyle: bodyMedium,
+                  color: AppColors.blue)
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+      ],
+    );
+  }
 }
+
+
 
 int getDateSwitcherIndex(ChartTimeStatus status) {
   switch (status) {
@@ -470,6 +650,8 @@ int getDateSwitcherIndex(ChartTimeStatus status) {
       return 1;
     case ChartTimeStatus.month:
       return 2;
+    case ChartTimeStatus.semester:
+      return 3;
     default:
       return 0;
   }

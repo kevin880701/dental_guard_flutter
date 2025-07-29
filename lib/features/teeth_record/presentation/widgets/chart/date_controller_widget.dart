@@ -107,6 +107,9 @@ class DateControllerWidget extends StatelessWidget {
                 case ChartTimeStatus.day:
                   newDate = addMonths(selectTime, -1);
                   break;
+                case ChartTimeStatus.semester:
+                  newDate = navigateSemester(selectTime, -1); // 調用新的學期導航函式
+                  break;
                 case ChartTimeStatus.month:
                   newDate = addYears(selectTime, -1);
                   break;
@@ -142,6 +145,9 @@ class DateControllerWidget extends StatelessWidget {
                   break;
                 case ChartTimeStatus.day:
                   newDate = addMonths(selectTime, 1);
+                  break;
+                case ChartTimeStatus.semester:
+                  newDate = navigateSemester(selectTime, 1);
                   break;
                 case ChartTimeStatus.month:
                   newDate = addYears(selectTime, 1);
@@ -189,6 +195,41 @@ DateTime addYears(DateTime date, int years) {
   return DateTime(year, month, day);
 }
 
+DateTime navigateSemester(DateTime selectTime, int direction) {
+  int currentYear = selectTime.year;
+  int currentMonth = selectTime.month;
+
+  // 判斷當前 selectTime 所在的學期
+  // 如果是 8月-1月，是上學期 (semester = 1)
+  // 如果是 2月-7月，是下學期 (semester = 2)
+  int currentSemester;
+  if (currentMonth >= 8 || currentMonth <= 1) {
+    currentSemester = 1; // 上學期
+  } else {
+    currentSemester = 2; // 下學期
+  }
+
+  if (direction == 1) {
+    // 往後一個學期
+    if (currentSemester == 1) {
+      // 當前是上學期 (8月-1月)，下一學期是同年的下學期 (從2月開始)
+      return DateTime(currentYear, 2, 1);
+    } else {
+      // 當前是下學期 (2月-7月)，下一學期是下一個學年的上學期 (從次年8月開始)
+      return DateTime(currentYear + 1, 8, 1);
+    }
+  } else {
+    // 往前一個學期 (direction == -1)
+    if (currentSemester == 1) {
+      // 當前是上學期 (8月-1月)，上一學期是前一個學年的下學期 (從前一年2月開始)
+      return DateTime(currentYear - 1, 2, 1);
+    } else {
+      // 當前是下學期 (2月-7月)，上一學期是同年的上學期 (從同一年8月開始)
+      return DateTime(currentYear, 8, 1);
+    }
+  }
+}
+
 String formatDateByStatus(DateTime date, ChartTimeStatus status) {
   switch (status) {
     case ChartTimeStatus.hour:
@@ -199,6 +240,23 @@ String formatDateByStatus(DateTime date, ChartTimeStatus status) {
       return DateFormat('yyyy').format(date);
     case ChartTimeStatus.minute:
       return DateFormat('yyyy-MM-dd HH:00').format(date);
+    case ChartTimeStatus.semester:
+    // 計算民國年
+      int taiwanYear = date.year - 1911;
+      String semesterText;
+      if (date.month >= 8 || date.month <= 1) {
+        // 8月到次年1月為上學期
+        // 如果當前日期是1月，但它實際上代表的是前一學年的上學期
+        if (date.month <= 1) {
+          semesterText = '${taiwanYear - 1}上學期';
+        } else {
+          semesterText = '${taiwanYear}上學期';
+        }
+      } else {
+        // 2月到7月為下學期
+        semesterText = '${taiwanYear}下學期';
+      }
+      return semesterText;
     case ChartTimeStatus.quarter:
     case ChartTimeStatus.quarterHour:
     default:

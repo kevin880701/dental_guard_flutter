@@ -71,12 +71,19 @@ final groupBrushingStatsProvider = FutureProvider.autoDispose.family<
   final dateRange = getChartDateRange(param.selectTime, param.status);
   final String timeZone = await FlutterTimezone.getLocalTimezone();
 
+  String timeSpaceParam;
+  if (param.status == ChartTimeStatus.semester) {
+    timeSpaceParam = ChartTimeStatus.month.name; // 如果是 semester，則傳入 month
+  } else {
+    timeSpaceParam = param.status.name;
+  }
+
   final result = await useCase(
     GetGroupBrushingStatsRequest(
       groupId: param.groupId,
       startDate: dateRange.start,
       endDate: dateRange.end,
-      timeSpace: param.status.name,
+      timeSpace: timeSpaceParam,
       timeZone: timeZone,
     ),
   );
@@ -104,12 +111,18 @@ final memberBrushingStatsProvider = FutureProvider.autoDispose.family<
 
   final dateRange = getChartDateRange(param.selectTime, param.status);
   final String timeZone = await FlutterTimezone.getLocalTimezone();
+  String timeSpaceParam;
+  if (param.status == ChartTimeStatus.semester) {
+    timeSpaceParam = ChartTimeStatus.month.name; // 如果是 semester，則傳入 month
+  } else {
+    timeSpaceParam = param.status.name;
+  }
 
   final result = await useCase(
     userId: param.userId,
     startDate: dateRange.start,
     endDate: dateRange.end,
-    timeSpace: param.status.name,
+    timeSpace: timeSpaceParam,
       timeZone: timeZone,
   );
 
