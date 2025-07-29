@@ -32,11 +32,18 @@ class LaunchScreen extends HookConsumerWidget {
             await ref.read(versionInfoProvider.notifier).loadVersionInfo();
         if (!success) {
           // 取得版本失敗
-          await showErrorDialog(
+          showDefaultDialog(
             context,
+            canPop: false,
             title: AppStrings.getVersionFailed,
-            content: AppStrings.serverVersionUnavailable,
-            onPressed: () {
+            content: AppStrings.pleaseUpdateToContinue,
+            onRightButtonPressed: () async {
+              await openStore();
+              exitApp();
+            },
+            leftButtonText: "結束",
+            onLeftButtonPressed: () {
+              context.router.pop(false);
               exitApp();
             },
           );
