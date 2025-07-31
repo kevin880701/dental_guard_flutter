@@ -12,6 +12,7 @@ class AppImages {
   static const googleIcon = '${assetsIcons}ic_google.png';
   static const lineIcon = '${assetsIcons}ic_line.png';
   static const dateIcon = '${assetsIcons}ic_date.svg';
+  static const filterIcon = '${assetsIcons}ic_filter.svg';
 
   static const informationIcon = '${assetsImages}ic_information.png';
   static const addIcon = '${assetsImages}ic_add.png';

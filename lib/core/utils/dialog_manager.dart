@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../features/teeth_record/domain/entity/chart_time_status.dart';
+import '../../features/teeth_record/domain/entity/rank_sort_criteria.dart';
 import '../../features/teeth_record/domain/entity/report_data.dart';
 import '../constants/app_resources.dart';
 import '../widgets/dialog/window/add_member_dialog.dart';
 import '../widgets/dialog/window/bottom_edit_dialog.dart';
 import '../widgets/dialog/window/choose_image_dialog.dart';
+import '../widgets/dialog/window/choose_rank_sort_criteria_dialog.dart';
 import '../widgets/dialog/window/default_dialog.dart';
 import '../widgets/dialog/window/download_report_dialog.dart';
 import '../widgets/dialog/window/edit_member_dialog.dart';
@@ -75,6 +77,22 @@ Future<String?> showBottomEditDialog(
       inputType: inputType,
       isAllowSymbols: isAllowSymbols,
       isAllowEmoji: isAllowEmoji,
+    ),
+    position: DialogPosition.bottom,
+    barrierDismissible: barrierDismissible,
+  );
+}
+
+/// 底部選擇排名依據
+Future<RankSortCriteria?> showChooseRankSortCriteriaDialog(
+    BuildContext context, {
+      required RankSortCriteria currentRankSortCriteria,
+      bool barrierDismissible = true,
+    }) async {
+  return await showDialogBox<RankSortCriteria>(
+    context,
+    child: ChooseRankSortCriteriaDialog(
+      currentRankSortCriteria: currentRankSortCriteria,
     ),
     position: DialogPosition.bottom,
     barrierDismissible: barrierDismissible,

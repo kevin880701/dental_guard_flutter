@@ -33,6 +33,7 @@ class ApiEndPoint {
   static const String createBrushingRecord = '/v1/teeth-record/create';
   static const String groupBrushingStats = '/v1/teeth-record/group/stats';
   static const String groupsBrushingRecords = '/v1/teeth-record/group/search';
+  static const String teethRecordGroupTopUsers = '/v1/teeth-record/group/top-users';
   static const String userBrushingStats = '/v1/teeth-record/user/stats';
   static const String usersBrushingRecords = '/v1/teeth-record/users/search';
 

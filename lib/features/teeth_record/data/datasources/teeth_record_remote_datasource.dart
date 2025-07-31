@@ -4,11 +4,13 @@ import 'package:dental_guard_flutter/core/network/network_interface.dart';
 
 import '../models/request/create_brushing_record/create_brushing_record_request.dart';
 import '../models/request/get_group_brushing_stats/get_group_brushing_stats_request.dart';
+import '../models/request/get_group_top_users/get_group_top_users.dart';
 import '../models/request/get_groups_brushing_records/get_groups_brushing_records_request.dart';
 import '../models/request/get_user_brushing_stats/get_user_brushing_stats_request.dart';
 import '../models/request/users_records_search/users_records_search_request.dart';
 import '../models/response/brushing_record/brushing_record_data.dart';
 import '../models/response/brushing_stats/brushing_stats_data.dart';
+import '../models/response/group_top_user/group_top_user.dart';
 import '../models/response/groups_brushing_records/group_brushing_records_data.dart';
 import '../models/response/users_records_pagination/users_records_pagination.dart';
 
@@ -125,5 +127,22 @@ class TeethRecordRemoteDataSource {
     );
 
     return apiResponse.data;
+  }
+
+  /// 查詢群組內使用者排名
+  Future<List<GroupTopUser>> getGroupTopUsers(GroupTopUsersRequest request) async {
+    final response = await networkInterface.get(
+      url: ApiEndPoint.teethRecordGroupTopUsers,
+      query: request.toJson(),
+    );
+
+    final apiResponse = ApiResponse<List<GroupTopUser>>.fromJson(
+      response.data,
+          (json) => (json as List)
+          .map((item) => GroupTopUser.fromJson(item as Map<String, dynamic>))
+          .toList(),
+    );
+
+    return apiResponse.data ?? [];
   }
 }

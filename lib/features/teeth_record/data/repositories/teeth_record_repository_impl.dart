@@ -2,11 +2,13 @@
 import '../datasources/teeth_record_remote_datasource.dart';
 import '../models/request/create_brushing_record/create_brushing_record_request.dart';
 import '../models/request/get_group_brushing_stats/get_group_brushing_stats_request.dart';
+import '../models/request/get_group_top_users/get_group_top_users.dart';
 import '../models/request/get_groups_brushing_records/get_groups_brushing_records_request.dart';
 import '../models/request/get_user_brushing_stats/get_user_brushing_stats_request.dart';
 import '../models/request/users_records_search/users_records_search_request.dart';
 import '../models/response/brushing_record/brushing_record_data.dart';
 import '../models/response/brushing_stats/brushing_stats_data.dart';
+import '../models/response/group_top_user/group_top_user.dart';
 import '../models/response/groups_brushing_records/group_brushing_records_data.dart';
 import '../models/response/users_records_pagination/users_records_pagination.dart';
 
@@ -28,6 +30,9 @@ abstract class TeethRecordRepository {
 
   /// 查詢多使用者潔牙紀錄
   Future<UsersRecordsPagination?> usersRecordsSearch(UsersRecordsSearchRequest request);
+
+  /// 查詢群組前X名使用者
+  Future<List<GroupTopUser>> getGroupTopUsers(GroupTopUsersRequest request);
 }
 
 class TeethRecordRepositoryImpl implements TeethRecordRepository {
@@ -68,5 +73,10 @@ class TeethRecordRepositoryImpl implements TeethRecordRepository {
   @override
   Future<UsersRecordsPagination?> usersRecordsSearch(UsersRecordsSearchRequest request) async {
     return await remoteDataSource.usersRecordsSearch(request);
+  }
+
+  @override
+  Future<List<GroupTopUser>> getGroupTopUsers(GroupTopUsersRequest request) async {
+    return await remoteDataSource.getGroupTopUsers(request);
   }
 }

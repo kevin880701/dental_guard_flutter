@@ -31,4 +31,5 @@ class AppColors {
 
   static const Color successGreen = Color(0xFF4CAF50);
 
+  static const Color chartPurple = Color(0xFF886CE4);
 }

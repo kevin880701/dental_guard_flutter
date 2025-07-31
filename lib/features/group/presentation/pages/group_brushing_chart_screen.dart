@@ -4,6 +4,7 @@ import 'package:dental_guard_flutter/core/constants/app_resources.dart';
 import 'package:dental_guard_flutter/core/utils/utils.dart';
 import 'package:dental_guard_flutter/core/widgets/button/app_button.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
+import 'package:dental_guard_flutter/features/teeth_record/presentation/widgets/chart/group_rank_bar_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -154,6 +155,10 @@ class GroupBrushingChartScreen extends HookConsumerWidget {
                   title: AppStrings.averageNumberOfUsers,
                   refreshKey: groupMainState.refreshKey
                   ,
+                ),
+                GroupRankBarChart(
+                  groupId: group.id,
+                  refreshKey: groupMainState.refreshKey
                 ),
                 SizedBox(height: 96),
               ],
