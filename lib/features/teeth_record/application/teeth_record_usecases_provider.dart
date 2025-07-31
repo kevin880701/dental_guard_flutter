@@ -13,7 +13,7 @@ import '../domain/usecase/delete_brushing_record_usecase.dart';
 import '../domain/usecase/get_brushing_record_by_id_usecase.dart';
 import '../domain/usecase/get_group_brushing_stats_usecase.dart';
 import '../domain/usecase/get_groups_brushing_records_usecase.dart';
-import '../domain/usecase/get_multi_user_brushing_records_usecase.dart';
+import '../domain/usecase/users_records_search_usecase.dart';
 import '../domain/usecase/get_user_brushing_stats_usecase.dart';
 
 /// Repository Provider
@@ -55,9 +55,9 @@ final getUserBrushingStatsUseCaseProvider = Provider<GetUserBrushingStatsUseCase
   return GetUserBrushingStatsUseCase(repo);
 });
 
-final getMultiUserBrushingRecordsUseCaseProvider = Provider<GetMultiUserBrushingRecordsUseCase>((ref) {
+final getUsersRecordsSearchUseCaseProvider = Provider<UsersRecordsSearchUseCase>((ref) {
   final repo = ref.read(teethRecordRepositoryProvider);
-  return GetMultiUserBrushingRecordsUseCase(repo);
+  return UsersRecordsSearchUseCase(repo);
 });
 
 final groupBrushingStatsProvider = FutureProvider.autoDispose.family<

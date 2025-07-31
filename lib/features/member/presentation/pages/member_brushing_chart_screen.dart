@@ -56,7 +56,7 @@ class MemberBrushingChartScreen extends HookConsumerWidget {
                         required DateTime endTime,
                       }) async {
                         final String timeZone = await FlutterTimezone.getLocalTimezone();
-                        final useCase = ref.read(getMultiUserBrushingRecordsUseCaseProvider);
+                        final useCase = ref.read(getUsersRecordsSearchUseCaseProvider);
                         final result = await useCase(
                           userIds: [state.user!.id],
                           startDate: startTime.toIsoDateTime(),
@@ -66,9 +66,8 @@ class MemberBrushingChartScreen extends HookConsumerWidget {
 
                         final allRecords = <Map<String, dynamic>>[];
 
-                        if (result.isNotEmpty) {
-                          // result 是 List<MultiUserBrushingRecordsData>
-                          for (final data in result) {
+                        if (result != null && result.records != null && result.records!.isNotEmpty) {
+                          for (final data in result.records!) {
                             final userInfo = data.user;
                             for (final record in (data.brushingRecords ?? [])) {
                               final scoreDisplay = (record.analyzeResult.isSuccess == 0)

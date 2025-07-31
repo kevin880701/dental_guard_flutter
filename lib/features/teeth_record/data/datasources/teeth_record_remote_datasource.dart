@@ -5,12 +5,12 @@ import 'package:dental_guard_flutter/core/network/network_interface.dart';
 import '../models/request/create_brushing_record/create_brushing_record_request.dart';
 import '../models/request/get_group_brushing_stats/get_group_brushing_stats_request.dart';
 import '../models/request/get_groups_brushing_records/get_groups_brushing_records_request.dart';
-import '../models/request/get_multi_user_brushing_records/get_multi_user_brushing_records_request.dart';
 import '../models/request/get_user_brushing_stats/get_user_brushing_stats_request.dart';
+import '../models/request/users_records_search/users_records_search_request.dart';
 import '../models/response/brushing_record/brushing_record_data.dart';
 import '../models/response/brushing_stats/brushing_stats_data.dart';
 import '../models/response/groups_brushing_records/group_brushing_records_data.dart';
-import '../models/response/multi_user_brushing_records/multi_user_brushing_records_data.dart';
+import '../models/response/users_records_pagination/users_records_pagination.dart';
 
 
 class TeethRecordRemoteDataSource {
@@ -113,19 +113,17 @@ class TeethRecordRemoteDataSource {
   }
 
   /// 查詢多使用者潔牙紀錄（含分析結果）
-  Future<List<MultiUserBrushingRecordsData>> getMultiUserBrushingRecords(GetMultiUserBrushingRecordsRequest request) async {
+  Future<UsersRecordsPagination?> usersRecordsSearch(UsersRecordsSearchRequest request) async {
     final response = await networkInterface.post(
       url: ApiEndPoint.usersBrushingRecords,
       body: request.toJson(),
     );
 
-    final apiResponse = ApiResponse<List<MultiUserBrushingRecordsData>>.fromJson(
+    final apiResponse = ApiResponse<UsersRecordsPagination?>.fromJson(
       response.data,
-          (json) => (json as List)
-          .map((item) => MultiUserBrushingRecordsData.fromJson(item as Map<String, dynamic>))
-          .toList(),
+          (json) => nullableFromJson(json, UsersRecordsPagination.fromJson),
     );
 
-    return apiResponse.data ?? [];
+    return apiResponse.data;
   }
 }

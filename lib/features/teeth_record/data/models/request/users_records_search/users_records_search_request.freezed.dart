@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'get_multi_user_brushing_records_request.dart';
+part of 'users_records_search_request.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-GetMultiUserBrushingRecordsRequest _$GetMultiUserBrushingRecordsRequestFromJson(
+UsersRecordsSearchRequest _$UsersRecordsSearchRequestFromJson(
     Map<String, dynamic> json) {
-  return _GetMultiUserBrushingRecordsRequest.fromJson(json);
+  return _UsersRecordsSearchRequest.fromJson(json);
 }
 
 /// @nodoc
-mixin _$GetMultiUserBrushingRecordsRequest {
+mixin _$UsersRecordsSearchRequest {
   @JsonKey(name: 'user_ids')
   List<String> get userIds => throw _privateConstructorUsedError;
   @JsonKey(name: 'start_date')
@@ -30,24 +30,21 @@ mixin _$GetMultiUserBrushingRecordsRequest {
   @JsonKey(name: 'time_zone')
   String get timeZone => throw _privateConstructorUsedError;
 
-  /// Serializes this GetMultiUserBrushingRecordsRequest to a JSON map.
+  /// Serializes this UsersRecordsSearchRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of GetMultiUserBrushingRecordsRequest
+  /// Create a copy of UsersRecordsSearchRequest
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GetMultiUserBrushingRecordsRequestCopyWith<
-          GetMultiUserBrushingRecordsRequest>
-      get copyWith => throw _privateConstructorUsedError;
+  $UsersRecordsSearchRequestCopyWith<UsersRecordsSearchRequest> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetMultiUserBrushingRecordsRequestCopyWith<$Res> {
-  factory $GetMultiUserBrushingRecordsRequestCopyWith(
-          GetMultiUserBrushingRecordsRequest value,
-          $Res Function(GetMultiUserBrushingRecordsRequest) then) =
-      _$GetMultiUserBrushingRecordsRequestCopyWithImpl<$Res,
-          GetMultiUserBrushingRecordsRequest>;
+abstract class $UsersRecordsSearchRequestCopyWith<$Res> {
+  factory $UsersRecordsSearchRequestCopyWith(UsersRecordsSearchRequest value,
+          $Res Function(UsersRecordsSearchRequest) then) =
+      _$UsersRecordsSearchRequestCopyWithImpl<$Res, UsersRecordsSearchRequest>;
   @useResult
   $Res call(
       {@JsonKey(name: 'user_ids') List<String> userIds,
@@ -57,17 +54,17 @@ abstract class $GetMultiUserBrushingRecordsRequestCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GetMultiUserBrushingRecordsRequestCopyWithImpl<$Res,
-        $Val extends GetMultiUserBrushingRecordsRequest>
-    implements $GetMultiUserBrushingRecordsRequestCopyWith<$Res> {
-  _$GetMultiUserBrushingRecordsRequestCopyWithImpl(this._value, this._then);
+class _$UsersRecordsSearchRequestCopyWithImpl<$Res,
+        $Val extends UsersRecordsSearchRequest>
+    implements $UsersRecordsSearchRequestCopyWith<$Res> {
+  _$UsersRecordsSearchRequestCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetMultiUserBrushingRecordsRequest
+  /// Create a copy of UsersRecordsSearchRequest
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -99,12 +96,12 @@ class _$GetMultiUserBrushingRecordsRequestCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$GetMultiUserBrushingRecordsRequestImplCopyWith<$Res>
-    implements $GetMultiUserBrushingRecordsRequestCopyWith<$Res> {
-  factory _$$GetMultiUserBrushingRecordsRequestImplCopyWith(
-          _$GetMultiUserBrushingRecordsRequestImpl value,
-          $Res Function(_$GetMultiUserBrushingRecordsRequestImpl) then) =
-      __$$GetMultiUserBrushingRecordsRequestImplCopyWithImpl<$Res>;
+abstract class _$$UsersRecordsSearchRequestImplCopyWith<$Res>
+    implements $UsersRecordsSearchRequestCopyWith<$Res> {
+  factory _$$UsersRecordsSearchRequestImplCopyWith(
+          _$UsersRecordsSearchRequestImpl value,
+          $Res Function(_$UsersRecordsSearchRequestImpl) then) =
+      __$$UsersRecordsSearchRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,16 +112,16 @@ abstract class _$$GetMultiUserBrushingRecordsRequestImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$GetMultiUserBrushingRecordsRequestImplCopyWithImpl<$Res>
-    extends _$GetMultiUserBrushingRecordsRequestCopyWithImpl<$Res,
-        _$GetMultiUserBrushingRecordsRequestImpl>
-    implements _$$GetMultiUserBrushingRecordsRequestImplCopyWith<$Res> {
-  __$$GetMultiUserBrushingRecordsRequestImplCopyWithImpl(
-      _$GetMultiUserBrushingRecordsRequestImpl _value,
-      $Res Function(_$GetMultiUserBrushingRecordsRequestImpl) _then)
+class __$$UsersRecordsSearchRequestImplCopyWithImpl<$Res>
+    extends _$UsersRecordsSearchRequestCopyWithImpl<$Res,
+        _$UsersRecordsSearchRequestImpl>
+    implements _$$UsersRecordsSearchRequestImplCopyWith<$Res> {
+  __$$UsersRecordsSearchRequestImplCopyWithImpl(
+      _$UsersRecordsSearchRequestImpl _value,
+      $Res Function(_$UsersRecordsSearchRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetMultiUserBrushingRecordsRequest
+  /// Create a copy of UsersRecordsSearchRequest
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -134,7 +131,7 @@ class __$$GetMultiUserBrushingRecordsRequestImplCopyWithImpl<$Res>
     Object? endDate = null,
     Object? timeZone = null,
   }) {
-    return _then(_$GetMultiUserBrushingRecordsRequestImpl(
+    return _then(_$UsersRecordsSearchRequestImpl(
       userIds: null == userIds
           ? _value._userIds
           : userIds // ignore: cast_nullable_to_non_nullable
@@ -157,18 +154,16 @@ class __$$GetMultiUserBrushingRecordsRequestImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GetMultiUserBrushingRecordsRequestImpl
-    implements _GetMultiUserBrushingRecordsRequest {
-  const _$GetMultiUserBrushingRecordsRequestImpl(
+class _$UsersRecordsSearchRequestImpl implements _UsersRecordsSearchRequest {
+  const _$UsersRecordsSearchRequestImpl(
       {@JsonKey(name: 'user_ids') required final List<String> userIds,
       @JsonKey(name: 'start_date') required this.startDate,
       @JsonKey(name: 'end_date') required this.endDate,
       @JsonKey(name: 'time_zone') required this.timeZone})
       : _userIds = userIds;
 
-  factory _$GetMultiUserBrushingRecordsRequestImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$GetMultiUserBrushingRecordsRequestImplFromJson(json);
+  factory _$UsersRecordsSearchRequestImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UsersRecordsSearchRequestImplFromJson(json);
 
   final List<String> _userIds;
   @override
@@ -191,14 +186,14 @@ class _$GetMultiUserBrushingRecordsRequestImpl
 
   @override
   String toString() {
-    return 'GetMultiUserBrushingRecordsRequest(userIds: $userIds, startDate: $startDate, endDate: $endDate, timeZone: $timeZone)';
+    return 'UsersRecordsSearchRequest(userIds: $userIds, startDate: $startDate, endDate: $endDate, timeZone: $timeZone)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetMultiUserBrushingRecordsRequestImpl &&
+            other is _$UsersRecordsSearchRequestImpl &&
             const DeepCollectionEquality().equals(other._userIds, _userIds) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
@@ -216,36 +211,33 @@ class _$GetMultiUserBrushingRecordsRequestImpl
       endDate,
       timeZone);
 
-  /// Create a copy of GetMultiUserBrushingRecordsRequest
+  /// Create a copy of UsersRecordsSearchRequest
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$GetMultiUserBrushingRecordsRequestImplCopyWith<
-          _$GetMultiUserBrushingRecordsRequestImpl>
-      get copyWith => __$$GetMultiUserBrushingRecordsRequestImplCopyWithImpl<
-          _$GetMultiUserBrushingRecordsRequestImpl>(this, _$identity);
+  _$$UsersRecordsSearchRequestImplCopyWith<_$UsersRecordsSearchRequestImpl>
+      get copyWith => __$$UsersRecordsSearchRequestImplCopyWithImpl<
+          _$UsersRecordsSearchRequestImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$GetMultiUserBrushingRecordsRequestImplToJson(
+    return _$$UsersRecordsSearchRequestImplToJson(
       this,
     );
   }
 }
 
-abstract class _GetMultiUserBrushingRecordsRequest
-    implements GetMultiUserBrushingRecordsRequest {
-  const factory _GetMultiUserBrushingRecordsRequest(
+abstract class _UsersRecordsSearchRequest implements UsersRecordsSearchRequest {
+  const factory _UsersRecordsSearchRequest(
           {@JsonKey(name: 'user_ids') required final List<String> userIds,
           @JsonKey(name: 'start_date') required final String startDate,
           @JsonKey(name: 'end_date') required final String endDate,
           @JsonKey(name: 'time_zone') required final String timeZone}) =
-      _$GetMultiUserBrushingRecordsRequestImpl;
+      _$UsersRecordsSearchRequestImpl;
 
-  factory _GetMultiUserBrushingRecordsRequest.fromJson(
-          Map<String, dynamic> json) =
-      _$GetMultiUserBrushingRecordsRequestImpl.fromJson;
+  factory _UsersRecordsSearchRequest.fromJson(Map<String, dynamic> json) =
+      _$UsersRecordsSearchRequestImpl.fromJson;
 
   @override
   @JsonKey(name: 'user_ids')
@@ -260,11 +252,10 @@ abstract class _GetMultiUserBrushingRecordsRequest
   @JsonKey(name: 'time_zone')
   String get timeZone;
 
-  /// Create a copy of GetMultiUserBrushingRecordsRequest
+  /// Create a copy of UsersRecordsSearchRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GetMultiUserBrushingRecordsRequestImplCopyWith<
-          _$GetMultiUserBrushingRecordsRequestImpl>
+  _$$UsersRecordsSearchRequestImplCopyWith<_$UsersRecordsSearchRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

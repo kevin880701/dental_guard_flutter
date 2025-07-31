@@ -3,12 +3,12 @@ import '../datasources/teeth_record_remote_datasource.dart';
 import '../models/request/create_brushing_record/create_brushing_record_request.dart';
 import '../models/request/get_group_brushing_stats/get_group_brushing_stats_request.dart';
 import '../models/request/get_groups_brushing_records/get_groups_brushing_records_request.dart';
-import '../models/request/get_multi_user_brushing_records/get_multi_user_brushing_records_request.dart';
 import '../models/request/get_user_brushing_stats/get_user_brushing_stats_request.dart';
+import '../models/request/users_records_search/users_records_search_request.dart';
 import '../models/response/brushing_record/brushing_record_data.dart';
 import '../models/response/brushing_stats/brushing_stats_data.dart';
 import '../models/response/groups_brushing_records/group_brushing_records_data.dart';
-import '../models/response/multi_user_brushing_records/multi_user_brushing_records_data.dart';
+import '../models/response/users_records_pagination/users_records_pagination.dart';
 
 abstract class TeethRecordRepository {
   Future<BrushingRecordData?> createBrushingRecord(CreateBrushingRecordRequest request);
@@ -27,7 +27,7 @@ abstract class TeethRecordRepository {
   Future<List<BrushingStatsData>> getUserBrushingStats(GetUserBrushingStatsRequest request);
 
   /// 查詢多使用者潔牙紀錄
-  Future<List<MultiUserBrushingRecordsData>> getMultiUserBrushingRecords(GetMultiUserBrushingRecordsRequest request);
+  Future<UsersRecordsPagination?> usersRecordsSearch(UsersRecordsSearchRequest request);
 }
 
 class TeethRecordRepositoryImpl implements TeethRecordRepository {
@@ -66,7 +66,7 @@ class TeethRecordRepositoryImpl implements TeethRecordRepository {
   }
 
   @override
-  Future<List<MultiUserBrushingRecordsData>> getMultiUserBrushingRecords(GetMultiUserBrushingRecordsRequest request) async {
-    return await remoteDataSource.getMultiUserBrushingRecords(request);
+  Future<UsersRecordsPagination?> usersRecordsSearch(UsersRecordsSearchRequest request) async {
+    return await remoteDataSource.usersRecordsSearch(request);
   }
 }

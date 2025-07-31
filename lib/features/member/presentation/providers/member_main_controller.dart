@@ -69,7 +69,7 @@ class MemberInfoController extends StateNotifier<MemberMainState> {
     }
     state = state.copyWith(isLoading: true, errorMessage: null);
     try {
-      final useCase = ref.read(getMultiUserBrushingRecordsUseCaseProvider);
+      final useCase = ref.read(getUsersRecordsSearchUseCaseProvider);
       final DateTime startTime = DateTime.utc(2000, 1, 1);
       final DateTime endTime = DateTime.utc(2099, 12, 31);
 
@@ -80,8 +80,7 @@ class MemberInfoController extends StateNotifier<MemberMainState> {
         timeZone: timeZone,
       );
 
-
-      state = state.copyWith(brushingRecords: result.first.brushingRecords ?? [], isLoading: false);
+      state = state.copyWith(brushingRecords: result?.records?.first.brushingRecords??[], isLoading: false);
     } catch (e, st) {
       AppLog.e('取得潔牙紀錄失敗: $e\n$st');
       state = state.copyWith(
