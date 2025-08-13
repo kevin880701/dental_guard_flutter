@@ -71,7 +71,7 @@ bool isDebugVersionGreater(String debugVersion, String? appVersion) {
 
   final releaseNum = int.tryParse(normalize(debugVersion)) ?? 0;
   final appNum = int.tryParse(normalize(appVersion)) ?? 0;
-  return releaseNum > appNum;
+  return releaseNum >= appNum;
 }
 
 Future<void> openStore() async {
