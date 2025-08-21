@@ -28,3 +28,6 @@ doc/api/
 
 # Android NDK build output
 **/android/app/.cxx/
+
+.DS_Store
+.idea
