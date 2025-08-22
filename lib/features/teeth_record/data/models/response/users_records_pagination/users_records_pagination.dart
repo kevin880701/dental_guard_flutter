@@ -1,6 +1,4 @@
-import 'package:dental_guard_flutter/features/auth/data/models/response/user_info/user_info_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../brushing_record/brushing_record_data.dart';
 import '../pagination/pagination.dart';
 import '../user_records/user_records.dart';
 

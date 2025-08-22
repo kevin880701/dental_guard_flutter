@@ -5,7 +5,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../../data/models/response/brushing_stats/brushing_stats_data.dart';
 import '../../../../domain/entity/chart_time_status.dart';
-import '../indicator/bar_chart_Indicator.dart';
+import '../indicator/bar_chart_indicator.dart';
 
 class BarChart extends StatefulWidget {
   final List<BrushingStatsData> data;
@@ -42,7 +42,6 @@ class _BarChartState extends State<BarChart> {
         return d.time.month.toString().padLeft(2, '0'); // 月
       case ChartTimeStatus.quarter:
       case ChartTimeStatus.quarterHour:
-      default:
         return '';
     }
   }
@@ -95,7 +94,6 @@ class _BarChartState extends State<BarChart> {
                     break;
                   case ChartTimeStatus.quarter:
                   case ChartTimeStatus.quarterHour:
-                  default:
                     shouldShow = true;
                 }
                 return ChartAxisLabel(

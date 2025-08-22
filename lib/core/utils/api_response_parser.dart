@@ -33,7 +33,7 @@ Future<T?> parseApiResponse<T>(
     }
 
     return apiResponse.data;
-  } catch (e, stackTrace) {
+  } catch (e) {
     if (showToastOnError) {
       AppToast.showToast(
         message: "伺服器回傳資料異常",

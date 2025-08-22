@@ -4,7 +4,6 @@ import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../core/constants/app_colors.dart';
 import '../../../../core/widgets/text/app_text.dart';
 import '../../../teeth_record/data/models/response/brushing_record/brushing_record_data.dart';
 

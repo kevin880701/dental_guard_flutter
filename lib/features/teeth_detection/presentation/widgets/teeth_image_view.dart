@@ -1,9 +1,7 @@
-import 'dart:io';
 
 import 'package:dental_guard_flutter/core/constants/app_resources.dart';
 import 'package:flutter/material.dart';
 import 'package:dental_guard_flutter/core/constants/api_endpoints.dart';
-import 'package:dental_guard_flutter/core/constants/app_colors.dart';
 import 'package:dental_guard_flutter/core/widgets/text/app_text.dart';
 import 'package:dental_guard_flutter/core/widgets/image/network_image_widget.dart';
 import '../../../analyze/data/models/response/analyze_result/analyze_result_data.dart';

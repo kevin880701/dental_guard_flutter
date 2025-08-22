@@ -1,4 +1,3 @@
-import '../../application/teeth_record_usecases_provider.dart';
 import '../../data/models/request/get_group_top_users/get_group_top_users.dart';
 import '../../data/models/response/group_top_user/group_top_user.dart';
 import '../../data/repositories/teeth_record_repository_impl.dart';

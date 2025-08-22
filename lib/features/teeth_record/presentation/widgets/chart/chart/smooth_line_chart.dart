@@ -1,12 +1,12 @@
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../core/constants/app_colors.dart';
-import '../../../../../../core/utils/utils.dart';
 import '../../../../../../core/widgets/text/app_text.dart';
 import '../../../../../../core/widgets/text/text_theme.dart';
 import '../../../../data/models/response/brushing_stats/brushing_stats_data.dart';
 import '../../../../domain/entity/chart_time_status.dart';
-import '../indicator/smooth_line_Indicator.dart';
+import '../indicator/smooth_line_indicator.dart';
 
 class SmoothLineChart extends StatefulWidget {
   final List<BrushingStatsData> data;
@@ -47,7 +47,6 @@ class _SmoothLineChartState extends State<SmoothLineChart> {
         return t.month.toString().padLeft(2, '0');
       case ChartTimeStatus.quarter:
       case ChartTimeStatus.quarterHour:
-      default:
         return '';
     }
   }
@@ -136,8 +135,9 @@ class _SmoothLineChartState extends State<SmoothLineChart> {
                     interval: 1,
                     getTitlesWidget: (double value, TitleMeta meta) {
                       int idx = value.toInt();
-                      if (idx < 0 || idx >= xLabels.length)
+                      if (idx < 0 || idx >= xLabels.length) {
                         return const SizedBox.shrink();
+                      }
 
                       bool shouldShow = false;
                       final lastIdx = xLabels.length - 1;
@@ -295,7 +295,6 @@ class _SmoothLineChartState extends State<SmoothLineChart> {
                   }
                   if (event is FlTapDownEvent) {
                     if (!event.isInterestedForInteractions ||
-                        response == null ||
                         response.lineBarSpots == null) {
                       setState(() {
                         widget.onTap?.call([]);

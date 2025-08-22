@@ -1,7 +1,7 @@
 import 'package:dental_guard_flutter/core/utils/utils.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/providers/refresh_controller.dart';
 import '../../../../core/utils/app_log.dart';

@@ -1,7 +1,4 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:dental_guard_flutter/core/base/base_page.dart';
-import 'package:dental_guard_flutter/core/constants/app_colors.dart';
 import 'package:dental_guard_flutter/core/constants/app_resources.dart';
 import 'package:dental_guard_flutter/core/widgets/text/app_text.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
@@ -13,7 +10,6 @@ import '../../../../core/utils/app_toast.dart';
 import '../../../../core/utils/dialog_manager.dart';
 import '../../../../core/widgets/button/app_button.dart';
 import '../../../../core/widgets/image/app_icon.dart';
-import '../../../../core/widgets/title_bar.dart';
 import '../../../auth/application/auth_provider.dart';
 import '../../../auth/data/models/response/user_info/user_info_data.dart';
 import '../../../organization/application/organization_controller.dart';

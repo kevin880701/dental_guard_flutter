@@ -53,7 +53,7 @@ class DatePickerWidget extends HookConsumerWidget {
 
   /// 建構函式
   const DatePickerWidget({
-    Key? key,
+    super.key,
     this.backgroundColor = Colors.white,
     this.disableBackgroundColor = Colors.grey,
     this.value,
@@ -62,7 +62,7 @@ class DatePickerWidget extends HookConsumerWidget {
     this.textStyle,
     this.icon,
     this.minWidth = 100.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -70,7 +70,7 @@ class DatePickerWidget extends HookConsumerWidget {
     final formatter = DateFormat('yyyy-MM-dd HH:mm');
 
     /// 彈出日期與時間選擇器
-    Future<void> _selectDateTime() async {
+    Future<void> selectDateTime() async {
       final DateTime? pickedDate = await showDatePicker(
         context: context,
         initialDate: selectedDateTime.value ?? DateTime.now(),
@@ -101,7 +101,7 @@ class DatePickerWidget extends HookConsumerWidget {
     }
 
     return GestureDetector(
-      onTap: isEnable ? _selectDateTime : null,
+      onTap: isEnable ? selectDateTime : null,
       child: Container(
         constraints: BoxConstraints(minWidth: minWidth),
         alignment: Alignment.centerRight,

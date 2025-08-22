@@ -1,5 +1,6 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/utils/app_log.dart';
 import '../../../features/auth/data/models/response/user_info/user_info_data.dart';

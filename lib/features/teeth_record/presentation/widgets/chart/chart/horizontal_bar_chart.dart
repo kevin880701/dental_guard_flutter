@@ -1,15 +1,12 @@
-import 'dart:math';
 
-import 'package:dental_guard_flutter/core/constants/app_colors.dart';
+import 'dart:math';
 import 'package:dental_guard_flutter/core/constants/app_resources.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
 import '../../../../data/models/response/group_top_user/group_top_user.dart';
 import '../../../../domain/entity/rank_sort_criteria.dart';
-import '../indicator/bar_chart_Indicator.dart';
-
+import '../indicator/bar_chart_indicator.dart';
 
 ///
 /// 一個水平顯示的群組排名長條圖元件。
@@ -74,9 +71,7 @@ class _HorizontalRankChartState extends State<HorizontalRankChart> {
       // 找出最大次數
       final maxCount = widget.data.isEmpty
           ? 0
-          : widget.data
-          .map((d) => d.recordCount)
-          .reduce((a, b) => max(a, b));
+          : widget.data.map((d) => d.recordCount).reduce((a, b) => max(a, b));
 
       yAxisMaximum = (maxCount * 1.2).ceilToDouble();
       // 計算一個合理的間隔，避免 Y 軸標籤過多
@@ -96,7 +91,8 @@ class _HorizontalRankChartState extends State<HorizontalRankChart> {
       children: [
         Expanded(
           child: SfCartesianChart(
-            isTransposed: true, // 水平呈現
+            isTransposed: true,
+            // 水平呈現
             // X 軸是分類
             primaryXAxis: CategoryAxis(
               majorGridLines: const MajorGridLines(width: 0),
@@ -118,7 +114,7 @@ class _HorizontalRankChartState extends State<HorizontalRankChart> {
             series: <CartesianSeries>[
               ColumnSeries<GroupTopUser, String>(
                 dataSource: reversedData,
-                xValueMapper: (user, _) => '${user.userName}',
+                xValueMapper: (user, _) => user.userName,
                 yValueMapper: yValueMapper,
                 pointColorMapper: (user, i) {
                   final originalIndex = reversedData.length - 1 - i;

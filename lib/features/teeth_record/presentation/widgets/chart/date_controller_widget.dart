@@ -16,16 +16,16 @@ class DateControllerWidget extends StatelessWidget {
   final VoidCallback? onReportTap;
 
   const DateControllerWidget({
-    Key? key,
+    super.key,
     required this.selectTime,
     required this.currentTimeStatus,
     required this.onDateChange,
     this.onReportTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 40,
       width: double.infinity,
       child: Row(
@@ -250,16 +250,15 @@ String formatDateByStatus(DateTime date, ChartTimeStatus status) {
         if (date.month <= 1) {
           semesterText = '${taiwanYear - 1}上學期';
         } else {
-          semesterText = '${taiwanYear}上學期';
+          semesterText = '$taiwanYear上學期';
         }
       } else {
         // 2月到7月為下學期
-        semesterText = '${taiwanYear}下學期';
+        semesterText = '$taiwanYear下學期';
       }
       return semesterText;
     case ChartTimeStatus.quarter:
     case ChartTimeStatus.quarterHour:
-    default:
       return '';
 
   }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../features/teeth_record/domain/entity/report_data.dart';
 import '../../../constants/app_colors.dart';
-import '../../button/app_button.dart';
 import '../../shape/line_widget.dart';
 import '../../text/app_text.dart';
 import '../../text/text_theme.dart';
@@ -15,11 +14,11 @@ class ReportDialog extends StatefulWidget {
   final String? title;
 
   const ReportDialog({
-    Key? key,
+    super.key,
     required this.fieldTitle,
     required this.data,
     this.title,
-  }) : super(key: key);
+  });
 
   @override
   State<ReportDialog> createState() => _ReportDialogState();

@@ -54,6 +54,9 @@ dependencies:
   syncfusion_flutter_gauges: ^29.2.7+1
   syncfusion_flutter_charts: ^29.2.7
 
+  riverpod: ^2.6.1
+  flutter_riverpod: ^2.6.1
+  flutter_hooks: ^0.20.0
   hooks_riverpod: ^2.6.1
   auto_route: ^10.0.1
 

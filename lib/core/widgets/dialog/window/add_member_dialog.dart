@@ -8,7 +8,6 @@ import '../../../../features/login/presentation/widgets/app_input.dart';
 import '../../button/app_button.dart';
 import '../../input/input_type.dart';
 import '../../text/app_text.dart';
-import '../../text/text_theme.dart';
 import '../widget/dialog_title_bar.dart';
 
 class AddMemberDialog extends HookConsumerWidget {

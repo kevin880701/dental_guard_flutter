@@ -19,7 +19,7 @@ class AppLog {
   }
 
   static int getLogLevel() {
-    AppLog.i("Current Log Level is " + _getPriorityText(_currentLogLevel));
+    AppLog.i("Current Log Level is ${_getPriorityText(_currentLogLevel)}");
     return _currentLogLevel;
   }
 

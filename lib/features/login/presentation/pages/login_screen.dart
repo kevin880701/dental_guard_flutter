@@ -11,13 +11,10 @@ import '../../../../core/base/base_page.dart';
 import '../../../../core/providers/version_info_provider.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/button/app_button.dart';
-import '../../../../core/widgets/image/app_icon.dart';
 import '../../../../core/widgets/input/input_type.dart';
 import '../../../../core/widgets/text/app_text.dart';
 import '../../../../routes/app_router.dart';
 import '../../../auth/application/auth_controller.dart';
-import '../../../auth/application/auth_provider.dart';
-import '../../../auth/domain/entities/OAuthProviderType.dart';
 import '../widgets/app_input.dart';
 
 @RoutePage()
@@ -31,8 +28,8 @@ class LoginScreen extends HookConsumerWidget {
     final accountController = useTextEditingController();
     final passwordController = useTextEditingController();
     final lastBackPressed = useState<DateTime?>(null);
-    final _isKeepLogin = useState<bool>(false);
-    final _isClickable = useState(false);
+    final isKeepLogin = useState<bool>(false);
+    final isClickable = useState(false);
     final isFormValid = useState(false);
 
     void validateForm() {
@@ -44,7 +41,7 @@ class LoginScreen extends HookConsumerWidget {
       isFormValid.value = isValid;
     }
 
-    void _login() async {
+    void login() async {
       ref.read(pageNotifierProvider.notifier).showLoading();
       final response = await authControllerNotifier.login(
         account: accountController.text,
@@ -55,7 +52,7 @@ class LoginScreen extends HookConsumerWidget {
         _onLoginSuccess(
           ref,
           context,
-          _isKeepLogin.value,
+          isKeepLogin.value,
           accountController.text,
           passwordController.text,
         );
@@ -74,7 +71,7 @@ class LoginScreen extends HookConsumerWidget {
         final keepLogin = prefs.getBool('keepLogin') ?? false;
 
         if (keepLogin) {
-          _isKeepLogin.value = true;
+          isKeepLogin.value = true;
           final savedAccount = prefs.getString('account');
           final savedPassword = prefs.getString('password');
 
@@ -92,7 +89,7 @@ class LoginScreen extends HookConsumerWidget {
 
     useEffect(() {
       void updateIsClickable() {
-        _isClickable.value = accountController.text.isNotEmpty &&
+        isClickable.value = accountController.text.isNotEmpty &&
             passwordController.text.isNotEmpty;
       }
 
@@ -107,7 +104,7 @@ class LoginScreen extends HookConsumerWidget {
       };
     }, [accountController.text, passwordController.text]);
 
-    Future<bool> _onWillPop() async {
+    Future<bool> onWillPop() async {
       final now = DateTime.now();
       if (lastBackPressed.value == null ||
           now.difference(lastBackPressed.value!) > Duration(seconds: 2)) {
@@ -123,7 +120,7 @@ class LoginScreen extends HookConsumerWidget {
 
     return BasePage(
       backgroundColor: AppColors.bgColor,
-      onWillPop: _onWillPop,
+      onWillPop: onWillPop,
       child: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(24),
@@ -163,16 +160,16 @@ class LoginScreen extends HookConsumerWidget {
                     side: BorderSide(color: AppColors.primaryBlack, width: 2),
                     checkColor: Colors.white,
                     activeColor: AppColors.primaryBlack,
-                    value: _isKeepLogin.value,
+                    value: isKeepLogin.value,
                     onChanged: (bool? value) {
-                      _isKeepLogin.value = value ?? false;
+                      isKeepLogin.value = value ?? false;
                     },
                   ),
                   AppText(
                     text: AppStrings.keepLoginState,
                     textStyle: bodyMedium,
                     onTap: () {
-                      _isKeepLogin.value = !_isKeepLogin.value;
+                      isKeepLogin.value = !isKeepLogin.value;
                     },
                   ),
                 ],
@@ -182,13 +179,13 @@ class LoginScreen extends HookConsumerWidget {
                   width: double.infinity,
                   child: AppButton(
                       text: AppStrings.login,
-                      backgroundColor: (_isClickable.value)
+                      backgroundColor: (isClickable.value)
                           ? AppColors.primaryBlack
                           : AppColors.disableGrey,
                       fontColor: AppColors.white,
-                      onPressed: (_isClickable.value)
+                      onPressed: (isClickable.value)
                           ? () {
-                              _login();
+                              login();
                             }
                           : null)),
               Spacer(),

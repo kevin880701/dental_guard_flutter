@@ -14,7 +14,7 @@ class TabItem extends StatelessWidget {
   final Color unselectedLabelColor;
 
   const TabItem({
-    Key? key,
+    super.key,
     required this.selectedIcon,
     required this.unselectedIcon,
     required this.text,
@@ -24,7 +24,7 @@ class TabItem extends StatelessWidget {
     this.unselectedIconColor = Colors.black,
     this.labelColor = Colors.blue,
     this.unselectedLabelColor = Colors.black,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

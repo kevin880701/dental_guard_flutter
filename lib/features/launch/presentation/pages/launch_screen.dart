@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:dental_guard_flutter/core/constants/app_colors.dart';
 import 'package:dental_guard_flutter/core/providers/version_info_provider.dart';
 import 'package:dental_guard_flutter/core/widgets/image/asset_image_widget.dart';
 import 'package:dental_guard_flutter/core/widgets/text/app_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

@@ -1,9 +1,6 @@
-import 'package:dental_guard_flutter/core/utils/dialog_manager.dart';
-import 'package:dental_guard_flutter/features/auth/application/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,8 +22,8 @@ class MainScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lastBackPressed = useState<DateTime?>(null);
-    final TabController _tabController = useTabController(initialLength: 2);
-    final _tabSelectedIndex = useState(0);
+    final TabController tabController = useTabController(initialLength: 2);
+    final tabSelectedIndex = useState(0);
 
     useEffect(() {
       return null;
@@ -52,7 +49,7 @@ class MainScreen extends HookConsumerWidget {
           Expanded(
               child: TabBarView(
             physics: NeverScrollableScrollPhysics(),
-            controller: _tabController,
+            controller: tabController,
             children: <Widget>[
               KeepAliveWrapper(child: GroupListScreen()),
               KeepAliveWrapper(child: PersonalScreen()),
@@ -61,14 +58,14 @@ class MainScreen extends HookConsumerWidget {
           Container(
             color: AppColors.white,
             child: TabBar(
-              controller: _tabController,
+              controller: tabController,
               indicatorColor: AppColors.transparent,
               labelColor: AppColors.primaryBlack,
               unselectedLabelColor: AppColors.grey,
               dividerColor: AppColors.transparent,
               tabs: <Widget>[
                 Tab(
-                  icon: _tabSelectedIndex.value == 0
+                  icon: tabSelectedIndex.value == 0
                       ? AppIcon(
                           icon: AppImages.homeActiveIcon,
                           size: 24.sp,
@@ -80,7 +77,7 @@ class MainScreen extends HookConsumerWidget {
                   text: AppStrings.home,
                 ),
                 Tab(
-                  icon: _tabSelectedIndex.value == 1
+                  icon: tabSelectedIndex.value == 1
                       ? AppIcon(
                           icon: AppImages.personalActiveIcon,
                           size: 24.sp,
@@ -93,7 +90,7 @@ class MainScreen extends HookConsumerWidget {
                 ),
               ],
               onTap: (index) {
-                _tabSelectedIndex.value = index;
+                tabSelectedIndex.value = index;
               },
             ),
           ),

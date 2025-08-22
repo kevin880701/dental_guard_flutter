@@ -202,7 +202,7 @@ class SfDateRangePicker extends StatelessWidget {
   /// When the visible view changes, the widget will call the [onViewChanged]
   /// callback with the current view and the current view visible dates.
   SfDateRangePicker(
-      {Key? key,
+      {super.key,
       DateRangePickerView view = DateRangePickerView.month,
       this.selectionMode = DateRangePickerSelectionMode.single,
       this.headerHeight = 40,
@@ -265,8 +265,7 @@ class SfDateRangePicker extends StatelessWidget {
             : initialDisplayDate ?? DateTime.now(),
         minDate = minDate ?? DateTime(1900),
         maxDate = maxDate ?? DateTime(2100, 12, 31),
-        viewSpacing = enableMultiView ? viewSpacing : 0,
-        super(key: key);
+        viewSpacing = enableMultiView ? viewSpacing : 0;
 
   /// Defines the view for the [SfDateRangePicker].
   ///
@@ -2815,7 +2814,7 @@ class SfHijriDateRangePicker extends StatelessWidget {
   /// When the visible view changes, the widget will call the [onViewChanged]
   /// callback with the current view and the current view visible dates.
   SfHijriDateRangePicker({
-    Key? key,
+    super.key,
     HijriDatePickerView view = HijriDatePickerView.month,
     this.selectionMode = DateRangePickerSelectionMode.single,
     this.headerHeight = 40,
@@ -2875,8 +2874,7 @@ class SfHijriDateRangePicker extends StatelessWidget {
             : initialDisplayDate ?? HijriDateTime.now(),
         minDate = minDate ?? HijriDateTime(1356, 01, 01),
         maxDate = maxDate ?? HijriDateTime(1499, 12, 30),
-        viewSpacing = enableMultiView ? viewSpacing : 0,
-        super(key: key);
+        viewSpacing = enableMultiView ? viewSpacing : 0;
 
   /// Defines the view for the [SfHijriDateRangePicker].
   ///
@@ -5318,7 +5316,7 @@ class SfHijriDateRangePicker extends StatelessWidget {
 @immutable
 class _SfDateRangePicker extends StatefulWidget {
   const _SfDateRangePicker(
-      {Key? key,
+      {super.key,
       required this.view,
       required this.selectionMode,
       this.isHijri = false,
@@ -5364,8 +5362,7 @@ class _SfDateRangePicker extends StatefulWidget {
       this.cellBuilder,
       this.showTodayButton = false,
       this.selectableDayPredicate,
-      this.extendableRangeSelectionDirection = ExtendableRangeSelectionDirection.both})
-      : super(key: key);
+      this.extendableRangeSelectionDirection = ExtendableRangeSelectionDirection.both});
 
   final DateRangePickerView view;
 
@@ -7325,16 +7322,10 @@ class _AnimatedOpacityWidgetState extends State<_AnimatedOpacityWidget> {
 /// Holds content and header to show header like sticky based on content.
 class _StickyHeader extends Stack {
   const _StickyHeader({
-    required List<Widget> children,
-    AlignmentDirectional alignment = AlignmentDirectional.topStart,
+    required super.children,
     this.isHorizontal = false,
     this.isRTL = false,
-    Key? key,
-  }) : super(
-          key: key,
-          children: children,
-          alignment: alignment,
-        );
+  });
 
   final bool isHorizontal;
   final bool isRTL;
@@ -7366,19 +7357,14 @@ class _StickyHeader extends Stack {
 class _StickyHeaderRenderObject extends RenderStack {
   _StickyHeaderRenderObject({
     required ScrollableState scrollableState,
-    required AlignmentGeometry alignment,
-    required TextDirection textDirection,
-    required StackFit fit,
+    required super.alignment,
+    required TextDirection super.textDirection,
+    required super.fit,
     required bool isHorizontal,
     required bool isRTL,
   })  : _scrollableState = scrollableState,
         _isHorizontal = isHorizontal,
-        _isRTL = isRTL,
-        super(
-          alignment: alignment,
-          textDirection: textDirection,
-          fit: fit,
-        );
+        _isRTL = isRTL;
 
   /// Used to update the child position when it scroll changed.
   ScrollableState _scrollableState;
@@ -7558,9 +7544,7 @@ class _PickerHeaderView extends StatefulWidget {
       this.isRtl,
       this.textScaleFactor,
       this.isHijri,
-      this.localizations,
-      {Key? key})
-      : super(key: key);
+      this.localizations);
 
   /// Defines the text scale factor of [SfDateRangePicker].
   final double textScaleFactor;
@@ -8259,10 +8243,10 @@ class _PickerScrollView extends StatefulWidget {
     this.datePickerTheme,
     this.locale,
     this.textScaleFactor, {
-    Key? key,
+    super.key,
     required this.getPickerStateValues,
     required this.updatePickerStateValues,
-  }) : super(key: key);
+  });
 
   /// Holds the picker instance to access the picker details.
   final _SfDateRangePicker picker;
@@ -10367,11 +10351,11 @@ class _PickerView extends StatefulWidget {
     this.focusNode,
     this.textScaleFactor,
     this.disableDatePredicates, {
-    Key? key,
+    super.key,
     required this.getPickerStateDetails,
     required this.updatePickerStateDetails,
     this.isRtl = false,
-  }) : super(key: key);
+  });
 
   /// Holds the visible dates for the picker view.
   final List<dynamic> visibleDates;

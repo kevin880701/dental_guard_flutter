@@ -1,6 +1,4 @@
-import '../../data/models/request/login/login_request.dart';
 import '../../data/models/request/updateUserProfile/update_user_profile_request.dart';
-import '../../data/models/response/login/login_data.dart';
 import '../../data/models/response/user_info/user_info_data.dart';
 import '../../data/repositories/auth_repository_impl.dart';
 

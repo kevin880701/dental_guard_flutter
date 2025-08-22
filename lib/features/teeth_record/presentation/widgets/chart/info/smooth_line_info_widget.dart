@@ -32,8 +32,7 @@ class SmoothLineInfoWidget extends StatelessWidget {
         return DateFormat('yyyy/MM').format(dt);
       case ChartTimeStatus.quarter:
       case ChartTimeStatus.quarterHour:
-      default:
-        return "";
+      return "";
     }
   }
 

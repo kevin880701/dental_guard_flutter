@@ -53,7 +53,7 @@ class MonthView extends StatefulWidget {
       this.weekNumberStyle,
       this.isMobilePlatform,
       this.disableDatesCollection,
-      this.extendableRangeSelectionDirection);
+      this.extendableRangeSelectionDirection, {super.key});
 
   /// Defines the month row count.
   final int rowCount;

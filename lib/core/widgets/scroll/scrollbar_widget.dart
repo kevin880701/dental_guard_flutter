@@ -11,7 +11,7 @@ class ScrollbarWidget extends StatelessWidget {
   final double thickness;
 
   const ScrollbarWidget({
-    Key? key,
+    super.key,
     required this.child,
     this.scrollBarVisibility = ScrollBarVisibility.onScroll,
     this.controller,
@@ -19,7 +19,7 @@ class ScrollbarWidget extends StatelessWidget {
     this.thumbColor = Colors.grey,
     this.isRounded = true,
     this.thickness = 6.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

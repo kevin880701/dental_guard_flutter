@@ -8,13 +8,13 @@ class CircleWidget extends StatelessWidget {
   final VoidCallback? onTap; // 點擊事件
 
   const CircleWidget({
-    Key? key,
+    super.key,
     this.size = 20,
     this.backgroundColor = Colors.blue,
     this.borderColor = Colors.white,
     this.borderWidth = 2,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

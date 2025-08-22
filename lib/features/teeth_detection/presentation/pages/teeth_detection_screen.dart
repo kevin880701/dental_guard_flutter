@@ -1,24 +1,18 @@
-import 'dart:io';
 
 import 'package:dental_guard_flutter/core/providers/page_provider.dart';
 import 'package:dental_guard_flutter/core/utils/app_toast.dart';
 import 'package:dental_guard_flutter/core/utils/utils.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/base/base_page.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/app_log.dart';
-import '../../../../core/utils/dialog_manager.dart';
-import '../../../../core/utils/file_manager.dart';
 import '../../../../core/widgets/button/app_button.dart';
 import '../../../../core/widgets/image/file_image_widget.dart';
-import '../../../../core/widgets/text/app_text.dart';
 import '../../../../core/widgets/title_bar.dart';
 import '../../../analyze/application/analyze_usecases_provider.dart';
 import '../../../group/presentation/provider/group_main_controller.dart';
@@ -161,7 +155,7 @@ class TeethDetectionScreen extends HookConsumerWidget {
                                 .read(pageNotifierProvider.notifier)
                                 .showToastMessage(
                                     message: AppStrings.detectionFailed);
-                            AppLog.e("ERROR:${e}");
+                            AppLog.e("ERROR:$e");
                           }
                           ref.read(pageNotifierProvider.notifier).hideLoading();
                         }),
@@ -220,7 +214,7 @@ class TeethDetectionScreen extends HookConsumerWidget {
                                       .read(pageNotifierProvider.notifier)
                                       .showToastMessage(
                                           message: AppStrings.detectionFailed);
-                                  AppLog.e("ERROR:${e}");
+                                  AppLog.e("ERROR:$e");
                                 }
                                 ref
                                     .read(pageNotifierProvider.notifier)

@@ -141,14 +141,14 @@ class _AnimatedToastWidget extends StatefulWidget {
   final dynamic overflowDismissDuration;
 
   const _AnimatedToastWidget({
-    Key? key,
+    super.key,
     required this.message,
     this.type = ToastType.DEFAULT,
     required this.onAnimationComplete,
     required this.duration,
     this.dismissDuration = const Duration(milliseconds: 300),
     this.overflowDismissDuration = const Duration(milliseconds: 50),
-  }) : super(key: key);
+  });
 
   @override
   _AnimatedToastWidgetState createState() => _AnimatedToastWidgetState();

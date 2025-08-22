@@ -1,9 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
-
 import '../../../../../../core/constants/app_colors.dart';
 import '../../../../../../core/widgets/image/app_icon.dart';
-import '../../../../../../core/widgets/image/asset_image_widget.dart';
 
 class BaselinePieChart extends StatefulWidget {
   const BaselinePieChart({
@@ -73,7 +72,7 @@ class _BaselinePieChartState extends State<BaselinePieChart> {
       );
     }
 
-    return Container(
+    return SizedBox(
       height: 64,
       width: 64,
       child: SfRadialGauge(

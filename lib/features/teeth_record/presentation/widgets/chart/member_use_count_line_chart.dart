@@ -1,12 +1,9 @@
-import 'package:dental_guard_flutter/core/constants/app_colors.dart';
 import 'package:dental_guard_flutter/core/constants/app_resources.dart';
 import 'package:dental_guard_flutter/core/widgets/text/app_text.dart';
-import 'package:dental_guard_flutter/features/teeth_record/presentation/widgets/chart/pieChart/BaselinePieChart.dart';
+import 'package:dental_guard_flutter/features/teeth_record/presentation/widgets/chart/pieChart/baseline_pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
-import '../../../../../core/constants/app_images.dart';
 import '../../../../../core/utils/dialog_manager.dart';
 import '../../../../../core/widgets/text/text_theme.dart';
 import '../../../application/teeth_record_usecases_provider.dart';

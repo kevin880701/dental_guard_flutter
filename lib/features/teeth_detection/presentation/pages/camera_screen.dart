@@ -9,16 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/constants/app_colors.dart';
-import '../../../../core/constants/app_images.dart';
 import '../../../../core/widgets/image/app_icon.dart';
 import '../../../../core/widgets/text/app_text.dart';
-import '../../../../core/widgets/title_bar.dart';
 import '../provider/camera_controller.dart';
 import '../provider/teeth_detection_controller.dart';
 
 @RoutePage()
 class CameraScreen extends HookConsumerWidget {
+  const CameraScreen({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cameraState = ref.watch(cameraControllerProvider);

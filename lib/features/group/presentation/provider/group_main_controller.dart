@@ -1,11 +1,6 @@
-import 'dart:io';
 
-import 'package:camera/camera.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:image/image.dart' as img;
-import 'package:path/path.dart' show join;
-import 'package:path_provider/path_provider.dart';
 
 import '../../../../core/providers/refresh_controller.dart';
 

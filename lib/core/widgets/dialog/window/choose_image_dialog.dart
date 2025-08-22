@@ -1,15 +1,10 @@
-import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:dental_guard_flutter/core/constants/app_resources.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../constants/app_colors.dart';
 import '../../text/app_text.dart';
 
 class ChooseImageDialog extends HookConsumerWidget {

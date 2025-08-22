@@ -1,14 +1,12 @@
 
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../main.dart';
-import '../constants/app_images.dart';
 
 String secondsToMMSS(int seconds) {
   final m = (seconds ~/ 60).toString().padLeft(2, '0');
@@ -32,7 +30,7 @@ extension DateTimeFormatExtension on DateTime {
   }
 
   String formatDateTime() {
-    return "${year}年"
+    return "$year年"
         "${month.toString().padLeft(2, '0')}月"
         "${day.toString().padLeft(2, '0')}日 "
         "${hour.toString().padLeft(2, '0')}:"

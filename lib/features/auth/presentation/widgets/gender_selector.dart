@@ -34,7 +34,7 @@ class GenderSelector extends StatelessWidget {
                           RadioTheme(
                             data: RadioThemeData(
                               fillColor: WidgetStateProperty.resolveWith((states) {
-                                if (states.contains(MaterialState.selected)) {
+                                if (states.contains(WidgetState.selected)) {
                                   return AppColors.primaryBlack;
                                 }
                                 return AppColors.disableGrey;

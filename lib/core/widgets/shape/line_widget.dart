@@ -12,7 +12,7 @@ class LineWidget extends StatelessWidget {
   final double gap;
 
   const LineWidget({
-    Key? key,
+    super.key,
     required this.direction,
     this.thickness = 2.0,
     this.color = Colors.black,
@@ -20,7 +20,7 @@ class LineWidget extends StatelessWidget {
     this.isDashed = false,
     this.dashLength = 10.0,
     this.gap = 5.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

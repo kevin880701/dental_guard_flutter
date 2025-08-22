@@ -37,7 +37,7 @@ class DashTextInputFormatter extends TextInputFormatter {
 
     // 如果字串長度大於4，並且還沒有加上'-'符號，自動加上
     if (newText.length > 4) {
-      newText = newText.substring(0, 4) + '-' + newText.substring(4);
+      newText = '${newText.substring(0, 4)}-${newText.substring(4)}';
     }
 
     return TextEditingValue(

@@ -2,7 +2,7 @@ import 'package:dental_guard_flutter/core/constants/app_colors.dart';
 import 'package:dental_guard_flutter/core/constants/app_images.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:dental_guard_flutter/core/widgets/text/app_text.dart';
-import 'package:dental_guard_flutter/features/teeth_record/presentation/widgets/chart/pieChart/BaselinePieChart.dart';
+import 'package:dental_guard_flutter/features/teeth_record/presentation/widgets/chart/pieChart/baseline_pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

@@ -1,6 +1,5 @@
 import 'package:dental_guard_flutter/core/utils/app_log.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../features/system/application/system_usecases_provider.dart';
@@ -63,7 +62,7 @@ class VersionInfoNotifier extends StateNotifier<VersionInfoState> {
 
       if (appInfo == null) return false;
       return true;
-    } catch (e, st) {
+    } catch (e) {
       AppLog.e("Error:$e");
       final packageInfo = await PackageInfo.fromPlatform();
       state = state.copyWith(

@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:dental_guard_flutter/core/utils/utils.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,7 +8,6 @@ import '../data/models/response/brushing_stats/brushing_stats_data.dart';
 import '../data/models/response/group_top_user/group_top_user.dart';
 import '../data/repositories/teeth_record_repository_impl.dart';
 import '../domain/entity/chart_time_status.dart';
-import '../domain/entity/rank_chart_data.dart';
 import '../domain/entity/rank_sort_criteria.dart';
 import '../domain/usecase/create_brushing_record_usecase.dart';
 import '../domain/usecase/delete_brushing_record_usecase.dart';

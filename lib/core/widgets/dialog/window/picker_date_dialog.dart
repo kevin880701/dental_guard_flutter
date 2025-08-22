@@ -1,15 +1,10 @@
 import 'package:dental_guard_flutter/core/constants/app_images.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'dart:io';
 
 import '../../../../features/teeth_record/domain/entity/chart_time_status.dart';
 import '../../../constants/app_colors.dart';
 import '../../../constants/app_strings.dart';
-import '../../../utils/utils.dart';
 import '../../datePicker/library/date_picker.dart';
 import '../../datePicker/library/date_picker_manager.dart';
 import '../../image/app_icon.dart';
@@ -113,20 +108,20 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
     // 顯示從現在開始前十年的學期
     for (int i = 0; i < 11; i++) {
       int taiwanYear = currentTaiwanYear - 10 + i;
-      semesterList.add("${taiwanYear}上學期");
-      semesterList.add("${taiwanYear}下學期");
+      semesterList.add("$taiwanYear上學期");
+      semesterList.add("$taiwanYear下學期");
     }
 
     // 計算當前時間對應的學期索引
     int selectedTaiwanYear = selectedTime.year - 1911;
     String selectedSemesterString;
     if (selectedTime.month >= 8 || selectedTime.month <= 1) { // 上學期 (8月到1月)
-      selectedSemesterString = "${selectedTaiwanYear}上學期";
+      selectedSemesterString = "$selectedTaiwanYear上學期";
       if (selectedTime.month <= 1) { // 如果是1月，則歸為前一年的上學期
         selectedSemesterString = "${selectedTaiwanYear - 1}上學期";
       }
     } else { // 下學期 (2月到7月)
-      selectedSemesterString = "${selectedTaiwanYear}下學期";
+      selectedSemesterString = "$selectedTaiwanYear下學期";
     }
     semesterSelectorIndex = semesterList.indexOf(selectedSemesterString);
     if (semesterSelectorIndex == -1) { // 如果找不到，可能是初始時間不在範圍內，預設為當前學期
@@ -140,12 +135,12 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
     int currentTaiwanYear = currentYear - 1911;
     String currentSemesterString;
     if (DateTime.now().month >= 8 || DateTime.now().month <= 1) {
-      currentSemesterString = "${currentTaiwanYear}上學期";
+      currentSemesterString = "$currentTaiwanYear上學期";
       if (DateTime.now().month <= 1) {
         currentSemesterString = "${currentTaiwanYear - 1}上學期";
       }
     } else {
-      currentSemesterString = "${currentTaiwanYear}下學期";
+      currentSemesterString = "$currentTaiwanYear下學期";
     }
     return semesterList.indexOf(currentSemesterString);
   }
@@ -326,7 +321,7 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
             ),
             const SizedBox(width: 4),
             AppText(
-              text: "${viewMonthSelectorYear.toString().padLeft(4, '0')}",
+              text: viewMonthSelectorYear.toString().padLeft(4, '0'),
               textStyle: titleMedium,
               color: AppColors.primaryBlack,
             ),
@@ -422,15 +417,15 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
   }
 
   Widget yearSelectorWidget() {
-    ScrollController _scrollController = ScrollController();
+    ScrollController scrollController = ScrollController();
 
     void scrollToSelectedYear() {
-      if (_scrollController.hasClients) {
+      if (scrollController.hasClients) {
         final double itemWidth = MediaQuery.of(context).size.width / 5;
         final double offset = (yearSelectorIndex != -1)
             ? (yearSelectorIndex * itemWidth) - (itemWidth * 2)
             : ((yearList.length - 1) * itemWidth) - (itemWidth * 2);
-        _scrollController.animateTo(
+        scrollController.animateTo(
           offset,
           duration: const Duration(milliseconds: 500),
           curve: Curves.easeInOut,
@@ -450,7 +445,7 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: yearList.length,
-            controller: _scrollController,
+            controller: scrollController,
             itemBuilder: (BuildContext context, int index) {
               bool isSelected = yearSelectorIndex == index;
               bool isCurrentYear = currentYearSelectorIndex == index;
@@ -490,11 +485,11 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
         const SizedBox(height: 24),
         GestureDetector(
           onTap: () {
-            if (_scrollController.hasClients) {
+            if (scrollController.hasClients) {
               final double itemWidth = MediaQuery.of(context).size.width / 5;
               final double offset =
                   ((yearList.length - 1) * itemWidth) - (itemWidth * 2);
-              _scrollController.animateTo(
+              scrollController.animateTo(
                 offset,
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeInOut,
@@ -520,10 +515,10 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
   }
 
   Widget semesterSelectorWidget() {
-    ScrollController _semesterScrollController = ScrollController();
+    ScrollController semesterScrollController = ScrollController();
 
     void scrollToSelectedSemester() {
-      if (_semesterScrollController.hasClients) {
+      if (semesterScrollController.hasClients) {
         // 確保選中的學期在可視範圍內，並盡量居中
         // 這裡的 itemWidth 需要根據實際學期文字長度調整
         final double itemWidth = 120; // 估計一個學期項目的寬度，可能需要微調
@@ -531,8 +526,8 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
             ? (semesterSelectorIndex * itemWidth) - (itemWidth * 2)
             : ((semesterList.length - 1) * itemWidth) - (itemWidth * 2);
 
-        _semesterScrollController.animateTo(
-          offset.clamp(0.0, _semesterScrollController.position.maxScrollExtent), // 限制在有效範圍內
+        semesterScrollController.animateTo(
+          offset.clamp(0.0, semesterScrollController.position.maxScrollExtent), // 限制在有效範圍內
           duration: const Duration(milliseconds: 500),
           curve: Curves.easeInOut,
         );
@@ -551,7 +546,7 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: semesterList.length,
-            controller: _semesterScrollController,
+            controller: semesterScrollController,
             itemBuilder: (BuildContext context, int index) {
               bool isSelected = semesterSelectorIndex == index;
               bool isCurrentSemester = currentSemesterSelectorIndex == index;
@@ -610,12 +605,12 @@ class _PickerDateDialogState extends State<PickerDateDialog> {
               selectedTime = DateTime.now();
               _initSemesterList(); // 確保重新計算當前學期索引和選中索引
             });
-            if (_semesterScrollController.hasClients) {
+            if (semesterScrollController.hasClients) {
               // 滾動到當前學期
               final double itemWidth = 120; // 估計一個學期項目的寬度，可能需要微調
               final double offset = (currentSemesterSelectorIndex * itemWidth) - (itemWidth * 2);
-              _semesterScrollController.animateTo(
-                offset.clamp(0.0, _semesterScrollController.position.maxScrollExtent),
+              semesterScrollController.animateTo(
+                offset.clamp(0.0, semesterScrollController.position.maxScrollExtent),
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.easeInOut,
               );

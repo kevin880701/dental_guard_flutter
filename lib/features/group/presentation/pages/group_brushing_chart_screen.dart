@@ -11,8 +11,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../../core/base/base_page.dart';
-import '../../../../core/constants/app_colors.dart';
-import '../../../../core/providers/refresh_controller.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/utils/dialog_manager.dart';
 import '../../../../core/widgets/image/app_icon.dart';
@@ -39,7 +37,7 @@ class GroupBrushingChartScreen extends HookConsumerWidget {
         onRefresh: () async {
           ref.read(groupMainProvider.notifier).refresh();
         },
-        child: Container(
+        child: SizedBox(
         height: double.infinity,
         child: SingleChildScrollView(
           child: Container(

@@ -12,10 +12,10 @@ class LoadingOverlay extends HookConsumerWidget {
   final VoidCallback? onCancel;
 
   const LoadingOverlay({
-    Key? key,
+    super.key,
     this.loadingText = AppStrings.loading,
     this.onCancel,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

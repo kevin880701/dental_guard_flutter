@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../../../../../../core/constants/app_colors.dart';
 import '../../../../../../core/widgets/shape/line_widget.dart';
 import '../../../../../../core/widgets/text/app_text.dart';
@@ -32,7 +31,6 @@ class ChartInfoWidget extends StatelessWidget {
         return "本學期平均";
       case ChartTimeStatus.quarter:
       case ChartTimeStatus.quarterHour:
-      default:
         return "";
     }
   }
@@ -51,7 +49,6 @@ class ChartInfoWidget extends StatelessWidget {
         return "去年學期平均";
       case ChartTimeStatus.quarter:
       case ChartTimeStatus.quarterHour:
-      default:
         return "";
     }
   }

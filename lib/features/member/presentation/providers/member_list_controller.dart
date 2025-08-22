@@ -1,9 +1,9 @@
-import 'package:collection/collection.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../../auth/data/models/response/user_info/user_info_data.dart';
 import '../../../organization/application/organization_controller.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../auth/data/models/response/user_info/user_info_data.dart';
 
 part 'member_list_controller.freezed.dart';
 

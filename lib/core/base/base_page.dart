@@ -68,7 +68,7 @@ class BasePage extends HookConsumerWidget {
           children: [
             AbsorbPointer(
               absorbing: pageState.isLoading,
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height,
                 child: child,
