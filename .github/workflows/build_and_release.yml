@@ -1,0 +1,98 @@
+name: Flutter Build & Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.1'
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze code
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test
+
+  build_and_release:
+    name: Build & Release
+    environment: prod
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.1'
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      # --- 解碼並建立簽署金鑰檔案（key.properties） ---
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.SIGNING_KEY_BASE64 }}" | base64 --decode > android/app/dental_guard.jks
+
+      - name: Create key.properties
+        run: |
+          echo "storeFile=dental_guard.jks" > android/key.properties
+          echo "storePassword=${{ secrets.SIGNING_KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+
+      - name: Build and Release APK to Firebase
+        run: flutter build apk --release
+
+      - name: Distribute APK to Firebase App Distribution
+        uses: ./.github/actions/firebase-distribution-local
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.GOOGLE_PLAY_JSON_KEY }}
+          groups: qa-team
+          file: build/app/outputs/flutter-apk/app-release.apk
+          releaseNotes: "版本 ${{ github.ref_name }} - 自動化建置 #${{ github.run_number }}"
+
+      # --- 打包 AAB 並分發到 Google Play ---
+      - name: Build and Release AAB to Google Play
+        run: flutter build appbundle --release
+
+      - name: Distribute AAB to Google Play
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_JSON_KEY }}
+
+          packageName: com.lhr.oralcare
+
+          releaseFiles: build/app/outputs/bundle/release/app-release.aab
+
+          track: internal
