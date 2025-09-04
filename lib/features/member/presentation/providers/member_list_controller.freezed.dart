@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MemberListState {
-  String get groupId => throw _privateConstructorUsedError;
+  GroupWithMemberCountData? get group => throw _privateConstructorUsedError;
   List<UserInfoData> get users => throw _privateConstructorUsedError;
 
   /// Create a copy of MemberListState
@@ -32,7 +32,9 @@ abstract class $MemberListStateCopyWith<$Res> {
           MemberListState value, $Res Function(MemberListState) then) =
       _$MemberListStateCopyWithImpl<$Res, MemberListState>;
   @useResult
-  $Res call({String groupId, List<UserInfoData> users});
+  $Res call({GroupWithMemberCountData? group, List<UserInfoData> users});
+
+  $GroupWithMemberCountDataCopyWith<$Res>? get group;
 }
 
 /// @nodoc
@@ -50,19 +52,33 @@ class _$MemberListStateCopyWithImpl<$Res, $Val extends MemberListState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? groupId = null,
+    Object? group = freezed,
     Object? users = null,
   }) {
     return _then(_value.copyWith(
-      groupId: null == groupId
-          ? _value.groupId
-          : groupId // ignore: cast_nullable_to_non_nullable
-              as String,
+      group: freezed == group
+          ? _value.group
+          : group // ignore: cast_nullable_to_non_nullable
+              as GroupWithMemberCountData?,
       users: null == users
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
               as List<UserInfoData>,
     ) as $Val);
+  }
+
+  /// Create a copy of MemberListState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $GroupWithMemberCountDataCopyWith<$Res>? get group {
+    if (_value.group == null) {
+      return null;
+    }
+
+    return $GroupWithMemberCountDataCopyWith<$Res>(_value.group!, (value) {
+      return _then(_value.copyWith(group: value) as $Val);
+    });
   }
 }
 
@@ -74,7 +90,10 @@ abstract class _$$MemberListStateImplCopyWith<$Res>
       __$$MemberListStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String groupId, List<UserInfoData> users});
+  $Res call({GroupWithMemberCountData? group, List<UserInfoData> users});
+
+  @override
+  $GroupWithMemberCountDataCopyWith<$Res>? get group;
 }
 
 /// @nodoc
@@ -90,14 +109,14 @@ class __$$MemberListStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? groupId = null,
+    Object? group = freezed,
     Object? users = null,
   }) {
     return _then(_$MemberListStateImpl(
-      groupId: null == groupId
-          ? _value.groupId
-          : groupId // ignore: cast_nullable_to_non_nullable
-              as String,
+      group: freezed == group
+          ? _value.group
+          : group // ignore: cast_nullable_to_non_nullable
+              as GroupWithMemberCountData?,
       users: null == users
           ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
@@ -110,12 +129,11 @@ class __$$MemberListStateImplCopyWithImpl<$Res>
 
 class _$MemberListStateImpl implements _MemberListState {
   const _$MemberListStateImpl(
-      {this.groupId = '', final List<UserInfoData> users = const []})
+      {this.group, final List<UserInfoData> users = const []})
       : _users = users;
 
   @override
-  @JsonKey()
-  final String groupId;
+  final GroupWithMemberCountData? group;
   final List<UserInfoData> _users;
   @override
   @JsonKey()
@@ -127,7 +145,7 @@ class _$MemberListStateImpl implements _MemberListState {
 
   @override
   String toString() {
-    return 'MemberListState(groupId: $groupId, users: $users)';
+    return 'MemberListState(group: $group, users: $users)';
   }
 
   @override
@@ -135,13 +153,13 @@ class _$MemberListStateImpl implements _MemberListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MemberListStateImpl &&
-            (identical(other.groupId, groupId) || other.groupId == groupId) &&
+            (identical(other.group, group) || other.group == group) &&
             const DeepCollectionEquality().equals(other._users, _users));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, groupId, const DeepCollectionEquality().hash(_users));
+      runtimeType, group, const DeepCollectionEquality().hash(_users));
 
   /// Create a copy of MemberListState
   /// with the given fields replaced by the non-null parameter values.
@@ -155,11 +173,11 @@ class _$MemberListStateImpl implements _MemberListState {
 
 abstract class _MemberListState implements MemberListState {
   const factory _MemberListState(
-      {final String groupId,
+      {final GroupWithMemberCountData? group,
       final List<UserInfoData> users}) = _$MemberListStateImpl;
 
   @override
-  String get groupId;
+  GroupWithMemberCountData? get group;
   @override
   List<UserInfoData> get users;
 

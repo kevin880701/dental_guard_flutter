@@ -18,20 +18,6 @@ class OrganizationRemoteDataSource {
 
   OrganizationRemoteDataSource(this.networkInterface);
 
-  /// 取得管理的群組
-  Future<GroupsManageData?> getManagedGroups() async {
-    final response = await networkInterface.get(
-      url: ApiEndPoint.getManagedGroups,
-    );
-
-    final apiResponse = ApiResponse<GroupsManageData>.fromJson(
-      response.data,
-          (json) => GroupsManageData.fromJson(json as Map<String, dynamic>),
-    );
-
-    return apiResponse.data;
-  }
-
   /// 建立群組
   Future<GroupData?> createGroup(CreateGroupRequest request) async {
     final response = await networkInterface.post(

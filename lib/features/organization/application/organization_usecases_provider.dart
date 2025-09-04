@@ -8,7 +8,6 @@ import '../domain/usecase/create_group_usecase.dart';
 import '../domain/usecase/get_group_by_id_usecase.dart';
 import '../domain/usecase/get_group_users_usecase.dart';
 import '../domain/usecase/get_groups_by_organization_usecase.dart';
-import '../domain/usecase/get_managed_groups_usecase.dart';
 import '../domain/usecase/get_user_organizations_usecase.dart';
 import '../domain/usecase/remove_group_member_usecase.dart';
 import '../domain/usecase/update_group_name_usecase.dart';
@@ -17,12 +16,6 @@ final organizationRepositoryProvider = Provider<OrganizationRepository>((ref) {
   return OrganizationRepositoryImpl(
     OrganizationRemoteDataSource(NetworkInterface.getInstance()),
   );
-});
-
-/// UseCases Providers
-final getManagedGroupsUseCaseProvider = Provider<GetManagedGroupsUseCase>((ref) {
-  final repo = ref.read(organizationRepositoryProvider);
-  return GetManagedGroupsUseCase(repo);
 });
 
 final createGroupUseCaseProvider = Provider<CreateGroupUseCase>((ref) {

@@ -8,15 +8,17 @@ import '../../../../core/widgets/keep_alive_wrapper.dart';
 import '../../../../core/widgets/tab_navigation/tab_navigation.dart';
 import '../../../../core/widgets/title_bar.dart';
 import '../../../auth/data/models/response/user_info/user_info_data.dart';
+import '../../../organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
 import '../providers/member_main_controller.dart';
 import 'member_brushing_chart_screen.dart';
 import 'member_teeth_record_screen.dart';
 
 @RoutePage()
 class MemberMainScreen extends HookConsumerWidget {
+  final GroupWithMemberCountData group;
   final UserInfoData user;
 
-  const MemberMainScreen({super.key, required this.user});
+  const MemberMainScreen({super.key, required this.group, required this.user});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,6 +32,7 @@ class MemberMainScreen extends HookConsumerWidget {
     useEffect(() {
       Future.microtask(() {
         controller.setUser(user);
+        controller.setGroup(group);
         controller.loadUserBrushingRecords();
       });
       return null;
@@ -63,7 +66,6 @@ class MemberMainScreen extends HookConsumerWidget {
             selectedIndex: tabIndex.value,
             onItemTap: (idx) {
               tabIndex.value = idx;
-              // 這裡不用 animateToPage，交給 useEffect 處理
             },
             labelColor: AppColors.primaryBlack,
             indicatorColor: AppColors.primaryBlack,

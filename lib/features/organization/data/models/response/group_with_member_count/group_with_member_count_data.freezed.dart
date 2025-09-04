@@ -31,6 +31,8 @@ mixin _$GroupWithMemberCountData {
   String get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'member_count')
   int get memberCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'type')
+  String get type => throw _privateConstructorUsedError;
 
   /// Serializes this GroupWithMemberCountData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,7 +55,8 @@ abstract class $GroupWithMemberCountDataCopyWith<$Res> {
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'created_at') String createdAt,
       @JsonKey(name: 'updated_at') String updatedAt,
-      @JsonKey(name: 'member_count') int memberCount});
+      @JsonKey(name: 'member_count') int memberCount,
+      @JsonKey(name: 'type') String type});
 }
 
 /// @nodoc
@@ -77,6 +80,7 @@ class _$GroupWithMemberCountDataCopyWithImpl<$Res,
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? memberCount = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -99,6 +103,10 @@ class _$GroupWithMemberCountDataCopyWithImpl<$Res,
           ? _value.memberCount
           : memberCount // ignore: cast_nullable_to_non_nullable
               as int,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -117,7 +125,8 @@ abstract class _$$GroupWithMemberCountDataImplCopyWith<$Res>
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'created_at') String createdAt,
       @JsonKey(name: 'updated_at') String updatedAt,
-      @JsonKey(name: 'member_count') int memberCount});
+      @JsonKey(name: 'member_count') int memberCount,
+      @JsonKey(name: 'type') String type});
 }
 
 /// @nodoc
@@ -140,6 +149,7 @@ class __$$GroupWithMemberCountDataImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? memberCount = null,
+    Object? type = null,
   }) {
     return _then(_$GroupWithMemberCountDataImpl(
       id: null == id
@@ -162,6 +172,10 @@ class __$$GroupWithMemberCountDataImplCopyWithImpl<$Res>
           ? _value.memberCount
           : memberCount // ignore: cast_nullable_to_non_nullable
               as int,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -174,7 +188,8 @@ class _$GroupWithMemberCountDataImpl implements _GroupWithMemberCountData {
       @JsonKey(name: 'name') required this.name,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'updated_at') required this.updatedAt,
-      @JsonKey(name: 'member_count') required this.memberCount});
+      @JsonKey(name: 'member_count') required this.memberCount,
+      @JsonKey(name: 'type') required this.type});
 
   factory _$GroupWithMemberCountDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$GroupWithMemberCountDataImplFromJson(json);
@@ -194,10 +209,13 @@ class _$GroupWithMemberCountDataImpl implements _GroupWithMemberCountData {
   @override
   @JsonKey(name: 'member_count')
   final int memberCount;
+  @override
+  @JsonKey(name: 'type')
+  final String type;
 
   @override
   String toString() {
-    return 'GroupWithMemberCountData(id: $id, name: $name, createdAt: $createdAt, updatedAt: $updatedAt, memberCount: $memberCount)';
+    return 'GroupWithMemberCountData(id: $id, name: $name, createdAt: $createdAt, updatedAt: $updatedAt, memberCount: $memberCount, type: $type)';
   }
 
   @override
@@ -212,13 +230,14 @@ class _$GroupWithMemberCountDataImpl implements _GroupWithMemberCountData {
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.memberCount, memberCount) ||
-                other.memberCount == memberCount));
+                other.memberCount == memberCount) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, createdAt, updatedAt, memberCount);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, createdAt, updatedAt, memberCount, type);
 
   /// Create a copy of GroupWithMemberCountData
   /// with the given fields replaced by the non-null parameter values.
@@ -243,7 +262,8 @@ abstract class _GroupWithMemberCountData implements GroupWithMemberCountData {
           @JsonKey(name: 'name') required final String name,
           @JsonKey(name: 'created_at') required final String createdAt,
           @JsonKey(name: 'updated_at') required final String updatedAt,
-          @JsonKey(name: 'member_count') required final int memberCount}) =
+          @JsonKey(name: 'member_count') required final int memberCount,
+          @JsonKey(name: 'type') required final String type}) =
       _$GroupWithMemberCountDataImpl;
 
   factory _GroupWithMemberCountData.fromJson(Map<String, dynamic> json) =
@@ -264,6 +284,9 @@ abstract class _GroupWithMemberCountData implements GroupWithMemberCountData {
   @override
   @JsonKey(name: 'member_count')
   int get memberCount;
+  @override
+  @JsonKey(name: 'type')
+  String get type;
 
   /// Create a copy of GroupWithMemberCountData
   /// with the given fields replaced by the non-null parameter values.

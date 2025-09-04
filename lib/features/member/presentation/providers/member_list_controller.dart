@@ -5,12 +5,14 @@ import '../../../auth/data/models/response/user_info/user_info_data.dart';
 import '../../../organization/application/organization_controller.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
+
 part 'member_list_controller.freezed.dart';
 
 @freezed
 class MemberListState with _$MemberListState {
   const factory MemberListState({
-    @Default('') String groupId,
+    GroupWithMemberCountData? group,
     @Default([]) List<UserInfoData> users,
   }) = _MemberListState;
 }
@@ -34,14 +36,16 @@ class MemberListController extends StateNotifier<MemberListState> {
     // });
   }
 
-  void setGroupId(String groupId) {
-    state = state.copyWith(groupId: groupId);
+  void setGroup(GroupWithMemberCountData group) {
+    state = state.copyWith(group: group);
   }
 
   Future<void> loadMembersByGroupId() async {
-    final members = await ref.read(organizationControllerProvider.notifier).loadGroupUsers(state.groupId);
+    List<UserInfoData> members = (state.group != null)
+        ? (await ref.read(organizationControllerProvider.notifier).loadGroupUsers(state.group!.id))
+        :[];
 
-      state = state.copyWith(groupId: state.groupId, users: members);
+      state = state.copyWith(users: members);
   }
 
   void updateUsers(List<UserInfoData> updatedUsers) {

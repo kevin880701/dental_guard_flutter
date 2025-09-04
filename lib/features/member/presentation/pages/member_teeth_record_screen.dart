@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dental_guard_flutter/core/constants/app_resources.dart';
 import 'package:dental_guard_flutter/core/widgets/text/app_text.dart';
 import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
+import 'package:dental_guard_flutter/features/group/presentation/provider/group_list_controller.dart';
 import 'package:dental_guard_flutter/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -54,11 +55,11 @@ class MemberTeethRecordScreen extends HookConsumerWidget {
                     );
                     if (result != null) {
                       controller.setUser(result);
-                      ref.read(organizationControllerProvider.notifier).loadManagedGroups();
+                      ref.read(groupListControllerProvider.notifier).refreshGroups();
                       ref.read(memberListControllerProvider.notifier).loadMembersByGroupId();
-                      AppToast.showToast(message: AppStrings.createSuccess);
+                      AppToast.showToast(message: AppStrings.editSuccess);
                     } else {
-                      AppToast.showToast(message: AppStrings.createFailed);
+                      AppToast.showToast(message: AppStrings.editFailed);
                     }
                   },
                 );
@@ -75,14 +76,15 @@ class MemberTeethRecordScreen extends HookConsumerWidget {
                     color: AppColors.primaryBlack),
                 AppText(text: AppStrings.toothBrushingRecord),
                 Spacer(),
-                AppButton(
-                  text: AppStrings.addRecordPlus,
-                  fontColor: AppColors.white,
-                  backgroundColor: AppColors.primaryBlack,
-                  onPressed: () {
-                    context.pushRoute(TeethDetectionRoute(userId: state.user!.id));
-                  },
-                )
+                if(controller.canEditMember())
+                  AppButton(
+                    text: AppStrings.addRecordPlus,
+                    fontColor: AppColors.white,
+                    backgroundColor: AppColors.primaryBlack,
+                    onPressed: () {
+                      context.pushRoute(TeethDetectionRoute(userId: state.user!.id));
+                    },
+                  )
               ],
             ),
           ),

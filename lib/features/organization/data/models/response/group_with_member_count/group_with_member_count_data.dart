@@ -11,6 +11,7 @@ class GroupWithMemberCountData with _$GroupWithMemberCountData {
     @JsonKey(name: 'created_at') required String createdAt,
     @JsonKey(name: 'updated_at') required String updatedAt,
     @JsonKey(name: 'member_count') required int memberCount,
+    @JsonKey(name: 'type') required String type, // admin、manager、user
   }) = _GroupWithMemberCountData;
 
   factory GroupWithMemberCountData.fromJson(Map<String, dynamic> json) =>

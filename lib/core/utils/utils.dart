@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../main.dart';
+import '../constants/params.dart';
 
 String secondsToMMSS(int seconds) {
   final m = (seconds ~/ 60).toString().padLeft(2, '0');
@@ -92,4 +93,23 @@ void exitApp() {
   } else if (Platform.isIOS) {
     exit(0); // 強制結束
   }
+}
+
+/// 提取中文數字的排序權重
+int extractChineseNumberWeight(String name) {
+  // 尋找名稱中的中文數字
+  for (final entry in chineseNumbers.entries) {
+    if (name.contains(entry.key)) {
+      return entry.value;
+    }
+  }
+
+  // 如果沒有找到中文數字，檢查是否有阿拉伯數字
+  final match = RegExp(r'\d+').firstMatch(name);
+  if (match != null) {
+    return int.tryParse(match.group(0)!) ?? 999;
+  }
+
+  // 如果都沒有找到數字，返回較大的數字讓它排在後面
+  return 999;
 }

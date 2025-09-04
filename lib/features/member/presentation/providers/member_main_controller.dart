@@ -5,8 +5,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/providers/refresh_controller.dart';
 import '../../../../core/utils/app_log.dart';
+import '../../../auth/application/auth_controller.dart';
 import '../../../auth/data/models/response/user_info/user_info_data.dart';
 import '../../../organization/application/organization_controller.dart';
+import '../../../organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
 import '../../../teeth_record/application/teeth_record_usecases_provider.dart';
 import '../../../teeth_record/data/models/response/brushing_record/brushing_record_data.dart';
 
@@ -15,6 +17,7 @@ part 'member_main_controller.freezed.dart';
 @freezed
 class MemberMainState with _$MemberMainState {
   const factory MemberMainState({
+    GroupWithMemberCountData? group,
     UserInfoData? user,
     required List<BrushingRecordData> brushingRecords,
     @Default(false) bool isLoading,
@@ -56,6 +59,38 @@ class MemberInfoController extends StateNotifier<MemberMainState> {
   void setUser(UserInfoData user) {
     state = state.copyWith(user: user);
   }
+
+  void setGroup(GroupWithMemberCountData group) {
+    state = state.copyWith(group: group);
+  }
+
+
+  /// 檢查是否可以編輯成員資訊
+  /// 兩種情況下可以編輯：
+  /// 1. 用戶是管理員（admin/manager）
+  /// 2. 用戶在編輯自己的資料
+  bool canEditMember() {
+    // 取得當前登入用戶的資訊
+    final currentUser = ref.read(authControllerProvider).userInfoData;
+    final currentGroup = state.group;
+    final targetUser = state.user;
+
+    // 如果沒有必要的資訊，預設允許編輯（向後兼容）
+    if (currentUser == null || currentGroup == null || targetUser == null) {
+      return true;
+    }
+
+    // 檢查是否為管理員（從群組的 type 欄位判斷）
+    final userType = currentGroup.type.toLowerCase();
+    final isAdmin = userType == 'admin' || userType == 'manager';
+
+    // 檢查是否為本人
+    final isSelf = currentUser.id == targetUser.id;
+
+    // 管理員或本人都可以編輯
+    return isAdmin || isSelf;
+  }
+
 
   Future<void> loadUserBrushingRecords() async {
     final String timeZone = await FlutterTimezone.getLocalTimezone();

@@ -7,12 +7,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/base/base_page.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../organization/application/organization_controller.dart';
-import '../../../organization/data/models/response/group/group_data.dart';
+import '../../../organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
 import '../providers/member_list_controller.dart';
 import '../widgets/MemberItem.dart';
 
 class MemberListScreen extends HookConsumerWidget {
-  final GroupData group;
+  final GroupWithMemberCountData group;
 
   const MemberListScreen({super.key, required this.group});
 
@@ -24,7 +24,7 @@ class MemberListScreen extends HookConsumerWidget {
 
     useEffect(() {
       Future.microtask(() async {
-         memberListControllerNotifier.setGroupId(group.id);
+         memberListControllerNotifier.setGroup(group);
         await memberListControllerNotifier.loadMembersByGroupId();
       });
       return null;
@@ -45,7 +45,7 @@ class MemberListScreen extends HookConsumerWidget {
                   return MemberItem(
                     user: user,
                     onTap: () {
-                      context.pushRoute(MemberMainRoute(user: user));
+                      context.pushRoute(MemberMainRoute(group: group, user: user));
                     },
                   );
                 },

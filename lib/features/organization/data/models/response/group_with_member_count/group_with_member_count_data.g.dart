@@ -14,6 +14,7 @@ _$GroupWithMemberCountDataImpl _$$GroupWithMemberCountDataImplFromJson(
       createdAt: json['created_at'] as String,
       updatedAt: json['updated_at'] as String,
       memberCount: (json['member_count'] as num).toInt(),
+      type: json['type'] as String,
     );
 
 Map<String, dynamic> _$$GroupWithMemberCountDataImplToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$GroupWithMemberCountDataImplToJson(
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'member_count': instance.memberCount,
+      'type': instance.type,
     };

@@ -21,7 +21,7 @@ class CameraRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return CameraScreen();
+      return const CameraScreen();
     },
   );
 }
@@ -47,7 +47,7 @@ class CreateUserProfileRoute extends PageRouteInfo<void> {
 class GroupMainRoute extends PageRouteInfo<GroupMainRouteArgs> {
   GroupMainRoute({
     Key? key,
-    required GroupData group,
+    required GroupWithMemberCountData group,
     List<PageRouteInfo>? children,
   }) : super(
          GroupMainRoute.name,
@@ -71,7 +71,7 @@ class GroupMainRouteArgs {
 
   final Key? key;
 
-  final GroupData group;
+  final GroupWithMemberCountData group;
 
   @override
   String toString() {
@@ -132,11 +132,12 @@ class MainRoute extends PageRouteInfo<void> {
 class MemberMainRoute extends PageRouteInfo<MemberMainRouteArgs> {
   MemberMainRoute({
     Key? key,
+    required GroupWithMemberCountData group,
     required UserInfoData user,
     List<PageRouteInfo>? children,
   }) : super(
          MemberMainRoute.name,
-         args: MemberMainRouteArgs(key: key, user: user),
+         args: MemberMainRouteArgs(key: key, group: group, user: user),
          initialChildren: children,
        );
 
@@ -146,21 +147,31 @@ class MemberMainRoute extends PageRouteInfo<MemberMainRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<MemberMainRouteArgs>();
-      return MemberMainScreen(key: args.key, user: args.user);
+      return MemberMainScreen(
+        key: args.key,
+        group: args.group,
+        user: args.user,
+      );
     },
   );
 }
 
 class MemberMainRouteArgs {
-  const MemberMainRouteArgs({this.key, required this.user});
+  const MemberMainRouteArgs({
+    this.key,
+    required this.group,
+    required this.user,
+  });
 
   final Key? key;
+
+  final GroupWithMemberCountData group;
 
   final UserInfoData user;
 
   @override
   String toString() {
-    return 'MemberMainRouteArgs{key: $key, user: $user}';
+    return 'MemberMainRouteArgs{key: $key, group: $group, user: $user}';
   }
 }
 

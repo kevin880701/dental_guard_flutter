@@ -122,7 +122,7 @@ class AppDropdown extends StatefulWidget {
     this.isEnable = true,
     this.padding = const EdgeInsets.all(8),
     this.itemBorderColor = Colors.transparent,
-    this.itemBackgroundColor = Colors.white,
+    this.itemBackgroundColor = Colors.transparent,
     this.itemBorderWidth = 1.0,
     this.itemBorderRadius = 0.0,
     this.itemSpacing = 4.0,
@@ -136,7 +136,7 @@ class AppDropdown extends StatefulWidget {
     this.textStyle = const TextStyle(fontSize: 16, color: Colors.black),
     this.itemTextStyle = const TextStyle(fontSize: 14, color: Colors.black),
     this.selectedTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
-    this.selectedBackgroundColor = Colors.lightBlueAccent,
+    this.selectedBackgroundColor = Colors.white,
   });
 
   @override

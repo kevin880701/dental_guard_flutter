@@ -14,7 +14,7 @@ import '../../../../core/base/base_page.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/utils/dialog_manager.dart';
 import '../../../../core/widgets/image/app_icon.dart';
-import '../../../organization/data/models/response/group/group_data.dart';
+import '../../../organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
 import '../../../teeth_record/application/teeth_record_usecases_provider.dart';
 import '../../../teeth_record/data/models/response/groups_brushing_records/group_brushing_records_data.dart';
 import '../../../teeth_record/presentation/widgets/chart/group_plaque_bar_chart.dart';
@@ -22,7 +22,7 @@ import '../../../teeth_record/presentation/widgets/chart/group_use_count_line_ch
 import '../provider/group_main_controller.dart';
 
 class GroupBrushingChartScreen extends HookConsumerWidget {
-  final GroupData group;
+  final GroupWithMemberCountData group;
 
   const GroupBrushingChartScreen({super.key, required this.group});
 

@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MemberMainState {
+  GroupWithMemberCountData? get group => throw _privateConstructorUsedError;
   UserInfoData? get user => throw _privateConstructorUsedError;
   List<BrushingRecordData> get brushingRecords =>
       throw _privateConstructorUsedError;
@@ -37,7 +38,8 @@ abstract class $MemberMainStateCopyWith<$Res> {
       _$MemberMainStateCopyWithImpl<$Res, MemberMainState>;
   @useResult
   $Res call(
-      {UserInfoData? user,
+      {GroupWithMemberCountData? group,
+      UserInfoData? user,
       List<BrushingRecordData> brushingRecords,
       bool isLoading,
       String? errorMessage,
@@ -61,6 +63,7 @@ class _$MemberMainStateCopyWithImpl<$Res, $Val extends MemberMainState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? group = freezed,
     Object? user = freezed,
     Object? brushingRecords = null,
     Object? isLoading = null,
@@ -68,6 +71,10 @@ class _$MemberMainStateCopyWithImpl<$Res, $Val extends MemberMainState>
     Object? refreshKey = null,
   }) {
     return _then(_value.copyWith(
+      group: freezed == group
+          ? _value.group
+          : group // ignore: cast_nullable_to_non_nullable
+              as GroupWithMemberCountData?,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -115,7 +122,8 @@ abstract class _$$MemberMainStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {UserInfoData? user,
+      {GroupWithMemberCountData? group,
+      UserInfoData? user,
       List<BrushingRecordData> brushingRecords,
       bool isLoading,
       String? errorMessage,
@@ -138,6 +146,7 @@ class __$$MemberMainStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? group = freezed,
     Object? user = freezed,
     Object? brushingRecords = null,
     Object? isLoading = null,
@@ -145,6 +154,10 @@ class __$$MemberMainStateImplCopyWithImpl<$Res>
     Object? refreshKey = null,
   }) {
     return _then(_$MemberMainStateImpl(
+      group: freezed == group
+          ? _value.group
+          : group // ignore: cast_nullable_to_non_nullable
+              as GroupWithMemberCountData?,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -173,13 +186,16 @@ class __$$MemberMainStateImplCopyWithImpl<$Res>
 
 class _$MemberMainStateImpl implements _MemberMainState {
   const _$MemberMainStateImpl(
-      {this.user,
+      {this.group,
+      this.user,
       required final List<BrushingRecordData> brushingRecords,
       this.isLoading = false,
       this.errorMessage,
       this.refreshKey = 99})
       : _brushingRecords = brushingRecords;
 
+  @override
+  final GroupWithMemberCountData? group;
   @override
   final UserInfoData? user;
   final List<BrushingRecordData> _brushingRecords;
@@ -201,7 +217,7 @@ class _$MemberMainStateImpl implements _MemberMainState {
 
   @override
   String toString() {
-    return 'MemberMainState(user: $user, brushingRecords: $brushingRecords, isLoading: $isLoading, errorMessage: $errorMessage, refreshKey: $refreshKey)';
+    return 'MemberMainState(group: $group, user: $user, brushingRecords: $brushingRecords, isLoading: $isLoading, errorMessage: $errorMessage, refreshKey: $refreshKey)';
   }
 
   @override
@@ -209,6 +225,7 @@ class _$MemberMainStateImpl implements _MemberMainState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MemberMainStateImpl &&
+            const DeepCollectionEquality().equals(other.group, group) &&
             (identical(other.user, user) || other.user == user) &&
             const DeepCollectionEquality()
                 .equals(other._brushingRecords, _brushingRecords) &&
@@ -223,6 +240,7 @@ class _$MemberMainStateImpl implements _MemberMainState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(group),
       user,
       const DeepCollectionEquality().hash(_brushingRecords),
       isLoading,
@@ -241,12 +259,15 @@ class _$MemberMainStateImpl implements _MemberMainState {
 
 abstract class _MemberMainState implements MemberMainState {
   const factory _MemberMainState(
-      {final UserInfoData? user,
+      {final GroupWithMemberCountData? group,
+      final UserInfoData? user,
       required final List<BrushingRecordData> brushingRecords,
       final bool isLoading,
       final String? errorMessage,
       final int refreshKey}) = _$MemberMainStateImpl;
 
+  @override
+  GroupWithMemberCountData? get group;
   @override
   UserInfoData? get user;
   @override

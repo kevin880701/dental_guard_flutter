@@ -16,7 +16,6 @@ class ApiEndPoint {
   static String getUserById(String id) => '/v1/user/$id';
 
   // Organization
-  static const String getManagedGroups = '/v1/organization/managed-groups';
   static const String createGroup = '/v1/organization/group';
   static const String addGroupMember = '/v1/organization/group/member';
   static const String removeGroupMember = '/v1/organization/group/member';

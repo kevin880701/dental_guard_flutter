@@ -11,7 +11,6 @@ import '../models/response/group_with_member_count/group_with_member_count_data.
 import '../models/response/organization/organization_data.dart';
 
 abstract class OrganizationRepository {
-  Future<GroupsManageData?> getManagedGroups();
   Future<GroupData?> createGroup(CreateGroupRequest request);
   Future<bool> addGroupMember(GroupMemberRequest request);
   Future<bool> removeGroupMember(GroupMemberRequest request);
@@ -27,11 +26,6 @@ class OrganizationRepositoryImpl implements OrganizationRepository {
   final OrganizationRemoteDataSource remoteDataSource;
 
   OrganizationRepositoryImpl(this.remoteDataSource);
-
-  @override
-  Future<GroupsManageData?> getManagedGroups() async {
-    return await remoteDataSource.getManagedGroups();
-  }
 
   @override
   Future<GroupData?> createGroup(CreateGroupRequest request) async {

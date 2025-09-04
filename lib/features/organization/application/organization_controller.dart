@@ -29,22 +29,6 @@ class OrganizationController extends StateNotifier<OrganizationState> {
 
   OrganizationController(this.ref) : super(const OrganizationState());
 
-  /// 載入管理群組
-  Future<void> loadManagedGroups() async {
-    try {
-      final getManagedGroupsUseCase = ref.read(getManagedGroupsUseCaseProvider);
-      final data = await getManagedGroupsUseCase();
-
-      final flattenedGroups = flattenHierarchy(data?.hierarchy);
-      state = state.copyWith(
-        groupsManageData: data,
-        allParentGroups: flattenedGroups,
-      );
-    } catch (e, st) {
-      AppLog.e('載入群組失敗: $e\n$st');
-    }
-  }
-
   /// 建立群組
   Future<GroupData?> createGroup({
     required String organizationId,
