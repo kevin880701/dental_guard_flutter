@@ -9,6 +9,7 @@ import '../models/request/create_group/create_group_request.dart';
 import '../models/request/group_member/group_member_request.dart';
 import '../models/request/update_group_name/update_group_name_request.dart';
 import '../models/response/group/group_data.dart';
+import '../models/response/group_with_member_count/group_with_member_count_data.dart';
 import '../models/response/groups_manage/groups_manage_data.dart';
 import '../models/response/organization/organization_data.dart';
 
@@ -146,6 +147,23 @@ class OrganizationRemoteDataSource {
       response.data,
           (json) => (json as List)
           .map((item) => OrganizationData.fromJson(item as Map<String, dynamic>))
+          .toList(),
+    );
+
+    return apiResponse.data ?? [];
+  }
+
+
+  /// 取得指定組織下的所有群組及成員數量
+  Future<List<GroupWithMemberCountData>> getGroupsByOrganizationId(String organizationId) async {
+    final response = await networkInterface.get(
+      url: ApiEndPoint.getGroupsByOrganizationId(organizationId),
+    );
+
+    final apiResponse = ApiResponse<List<GroupWithMemberCountData>>.fromJson(
+      response.data,
+          (json) => (json as List)
+          .map((item) => GroupWithMemberCountData.fromJson(item as Map<String, dynamic>))
           .toList(),
     );
 

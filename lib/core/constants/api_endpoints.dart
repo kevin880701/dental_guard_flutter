@@ -30,6 +30,9 @@ class ApiEndPoint {
   /// /v1/organization/group/{groupId}
   static String getGroupById(String groupId) => '/v1/organization/group/$groupId';
 
+  static String getGroupsByOrganizationId(String organizationId) =>
+      '/v1/organization/$organizationId/groups';
+
   // Teeth Record
   static const String createBrushingRecord = '/v1/teeth-record/create';
   static const String groupBrushingStats = '/v1/teeth-record/group/stats';

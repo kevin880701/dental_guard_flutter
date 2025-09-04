@@ -7,6 +7,7 @@ import '../../data/datasources/organization_remote_datasource.dart';
 import '../models/request/add_group_member_extended/add_group_member_extended_request.dart';
 import '../models/request/update_group_name/update_group_name_request.dart';
 import '../models/response/group/group_data.dart';
+import '../models/response/group_with_member_count/group_with_member_count_data.dart';
 import '../models/response/organization/organization_data.dart';
 
 abstract class OrganizationRepository {
@@ -19,6 +20,7 @@ abstract class OrganizationRepository {
   Future<ApiResponse<UserInfoData?>> addGroupMemberExtended(AddGroupMemberExtendedRequest request);
   Future<ApiResponse<GroupData?>> updateGroupName(UpdateGroupNameRequest request);
   Future<List<OrganizationData>> getUserOrganizations();
+  Future<List<GroupWithMemberCountData>> getGroupsByOrganizationId(String organizationId);
 }
 
 class OrganizationRepositoryImpl implements OrganizationRepository {
@@ -69,5 +71,10 @@ class OrganizationRepositoryImpl implements OrganizationRepository {
   @override
   Future<List<OrganizationData>> getUserOrganizations() async {
     return await remoteDataSource.getUserOrganizations();
+  }
+
+  @override
+  Future<List<GroupWithMemberCountData>> getGroupsByOrganizationId(String organizationId) async {
+    return await remoteDataSource.getGroupsByOrganizationId(organizationId);
   }
 }
