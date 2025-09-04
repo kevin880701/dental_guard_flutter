@@ -10,6 +10,7 @@ import '../models/request/group_member/group_member_request.dart';
 import '../models/request/update_group_name/update_group_name_request.dart';
 import '../models/response/group/group_data.dart';
 import '../models/response/groups_manage/groups_manage_data.dart';
+import '../models/response/organization/organization_data.dart';
 
 class OrganizationRemoteDataSource {
   final NetworkInterface networkInterface;
@@ -133,5 +134,21 @@ class OrganizationRemoteDataSource {
     );
 
     return apiResponse;
+  }
+
+  /// 取得用戶所屬組織列表
+  Future<List<OrganizationData>> getUserOrganizations() async {
+    final response = await networkInterface.get(
+      url: ApiEndPoint.getUserOrganizations,
+    );
+
+    final apiResponse = ApiResponse<List<OrganizationData>>.fromJson(
+      response.data,
+          (json) => (json as List)
+          .map((item) => OrganizationData.fromJson(item as Map<String, dynamic>))
+          .toList(),
+    );
+
+    return apiResponse.data ?? [];
   }
 }
