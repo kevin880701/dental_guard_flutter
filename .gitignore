@@ -31,3 +31,13 @@ doc/api/
 
 .DS_Store
 .idea
+
+
+# Flutter 自動生成檔案
+**/linux/flutter/generated_plugin*
+**/windows/flutter/generated_plugin*
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/generated_plugins.cmake
+
+# Android/Kotlin 編譯日誌
+**/android/**/errors-*.log
