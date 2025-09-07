@@ -21,6 +21,8 @@ AddGroupMemberExtendedRequest _$AddGroupMemberExtendedRequestFromJson(
 
 /// @nodoc
 mixin _$AddGroupMemberExtendedRequest {
+  @JsonKey(name: 'organization_id')
+  String get organizationId => throw _privateConstructorUsedError;
   @JsonKey(name: 'group_id')
   String get groupId => throw _privateConstructorUsedError;
   @JsonKey(name: 'number')
@@ -57,7 +59,8 @@ abstract class $AddGroupMemberExtendedRequestCopyWith<$Res> {
           AddGroupMemberExtendedRequest>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'group_id') String groupId,
+      {@JsonKey(name: 'organization_id') String organizationId,
+      @JsonKey(name: 'group_id') String groupId,
       @JsonKey(name: 'number') String number,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'email') String? email,
@@ -83,6 +86,7 @@ class _$AddGroupMemberExtendedRequestCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? organizationId = null,
     Object? groupId = null,
     Object? number = null,
     Object? name = null,
@@ -93,6 +97,10 @@ class _$AddGroupMemberExtendedRequestCopyWithImpl<$Res,
     Object? gender = null,
   }) {
     return _then(_value.copyWith(
+      organizationId: null == organizationId
+          ? _value.organizationId
+          : organizationId // ignore: cast_nullable_to_non_nullable
+              as String,
       groupId: null == groupId
           ? _value.groupId
           : groupId // ignore: cast_nullable_to_non_nullable
@@ -139,7 +147,8 @@ abstract class _$$AddGroupMemberExtendedRequestImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'group_id') String groupId,
+      {@JsonKey(name: 'organization_id') String organizationId,
+      @JsonKey(name: 'group_id') String groupId,
       @JsonKey(name: 'number') String number,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'email') String? email,
@@ -164,6 +173,7 @@ class __$$AddGroupMemberExtendedRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? organizationId = null,
     Object? groupId = null,
     Object? number = null,
     Object? name = null,
@@ -174,6 +184,10 @@ class __$$AddGroupMemberExtendedRequestImplCopyWithImpl<$Res>
     Object? gender = null,
   }) {
     return _then(_$AddGroupMemberExtendedRequestImpl(
+      organizationId: null == organizationId
+          ? _value.organizationId
+          : organizationId // ignore: cast_nullable_to_non_nullable
+              as String,
       groupId: null == groupId
           ? _value.groupId
           : groupId // ignore: cast_nullable_to_non_nullable
@@ -215,7 +229,8 @@ class __$$AddGroupMemberExtendedRequestImplCopyWithImpl<$Res>
 class _$AddGroupMemberExtendedRequestImpl
     implements _AddGroupMemberExtendedRequest {
   const _$AddGroupMemberExtendedRequestImpl(
-      {@JsonKey(name: 'group_id') required this.groupId,
+      {@JsonKey(name: 'organization_id') required this.organizationId,
+      @JsonKey(name: 'group_id') required this.groupId,
       @JsonKey(name: 'number') required this.number,
       @JsonKey(name: 'name') required this.name,
       @JsonKey(name: 'email') this.email,
@@ -228,6 +243,9 @@ class _$AddGroupMemberExtendedRequestImpl
           Map<String, dynamic> json) =>
       _$$AddGroupMemberExtendedRequestImplFromJson(json);
 
+  @override
+  @JsonKey(name: 'organization_id')
+  final String organizationId;
   @override
   @JsonKey(name: 'group_id')
   final String groupId;
@@ -256,7 +274,7 @@ class _$AddGroupMemberExtendedRequestImpl
 
   @override
   String toString() {
-    return 'AddGroupMemberExtendedRequest(groupId: $groupId, number: $number, name: $name, email: $email, phone: $phone, avatarUrl: $avatarUrl, birthday: $birthday, gender: $gender)';
+    return 'AddGroupMemberExtendedRequest(organizationId: $organizationId, groupId: $groupId, number: $number, name: $name, email: $email, phone: $phone, avatarUrl: $avatarUrl, birthday: $birthday, gender: $gender)';
   }
 
   @override
@@ -264,6 +282,8 @@ class _$AddGroupMemberExtendedRequestImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddGroupMemberExtendedRequestImpl &&
+            (identical(other.organizationId, organizationId) ||
+                other.organizationId == organizationId) &&
             (identical(other.groupId, groupId) || other.groupId == groupId) &&
             (identical(other.number, number) || other.number == number) &&
             (identical(other.name, name) || other.name == name) &&
@@ -278,8 +298,8 @@ class _$AddGroupMemberExtendedRequestImpl
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, groupId, number, name, email,
-      phone, avatarUrl, birthday, gender);
+  int get hashCode => Object.hash(runtimeType, organizationId, groupId, number,
+      name, email, phone, avatarUrl, birthday, gender);
 
   /// Create a copy of AddGroupMemberExtendedRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -302,19 +322,23 @@ class _$AddGroupMemberExtendedRequestImpl
 abstract class _AddGroupMemberExtendedRequest
     implements AddGroupMemberExtendedRequest {
   const factory _AddGroupMemberExtendedRequest(
-          {@JsonKey(name: 'group_id') required final String groupId,
-          @JsonKey(name: 'number') required final String number,
-          @JsonKey(name: 'name') required final String name,
-          @JsonKey(name: 'email') final String? email,
-          @JsonKey(name: 'phone') final String? phone,
-          @JsonKey(name: 'avatar_url') final String? avatarUrl,
-          @JsonKey(name: 'birthday') required final String birthday,
-          @JsonKey(name: 'gender') required final int gender}) =
-      _$AddGroupMemberExtendedRequestImpl;
+      {@JsonKey(name: 'organization_id') required final String organizationId,
+      @JsonKey(name: 'group_id') required final String groupId,
+      @JsonKey(name: 'number') required final String number,
+      @JsonKey(name: 'name') required final String name,
+      @JsonKey(name: 'email') final String? email,
+      @JsonKey(name: 'phone') final String? phone,
+      @JsonKey(name: 'avatar_url') final String? avatarUrl,
+      @JsonKey(name: 'birthday') required final String birthday,
+      @JsonKey(name: 'gender')
+      required final int gender}) = _$AddGroupMemberExtendedRequestImpl;
 
   factory _AddGroupMemberExtendedRequest.fromJson(Map<String, dynamic> json) =
       _$AddGroupMemberExtendedRequestImpl.fromJson;
 
+  @override
+  @JsonKey(name: 'organization_id')
+  String get organizationId;
   @override
   @JsonKey(name: 'group_id')
   String get groupId;

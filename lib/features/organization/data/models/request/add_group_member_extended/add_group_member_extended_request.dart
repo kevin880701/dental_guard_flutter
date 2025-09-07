@@ -6,6 +6,7 @@ part 'add_group_member_extended_request.g.dart';
 @freezed
 class AddGroupMemberExtendedRequest with _$AddGroupMemberExtendedRequest {
   const factory AddGroupMemberExtendedRequest({
+    @JsonKey(name: 'organization_id') required String organizationId,
     @JsonKey(name: 'group_id') required String groupId,
     @JsonKey(name: 'number') required String number,
     @JsonKey(name: 'name') required String name,

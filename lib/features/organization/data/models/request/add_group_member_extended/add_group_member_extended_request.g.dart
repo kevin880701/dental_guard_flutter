@@ -9,6 +9,7 @@ part of 'add_group_member_extended_request.dart';
 _$AddGroupMemberExtendedRequestImpl
     _$$AddGroupMemberExtendedRequestImplFromJson(Map<String, dynamic> json) =>
         _$AddGroupMemberExtendedRequestImpl(
+          organizationId: json['organization_id'] as String,
           groupId: json['group_id'] as String,
           number: json['number'] as String,
           name: json['name'] as String,
@@ -22,6 +23,7 @@ _$AddGroupMemberExtendedRequestImpl
 Map<String, dynamic> _$$AddGroupMemberExtendedRequestImplToJson(
         _$AddGroupMemberExtendedRequestImpl instance) =>
     <String, dynamic>{
+      'organization_id': instance.organizationId,
       'group_id': instance.groupId,
       'number': instance.number,
       'name': instance.name,

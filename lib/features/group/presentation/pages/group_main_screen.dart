@@ -28,6 +28,7 @@ class GroupMainScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final memberListControllerNotifier = ref.read(memberListControllerProvider.notifier);
+    final groupListState = ref.watch(groupListControllerProvider);
 
     final tabIndex = useState(0);
     final tabs = [AppStrings.group, AppStrings.dataAnalysis];
@@ -72,6 +73,7 @@ class GroupMainScreen extends HookConsumerWidget {
                   }) async {
                     final useCase = ref.read(addGroupMemberExtendedUseCaseProvider);
                     final result = await useCase(
+                      organizationId: groupListState.selectedOrganizationId!,
                       groupId: group.id,
                       number: number,
                       name: name,

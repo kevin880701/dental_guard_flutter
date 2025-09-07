@@ -9,6 +9,7 @@ class AddGroupMemberExtendedUseCase {
   AddGroupMemberExtendedUseCase(this.repository);
 
   Future<ApiResponse<UserInfoData?>> call({
+    required String organizationId,
     required String groupId,
     required String number,
     required String name,
@@ -19,6 +20,7 @@ class AddGroupMemberExtendedUseCase {
     required int gender,
   }) {
     return repository.addGroupMemberExtended(AddGroupMemberExtendedRequest(
+      organizationId: organizationId,
       groupId: groupId,
       number: number,
       name: name,
