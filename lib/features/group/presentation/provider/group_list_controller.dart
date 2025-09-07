@@ -5,6 +5,7 @@ import '../../../../core/utils/app_log.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../organization/application/organization_usecases_provider.dart';
 import '../../../organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
+import '../../../organization/data/models/response/group_with_user_type/group_with_user_type_data.dart';
 import '../../../organization/data/models/response/organization/organization_data.dart';
 part 'group_list_controller.freezed.dart';
 
@@ -18,7 +19,7 @@ class GroupListState with _$GroupListState {
   const factory GroupListState({
     @Default([]) List<OrganizationData> organizations,
     @Default(0) int selectedOrganizationIndex,
-    @Default([]) List<GroupWithMemberCountData> groups,
+    @Default([]) List<GroupWithUserTypeData> groups,
     @Default(false) bool isLoadingOrganizations,
     @Default(false) bool isLoadingGroups,
     String? selectedOrganizationId,
@@ -36,8 +37,8 @@ class GroupListController extends StateNotifier<GroupListState> {
     await loadUserOrganizations();
   }
 
-  List<GroupWithMemberCountData> _sortGroupsByName(List<GroupWithMemberCountData> groups) {
-    final sortedGroups = List<GroupWithMemberCountData>.from(groups);
+  List<GroupWithUserTypeData> _sortGroupsByName(List<GroupWithUserTypeData> groups) {
+    final sortedGroups = List<GroupWithUserTypeData>.from(groups);
 
     sortedGroups.sort((a, b) {
       final weightA = extractChineseNumberWeight(a.name);
@@ -115,7 +116,7 @@ class GroupListController extends StateNotifier<GroupListState> {
     state = state.copyWith(isLoadingGroups: true, error: null);
 
     try {
-      final getGroupsByOrganizationUseCase = ref.read(getGroupsByOrganizationUseCaseProvider);
+      final getGroupsByOrganizationUseCase = ref.read(getUserGroupsByOrganizationUseCaseProvider);
       final groups = await getGroupsByOrganizationUseCase(organizationId);
 
       // 對群組進行排序

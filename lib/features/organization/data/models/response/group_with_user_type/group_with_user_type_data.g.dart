@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'group_with_member_count_data.dart';
+part of 'group_with_user_type_data.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GroupWithMemberCountDataImpl _$$GroupWithMemberCountDataImplFromJson(
+_$GroupWithUserTypeDataImpl _$$GroupWithUserTypeDataImplFromJson(
         Map<String, dynamic> json) =>
-    _$GroupWithMemberCountDataImpl(
+    _$GroupWithUserTypeDataImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       createdAt: json['created_at'] as String,
@@ -16,10 +16,11 @@ _$GroupWithMemberCountDataImpl _$$GroupWithMemberCountDataImplFromJson(
       memberCount: (json['member_count'] as num).toInt(),
       managerCount: (json['manager_count'] as num).toInt(),
       adminCount: (json['admin_count'] as num).toInt(),
+      type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$GroupWithMemberCountDataImplToJson(
-        _$GroupWithMemberCountDataImpl instance) =>
+Map<String, dynamic> _$$GroupWithUserTypeDataImplToJson(
+        _$GroupWithUserTypeDataImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -28,4 +29,5 @@ Map<String, dynamic> _$$GroupWithMemberCountDataImplToJson(
       'member_count': instance.memberCount,
       'manager_count': instance.managerCount,
       'admin_count': instance.adminCount,
+      'type': instance.type,
     };

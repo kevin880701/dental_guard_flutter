@@ -7,9 +7,10 @@ import '../../../../core/widgets/image/app_icon.dart';
 import '../../../../core/widgets/text/app_text.dart';
 import '../../../organization/data/models/response/group/group_data.dart';
 import '../../../organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
+import '../../../organization/data/models/response/group_with_user_type/group_with_user_type_data.dart';
 
 class GroupItem extends StatelessWidget {
-  final GroupWithMemberCountData? groupWithCount;
+  final GroupWithUserTypeData? groupWithCount;
   final VoidCallback? onTap;
   final VoidCallback? onEditTap;
 
@@ -25,7 +26,7 @@ class GroupItem extends StatelessWidget {
     // 檢查是否有編輯權限
     bool canEdit() {
       if (groupWithCount == null) return false;
-      final userType = groupWithCount!.type.toLowerCase();
+      final userType = groupWithCount!.type?.toLowerCase();
       return userType == 'admin' || userType == 'manager';
     }
     

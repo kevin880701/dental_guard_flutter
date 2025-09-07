@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'group_with_member_count_data.dart';
+part of 'group_with_user_type_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-GroupWithMemberCountData _$GroupWithMemberCountDataFromJson(
+GroupWithUserTypeData _$GroupWithUserTypeDataFromJson(
     Map<String, dynamic> json) {
-  return _GroupWithMemberCountData.fromJson(json);
+  return _GroupWithUserTypeData.fromJson(json);
 }
 
 /// @nodoc
-mixin _$GroupWithMemberCountData {
+mixin _$GroupWithUserTypeData {
   @JsonKey(name: 'id')
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
@@ -35,22 +35,24 @@ mixin _$GroupWithMemberCountData {
   int get managerCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'admin_count')
   int get adminCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'type')
+  String? get type => throw _privateConstructorUsedError;
 
-  /// Serializes this GroupWithMemberCountData to a JSON map.
+  /// Serializes this GroupWithUserTypeData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of GroupWithMemberCountData
+  /// Create a copy of GroupWithUserTypeData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GroupWithMemberCountDataCopyWith<GroupWithMemberCountData> get copyWith =>
+  $GroupWithUserTypeDataCopyWith<GroupWithUserTypeData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GroupWithMemberCountDataCopyWith<$Res> {
-  factory $GroupWithMemberCountDataCopyWith(GroupWithMemberCountData value,
-          $Res Function(GroupWithMemberCountData) then) =
-      _$GroupWithMemberCountDataCopyWithImpl<$Res, GroupWithMemberCountData>;
+abstract class $GroupWithUserTypeDataCopyWith<$Res> {
+  factory $GroupWithUserTypeDataCopyWith(GroupWithUserTypeData value,
+          $Res Function(GroupWithUserTypeData) then) =
+      _$GroupWithUserTypeDataCopyWithImpl<$Res, GroupWithUserTypeData>;
   @useResult
   $Res call(
       {@JsonKey(name: 'id') String id,
@@ -59,21 +61,22 @@ abstract class $GroupWithMemberCountDataCopyWith<$Res> {
       @JsonKey(name: 'updated_at') String updatedAt,
       @JsonKey(name: 'member_count') int memberCount,
       @JsonKey(name: 'manager_count') int managerCount,
-      @JsonKey(name: 'admin_count') int adminCount});
+      @JsonKey(name: 'admin_count') int adminCount,
+      @JsonKey(name: 'type') String? type});
 }
 
 /// @nodoc
-class _$GroupWithMemberCountDataCopyWithImpl<$Res,
-        $Val extends GroupWithMemberCountData>
-    implements $GroupWithMemberCountDataCopyWith<$Res> {
-  _$GroupWithMemberCountDataCopyWithImpl(this._value, this._then);
+class _$GroupWithUserTypeDataCopyWithImpl<$Res,
+        $Val extends GroupWithUserTypeData>
+    implements $GroupWithUserTypeDataCopyWith<$Res> {
+  _$GroupWithUserTypeDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GroupWithMemberCountData
+  /// Create a copy of GroupWithUserTypeData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -85,6 +88,7 @@ class _$GroupWithMemberCountDataCopyWithImpl<$Res,
     Object? memberCount = null,
     Object? managerCount = null,
     Object? adminCount = null,
+    Object? type = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -115,17 +119,21 @@ class _$GroupWithMemberCountDataCopyWithImpl<$Res,
           ? _value.adminCount
           : adminCount // ignore: cast_nullable_to_non_nullable
               as int,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$GroupWithMemberCountDataImplCopyWith<$Res>
-    implements $GroupWithMemberCountDataCopyWith<$Res> {
-  factory _$$GroupWithMemberCountDataImplCopyWith(
-          _$GroupWithMemberCountDataImpl value,
-          $Res Function(_$GroupWithMemberCountDataImpl) then) =
-      __$$GroupWithMemberCountDataImplCopyWithImpl<$Res>;
+abstract class _$$GroupWithUserTypeDataImplCopyWith<$Res>
+    implements $GroupWithUserTypeDataCopyWith<$Res> {
+  factory _$$GroupWithUserTypeDataImplCopyWith(
+          _$GroupWithUserTypeDataImpl value,
+          $Res Function(_$GroupWithUserTypeDataImpl) then) =
+      __$$GroupWithUserTypeDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -135,20 +143,20 @@ abstract class _$$GroupWithMemberCountDataImplCopyWith<$Res>
       @JsonKey(name: 'updated_at') String updatedAt,
       @JsonKey(name: 'member_count') int memberCount,
       @JsonKey(name: 'manager_count') int managerCount,
-      @JsonKey(name: 'admin_count') int adminCount});
+      @JsonKey(name: 'admin_count') int adminCount,
+      @JsonKey(name: 'type') String? type});
 }
 
 /// @nodoc
-class __$$GroupWithMemberCountDataImplCopyWithImpl<$Res>
-    extends _$GroupWithMemberCountDataCopyWithImpl<$Res,
-        _$GroupWithMemberCountDataImpl>
-    implements _$$GroupWithMemberCountDataImplCopyWith<$Res> {
-  __$$GroupWithMemberCountDataImplCopyWithImpl(
-      _$GroupWithMemberCountDataImpl _value,
-      $Res Function(_$GroupWithMemberCountDataImpl) _then)
+class __$$GroupWithUserTypeDataImplCopyWithImpl<$Res>
+    extends _$GroupWithUserTypeDataCopyWithImpl<$Res,
+        _$GroupWithUserTypeDataImpl>
+    implements _$$GroupWithUserTypeDataImplCopyWith<$Res> {
+  __$$GroupWithUserTypeDataImplCopyWithImpl(_$GroupWithUserTypeDataImpl _value,
+      $Res Function(_$GroupWithUserTypeDataImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GroupWithMemberCountData
+  /// Create a copy of GroupWithUserTypeData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -160,8 +168,9 @@ class __$$GroupWithMemberCountDataImplCopyWithImpl<$Res>
     Object? memberCount = null,
     Object? managerCount = null,
     Object? adminCount = null,
+    Object? type = freezed,
   }) {
-    return _then(_$GroupWithMemberCountDataImpl(
+    return _then(_$GroupWithUserTypeDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -190,24 +199,29 @@ class __$$GroupWithMemberCountDataImplCopyWithImpl<$Res>
           ? _value.adminCount
           : adminCount // ignore: cast_nullable_to_non_nullable
               as int,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$GroupWithMemberCountDataImpl implements _GroupWithMemberCountData {
-  const _$GroupWithMemberCountDataImpl(
+class _$GroupWithUserTypeDataImpl implements _GroupWithUserTypeData {
+  const _$GroupWithUserTypeDataImpl(
       {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'name') required this.name,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'updated_at') required this.updatedAt,
       @JsonKey(name: 'member_count') required this.memberCount,
       @JsonKey(name: 'manager_count') required this.managerCount,
-      @JsonKey(name: 'admin_count') required this.adminCount});
+      @JsonKey(name: 'admin_count') required this.adminCount,
+      @JsonKey(name: 'type') this.type});
 
-  factory _$GroupWithMemberCountDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GroupWithMemberCountDataImplFromJson(json);
+  factory _$GroupWithUserTypeDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GroupWithUserTypeDataImplFromJson(json);
 
   @override
   @JsonKey(name: 'id')
@@ -230,17 +244,20 @@ class _$GroupWithMemberCountDataImpl implements _GroupWithMemberCountData {
   @override
   @JsonKey(name: 'admin_count')
   final int adminCount;
+  @override
+  @JsonKey(name: 'type')
+  final String? type;
 
   @override
   String toString() {
-    return 'GroupWithMemberCountData(id: $id, name: $name, createdAt: $createdAt, updatedAt: $updatedAt, memberCount: $memberCount, managerCount: $managerCount, adminCount: $adminCount)';
+    return 'GroupWithUserTypeData(id: $id, name: $name, createdAt: $createdAt, updatedAt: $updatedAt, memberCount: $memberCount, managerCount: $managerCount, adminCount: $adminCount, type: $type)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GroupWithMemberCountDataImpl &&
+            other is _$GroupWithUserTypeDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.createdAt, createdAt) ||
@@ -252,44 +269,45 @@ class _$GroupWithMemberCountDataImpl implements _GroupWithMemberCountData {
             (identical(other.managerCount, managerCount) ||
                 other.managerCount == managerCount) &&
             (identical(other.adminCount, adminCount) ||
-                other.adminCount == adminCount));
+                other.adminCount == adminCount) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, createdAt, updatedAt,
-      memberCount, managerCount, adminCount);
+      memberCount, managerCount, adminCount, type);
 
-  /// Create a copy of GroupWithMemberCountData
+  /// Create a copy of GroupWithUserTypeData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$GroupWithMemberCountDataImplCopyWith<_$GroupWithMemberCountDataImpl>
-      get copyWith => __$$GroupWithMemberCountDataImplCopyWithImpl<
-          _$GroupWithMemberCountDataImpl>(this, _$identity);
+  _$$GroupWithUserTypeDataImplCopyWith<_$GroupWithUserTypeDataImpl>
+      get copyWith => __$$GroupWithUserTypeDataImplCopyWithImpl<
+          _$GroupWithUserTypeDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$GroupWithMemberCountDataImplToJson(
+    return _$$GroupWithUserTypeDataImplToJson(
       this,
     );
   }
 }
 
-abstract class _GroupWithMemberCountData implements GroupWithMemberCountData {
-  const factory _GroupWithMemberCountData(
-          {@JsonKey(name: 'id') required final String id,
-          @JsonKey(name: 'name') required final String name,
-          @JsonKey(name: 'created_at') required final String createdAt,
-          @JsonKey(name: 'updated_at') required final String updatedAt,
-          @JsonKey(name: 'member_count') required final int memberCount,
-          @JsonKey(name: 'manager_count') required final int managerCount,
-          @JsonKey(name: 'admin_count') required final int adminCount}) =
-      _$GroupWithMemberCountDataImpl;
+abstract class _GroupWithUserTypeData implements GroupWithUserTypeData {
+  const factory _GroupWithUserTypeData(
+      {@JsonKey(name: 'id') required final String id,
+      @JsonKey(name: 'name') required final String name,
+      @JsonKey(name: 'created_at') required final String createdAt,
+      @JsonKey(name: 'updated_at') required final String updatedAt,
+      @JsonKey(name: 'member_count') required final int memberCount,
+      @JsonKey(name: 'manager_count') required final int managerCount,
+      @JsonKey(name: 'admin_count') required final int adminCount,
+      @JsonKey(name: 'type') final String? type}) = _$GroupWithUserTypeDataImpl;
 
-  factory _GroupWithMemberCountData.fromJson(Map<String, dynamic> json) =
-      _$GroupWithMemberCountDataImpl.fromJson;
+  factory _GroupWithUserTypeData.fromJson(Map<String, dynamic> json) =
+      _$GroupWithUserTypeDataImpl.fromJson;
 
   @override
   @JsonKey(name: 'id')
@@ -312,11 +330,14 @@ abstract class _GroupWithMemberCountData implements GroupWithMemberCountData {
   @override
   @JsonKey(name: 'admin_count')
   int get adminCount;
+  @override
+  @JsonKey(name: 'type')
+  String? get type;
 
-  /// Create a copy of GroupWithMemberCountData
+  /// Create a copy of GroupWithUserTypeData
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GroupWithMemberCountDataImplCopyWith<_$GroupWithMemberCountDataImpl>
+  _$$GroupWithUserTypeDataImplCopyWith<_$GroupWithUserTypeDataImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

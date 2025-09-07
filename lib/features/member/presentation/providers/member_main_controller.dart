@@ -9,6 +9,7 @@ import '../../../auth/application/auth_controller.dart';
 import '../../../auth/data/models/response/user_info/user_info_data.dart';
 import '../../../organization/application/organization_controller.dart';
 import '../../../organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
+import '../../../organization/data/models/response/group_with_user_type/group_with_user_type_data.dart';
 import '../../../teeth_record/application/teeth_record_usecases_provider.dart';
 import '../../../teeth_record/data/models/response/brushing_record/brushing_record_data.dart';
 
@@ -17,7 +18,7 @@ part 'member_main_controller.freezed.dart';
 @freezed
 class MemberMainState with _$MemberMainState {
   const factory MemberMainState({
-    GroupWithMemberCountData? group,
+    GroupWithUserTypeData? group,
     UserInfoData? user,
     required List<BrushingRecordData> brushingRecords,
     @Default(false) bool isLoading,
@@ -60,7 +61,7 @@ class MemberInfoController extends StateNotifier<MemberMainState> {
     state = state.copyWith(user: user);
   }
 
-  void setGroup(GroupWithMemberCountData group) {
+  void setGroup(GroupWithUserTypeData group) {
     state = state.copyWith(group: group);
   }
 
@@ -81,7 +82,7 @@ class MemberInfoController extends StateNotifier<MemberMainState> {
     }
 
     // 檢查是否為管理員（從群組的 type 欄位判斷）
-    final userType = currentGroup.type.toLowerCase();
+    final userType = currentGroup.type?.toLowerCase();
     final isAdmin = userType == 'admin' || userType == 'manager';
 
     // 檢查是否為本人

@@ -9,6 +9,7 @@ import '../features/login/presentation/pages/login_screen.dart';
 import '../features/main/presentation/pages/main_screen.dart';
 import '../features/member/presentation/pages/member_main_screen.dart';
 import '../features/organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
+import '../features/organization/data/models/response/group_with_user_type/group_with_user_type_data.dart';
 import '../features/teeth_detection/presentation/pages/camera_screen.dart';
 import '../features/teeth_detection/presentation/pages/teeth_detection_screen.dart';
 import '../features/teeth_record/data/models/response/brushing_record/brushing_record_data.dart';

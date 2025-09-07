@@ -19,8 +19,7 @@ mixin _$GroupListState {
   List<OrganizationData> get organizations =>
       throw _privateConstructorUsedError;
   int get selectedOrganizationIndex => throw _privateConstructorUsedError;
-  List<GroupWithMemberCountData> get groups =>
-      throw _privateConstructorUsedError;
+  List<GroupWithUserTypeData> get groups => throw _privateConstructorUsedError;
   bool get isLoadingOrganizations => throw _privateConstructorUsedError;
   bool get isLoadingGroups => throw _privateConstructorUsedError;
   String? get selectedOrganizationId => throw _privateConstructorUsedError;
@@ -42,7 +41,7 @@ abstract class $GroupListStateCopyWith<$Res> {
   $Res call(
       {List<OrganizationData> organizations,
       int selectedOrganizationIndex,
-      List<GroupWithMemberCountData> groups,
+      List<GroupWithUserTypeData> groups,
       bool isLoadingOrganizations,
       bool isLoadingGroups,
       String? selectedOrganizationId,
@@ -84,7 +83,7 @@ class _$GroupListStateCopyWithImpl<$Res, $Val extends GroupListState>
       groups: null == groups
           ? _value.groups
           : groups // ignore: cast_nullable_to_non_nullable
-              as List<GroupWithMemberCountData>,
+              as List<GroupWithUserTypeData>,
       isLoadingOrganizations: null == isLoadingOrganizations
           ? _value.isLoadingOrganizations
           : isLoadingOrganizations // ignore: cast_nullable_to_non_nullable
@@ -116,7 +115,7 @@ abstract class _$$GroupListStateImplCopyWith<$Res>
   $Res call(
       {List<OrganizationData> organizations,
       int selectedOrganizationIndex,
-      List<GroupWithMemberCountData> groups,
+      List<GroupWithUserTypeData> groups,
       bool isLoadingOrganizations,
       bool isLoadingGroups,
       String? selectedOrganizationId,
@@ -156,7 +155,7 @@ class __$$GroupListStateImplCopyWithImpl<$Res>
       groups: null == groups
           ? _value._groups
           : groups // ignore: cast_nullable_to_non_nullable
-              as List<GroupWithMemberCountData>,
+              as List<GroupWithUserTypeData>,
       isLoadingOrganizations: null == isLoadingOrganizations
           ? _value.isLoadingOrganizations
           : isLoadingOrganizations // ignore: cast_nullable_to_non_nullable
@@ -183,7 +182,7 @@ class _$GroupListStateImpl implements _GroupListState {
   const _$GroupListStateImpl(
       {final List<OrganizationData> organizations = const [],
       this.selectedOrganizationIndex = 0,
-      final List<GroupWithMemberCountData> groups = const [],
+      final List<GroupWithUserTypeData> groups = const [],
       this.isLoadingOrganizations = false,
       this.isLoadingGroups = false,
       this.selectedOrganizationId,
@@ -203,10 +202,10 @@ class _$GroupListStateImpl implements _GroupListState {
   @override
   @JsonKey()
   final int selectedOrganizationIndex;
-  final List<GroupWithMemberCountData> _groups;
+  final List<GroupWithUserTypeData> _groups;
   @override
   @JsonKey()
-  List<GroupWithMemberCountData> get groups {
+  List<GroupWithUserTypeData> get groups {
     if (_groups is EqualUnmodifiableListView) return _groups;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_groups);
@@ -273,7 +272,7 @@ abstract class _GroupListState implements GroupListState {
   const factory _GroupListState(
       {final List<OrganizationData> organizations,
       final int selectedOrganizationIndex,
-      final List<GroupWithMemberCountData> groups,
+      final List<GroupWithUserTypeData> groups,
       final bool isLoadingOrganizations,
       final bool isLoadingGroups,
       final String? selectedOrganizationId,
@@ -284,7 +283,7 @@ abstract class _GroupListState implements GroupListState {
   @override
   int get selectedOrganizationIndex;
   @override
-  List<GroupWithMemberCountData> get groups;
+  List<GroupWithUserTypeData> get groups;
   @override
   bool get isLoadingOrganizations;
   @override

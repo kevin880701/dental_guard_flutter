@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MemberMainState {
-  GroupWithMemberCountData? get group => throw _privateConstructorUsedError;
+  GroupWithUserTypeData? get group => throw _privateConstructorUsedError;
   UserInfoData? get user => throw _privateConstructorUsedError;
   List<BrushingRecordData> get brushingRecords =>
       throw _privateConstructorUsedError;
@@ -38,13 +38,14 @@ abstract class $MemberMainStateCopyWith<$Res> {
       _$MemberMainStateCopyWithImpl<$Res, MemberMainState>;
   @useResult
   $Res call(
-      {GroupWithMemberCountData? group,
+      {GroupWithUserTypeData? group,
       UserInfoData? user,
       List<BrushingRecordData> brushingRecords,
       bool isLoading,
       String? errorMessage,
       int refreshKey});
 
+  $GroupWithUserTypeDataCopyWith<$Res>? get group;
   $UserInfoDataCopyWith<$Res>? get user;
 }
 
@@ -74,7 +75,7 @@ class _$MemberMainStateCopyWithImpl<$Res, $Val extends MemberMainState>
       group: freezed == group
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
-              as GroupWithMemberCountData?,
+              as GroupWithUserTypeData?,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -102,6 +103,20 @@ class _$MemberMainStateCopyWithImpl<$Res, $Val extends MemberMainState>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
+  $GroupWithUserTypeDataCopyWith<$Res>? get group {
+    if (_value.group == null) {
+      return null;
+    }
+
+    return $GroupWithUserTypeDataCopyWith<$Res>(_value.group!, (value) {
+      return _then(_value.copyWith(group: value) as $Val);
+    });
+  }
+
+  /// Create a copy of MemberMainState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
   $UserInfoDataCopyWith<$Res>? get user {
     if (_value.user == null) {
       return null;
@@ -122,13 +137,15 @@ abstract class _$$MemberMainStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {GroupWithMemberCountData? group,
+      {GroupWithUserTypeData? group,
       UserInfoData? user,
       List<BrushingRecordData> brushingRecords,
       bool isLoading,
       String? errorMessage,
       int refreshKey});
 
+  @override
+  $GroupWithUserTypeDataCopyWith<$Res>? get group;
   @override
   $UserInfoDataCopyWith<$Res>? get user;
 }
@@ -157,7 +174,7 @@ class __$$MemberMainStateImplCopyWithImpl<$Res>
       group: freezed == group
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
-              as GroupWithMemberCountData?,
+              as GroupWithUserTypeData?,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -195,7 +212,7 @@ class _$MemberMainStateImpl implements _MemberMainState {
       : _brushingRecords = brushingRecords;
 
   @override
-  final GroupWithMemberCountData? group;
+  final GroupWithUserTypeData? group;
   @override
   final UserInfoData? user;
   final List<BrushingRecordData> _brushingRecords;
@@ -225,7 +242,7 @@ class _$MemberMainStateImpl implements _MemberMainState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MemberMainStateImpl &&
-            const DeepCollectionEquality().equals(other.group, group) &&
+            (identical(other.group, group) || other.group == group) &&
             (identical(other.user, user) || other.user == user) &&
             const DeepCollectionEquality()
                 .equals(other._brushingRecords, _brushingRecords) &&
@@ -240,7 +257,7 @@ class _$MemberMainStateImpl implements _MemberMainState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(group),
+      group,
       user,
       const DeepCollectionEquality().hash(_brushingRecords),
       isLoading,
@@ -259,7 +276,7 @@ class _$MemberMainStateImpl implements _MemberMainState {
 
 abstract class _MemberMainState implements MemberMainState {
   const factory _MemberMainState(
-      {final GroupWithMemberCountData? group,
+      {final GroupWithUserTypeData? group,
       final UserInfoData? user,
       required final List<BrushingRecordData> brushingRecords,
       final bool isLoading,
@@ -267,7 +284,7 @@ abstract class _MemberMainState implements MemberMainState {
       final int refreshKey}) = _$MemberMainStateImpl;
 
   @override
-  GroupWithMemberCountData? get group;
+  GroupWithUserTypeData? get group;
   @override
   UserInfoData? get user;
   @override

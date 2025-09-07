@@ -9,13 +9,14 @@ import '../../../../core/widgets/tab_navigation/tab_navigation.dart';
 import '../../../../core/widgets/title_bar.dart';
 import '../../../auth/data/models/response/user_info/user_info_data.dart';
 import '../../../organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
+import '../../../organization/data/models/response/group_with_user_type/group_with_user_type_data.dart';
 import '../providers/member_main_controller.dart';
 import 'member_brushing_chart_screen.dart';
 import 'member_teeth_record_screen.dart';
 
 @RoutePage()
 class MemberMainScreen extends HookConsumerWidget {
-  final GroupWithMemberCountData group;
+  final GroupWithUserTypeData group;
   final UserInfoData user;
 
   const MemberMainScreen({super.key, required this.group, required this.user});

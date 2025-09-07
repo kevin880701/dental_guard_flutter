@@ -29,8 +29,13 @@ class ApiEndPoint {
   /// /v1/organization/group/{groupId}
   static String getGroupById(String groupId) => '/v1/organization/group/$groupId';
 
+  /// 純群組查詢（不包含用戶角色）
   static String getGroupsByOrganizationId(String organizationId) =>
       '/v1/organization/$organizationId/groups';
+
+  /// 用戶群組角色查詢（包含用戶角色）- 新增
+  static String getUserGroupsByOrganizationId(String organizationId) =>
+      '/v1/organization/$organizationId/user-groups';
 
   // Teeth Record
   static const String createBrushingRecord = '/v1/teeth-record/create';

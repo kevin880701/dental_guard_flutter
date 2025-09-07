@@ -15,12 +15,13 @@ import '../../../../core/widgets/title_bar.dart';
 import '../../../member/presentation/pages/member_list_screen.dart';
 import '../../../member/presentation/providers/member_list_controller.dart';
 import '../../../organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
+import '../../../organization/data/models/response/group_with_user_type/group_with_user_type_data.dart';
 import '../provider/group_list_controller.dart';
 import 'group_brushing_chart_screen.dart';
 
 @RoutePage()
 class GroupMainScreen extends HookConsumerWidget {
-  final GroupWithMemberCountData group;
+  final GroupWithUserTypeData group;
 
   const GroupMainScreen({super.key, required this.group});
 
@@ -46,7 +47,7 @@ class GroupMainScreen extends HookConsumerWidget {
 
     // 檢查當前群組是否有新增成員權限
     bool canAddMember() {
-      final userType = group.type.toLowerCase();
+      final userType = group.type?.toLowerCase();
       return userType == 'admin' || userType == 'manager';
     }
 

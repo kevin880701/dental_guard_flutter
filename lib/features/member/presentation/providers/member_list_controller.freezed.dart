@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MemberListState {
-  GroupWithMemberCountData? get group => throw _privateConstructorUsedError;
+  GroupWithUserTypeData? get group => throw _privateConstructorUsedError;
   List<UserInfoData> get users => throw _privateConstructorUsedError;
 
   /// Create a copy of MemberListState
@@ -32,9 +32,9 @@ abstract class $MemberListStateCopyWith<$Res> {
           MemberListState value, $Res Function(MemberListState) then) =
       _$MemberListStateCopyWithImpl<$Res, MemberListState>;
   @useResult
-  $Res call({GroupWithMemberCountData? group, List<UserInfoData> users});
+  $Res call({GroupWithUserTypeData? group, List<UserInfoData> users});
 
-  $GroupWithMemberCountDataCopyWith<$Res>? get group;
+  $GroupWithUserTypeDataCopyWith<$Res>? get group;
 }
 
 /// @nodoc
@@ -59,7 +59,7 @@ class _$MemberListStateCopyWithImpl<$Res, $Val extends MemberListState>
       group: freezed == group
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
-              as GroupWithMemberCountData?,
+              as GroupWithUserTypeData?,
       users: null == users
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
@@ -71,12 +71,12 @@ class _$MemberListStateCopyWithImpl<$Res, $Val extends MemberListState>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $GroupWithMemberCountDataCopyWith<$Res>? get group {
+  $GroupWithUserTypeDataCopyWith<$Res>? get group {
     if (_value.group == null) {
       return null;
     }
 
-    return $GroupWithMemberCountDataCopyWith<$Res>(_value.group!, (value) {
+    return $GroupWithUserTypeDataCopyWith<$Res>(_value.group!, (value) {
       return _then(_value.copyWith(group: value) as $Val);
     });
   }
@@ -90,10 +90,10 @@ abstract class _$$MemberListStateImplCopyWith<$Res>
       __$$MemberListStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({GroupWithMemberCountData? group, List<UserInfoData> users});
+  $Res call({GroupWithUserTypeData? group, List<UserInfoData> users});
 
   @override
-  $GroupWithMemberCountDataCopyWith<$Res>? get group;
+  $GroupWithUserTypeDataCopyWith<$Res>? get group;
 }
 
 /// @nodoc
@@ -116,7 +116,7 @@ class __$$MemberListStateImplCopyWithImpl<$Res>
       group: freezed == group
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
-              as GroupWithMemberCountData?,
+              as GroupWithUserTypeData?,
       users: null == users
           ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
@@ -133,7 +133,7 @@ class _$MemberListStateImpl implements _MemberListState {
       : _users = users;
 
   @override
-  final GroupWithMemberCountData? group;
+  final GroupWithUserTypeData? group;
   final List<UserInfoData> _users;
   @override
   @JsonKey()
@@ -173,11 +173,11 @@ class _$MemberListStateImpl implements _MemberListState {
 
 abstract class _MemberListState implements MemberListState {
   const factory _MemberListState(
-      {final GroupWithMemberCountData? group,
+      {final GroupWithUserTypeData? group,
       final List<UserInfoData> users}) = _$MemberListStateImpl;
 
   @override
-  GroupWithMemberCountData? get group;
+  GroupWithUserTypeData? get group;
   @override
   List<UserInfoData> get users;
 

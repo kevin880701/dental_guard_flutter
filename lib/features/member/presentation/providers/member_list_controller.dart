@@ -6,13 +6,14 @@ import '../../../organization/application/organization_controller.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
+import '../../../organization/data/models/response/group_with_user_type/group_with_user_type_data.dart';
 
 part 'member_list_controller.freezed.dart';
 
 @freezed
 class MemberListState with _$MemberListState {
   const factory MemberListState({
-    GroupWithMemberCountData? group,
+    GroupWithUserTypeData? group,
     @Default([]) List<UserInfoData> users,
   }) = _MemberListState;
 }
@@ -36,7 +37,7 @@ class MemberListController extends StateNotifier<MemberListState> {
     // });
   }
 
-  void setGroup(GroupWithMemberCountData group) {
+  void setGroup(GroupWithUserTypeData group) {
     state = state.copyWith(group: group);
   }
 
