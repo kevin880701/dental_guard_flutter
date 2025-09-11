@@ -63,22 +63,7 @@ class GroupListController extends StateNotifier<GroupListState> {
 
     try {
       final getUserOrganizationsUseCase = ref.read(getUserOrganizationsUseCaseProvider);
-      final allOrganizations = await getUserOrganizationsUseCase();
-
-      // TODO: 臨時性功能 - 篩選掉名稱包含"畢業"的組織，並且只有admin權限才能看到
-      final organizations = allOrganizations.where((org) {
-        final userType = org.type.toLowerCase();
-        // admin 用戶可以看到所有組織
-        if (userType == 'admin') {
-          return true;
-        }
-        // manager 和 member 用戶篩選掉包含"畢業"的組織
-        if (userType == 'manager' || userType == 'member') {
-          return !org.name.contains('畢業');
-        }
-        // 其他類型的用戶也篩選掉包含"畢業"的組織
-        return !org.name.contains('畢業');
-      }).toList();
+      final organizations = await getUserOrganizationsUseCase();
 
       state = state.copyWith(
         organizations: organizations,
