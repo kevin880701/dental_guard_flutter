@@ -65,7 +65,6 @@ class MemberInfoController extends StateNotifier<MemberMainState> {
     state = state.copyWith(group: group);
   }
 
-
   /// 檢查是否可以編輯成員資訊
   /// 兩種情況下可以編輯：
   /// 1. 用戶是管理員（admin/manager）
@@ -116,7 +115,11 @@ class MemberInfoController extends StateNotifier<MemberMainState> {
         timeZone: timeZone,
       );
 
-      state = state.copyWith(brushingRecords: result?.records?.first.brushingRecords??[], isLoading: false);
+      final originalRecords = result?.records?.first.brushingRecords ?? [];
+      final sortedRecords = [...originalRecords]
+        ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+      state = state.copyWith(brushingRecords: sortedRecords, isLoading: false);
     } catch (e, st) {
       AppLog.e('取得潔牙紀錄失敗: $e\n$st');
       state = state.copyWith(
