@@ -8,7 +8,6 @@ import '../../../../core/utils/app_log.dart';
 import '../../../auth/application/auth_controller.dart';
 import '../../../auth/data/models/response/user_info/user_info_data.dart';
 import '../../../organization/application/organization_controller.dart';
-import '../../../organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
 import '../../../organization/data/models/response/group_with_user_type/group_with_user_type_data.dart';
 import '../../../teeth_record/application/teeth_record_usecases_provider.dart';
 import '../../../teeth_record/data/models/response/brushing_record/brushing_record_data.dart';
@@ -132,8 +131,8 @@ class MemberInfoController extends StateNotifier<MemberMainState> {
   void appendBrushingRecords(List<BrushingRecordData> newRecords) {
     state = state.copyWith(
       brushingRecords: [
-        ...state.brushingRecords,
         ...newRecords,
+        ...state.brushingRecords,
       ],
     );
   }
