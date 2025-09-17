@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TeethDetectionState {
   String? get userId => throw _privateConstructorUsedError;
   File? get tempImage => throw _privateConstructorUsedError;
+  File? get originalImage => throw _privateConstructorUsedError;
+  int get rotationAngle => throw _privateConstructorUsedError;
   BrushingRecordData? get brushingRecord => throw _privateConstructorUsedError;
   AnalyzeResultData? get analyzeResult => throw _privateConstructorUsedError;
 
@@ -37,6 +39,8 @@ abstract class $TeethDetectionStateCopyWith<$Res> {
   $Res call(
       {String? userId,
       File? tempImage,
+      File? originalImage,
+      int rotationAngle,
       BrushingRecordData? brushingRecord,
       AnalyzeResultData? analyzeResult});
 
@@ -61,6 +65,8 @@ class _$TeethDetectionStateCopyWithImpl<$Res, $Val extends TeethDetectionState>
   $Res call({
     Object? userId = freezed,
     Object? tempImage = freezed,
+    Object? originalImage = freezed,
+    Object? rotationAngle = null,
     Object? brushingRecord = freezed,
     Object? analyzeResult = freezed,
   }) {
@@ -73,6 +79,14 @@ class _$TeethDetectionStateCopyWithImpl<$Res, $Val extends TeethDetectionState>
           ? _value.tempImage
           : tempImage // ignore: cast_nullable_to_non_nullable
               as File?,
+      originalImage: freezed == originalImage
+          ? _value.originalImage
+          : originalImage // ignore: cast_nullable_to_non_nullable
+              as File?,
+      rotationAngle: null == rotationAngle
+          ? _value.rotationAngle
+          : rotationAngle // ignore: cast_nullable_to_non_nullable
+              as int,
       brushingRecord: freezed == brushingRecord
           ? _value.brushingRecord
           : brushingRecord // ignore: cast_nullable_to_non_nullable
@@ -124,6 +138,8 @@ abstract class _$$TeethDetectionStateImplCopyWith<$Res>
   $Res call(
       {String? userId,
       File? tempImage,
+      File? originalImage,
+      int rotationAngle,
       BrushingRecordData? brushingRecord,
       AnalyzeResultData? analyzeResult});
 
@@ -148,6 +164,8 @@ class __$$TeethDetectionStateImplCopyWithImpl<$Res>
   $Res call({
     Object? userId = freezed,
     Object? tempImage = freezed,
+    Object? originalImage = freezed,
+    Object? rotationAngle = null,
     Object? brushingRecord = freezed,
     Object? analyzeResult = freezed,
   }) {
@@ -160,6 +178,14 @@ class __$$TeethDetectionStateImplCopyWithImpl<$Res>
           ? _value.tempImage
           : tempImage // ignore: cast_nullable_to_non_nullable
               as File?,
+      originalImage: freezed == originalImage
+          ? _value.originalImage
+          : originalImage // ignore: cast_nullable_to_non_nullable
+              as File?,
+      rotationAngle: null == rotationAngle
+          ? _value.rotationAngle
+          : rotationAngle // ignore: cast_nullable_to_non_nullable
+              as int,
       brushingRecord: freezed == brushingRecord
           ? _value.brushingRecord
           : brushingRecord // ignore: cast_nullable_to_non_nullable
@@ -176,12 +202,22 @@ class __$$TeethDetectionStateImplCopyWithImpl<$Res>
 
 class _$TeethDetectionStateImpl implements _TeethDetectionState {
   const _$TeethDetectionStateImpl(
-      {this.userId, this.tempImage, this.brushingRecord, this.analyzeResult});
+      {this.userId,
+      this.tempImage,
+      this.originalImage,
+      this.rotationAngle = 0,
+      this.brushingRecord,
+      this.analyzeResult});
 
   @override
   final String? userId;
   @override
   final File? tempImage;
+  @override
+  final File? originalImage;
+  @override
+  @JsonKey()
+  final int rotationAngle;
   @override
   final BrushingRecordData? brushingRecord;
   @override
@@ -189,7 +225,7 @@ class _$TeethDetectionStateImpl implements _TeethDetectionState {
 
   @override
   String toString() {
-    return 'TeethDetectionState(userId: $userId, tempImage: $tempImage, brushingRecord: $brushingRecord, analyzeResult: $analyzeResult)';
+    return 'TeethDetectionState(userId: $userId, tempImage: $tempImage, originalImage: $originalImage, rotationAngle: $rotationAngle, brushingRecord: $brushingRecord, analyzeResult: $analyzeResult)';
   }
 
   @override
@@ -200,6 +236,10 @@ class _$TeethDetectionStateImpl implements _TeethDetectionState {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.tempImage, tempImage) ||
                 other.tempImage == tempImage) &&
+            (identical(other.originalImage, originalImage) ||
+                other.originalImage == originalImage) &&
+            (identical(other.rotationAngle, rotationAngle) ||
+                other.rotationAngle == rotationAngle) &&
             (identical(other.brushingRecord, brushingRecord) ||
                 other.brushingRecord == brushingRecord) &&
             (identical(other.analyzeResult, analyzeResult) ||
@@ -207,8 +247,8 @@ class _$TeethDetectionStateImpl implements _TeethDetectionState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, userId, tempImage, brushingRecord, analyzeResult);
+  int get hashCode => Object.hash(runtimeType, userId, tempImage, originalImage,
+      rotationAngle, brushingRecord, analyzeResult);
 
   /// Create a copy of TeethDetectionState
   /// with the given fields replaced by the non-null parameter values.
@@ -224,6 +264,8 @@ abstract class _TeethDetectionState implements TeethDetectionState {
   const factory _TeethDetectionState(
       {final String? userId,
       final File? tempImage,
+      final File? originalImage,
+      final int rotationAngle,
       final BrushingRecordData? brushingRecord,
       final AnalyzeResultData? analyzeResult}) = _$TeethDetectionStateImpl;
 
@@ -231,6 +273,10 @@ abstract class _TeethDetectionState implements TeethDetectionState {
   String? get userId;
   @override
   File? get tempImage;
+  @override
+  File? get originalImage;
+  @override
+  int get rotationAngle;
   @override
   BrushingRecordData? get brushingRecord;
   @override

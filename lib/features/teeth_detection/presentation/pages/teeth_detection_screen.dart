@@ -1,4 +1,3 @@
-
 import 'package:dental_guard_flutter/core/providers/page_provider.dart';
 import 'package:dental_guard_flutter/core/utils/app_toast.dart';
 import 'package:dental_guard_flutter/core/utils/utils.dart';
@@ -51,6 +50,11 @@ class TeethDetectionScreen extends HookConsumerWidget {
       return null;
     }, []);
 
+    // 檢查是否應該顯示旋轉按鈕
+    final shouldShowRotateButton =
+        teethDetectionControllerState.tempImage != null &&
+            teethDetectionControllerState.analyzeResult == null;
+
     return BasePage(
       backgroundColor: AppColors.bgColor,
       child: SafeArea(
@@ -62,37 +66,61 @@ class TeethDetectionScreen extends HookConsumerWidget {
               isBack: true,
             ),
             Expanded(
-                child: Container(
-              height: double.infinity,
-              width: double.infinity,
-              margin: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: AppColors.borderGrey,
-                  width: 2,
+              child: Container(
+                height: double.infinity,
+                width: double.infinity,
+                margin: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: AppColors.borderGrey,
+                    width: 2,
+                  ),
                 ),
-              ),
-              child: (teethDetectionControllerState.analyzeResult !=
-                      null) // 判斷是否是呼叫紀錄
-                  ? TeethImageView(
-                      analyzeResult:
-                          teethDetectionControllerState.analyzeResult,
-                    )
-                  : (teethDetectionControllerState.tempImage !=
-                          null) // 判斷是否有選擇照片或拍照
-                      ? FileImageWidget(
-                          filePath:
-                              teethDetectionControllerState.tempImage!.path,
-                        )
-                      : ImageSelector(
-                          onImageSelected: (selectedImage) {
-                            teethDetectionControllerNotifier
-                                .setTempImage(selectedImage);
-                          },
+                child: Stack(children: [Positioned.fill(child: (teethDetectionControllerState.analyzeResult !=
+                    null) // 判斷是否是呼叫紀錄
+                    ? TeethImageView(
+                  analyzeResult:
+                  teethDetectionControllerState.analyzeResult,
+                )
+                    : (teethDetectionControllerState.tempImage !=
+                    null) // 判斷是否有選擇照片或拍照
+                    ? FileImageWidget(
+                  filePath:
+                  teethDetectionControllerState.tempImage!.path,
+                )
+                    : ImageSelector(
+                  onImageSelected: (selectedImage) {
+                    teethDetectionControllerNotifier
+                        .setTempImage(selectedImage);
+                  },
+                ),),
+                  // 旋轉按鈕
+                  if (shouldShowRotateButton)
+                    Positioned(
+                      top: 16,
+                      right: 16,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black54,
+                          borderRadius: BorderRadius.circular(8),
                         ),
-            )),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.rotate_right,
+                            color: Colors.white,
+                            size: 24,
+                          ),
+                          onPressed: () {
+                            teethDetectionControllerNotifier.rotateImage();
+                          },
+                          tooltip: "旋轉圖片",
+                        ),
+                      ),
+                    ),],)
+              ),
+            ),
             if (brushingRecordData == null) ...[
               Container(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
@@ -131,8 +159,10 @@ class TeethDetectionScreen extends HookConsumerWidget {
                                 .read(loadingNotifierProvider.notifier)
                                 .showLoading(cancellable: true);
 
-                            final analyzeResult = await cancelToken.run(() async {
-                              return await ref.read(analyzeTeethImageUseCaseUseCaseProvider)(
+                            final analyzeResult =
+                                await cancelToken.run(() async {
+                              return await ref.read(
+                                      analyzeTeethImageUseCaseUseCaseProvider)(
                                   teethDetectionControllerState.tempImage!);
                             });
 
@@ -142,19 +172,27 @@ class TeethDetectionScreen extends HookConsumerWidget {
                             }
 
                             // 處理結果
-                            teethDetectionControllerNotifier.setAnalyzeResult(analyzeResult);
+                            teethDetectionControllerNotifier
+                                .setAnalyzeResult(analyzeResult);
                             if (analyzeResult.isSuccess != 1) {
-                              ref.read(pageNotifierProvider.notifier).showToastMessage(
-                                  message: "${AppStrings.detectionFailed}：${analyzeResult.mark}");
+                              ref
+                                  .read(pageNotifierProvider.notifier)
+                                  .showToastMessage(
+                                      message:
+                                          "${AppStrings.detectionFailed}：${analyzeResult.mark}");
                             }
                           } catch (e) {
                             if (e is! OperationCancelledException) {
-                              ref.read(pageNotifierProvider.notifier).showToastMessage(
-                                  message: AppStrings.detectionFailed);
+                              ref
+                                  .read(pageNotifierProvider.notifier)
+                                  .showToastMessage(
+                                      message: AppStrings.detectionFailed);
                               AppLog.e("ERROR:$e");
                             }
                           }
-                          ref.read(loadingNotifierProvider.notifier).hideLoading();
+                          ref
+                              .read(loadingNotifierProvider.notifier)
+                              .hideLoading();
                         }),
                     AppButton(
                         text: AppStrings.imageStorage,
@@ -191,7 +229,9 @@ class TeethDetectionScreen extends HookConsumerWidget {
                                               .notifier);
                                       controller
                                           .appendBrushingRecords([result]);
-                                      ref.read(groupMainProvider.notifier).refresh();
+                                      ref
+                                          .read(groupMainProvider.notifier)
+                                          .refresh();
                                       context.pop();
                                       AppToast.showToast(
                                           message: AppStrings.storageSuccess);
