@@ -16,6 +16,9 @@ class TeethImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+    print('${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range.png');
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: Column(
@@ -25,22 +28,40 @@ class TeethImageView extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (analyzeResult != null && analyzeResult!.score >= 0) ...[
-                    Expanded(flex: 1,child: NetworkImageWidget(
-                      width: double.infinity,
-                      fit: BoxFit.contain,
-                      imageUrl:
-                      '${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range.png',
-                    ),)
-                    ,
-                    if(analyzeResult!.isSuccess == 1)...[
-                      Expanded(flex: 1,child:NetworkImageWidget(
-                        width: double.infinity,
-                        fit: BoxFit.contain,
-                        imageUrl:
-                        '${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range_detect.png',
-                      ),)]
-                  ] else ...[
+                  if (analyzeResult != null) ...[
+                    if (analyzeResult!.isSuccess == 1) ...[
+                      // 成功 (isSuccess == 1)：顯示兩張分析後的圖片
+                      Expanded(
+                        flex: 1,
+                        child: NetworkImageWidget(
+                          width: double.infinity,
+                          fit: BoxFit.contain,
+                          imageUrl:
+                          '${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range.png',
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: NetworkImageWidget(
+                          width: double.infinity,
+                          fit: BoxFit.contain,
+                          imageUrl:
+                          '${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range_detect.png',
+                        ),
+                      ),
+                    ] else ...[
+                      // 失敗 (isSuccess == 0)：顯示原始圖片
+                      Expanded(
+                        flex: 1,
+                        child: NetworkImageWidget(
+                          width: double.infinity,
+                          fit: BoxFit.contain,
+                          imageUrl:
+                          '${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/original_image.png',
+                        ),
+                      ),
+                    ]
+                  ]  else ...[
                     Expanded(flex: 1,child:NetworkImageWidget(
                       width: double.infinity,
                       fit: BoxFit.contain,
