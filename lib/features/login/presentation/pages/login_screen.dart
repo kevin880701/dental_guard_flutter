@@ -8,6 +8,7 @@ import 'package:dental_guard_flutter/core/constants/app_resources.dart';
 import 'package:dental_guard_flutter/core/providers/page_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/base/base_page.dart';
+import '../../../../core/providers/loading_provider.dart';
 import '../../../../core/providers/version_info_provider.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/button/app_button.dart';
@@ -42,7 +43,7 @@ class LoginScreen extends HookConsumerWidget {
     }
 
     void login() async {
-      ref.read(pageNotifierProvider.notifier).showLoading();
+      ref.read(loadingNotifierProvider.notifier).showLoading();
       final response = await authControllerNotifier.login(
         account: accountController.text,
         password: passwordController.text,
@@ -62,7 +63,7 @@ class LoginScreen extends HookConsumerWidget {
             .read(pageNotifierProvider.notifier)
             .showToastMessage(message: response.message);
       }
-      ref.read(pageNotifierProvider.notifier).hideLoading();
+      ref.read(loadingNotifierProvider.notifier).hideLoading();
     }
 
     useEffect(() {

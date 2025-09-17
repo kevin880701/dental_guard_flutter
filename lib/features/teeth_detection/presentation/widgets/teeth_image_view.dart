@@ -16,9 +16,6 @@ class TeethImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-    print('${ApiEndPoint.domain}${ApiEndPoint.getAnalyzeImage(analyzeResult!.analyzePath)}/teeth_range.png');
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: Column(

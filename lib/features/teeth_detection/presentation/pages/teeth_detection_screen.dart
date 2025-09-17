@@ -10,6 +10,8 @@ import 'package:auto_route/auto_route.dart';
 import '../../../../core/base/base_page.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/providers/cancellable_operation.dart';
+import '../../../../core/providers/loading_provider.dart';
 import '../../../../core/utils/app_log.dart';
 import '../../../../core/widgets/button/app_button.dart';
 import '../../../../core/widgets/image/file_image_widget.dart';
@@ -125,39 +127,34 @@ class TeethDetectionScreen extends HookConsumerWidget {
                         fontColor: AppColors.white,
                         onPressed: () async {
                           try {
-                            ref
-                                .read(pageNotifierProvider.notifier)
-                                .showLoading();
-                            if (teethDetectionControllerState.tempImage !=
-                                null) {
-                              final analyzeResult = await ref.read(
-                                      analyzeTeethImageUseCaseUseCaseProvider)(
+                            final cancelToken = ref
+                                .read(loadingNotifierProvider.notifier)
+                                .showLoading(cancellable: true);
+
+                            final analyzeResult = await cancelToken.run(() async {
+                              return await ref.read(analyzeTeethImageUseCaseUseCaseProvider)(
                                   teethDetectionControllerState.tempImage!);
-                              if(analyzeResult != null){
-                                teethDetectionControllerNotifier
-                                    .setAnalyzeResult(analyzeResult);
-                                if (analyzeResult.isSuccess == 1) {
-                                } else {
-                                  AppToast.showToast(
-                                      message:
-                                      "${AppStrings.detectionFailed}：${analyzeResult.mark}");
-                                }
-                              }
-                            } else {
-                              AppToast.showToast(
-                                  message: AppStrings.photosFailed);
+                            });
+
+                            // 檢查操作是否被取消
+                            if (analyzeResult == null) {
+                              return; // 操作被取消
+                            }
+
+                            // 處理結果
+                            teethDetectionControllerNotifier.setAnalyzeResult(analyzeResult);
+                            if (analyzeResult.isSuccess != 1) {
+                              ref.read(pageNotifierProvider.notifier).showToastMessage(
+                                  message: "${AppStrings.detectionFailed}：${analyzeResult.mark}");
                             }
                           } catch (e) {
-                            ref
-                                .read(pageNotifierProvider.notifier)
-                                .hideLoading();
-                            ref
-                                .read(pageNotifierProvider.notifier)
-                                .showToastMessage(
-                                    message: AppStrings.detectionFailed);
-                            AppLog.e("ERROR:$e");
+                            if (e is! OperationCancelledException) {
+                              ref.read(pageNotifierProvider.notifier).showToastMessage(
+                                  message: AppStrings.detectionFailed);
+                              AppLog.e("ERROR:$e");
+                            }
                           }
-                          ref.read(pageNotifierProvider.notifier).hideLoading();
+                          ref.read(loadingNotifierProvider.notifier).hideLoading();
                         }),
                     AppButton(
                         text: AppStrings.imageStorage,
@@ -176,7 +173,7 @@ class TeethDetectionScreen extends HookConsumerWidget {
                             ? () async {
                                 try {
                                   ref
-                                      .read(pageNotifierProvider.notifier)
+                                      .read(loadingNotifierProvider.notifier)
                                       .showLoading();
                                   if (teethDetectionControllerState.tempImage !=
                                       null) {
@@ -208,7 +205,7 @@ class TeethDetectionScreen extends HookConsumerWidget {
                                   }
                                 } catch (e) {
                                   ref
-                                      .read(pageNotifierProvider.notifier)
+                                      .read(loadingNotifierProvider.notifier)
                                       .hideLoading();
                                   ref
                                       .read(pageNotifierProvider.notifier)
@@ -217,7 +214,7 @@ class TeethDetectionScreen extends HookConsumerWidget {
                                   AppLog.e("ERROR:$e");
                                 }
                                 ref
-                                    .read(pageNotifierProvider.notifier)
+                                    .read(loadingNotifierProvider.notifier)
                                     .hideLoading();
                               }
                             : null),

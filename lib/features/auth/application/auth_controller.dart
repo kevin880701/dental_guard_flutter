@@ -1,4 +1,5 @@
 
+import 'package:dental_guard_flutter/core/providers/loading_provider.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../core/constants/params.dart';
@@ -35,7 +36,7 @@ class AuthController extends StateNotifier<AuthState> {
 
   Future<ApiResponse<LoginData?>> login(
       {required String account, required String password}) async {
-    ref.read(pageNotifierProvider.notifier).showLoading();
+    ref.read(loadingNotifierProvider.notifier).showLoading();
 
     try {
       final loginUseCase = ref.read(loginUseCaseProvider);
@@ -59,18 +60,18 @@ class AuthController extends StateNotifier<AuthState> {
         userInfoData: userResult,
       );
 
-      ref.read(pageNotifierProvider.notifier).hideLoading();
+      ref.read(loadingNotifierProvider.notifier).hideLoading();
       return loginResult;
     } catch (e) {
       AppLog.e(e.toString());
-      ref.read(pageNotifierProvider.notifier).hideLoading();
+      ref.read(loadingNotifierProvider.notifier).hideLoading();
       return ApiResponse(
           resultCode: -99999, message: "登入失敗，請稍後再試或聯繫客服", data: null);
     }
   }
 
   Future<ApiResponse<LoginData?>> oAuthLogin(OAuthProviderType providerType) async {
-    ref.read(pageNotifierProvider.notifier).showLoading();
+    ref.read(loadingNotifierProvider.notifier).showLoading();
 
     try {
       ApiResponse<LoginData?>? loginResult;
@@ -111,11 +112,11 @@ class AuthController extends StateNotifier<AuthState> {
         userInfoData: userResult,
       );
 
-      ref.read(pageNotifierProvider.notifier).hideLoading();
+      ref.read(loadingNotifierProvider.notifier).hideLoading();
       return loginResult!;
     } catch (e) {
       AppLog.e(e.toString());
-      ref.read(pageNotifierProvider.notifier).hideLoading();
+      ref.read(loadingNotifierProvider.notifier).hideLoading();
       return ApiResponse(
           resultCode: -99999, message: "登入失敗，請稍後再試或聯繫客服", data: null);
     }

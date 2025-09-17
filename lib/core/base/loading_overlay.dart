@@ -1,26 +1,26 @@
-import 'package:dental_guard_flutter/core/widgets/text/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../constants/app_resources.dart';
+import '../providers/loading_provider.dart';
 import '../providers/page_provider.dart';
 import '../utils/app_toast.dart';
 import '../widgets/text/app_text.dart';
+import '../widgets/text/text_theme.dart';
 
 class LoadingOverlay extends HookConsumerWidget {
   final String loadingText;
-  final VoidCallback? onCancel;
 
   const LoadingOverlay({
     super.key,
     this.loadingText = AppStrings.loading,
-    this.onCancel,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pageState = ref.watch(pageNotifierProvider);
-    final pageNotifier = ref.read(pageNotifierProvider.notifier);
+    final loadingState = ref.watch(loadingNotifierProvider);
+
+    // 監聽 toast 消息
     ref.listen<PageState>(pageNotifierProvider, (previous, next) {
       if (next.message != null) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -30,16 +30,13 @@ class LoadingOverlay extends HookConsumerWidget {
             duration: const Duration(seconds: 3),
             alignment: ToastAlignment.bottom,
           );
-
-          // 清空消息
-          // pageNotifier.hideMessage();
         });
       }
     });
 
     return Stack(
       children: [
-        if (pageState.isLoading) ...[
+        if (loadingState.isLoading) ...[
           Opacity(
             opacity: 0.5,
             child: ModalBarrier(dismissible: false, color: AppColors.black),
@@ -62,21 +59,21 @@ class LoadingOverlay extends HookConsumerWidget {
                       ),
                       child: CupertinoActivityIndicator(radius: 18.0),
                     ),
-                    SizedBox(height: 12,),
+                    SizedBox(height: 12),
                     AppText(
                       text: loadingText,
                       textStyle: bodySmall,
                       color: Colors.white,
                     ),
-                    if (onCancel != null)
+                    if (loadingState.isCancellable)
                       TextButton(
-                        onPressed: onCancel,
+                        onPressed: () => ref.read(loadingNotifierProvider.notifier).cancelLoading(),
                         child: Text(
-                          loadingText,
+                          AppStrings.cancel,
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
-                            color: Colors.grey,
+                            color: CupertinoColors.systemYellow,
                           ),
                         ),
                       ),

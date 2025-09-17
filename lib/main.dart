@@ -13,6 +13,7 @@ import 'core/constants/app_fonts.dart';
 import 'core/constants/app_strings.dart';
 import 'core/network/network_interface.dart';
 import 'core/network/token_manager.dart';
+import 'core/providers/loading_provider.dart';
 import 'core/providers/page_provider.dart';
 import 'core/utils/app_toast.dart';
 import 'core/utils/shared_prefs_util.dart';
@@ -60,8 +61,6 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pageState = ref.watch(pageNotifierProvider);
-
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
@@ -82,7 +81,7 @@ class MyApp extends ConsumerWidget {
                 children: [
                   child ?? const SizedBox.shrink(),
                   LoadingOverlay(
-                    loadingText: pageState.message ?? AppStrings.loading,
+                    loadingText: AppStrings.loading,
                   ),
                 ],
               );

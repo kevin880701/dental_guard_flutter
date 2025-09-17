@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../constants/app_resources.dart';
-import '../providers/page_provider.dart';
+import '../providers/loading_provider.dart';
 
 class BasePage extends HookConsumerWidget {
   final Widget child;
@@ -29,15 +29,24 @@ class BasePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pageState = ref.watch(pageNotifierProvider);
+    final loadingState = ref.watch(loadingNotifierProvider);
 
     return PopScope(
-      canPop: onWillPop == null,
+      canPop: loadingState.isLoading ? false : (onWillPop == null),
       onPopInvokedWithResult: (bool didPop, Object? result) async {
+        // 如果正在 loading
+        if (loadingState.isLoading) {
+          // 如果 loading 可以取消，則執行取消操作
+          if (loadingState.isCancellable) {
+            ref.read(loadingNotifierProvider.notifier).cancelLoading();
+          }
+          // 無論如何都不允許頁面返回
+          return;
+        }
 
-        // 檢查小鍵盤是否顯示
+        // 檢查鍵盤是否顯示
         if (MediaQuery.of(context).viewInsets.bottom > 0) {
-          FocusScope.of(context).unfocus(); // 收起小鍵盤
+          FocusScope.of(context).unfocus(); // 收起鍵盤
           return;
         }
 
@@ -67,7 +76,7 @@ class BasePage extends HookConsumerWidget {
         body: Stack(
           children: [
             AbsorbPointer(
-              absorbing: pageState.isLoading,
+              absorbing: loadingState.isLoading,
               child: SizedBox(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height,

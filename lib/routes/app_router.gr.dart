@@ -14,7 +14,7 @@ part of 'app_router.dart';
 /// [CameraScreen]
 class CameraRoute extends PageRouteInfo<void> {
   const CameraRoute({List<PageRouteInfo>? children})
-      : super(CameraRoute.name, initialChildren: children);
+    : super(CameraRoute.name, initialChildren: children);
 
   static const String name = 'CameraRoute';
 
@@ -30,7 +30,7 @@ class CameraRoute extends PageRouteInfo<void> {
 /// [CreateUserProfileScreen]
 class CreateUserProfileRoute extends PageRouteInfo<void> {
   const CreateUserProfileRoute({List<PageRouteInfo>? children})
-      : super(CreateUserProfileRoute.name, initialChildren: children);
+    : super(CreateUserProfileRoute.name, initialChildren: children);
 
   static const String name = 'CreateUserProfileRoute';
 
@@ -50,10 +50,10 @@ class GroupMainRoute extends PageRouteInfo<GroupMainRouteArgs> {
     required GroupWithUserTypeData group,
     List<PageRouteInfo>? children,
   }) : super(
-          GroupMainRoute.name,
-          args: GroupMainRouteArgs(key: key, group: group),
-          initialChildren: children,
-        );
+         GroupMainRoute.name,
+         args: GroupMainRouteArgs(key: key, group: group),
+         initialChildren: children,
+       );
 
   static const String name = 'GroupMainRoute';
 
@@ -77,23 +77,13 @@ class GroupMainRouteArgs {
   String toString() {
     return 'GroupMainRouteArgs{key: $key, group: $group}';
   }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! GroupMainRouteArgs) return false;
-    return key == other.key && group == other.group;
-  }
-
-  @override
-  int get hashCode => key.hashCode ^ group.hashCode;
 }
 
 /// generated route for
 /// [LaunchScreen]
 class LaunchRoute extends PageRouteInfo<void> {
   const LaunchRoute({List<PageRouteInfo>? children})
-      : super(LaunchRoute.name, initialChildren: children);
+    : super(LaunchRoute.name, initialChildren: children);
 
   static const String name = 'LaunchRoute';
 
@@ -109,7 +99,7 @@ class LaunchRoute extends PageRouteInfo<void> {
 /// [LoginScreen]
 class LoginRoute extends PageRouteInfo<void> {
   const LoginRoute({List<PageRouteInfo>? children})
-      : super(LoginRoute.name, initialChildren: children);
+    : super(LoginRoute.name, initialChildren: children);
 
   static const String name = 'LoginRoute';
 
@@ -125,7 +115,7 @@ class LoginRoute extends PageRouteInfo<void> {
 /// [MainScreen]
 class MainRoute extends PageRouteInfo<void> {
   const MainRoute({List<PageRouteInfo>? children})
-      : super(MainRoute.name, initialChildren: children);
+    : super(MainRoute.name, initialChildren: children);
 
   static const String name = 'MainRoute';
 
@@ -146,10 +136,10 @@ class MemberMainRoute extends PageRouteInfo<MemberMainRouteArgs> {
     required UserInfoData user,
     List<PageRouteInfo>? children,
   }) : super(
-          MemberMainRoute.name,
-          args: MemberMainRouteArgs(key: key, group: group, user: user),
-          initialChildren: children,
-        );
+         MemberMainRoute.name,
+         args: MemberMainRouteArgs(key: key, group: group, user: user),
+         initialChildren: children,
+       );
 
   static const String name = 'MemberMainRoute';
 
@@ -183,16 +173,6 @@ class MemberMainRouteArgs {
   String toString() {
     return 'MemberMainRouteArgs{key: $key, group: $group, user: $user}';
   }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! MemberMainRouteArgs) return false;
-    return key == other.key && group == other.group && user == other.user;
-  }
-
-  @override
-  int get hashCode => key.hashCode ^ group.hashCode ^ user.hashCode;
 }
 
 /// generated route for
@@ -204,14 +184,14 @@ class TeethDetectionRoute extends PageRouteInfo<TeethDetectionRouteArgs> {
     BrushingRecordData? brushingRecordData,
     List<PageRouteInfo>? children,
   }) : super(
-          TeethDetectionRoute.name,
-          args: TeethDetectionRouteArgs(
-            key: key,
-            userId: userId,
-            brushingRecordData: brushingRecordData,
-          ),
-          initialChildren: children,
-        );
+         TeethDetectionRoute.name,
+         args: TeethDetectionRouteArgs(
+           key: key,
+           userId: userId,
+           brushingRecordData: brushingRecordData,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'TeethDetectionRoute';
 
@@ -245,17 +225,4 @@ class TeethDetectionRouteArgs {
   String toString() {
     return 'TeethDetectionRouteArgs{key: $key, userId: $userId, brushingRecordData: $brushingRecordData}';
   }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! TeethDetectionRouteArgs) return false;
-    return key == other.key &&
-        userId == other.userId &&
-        brushingRecordData == other.brushingRecordData;
-  }
-
-  @override
-  int get hashCode =>
-      key.hashCode ^ userId.hashCode ^ brushingRecordData.hashCode;
 }
