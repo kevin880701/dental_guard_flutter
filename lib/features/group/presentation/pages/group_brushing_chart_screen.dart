@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dental_guard_flutter/core/constants/app_resources.dart';
@@ -13,6 +14,7 @@ import 'package:share_plus/share_plus.dart';
 import '../../../../core/base/base_page.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/utils/dialog_manager.dart';
+import '../../../../core/widgets/dialog/window/download_report_dialog.dart';
 import '../../../../core/widgets/image/app_icon.dart';
 import '../../../organization/data/models/response/group_with_member_count/group_with_member_count_data.dart';
 import '../../../organization/data/models/response/group_with_user_type/group_with_user_type_data.dart';
@@ -57,17 +59,19 @@ class GroupBrushingChartScreen extends HookConsumerWidget {
                       onSubmit: ({
                         required DateTime startTime,
                         required DateTime endTime,
+                        required ExportFormat format,
                       }) async {
                         final String timeZone = await FlutterTimezone.getLocalTimezone();
                         final useCase = ref.read(getGroupsBrushingRecordsUseCaseProvider);
-                        List<GroupBrushingRecordsData> result = await useCase(
+                        GroupsBrushingRecordsResponse? result = await useCase(
                           groupIds: [group.id],
-                          startDate:  startTime.toIsoDateTime(),
+                          startDate: startTime.toIsoDateTime(),
                           endDate: endTime.toIsoDateTime(),
                           timeZone: timeZone,
                         );
-                        if (result.isNotEmpty) {
-                          final users = result[0].users;
+
+                        if (result != null && result.records.isNotEmpty) {
+                          final users = result.records[0].users;
                           if (users.isEmpty) {
                             AppToast.showToast(message: "沒有使用者資料");
                             return;
@@ -77,7 +81,6 @@ class GroupBrushingChartScreen extends HookConsumerWidget {
                           final allRecords = <Map<String, dynamic>>[];
                           for (final user in users) {
                             for (final record in user.brushingRecords) {
-                              // 判斷偵測成功
                               final scoreDisplay = (record.analyzeResult.isSuccess == 0)
                                   ? '偵測失敗'
                                   : record.analyzeResult.score.toString();
@@ -92,35 +95,63 @@ class GroupBrushingChartScreen extends HookConsumerWidget {
                             }
                           }
 
-                          // createdAt 遞增排序
+                          // createdAt 非遞增排序
                           allRecords.sort((a, b) => (a['createdAt'] as DateTime).compareTo(b['createdAt'] as DateTime));
 
-                          // 轉成 CSV
-                          String toCsv(List<Map<String, dynamic>> records) {
+                          // 根據選擇的格式轉換 CSV
+                          String toCsv(List<Map<String, dynamic>> records, ExportFormat format) {
                             final header = ['使用者名稱', '代號', '備註', '建立時間', '牙菌斑百分比'];
                             final rows = [header.join(',')];
                             for (final r in records) {
-                              rows.add([
-                                r['userName'],
-                                r['userNumber'],
-                                r['remark'],
-                                (r['createdAt'] as DateTime).toIso8601String(),
-                                r['score'].toString(),
-                              ].join(','));
+                              // 處理可能包含逗號的數據
+                              final csvRow = [
+                                '"${r['userName']}"',
+                                '"${r['userNumber']}"',
+                                '"${r['remark']}"',
+                                '"${(r['createdAt'] as DateTime).toIso8601String()}"',
+                                '"${r['score']}"',
+                              ].join(',');
+                              rows.add(csvRow);
                             }
-                            return rows.join('\n');
+
+                            final csvContent = rows.join('\n');
+
+                            // 根據格式添加適當的標記
+                            switch (format) {
+                              case ExportFormat.utf8Bom:
+                                return '\uFEFF$csvContent'; // UTF-8 BOM
+                              case ExportFormat.utf8:
+                              case ExportFormat.ansi:
+                              default:
+                                return csvContent;
+                            }
                           }
 
                           // 存檔
                           final tempDir = await getTemporaryDirectory();
                           final file = File('${tempDir.path}/brushing_records.csv');
-                          await file.writeAsString(toCsv(allRecords));
+
+                          final csvContent = toCsv(allRecords, format);
+
+                          // 根據格式選擇編碼方式
+                          switch (format) {
+                            case ExportFormat.ansi:
+                            // ANSI (實際上是系統默認編碼，通常是 UTF-8)
+                            // 如果真的需要 ANSI，需要額外的編碼轉換
+                              await file.writeAsString(csvContent);
+                              break;
+                            case ExportFormat.utf8:
+                            case ExportFormat.utf8Bom:
+                            default:
+                              await file.writeAsString(csvContent, encoding: utf8);
+                              break;
+                          }
 
                           // 分享
                           final params = ShareParams(
                             files: [XFile(file.path)],
                             text: '匯出潔牙紀錄',
-                            subject: '潔牙紀錄報表',
+                            subject: '潔牙紀錄報表 (${format.displayName})',
                           );
                           await SharePlus.instance.share(params);
 
@@ -128,7 +159,6 @@ class GroupBrushingChartScreen extends HookConsumerWidget {
                         } else {
                           AppToast.showToast(message: "${AppStrings.downloadFailed}: ${AppStrings.searchFailed}");
                         }
-
                       },
                     );
                   },

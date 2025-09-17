@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dental_guard_flutter/core/constants/app_resources.dart';
@@ -11,6 +12,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../../core/utils/app_toast.dart';
 import '../../../../core/utils/dialog_manager.dart';
+import '../../../../core/widgets/dialog/window/download_report_dialog.dart';
 import '../../../../core/widgets/image/app_icon.dart';
 import '../../../teeth_record/application/teeth_record_usecases_provider.dart';
 import '../../../teeth_record/presentation/widgets/chart/member_plaque_bar_chart.dart';
@@ -52,6 +54,7 @@ class MemberBrushingChartScreen extends HookConsumerWidget {
                       onSubmit: ({
                         required DateTime startTime,
                         required DateTime endTime,
+                        required ExportFormat format,
                       }) async {
                         final String timeZone = await FlutterTimezone.getLocalTimezone();
                         final useCase = ref.read(getUsersRecordsSearchUseCaseProvider);
@@ -82,36 +85,62 @@ class MemberBrushingChartScreen extends HookConsumerWidget {
                             }
                           }
 
-                          // createdAt 遞增排序
+                          // createdAt 非遞增排序
                           allRecords.sort((a, b) =>
                               (a['createdAt'] as DateTime).compareTo(b['createdAt'] as DateTime));
 
-                          // 轉成 CSV
-                          String toCsv(List<Map<String, dynamic>> records) {
+                          // 根據選擇的格式轉換 CSV
+                          String toCsv(List<Map<String, dynamic>> records, ExportFormat format) {
                             final header = ['使用者名稱', '代號', '備註', '建立時間', '牙菌斑百分比'];
                             final rows = [header.join(',')];
                             for (final r in records) {
-                              rows.add([
-                                r['userName'],
-                                r['userNumber'],
-                                r['remark'],
-                                (r['createdAt'] as DateTime).toIso8601String(),
-                                r['score'],
-                              ].join(','));
+                              // 處理可能包含逗號的數據
+                              final csvRow = [
+                                '"${r['userName']}"',
+                                '"${r['userNumber']}"',
+                                '"${r['remark']}"',
+                                '"${(r['createdAt'] as DateTime).toIso8601String()}"',
+                                '"${r['score']}"',
+                              ].join(',');
+                              rows.add(csvRow);
                             }
-                            return rows.join('\n');
+
+                            final csvContent = rows.join('\n');
+
+                            // 根據格式添加適當的標記
+                            switch (format) {
+                              case ExportFormat.utf8Bom:
+                                return '\uFEFF$csvContent'; // UTF-8 BOM
+                              case ExportFormat.utf8:
+                              case ExportFormat.ansi:
+                              default:
+                                return csvContent;
+                            }
                           }
 
                           // 存檔
                           final tempDir = await getTemporaryDirectory();
                           final file = File('${tempDir.path}/brushing_records.csv');
-                          await file.writeAsString(toCsv(allRecords));
+
+                          final csvContent = toCsv(allRecords, format);
+
+                          // 根據格式選擇編碼方式
+                          switch (format) {
+                            case ExportFormat.ansi:
+                              await file.writeAsString(csvContent);
+                              break;
+                            case ExportFormat.utf8:
+                            case ExportFormat.utf8Bom:
+                            default:
+                              await file.writeAsString(csvContent, encoding: utf8);
+                              break;
+                          }
 
                           // 分享
                           final params = ShareParams(
                             files: [XFile(file.path)],
                             text: '匯出潔牙紀錄',
-                            subject: '潔牙紀錄報表',
+                            subject: '潔牙紀錄報表 (${format.displayName})',
                           );
                           await SharePlus.instance.share(params);
 
@@ -119,7 +148,6 @@ class MemberBrushingChartScreen extends HookConsumerWidget {
                         } else {
                           AppToast.showToast(message: "${AppStrings.downloadFailed}: ${AppStrings.searchFailed}");
                         }
-
                       },
                     );
                   },

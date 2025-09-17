@@ -219,6 +219,7 @@ Future<void> showDownloadReportDialog(
       required void Function({
       required DateTime startTime,
       required DateTime endTime,
+      required ExportFormat format,
       }) onSubmit,
       bool barrierDismissible = true,
     }) async {

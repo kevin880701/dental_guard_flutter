@@ -7,6 +7,30 @@ part 'group_brushing_records_data.freezed.dart';
 part 'group_brushing_records_data.g.dart';
 
 @freezed
+class GroupsBrushingRecordsResponse with _$GroupsBrushingRecordsResponse {
+  const factory GroupsBrushingRecordsResponse({
+    @JsonKey(name: 'records') @Default([]) List<GroupBrushingRecordsData> records,
+    @JsonKey(name: 'pagination') PaginationData? pagination,
+  }) = _GroupsBrushingRecordsResponse;
+
+  factory GroupsBrushingRecordsResponse.fromJson(Map<String, dynamic> json) =>
+      _$GroupsBrushingRecordsResponseFromJson(json);
+}
+
+@freezed
+class PaginationData with _$PaginationData {
+  const factory PaginationData({
+    @JsonKey(name: 'total_records') required int totalRecords,
+    @JsonKey(name: 'total_pages') required int totalPages,
+    @JsonKey(name: 'current_page') required int currentPage,
+    @JsonKey(name: 'page_size') required int pageSize,
+  }) = _PaginationData;
+
+  factory PaginationData.fromJson(Map<String, dynamic> json) =>
+      _$PaginationDataFromJson(json);
+}
+
+@freezed
 class GroupBrushingRecordsData with _$GroupBrushingRecordsData {
   const factory GroupBrushingRecordsData({
     @JsonKey(name: 'group') required GroupData group,

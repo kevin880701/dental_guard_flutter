@@ -7,7 +7,7 @@ class GetGroupsBrushingRecordsUseCase {
 
   GetGroupsBrushingRecordsUseCase(this.repository);
 
-  Future<List<GroupBrushingRecordsData>> call({
+  Future<GroupsBrushingRecordsResponse?> call({
     required List<String> groupIds,
     required String startDate,
     required String endDate,

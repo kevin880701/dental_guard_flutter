@@ -23,7 +23,7 @@ abstract class TeethRecordRepository {
   Future<List<BrushingStatsData>> getGroupBrushingStats(GetGroupBrushingStatsRequest request);
 
   /// 查詢群組刷牙紀錄(含群組、user資訊)
-  Future<List<GroupBrushingRecordsData>> getGroupsBrushingRecords(GetGroupsBrushingRecordsRequest request);
+  Future<GroupsBrushingRecordsResponse?> getGroupsBrushingRecords(GetGroupsBrushingRecordsRequest request);
 
   /// 查詢使用者潔牙紀錄統計
   Future<List<BrushingStatsData>> getUserBrushingStats(GetUserBrushingStatsRequest request);
@@ -61,7 +61,7 @@ class TeethRecordRepositoryImpl implements TeethRecordRepository {
   }
 
   @override
-  Future<List<GroupBrushingRecordsData>> getGroupsBrushingRecords(GetGroupsBrushingRecordsRequest request) async {
+  Future<GroupsBrushingRecordsResponse?> getGroupsBrushingRecords(GetGroupsBrushingRecordsRequest request) async {
     return await remoteDataSource.getGroupsBrushingRecords(request);
   }
 

@@ -81,20 +81,18 @@ class TeethRecordRemoteDataSource {
   }
 
   /// 查詢多群組使用者潔牙紀錄（含群組/使用者/分析結果）
-  Future<List<GroupBrushingRecordsData>> getGroupsBrushingRecords(GetGroupsBrushingRecordsRequest request) async {
+  Future<GroupsBrushingRecordsResponse?> getGroupsBrushingRecords(GetGroupsBrushingRecordsRequest request) async {
     final response = await networkInterface.post(
       url: ApiEndPoint.groupsBrushingRecords,
       body: request.toJson(),
     );
 
-    final apiResponse = ApiResponse<List<GroupBrushingRecordsData>>.fromJson(
+    final apiResponse = ApiResponse<GroupsBrushingRecordsResponse>.fromJson(
       response.data,
-          (json) => (json as List)
-          .map((item) => GroupBrushingRecordsData.fromJson(item as Map<String, dynamic>))
-          .toList(),
+          (json) => GroupsBrushingRecordsResponse.fromJson(json as Map<String, dynamic>),
     );
 
-    return apiResponse.data ?? [];
+    return apiResponse.data;
   }
 
   /// 取得使用者刷牙統計資料（可包含 baseline）

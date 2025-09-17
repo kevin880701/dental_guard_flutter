@@ -6,6 +6,44 @@ part of 'group_brushing_records_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_$GroupsBrushingRecordsResponseImpl
+    _$$GroupsBrushingRecordsResponseImplFromJson(Map<String, dynamic> json) =>
+        _$GroupsBrushingRecordsResponseImpl(
+          records: (json['records'] as List<dynamic>?)
+                  ?.map((e) => GroupBrushingRecordsData.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList() ??
+              const [],
+          pagination: json['pagination'] == null
+              ? null
+              : PaginationData.fromJson(
+                  json['pagination'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$$GroupsBrushingRecordsResponseImplToJson(
+        _$GroupsBrushingRecordsResponseImpl instance) =>
+    <String, dynamic>{
+      'records': instance.records,
+      'pagination': instance.pagination,
+    };
+
+_$PaginationDataImpl _$$PaginationDataImplFromJson(Map<String, dynamic> json) =>
+    _$PaginationDataImpl(
+      totalRecords: (json['total_records'] as num).toInt(),
+      totalPages: (json['total_pages'] as num).toInt(),
+      currentPage: (json['current_page'] as num).toInt(),
+      pageSize: (json['page_size'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$$PaginationDataImplToJson(
+        _$PaginationDataImpl instance) =>
+    <String, dynamic>{
+      'total_records': instance.totalRecords,
+      'total_pages': instance.totalPages,
+      'current_page': instance.currentPage,
+      'page_size': instance.pageSize,
+    };
+
 _$GroupBrushingRecordsDataImpl _$$GroupBrushingRecordsDataImplFromJson(
         Map<String, dynamic> json) =>
     _$GroupBrushingRecordsDataImpl(
