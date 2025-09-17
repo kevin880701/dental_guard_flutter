@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dental_guard_flutter/routes/app_router.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../core/constants/app_strings.dart';
@@ -32,7 +31,6 @@ class ImageSelector extends StatelessWidget {
               context: context,
               sizeLimitMB: 20,
               fileLimit: 1,
-              fileType: FileType.image,
             );
             if (selectedFiles.isNotEmpty) {
               onImageSelected(selectedFiles[0]);
